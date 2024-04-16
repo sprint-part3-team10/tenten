@@ -40,6 +40,13 @@ function ApplyTable() {
             </td>
           </tr>
         </tbody>
+        <tfoot>
+          <tr>
+            <td colSpan={4} className={styles.pagenation}>
+              1 2 3 4 5
+            </td>
+          </tr>
+        </tfoot>
       </table>
     </div>
   );
