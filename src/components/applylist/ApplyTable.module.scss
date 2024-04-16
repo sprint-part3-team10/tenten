@@ -1,0 +1,21 @@
+@import '../../styles/index';
+
+.tableContainer {
+  border: 1px solid $gray-20;
+  border-radius: 10px;
+}
+
+.table {
+  width: 100%;
+  @include text-14-l;
+}
+
+.titleRow {
+  padding: 1.4rem, 1.2rem;
+  text-align: left;
+  background-color: $red-10;
+}
+
+.listRow {
+  padding: 2rem 1.2rem;
+}
