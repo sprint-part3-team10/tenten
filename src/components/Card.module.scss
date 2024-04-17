@@ -1,0 +1,116 @@
+@import '../styles/index';
+
+.card {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  max-width: 32rem;
+  height: 100%;
+  padding: 1.6rem;
+  background: $white;
+  border: 1px solid $gray-20;
+  border-radius: 1.2rem;
+
+  @include media(mobile) {
+    width: 100%;
+    padding: 1.2rem;
+  }
+}
+
+.card.closed {
+  * {
+    color: $gray-30;
+  }
+}
+
+.contentContainer {
+  display: flex;
+  flex-direction: column;
+  gap: 0.8rem;
+  padding-top: 2rem;
+  padding-bottom: 1.6rem;
+
+  @include media(mobile) {
+    padding-top: 1.2rem;
+  }
+}
+
+.content {
+  display: flex;
+  gap: 0.6rem;
+  align-items: center;
+
+  @include media(mobile) {
+    align-items: flex-start;
+  }
+}
+
+.imgContainer {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  height: 100%;
+  aspect-ratio: 7 / 4;
+  overflow: hidden;
+  border-radius: 1.2rem;
+}
+
+.imgContainer.closedImg {
+  &::after {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    content: '';
+    background-color: $black;
+    opacity: 0.7;
+  }
+}
+
+.closeText {
+  @include text-28-b;
+
+  position: relative;
+  z-index: 1;
+  color: $white;
+  letter-spacing: 0.056rem;
+
+  @include media(mobile) {
+    @include text-20-b;
+  }
+}
+
+.storeName {
+  @include text-20-b;
+
+  color: $black;
+
+  @include media(mobile) {
+    @include text-16-b;
+  }
+}
+
+.explain {
+  @include text-14-l;
+
+  line-height: 2.2rem;
+  color: $gray-50;
+
+  @include media(mobile) {
+    @include text-12-l;
+  }
+}
+
+.price {
+  @include text-24-b;
+
+  color: $black;
+
+  @include media(mobile) {
+    @include text-18-b;
+  }
+}
