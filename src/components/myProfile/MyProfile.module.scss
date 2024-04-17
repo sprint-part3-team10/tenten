@@ -1,0 +1,50 @@
+@import '../../styles/index';
+
+.container {
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
+  min-width: 35rem;
+  max-width: 66.5rem;
+  padding: 3.2rem;
+  background-color: $red-10;
+  border-radius: 12px;
+}
+
+.profileInfo {
+  display: flex;
+  flex-direction: column;
+  gap: 1.4rem;
+}
+
+.name {
+  @include text-16-b;
+
+  color: $red-50;
+}
+
+.nameText {
+  @include text-28-b;
+
+  margin-bottom: 0.6rem;
+  color: $black;
+  letter-spacing: 0.2rem;
+}
+
+.phone,
+.address {
+  @include text-16-l;
+
+  color: $gray-50;
+  vertical-align: super;
+}
+
+.icon {
+  margin-right: 0.6rem;
+}
+
+.bio {
+  @include text-16-l;
+
+  margin-top: 2rem;
+}

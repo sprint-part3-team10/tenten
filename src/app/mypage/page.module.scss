@@ -1,0 +1,11 @@
+@import '../../styles/index';
+
+.section {
+  display: flex;
+  gap: 18rem;
+  padding: 6rem 23.8rem;
+}
+
+.title {
+  @include text-28-b;
+}
