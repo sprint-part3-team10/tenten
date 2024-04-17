@@ -7,8 +7,8 @@ import Image from 'next/image';
 
 export default function Footer() {
   return (
-    <footer>
-      <div>
+    <footer className={styles.container}>
+      <div className={styles.items}>
         <span className={styles.copyright}>©codeit - 2023</span>
         <div>
           <Link className={styles.link} href='/privacy'>
