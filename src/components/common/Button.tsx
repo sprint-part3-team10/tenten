@@ -1,12 +1,12 @@
 import styles from './Button.module.scss';
 
-type ButtonProps = {
+interface ButtonProps {
   buttonType: 'button' | 'submit' | 'reset' | undefined;
   text: string;
   size?: 'L' | 'M' | 'S' | '';
   isWhite?: boolean;
   isDisable?: boolean;
-};
+}
 
 export default function ({
   buttonType,

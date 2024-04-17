@@ -1,11 +1,11 @@
 import Image from 'next/image';
 import styles from './TypeSelector.module.scss';
 
-type TypeSelectorProps = {
+interface TypeSelectorProps {
   label: string;
   onChange: any;
   isEmployer: boolean;
-};
+}
 
 export default function TypeSelector({
   label,

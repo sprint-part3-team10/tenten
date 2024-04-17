@@ -1,6 +1,6 @@
 import styles from './Input.module.scss';
 
-type InputProps = {
+interface InputProps {
   label: string;
   name: string;
   inputType: string;
@@ -9,7 +9,7 @@ type InputProps = {
   onChange: any;
   isError?: boolean;
   errorMessage?: string;
-};
+}
 
 export default function Input({
   label,
