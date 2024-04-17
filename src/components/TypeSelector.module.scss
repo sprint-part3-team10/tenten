@@ -1,5 +1,4 @@
-@import '/src/styles/mixins/font';
-@import '/src/styles/constants/color';
+@import '/src/styles/index';
 
 .selectToggle {
   display: inline-flex;
@@ -7,7 +6,6 @@
   gap: 0.8rem;
   align-items: flex-start;
   width: 35rem;
-  margin-top: 2.4rem;
 }
 
 .label {
@@ -48,6 +46,10 @@
   @include button;
 
   border: 0.1rem solid $gray-30;
+
+  &:hover {
+    background: $red-10;
+  }
 }
 
 .circle {
