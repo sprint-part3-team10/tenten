@@ -1,15 +1,30 @@
 @import '/src/styles/index';
 
 .container {
+  @include media(mobile) {
+    width: 92vw;
+  }
+
+  @include media(tablet) {
+    flex-direction: column;
+    max-width: 68rem;
+  }
+
   display: flex;
   gap: 2.5rem;
+  max-width: 96rem;
   padding: 2.4rem;
+  margin: 0 auto;
   font-size: 1.6rem;
   background-color: $red-10;
   border-radius: 12px;
 }
 
 .imageContainer {
+  @include media(tablet) {
+    width: 100%;
+  }
+
   position: relative;
   width: 60%;
   height: 30rem;
@@ -20,6 +35,11 @@
 }
 
 .textButtonSpace {
+  @include media(tablet) {
+    gap: 4rem;
+    width: 100%;
+  }
+
   display: flex;
   flex-direction: column;
   justify-content: space-between;
