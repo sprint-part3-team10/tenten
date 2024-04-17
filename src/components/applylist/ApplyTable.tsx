@@ -1,5 +1,5 @@
 /* eslint-disable jsx-a11y/control-has-associated-label */
-import ApplyStatus from './ApplyStatus';
+import Label from './Label';
 import styles from './ApplyTable.module.scss';
 
 function ApplyTable() {
@@ -20,7 +20,7 @@ function ApplyTable() {
             <td className={styles.listRow}>2023-01-12 10:00 ~ 12:00 (2시간)</td>
             <td className={styles.listRow}>15,000원</td>
             <td className={styles.listRow}>
-              <ApplyStatus />
+              <Label labelType='location' content='서울시 도봉구' />
             </td>
           </tr>
           <tr>
@@ -28,7 +28,7 @@ function ApplyTable() {
             <td className={styles.listRow}>2023-01-12 10:00 ~ 12:00 (2시간)</td>
             <td className={styles.listRow}>15,000원</td>
             <td className={styles.listRow}>
-              <ApplyStatus />
+              <Label labelType='status' content='accepted' />
             </td>
           </tr>
           <tr>
@@ -36,7 +36,7 @@ function ApplyTable() {
             <td className={styles.listRow}>2023-01-12 10:00 ~ 12:00 (2시간)</td>
             <td className={styles.listRow}>15,000원</td>
             <td className={styles.listRow}>
-              <ApplyStatus />
+              <Label labelType='status' content='rejected' />
             </td>
           </tr>
         </tbody>
