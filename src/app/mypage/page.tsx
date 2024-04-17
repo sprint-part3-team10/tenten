@@ -4,7 +4,7 @@ import styles from './page.module.scss';
 import ApplyTable from '@/src/components/applylist/ApplyTable';
 
 function mypage() {
-  const listNum = 0;
+  const listNum = 1;
   return (
     <>
       <div className={styles.section}>

@@ -22,8 +22,20 @@
 
 .listRow {
   padding: 2rem 1.2rem;
+  border: 1px solid $gray-20;
 }
 
+.payCol {
+  @include media(tablet) {
+    display: none;
+  }
+}
+
+.timeCol {
+  @include media(mobile) {
+    display: none;
+  }
+}
 .pagenation {
   padding: 0.8rem 1.2rem;
   text-align: center;
