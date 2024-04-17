@@ -1,1 +1,13 @@
 @import '../styles/base/reset';
+
+@font-face {
+  font-family: SpoqaHanSansNeo-Regular;
+  font-style: normal;
+  font-weight: normal;
+  src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2108@1.1/SpoqaHanSansNeo-Regular.woff')
+    format('woff');
+}
+
+body {
+  font-family: SpoqaHanSansNeo-Regular, sans-serif;
+}
