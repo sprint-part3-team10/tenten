@@ -1,0 +1,83 @@
+@import '/src/styles/index';
+
+@mixin border-gray {
+  border-radius: 0.6rem;
+  border: 1px solid $gray-30;
+  background: $white;
+}
+
+.dropDownContainer {
+  display: flex;
+  flex-direction: column;
+  position: relative;
+
+  @include text-14-l;
+
+  .inputBox {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    position: relative;
+    gap: 1rem;
+
+    .input {
+      padding: 1.6rem 2rem;
+      outline: none;
+      cursor: pointer;
+
+      @include border-gray;
+    }
+
+    .input.onlyFilterInput {
+      background: $gray-10;
+      height: 3rem;
+      text-align: start;
+      padding: 1.5rem;
+
+      @include text-14-b;
+    }
+
+    .arrow {
+      position: absolute;
+      top: 55%;
+      right: 5%;
+    }
+
+    .arrow.onlyFilterArrow {
+      top: 25%;
+      right: 5%;
+    }
+  }
+
+  .selectList {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    overflow: auto;
+    height: 15rem;
+    box-shadow: 0px 4px 25px 0px rgba(0, 0, 0, 0.1);
+    position: absolute;
+    top: 110%;
+    width: 100%;
+    z-index: 1;
+
+    @include border-gray;
+
+    li {
+      width: 100%;
+      padding: 1rem;
+      text-align: center;
+      border-bottom: 1px solid $gray-20;
+      cursor: pointer;
+    }
+
+    li:hover {
+      background: $gray-10;
+    }
+  }
+
+  .selectList.onlyFilterList {
+    height: auto;
+    top: 50%;
+  }
+}
