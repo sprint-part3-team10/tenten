@@ -1,7 +1,9 @@
 import Image from 'next/image';
 import classNames from 'classnames';
 import locationIcon from '@/public/icons/location.svg';
+import locationGrayIcon from '@/public/icons/location_gray.svg';
 import clockIcon from '@/public/icons/clock.svg';
+import clockGrayIcon from '@/public/icons/clock_gray.svg';
 import styles from './Card.module.scss';
 import formatDateAndTime from '../lib/format';
 
@@ -36,18 +38,43 @@ function Card({ data }: CardData) {
           fill
           style={{ objectFit: 'cover' }}
         />
-        <span className={styles.closeText}>마감 완료</span>
+        {data.closed && <span className={styles.closeText}>마감 완료</span>}
       </div>
       <div className={styles.contentContainer}>
         <h2 className={styles.storeName}>{data.name}</h2>
         <div className={styles.content}>
-          <Image src={clockIcon} alt='시계 아이콘' width={20} height={20} />
+          {data.closed ? (
+            <Image
+              src={clockGrayIcon}
+              alt='시계 아이콘'
+              width={20}
+              height={20}
+            />
+          ) : (
+            <Image src={clockIcon} alt='시계 아이콘' width={20} height={20} />
+          )}
+
           <h3 className={styles.explain}>
             {formatDateAndTime(data.startsAt, data.workhour)}
           </h3>
         </div>
         <div className={styles.content}>
-          <Image src={locationIcon} alt='위치 아이콘' width={20} height={20} />
+          {data.closed ? (
+            <Image
+              src={locationGrayIcon}
+              alt='위치 아이콘'
+              width={20}
+              height={20}
+            />
+          ) : (
+            <Image
+              src={locationIcon}
+              alt='위치 아이콘'
+              width={20}
+              height={20}
+            />
+          )}
+
           <h3 className={styles.explain}>{data.address1}</h3>
         </div>
       </div>
