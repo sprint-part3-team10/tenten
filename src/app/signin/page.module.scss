@@ -1,0 +1,24 @@
+@import '/src/styles/mixins/font';
+
+.signinContainer {
+  display: flex;
+  flex-direction: column;
+  gap: 4rem;
+  align-items: center;
+  justify-content: center;
+  max-width: 35rem;
+  margin: 15rem auto;
+}
+
+.form {
+  display: flex;
+  flex-direction: column;
+  gap: 2.8rem;
+}
+
+.test {
+  display: block;
+  color: red;
+
+  @include text-28-b;
+}
