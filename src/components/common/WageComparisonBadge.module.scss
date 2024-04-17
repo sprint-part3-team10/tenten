@@ -1,0 +1,12 @@
+@import '/src/styles/_index';
+
+.badge {
+  @include text-14-b;
+
+  display: inline-flex;
+  align-items: center;
+  padding: 0.8rem;
+  color: $white;
+  background-color: $red-40;
+  border-radius: 20px;
+}

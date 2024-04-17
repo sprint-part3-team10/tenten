@@ -1,0 +1,73 @@
+@import '/src/styles/_index';
+
+.container {
+  display: flex;
+  gap: 2.5rem;
+  padding: 2.4rem;
+  font-size: 1.6rem;
+  background-color: blanchedalmond;
+  border-radius: 12px;
+}
+
+.imageContainer {
+  position: relative;
+  width: 60%;
+  height: 30rem;
+}
+
+.image {
+  border-radius: 12px;
+}
+
+.textButtonSpace {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  width: 40%;
+  padding-top: 1rem;
+}
+
+.textInfo {
+  display: flex;
+  flex-direction: column;
+  gap: 1.4rem;
+}
+
+.category {
+  @include text-16-b;
+
+  color: #ea3c12;
+}
+
+.title {
+  @include text-28-b;
+
+  display: flex;
+  gap: 0.8rem;
+  align-items: center;
+}
+
+.term {
+  @include text-16-l;
+
+  color: $gray-50;
+}
+
+.address {
+  color: $gray-50;
+}
+
+.description {
+  line-height: 2.6rem;
+}
+
+.button {
+  @include text-18-b;
+
+  width: 100%;
+  padding: 1.4rem;
+  color: $red-40;
+  background-color: $white;
+  border: 1px solid $red-40;
+  border-radius: 6px;
+}
