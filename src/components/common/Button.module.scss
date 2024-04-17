@@ -7,26 +7,105 @@
   color: $white;
   background: #ea3c12;
   border-radius: 0.6rem;
+
+  &:disabled {
+    cursor: not-allowed;
+    background: $gray-40;
+  }
+}
+
+@mixin white {
+  @include button;
+
+  color: #ea3c12;
+  background: $white;
+  border: 0.1rem solid #ea3c12;
+
+  &:disabled {
+    color: $white;
+    border: none;
+  }
+}
+
+@mixin large {
+  @include text-16-b;
+
+  padding: 1.4rem 13rem;
+  line-height: 2rem;
+}
+
+@mixin medium {
+  @include text-14-b;
+
+  padding: 1rem 2rem;
+  line-height: 2rem;
+}
+
+@mixin small {
+  @include text-12-l;
+
+  padding: 0.8rem 1.2rem;
+  line-height: 2rem;
+}
+
+.commonButton {
+  @include button;
+  @include media(mobile) {
+    @include small;
+  }
+  @include media(tablet) {
+    @include medium;
+  }
+  @include media(pc) {
+    @include large;
+  }
+}
+
+.commonButtonWhite {
+  @include white;
+  @include media(mobile) {
+    @include small;
+  }
+  @include media(tablet) {
+    @include medium;
+  }
+  @include media(pc) {
+    @include large;
+  }
 }
 
 .buttonL {
   @include button;
   @include text-16-b;
+  @include large;
+}
 
-  padding: 1.4rem 13.2rem;
-  line-height: 2rem;
+.buttonLWhite {
+  @include white;
+  @include text-16-b;
+  @include large;
 }
 
 .buttonM {
   @include button;
   @include text-14-b;
+  @include medium;
+}
 
-  padding: 1rem 2rem;
+.buttonMWhite {
+  @include white;
+  @include text-14-b;
+  @include medium;
 }
 
 .buttonS {
   @include button;
   @include text-12-l;
+  @include small;
+}
 
-  padding: 0.8rem 1.2rem;
+.buttonSWhite {
+  @include white;
+  @include text-12-l;
+  @include small;
 }
