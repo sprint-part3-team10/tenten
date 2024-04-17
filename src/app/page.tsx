@@ -1,5 +1,22 @@
+import Card from '../components/Card';
 import styles from './page.module.scss';
 
 export default function Home() {
-  return <div className={styles.test}>하이</div>;
+  const mockData = {
+    id: '1234',
+    name: '해피 버거',
+    startsAt: '2023-07-07T18:00:00.000Z',
+    workhour: 10,
+    address1: '서울시 은평구',
+    hourlyPay: 30000,
+    imageUrl: '/images/cherry.png',
+    closed: true,
+  };
+
+  return (
+    <div className={styles.test}>
+      <Card data={mockData} />
+      <Card data={mockData} />
+    </div>
+  );
 }
