@@ -6,9 +6,9 @@ import classNames from 'classnames';
 import downArrow from '@/public/icons/dropdown-down.svg';
 import upArrow from '@/public/icons/dropdown-up.svg';
 import useOutsideClick from '@/src/hooks/useOutsideClick';
-import styles from './DropdownInput.module.scss';
+import styles from './Dropdown.module.scss';
 
-interface DropdownInputProps {
+interface DropdownProps {
   id?: string;
   name?: string;
   width?: string;
@@ -17,14 +17,14 @@ interface DropdownInputProps {
   setValue: React.Dispatch<React.SetStateAction<string>>;
 }
 
-export default function DropdownInput({
+export default function Dropdown({
   id,
   name,
   width = '100%',
   optionList,
   value,
   setValue,
-}: DropdownInputProps) {
+}: DropdownProps) {
   const [isSelecting, setIsSelecting] = useState(false);
   const ref = useRef<HTMLDivElement>(null);
 
@@ -46,7 +46,7 @@ export default function DropdownInput({
   return (
     <div
       ref={ref}
-      className={styles.dropDownContainer}
+      className={styles.dropdownContainer}
       style={{
         width: width,
       }}
