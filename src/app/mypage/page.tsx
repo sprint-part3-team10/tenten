@@ -1,8 +1,8 @@
-import ApplyTable from '@/components/applylist/ApplyTable';
-import NoApply from '@/components/applylist/NoApply';
+import ApplyTable from '@/components/applyList/ApplyTable';
+import NoApply from '@/components/applyList/NoApply';
 
 function mypage() {
-  const applyNum = 0;
+  const applyNum = 1;
   return applyNum ? (
     <ApplyTable />
   ) : (

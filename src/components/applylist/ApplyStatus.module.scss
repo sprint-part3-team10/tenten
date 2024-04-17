@@ -1,11 +1,11 @@
 @import '../../styles/index';
 
 .label {
+  @include text-14-b;
+
   display: inline;
   padding: 0.6rem 1rem;
   border-radius: 20px;
-
-  @include text-14-b;
 }
 
 .labelAccept {

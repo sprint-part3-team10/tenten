@@ -6,8 +6,9 @@
 }
 
 .table {
-  width: 100%;
   @include text-14-l;
+
+  width: 100%;
 }
 
 .titleRow {
