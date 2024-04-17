@@ -24,7 +24,7 @@ export default function Input({
   return (
     <>
       <div className={styles.inputContainer}>
-        <label className={styles.inputTitle} htmlFor={name}>
+        <label className={styles.label} htmlFor={name}>
           {label}
         </label>
         {isError ? (
