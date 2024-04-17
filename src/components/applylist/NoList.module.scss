@@ -13,6 +13,10 @@
   @include text-16-l;
 
   text-align: center;
+
+  @include media(mobile) {
+    @include text-14-l;
+  }
 }
 
 .button {
