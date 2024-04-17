@@ -1,7 +1,7 @@
 import Image from 'next/image';
 import styles from './ShopNoticeInfoBox.module.scss';
 import WageComparisonBadge from '../common/WageComparisonBadge';
-import formatWage from '@/src/lib/formatWage';
+import formatWage from '../../lib/formatWage';
 
 interface ShopData {
   item: {

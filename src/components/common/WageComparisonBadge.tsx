@@ -8,7 +8,7 @@ function WageComparisonBadge() {
       <Image
         width={20}
         height={20}
-        src='/wageArrow.svg'
+        src='/icons/wageArrow.svg'
         alt='시급 비교 화살표'
       />
     </div>
