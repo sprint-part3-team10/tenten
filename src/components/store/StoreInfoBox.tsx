@@ -1,12 +1,12 @@
 import Image from 'next/image';
-import styles from './PlaceInfo.module.scss';
+import styles from './StoreInfoBox.module.scss';
 import WageComparisonBadge from './WageComparisonBadge';
 
 interface Props {
   term: boolean;
 }
 
-function PlaceInfo(term: Props) {
+function StoreInfoBox(term: Props) {
   return (
     <div className={styles.container}>
       <div className={styles.imageContainer}>
@@ -42,4 +42,4 @@ function PlaceInfo(term: Props) {
   );
 }
 
-export default PlaceInfo;
+export default StoreInfoBox;
