@@ -1,10 +1,11 @@
 'use client';
 
-import { useState } from 'react';
+import React, { useState, useRef } from 'react';
 import Image from 'next/image';
 import classNames from 'classnames';
 import downArrow from '@/public/icons/dropdown-down.svg';
 import upArrow from '@/public/icons/dropdown-up.svg';
+import useOutsideClick from '@/src/hooks/useOutsideClick';
 import styles from './DropdownInput.module.scss';
 
 interface DropdownInputProps {
@@ -25,6 +26,13 @@ export default function DropdownInput({
   setValue,
 }: DropdownInputProps) {
   const [isSelecting, setIsSelecting] = useState(false);
+  const ref = useRef<HTMLDivElement>(null);
+
+  const handleOutsideClick = () => {
+    setIsSelecting(false);
+  };
+
+  useOutsideClick(ref, handleOutsideClick);
 
   const toggleDropDown = () => {
     setIsSelecting(prevValue => !prevValue);
@@ -37,6 +45,7 @@ export default function DropdownInput({
 
   return (
     <div
+      ref={ref}
       className={styles.dropDownContainer}
       style={{
         width: width,
