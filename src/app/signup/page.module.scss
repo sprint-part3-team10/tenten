@@ -1,6 +1,6 @@
 @import '/src/styles/mixins/font';
 
-.signupContainer {
+@mixin container {
   display: flex;
   flex-direction: column;
   gap: 4rem;
@@ -10,15 +10,26 @@
   margin: 15rem auto;
 }
 
-.form {
+@mixin form {
   display: flex;
   flex-direction: column;
   gap: 2.8rem;
 }
 
-.test {
-  @include text-28-b;
+@mixin move {
+  @include text-16-l;
 
-  display: block;
-  color: red;
+  text-align: center;
+}
+
+.container {
+  @include container;
+}
+
+.form {
+  @include form;
+}
+
+.movePage {
+  @include move;
 }

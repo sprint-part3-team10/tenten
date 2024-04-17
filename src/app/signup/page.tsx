@@ -95,7 +95,7 @@ export default function SignUp() {
   };
 
   return (
-    <div className={styles.signupContainer}>
+    <div className={styles.container}>
       <Link href='/'>
         <Image
           src='/images/logo.svg'
@@ -105,7 +105,7 @@ export default function SignUp() {
         />
       </Link>
       <form className={styles.form} onSubmit={handleSubmit}>
-        <div className={styles.email}>
+        <div>
           <Input
             label='이메일'
             name='email'
@@ -116,7 +116,7 @@ export default function SignUp() {
             errorMessage='올바른 이메일 형식이 아닙니다'
           />
         </div>
-        <div className={styles.password}>
+        <div>
           <Input
             label='비밀번호'
             name='password'
@@ -127,7 +127,7 @@ export default function SignUp() {
             errorMessage='최소 8자 이상, 두 종류 이상의 문자로 설정해주세요'
           />
         </div>
-        <div className={styles.pwcheck}>
+        <div>
           <Input
             label='비밀번호 확인'
             name='passwordCheck'
@@ -138,17 +138,15 @@ export default function SignUp() {
             errorMessage='비밀번호가 일치하지 않습니다'
           />
         </div>
-        <div className={styles.userType}>
-          <TypeSelector
-            label='회원 유형'
-            onChange={handleType}
-            isEmployer={isEmployer}
-          />
-        </div>
+        <TypeSelector
+          label='회원 유형'
+          onChange={handleType}
+          isEmployer={isEmployer}
+        />
         <button type='submit' className={styles.btn}>
           가입하기
         </button>
-        <div>
+        <div className={styles.movePage}>
           이미 가입하셨나요?{' '}
           <Link className={styles.link} href='/signin'>
             로그인 하기

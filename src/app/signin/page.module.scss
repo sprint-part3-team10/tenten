@@ -1,13 +1,8 @@
 @import '/src/styles/mixins/font';
+@import '/src/app/signup/page.module';
 
-.signinContainer {
-  display: flex;
-  flex-direction: column;
-  gap: 4rem;
-  align-items: center;
-  justify-content: center;
-  max-width: 35rem;
-  margin: 15rem auto;
+.container {
+  @include container;
 }
 
 .form {
@@ -16,9 +11,6 @@
   gap: 2.8rem;
 }
 
-.test {
-  display: block;
-  color: red;
-
-  @include text-28-b;
+.movePage {
+  @include move;
 }
