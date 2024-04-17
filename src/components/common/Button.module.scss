@@ -1,0 +1,32 @@
+@import '/src/styles/index';
+
+@mixin button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  color: $white;
+  background: #ea3c12;
+  border-radius: 0.6rem;
+}
+
+.buttonL {
+  @include button;
+  @include text-16-b;
+
+  padding: 1.4rem 13.2rem;
+  line-height: 2rem;
+}
+
+.buttonM {
+  @include button;
+  @include text-14-b;
+
+  padding: 1rem 2rem;
+}
+
+.buttonS {
+  @include button;
+  @include text-12-l;
+
+  padding: 0.8rem 1.2rem;
+}
