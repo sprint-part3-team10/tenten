@@ -7,13 +7,13 @@ function mypage() {
   return (
     <>
       <div className={styles.section}>
-        <h1 className={styles.title}>내 프로필</h1>
+        <div className={styles.title}>내 프로필</div>
         <MyProfile />
       </div>
-      <NoList
+      {/* <NoList
         description={'아직 신청 내역이 없어요.'}
         buttonAction={'공고 보러가기'}
-      />
+      /> */}
     </>
   );
 }

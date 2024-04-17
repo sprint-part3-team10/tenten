@@ -21,6 +21,10 @@
   @include text-16-b;
 
   color: $red-50;
+
+  @include media(mobile) {
+    @include text-14-b;
+  }
 }
 
 .nameText {
@@ -29,6 +33,10 @@
   margin-bottom: 0.6rem;
   color: $black;
   letter-spacing: 0.2rem;
+
+  @include media(mobile) {
+    @include text-24-b;
+  }
 }
 
 .phone,
@@ -37,14 +45,27 @@
 
   color: $gray-50;
   vertical-align: super;
+
+  @include media(mobile) {
+    @include text-14-l;
+  }
 }
 
 .icon {
   margin-right: 0.6rem;
+
+  @include media(mobile) {
+    width: 16px;
+    height: 16px;
+  }
 }
 
 .bio {
   @include text-16-l;
 
   margin-top: 2rem;
+
+  @include media(mobile) {
+    @include text-14-l;
+  }
 }

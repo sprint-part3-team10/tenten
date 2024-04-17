@@ -1,7 +1,7 @@
 import Image from 'next/image';
-import styles from './MyProfile.module.scss';
-import phone from '@/public/icons/phone.svg';
 import location from '@/public/icons/location.svg';
+import phone from '@/public/icons/phone.svg';
+import styles from './MyProfile.module.scss';
 
 const mockData = {
   name: '김승우',
@@ -39,7 +39,6 @@ export default function MyProfile() {
         <p className={styles.bio}>{mockData.bio}</p>
       </div>
       {/* 버튼 컴포넌트 */}
-      <button>편집하기</button>
     </div>
   );
 }

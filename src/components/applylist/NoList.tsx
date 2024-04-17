@@ -2,15 +2,15 @@ import styles from './NoList.module.scss';
 
 function NoList({
   description,
-  buttonAction,
+  // buttonAction,
 }: {
   description: string;
-  buttonAction: string;
+  // buttonAction: string;
 }) {
   return (
     <div className={styles.box}>
       <p className={styles.description}>{description}</p>
-      <button className={styles.button}>{buttonAction}</button>
+      {/* <button className={styles.button}>{buttonAction}</button> */}
     </div>
   );
 }
