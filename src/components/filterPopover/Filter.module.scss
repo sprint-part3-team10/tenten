@@ -1,0 +1,13 @@
+@import '../../styles/index';
+
+.button {
+  @include text-14-b;
+
+  display: flex;
+  align-items: center;
+  height: 3rem;
+  padding: 1.2rem;
+  color: $white;
+  background: $red-30;
+  border-radius: 0.5rem;
+}
