@@ -3,70 +3,48 @@ import styles from './ShopNoticeInfoBox.module.scss';
 import WageComparisonBadge from '../common/WageComparisonBadge';
 import formatWage from '../../lib/formatWage';
 
-interface ShopData {
-  item: {
-    id: string;
-    name: string;
-    category: string;
-    address1: string;
-    address2: string;
-    description: string;
-    imageUrl: string;
-    originalHourlyPay: number;
-  };
-}
-
-// interface User {
-//   item: {
-//     id: string;
-//     email: string;
-//     type: string;
-//   };
-//   href: string;
-// }
-
 interface Props {
-  term: boolean;
-  noticeData: {
-    id: string;
-    hourlyPay: number;
-    startsAt: string;
-    workhour: number;
-    description: string;
-    closed: boolean;
-    shop: ShopData & {
-      href: string;
-    };
-    currentUserApplication: null;
-  };
-  // shopData?: (ShopData & User) | null;
+  kind: 'notice' | 'shop';
+  mainText: string | number;
+  startsAt?: string;
+  workhour?: number;
+  description: string;
+  imageUrl: string;
+  address1: string;
 }
 
-function ShopNoticeInfoBox({ term, noticeData }: Props) {
+function ShopNoticeInfoBox({
+  kind,
+  imageUrl,
+  mainText,
+  startsAt,
+  workhour,
+  description,
+  address1,
+}: Props) {
   return (
     <div className={styles.container}>
       <div className={styles.imageContainer}>
-        <Image
-          fill
-          src={noticeData.shop.item.imageUrl}
-          alt='식당 이미지'
-          className={styles.image}
-        />
+        <Image fill src={imageUrl} alt='식당 이미지' className={styles.image} />
       </div>
       <div className={styles.textButtonSpace}>
         <div className={styles.textInfo}>
-          <p className={styles.category}>시급</p>
+          <p className={styles.category}>
+            {kind === 'notice' ? '시급' : '식당'}
+          </p>
           <div className={styles.title}>
-            <span>{formatWage(noticeData.hourlyPay)}</span>
-            <WageComparisonBadge />
+            <span>
+              {kind === 'notice' ? formatWage(Number(mainText)) : mainText}
+            </span>
+            {kind === 'notice' && <WageComparisonBadge />}
           </div>
-          {term && (
-            <div className={styles.term}>2023-01-02 15:00~18:00 (3시간)</div>
+          {kind === 'notice' && (
+            <div className={styles.term}>
+              {kind === 'notice' && `${startsAt}에서 ${workhour}시간 노동`}
+            </div>
           )}
-          <div className={styles.address}>{noticeData.shop.item.address1}</div>
-          <div className={styles.description}>
-            {noticeData.shop.item.description}
-          </div>
+          <div className={styles.address}>{address1}</div>
+          <div className={styles.description}>{description}</div>
         </div>
         <button className={styles.button} type='button'>
           편집하기
@@ -75,5 +53,11 @@ function ShopNoticeInfoBox({ term, noticeData }: Props) {
     </div>
   );
 }
+
+// interface에 ?: 사용 시 오류 대응
+ShopNoticeInfoBox.defaultProps = {
+  startsAt: '',
+  workhour: 0,
+};
 
 export default ShopNoticeInfoBox;
