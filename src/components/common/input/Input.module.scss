@@ -1,0 +1,42 @@
+@import '/src/styles/index';
+
+.inputContainer {
+  display: flex;
+  flex-direction: column;
+  gap: 0.8rem;
+}
+
+.inputTitle {
+  @include text-16-l;
+
+  line-height: 2.6rem; /* 162.5% */
+  color: $black;
+}
+
+@mixin box {
+  @include text-16-l;
+
+  width: 35rem;
+  padding: 1.6rem 2rem;
+  color: $black;
+  background: $white;
+  border: 0.1rem solid #cbc9cf;
+  border-radius: 0.6rem;
+}
+
+.inputBox {
+  @include box;
+}
+
+.inputBoxError {
+  @include box;
+
+  border: 0.1rem solid $red-40;
+}
+
+.error {
+  @include text-12-l;
+
+  line-height: 1.6rem;
+  color: $red-40;
+}
