@@ -1,11 +1,14 @@
+'use client';
+
 import Image from 'next/image';
 import classNames from 'classnames';
+import { useEffect, useState } from 'react';
 import locationIcon from '@/public/icons/location.svg';
 import locationGrayIcon from '@/public/icons/location_gray.svg';
 import clockIcon from '@/public/icons/clock.svg';
 import clockGrayIcon from '@/public/icons/clock_gray.svg';
 import styles from './Card.module.scss';
-import formatDateAndTime from '../lib/format';
+import { formatDateAndTime, getTimeDifference } from '../lib/format';
 
 interface CardData {
   data: {
@@ -21,15 +24,25 @@ interface CardData {
 }
 
 function Card({ data }: CardData) {
+  const [closedText, setClosedText] = useState('마감 완료');
+  const [closedStatus, setClosedStatus] = useState(data.closed);
+
+  useEffect(() => {
+    if (getTimeDifference(data.startsAt)) {
+      setClosedStatus(true);
+      setClosedText('지난 공고');
+    }
+  }, [data.startsAt]);
+
   return (
     <div
       className={classNames(styles.card, {
-        [styles.closed]: data.closed,
+        [styles.closed]: closedStatus,
       })}
     >
       <div
         className={classNames(styles.imgContainer, {
-          [styles.closedImg]: data.closed,
+          [styles.closedImg]: closedStatus,
         })}
       >
         <Image
@@ -38,12 +51,12 @@ function Card({ data }: CardData) {
           fill
           style={{ objectFit: 'cover' }}
         />
-        {data.closed && <span className={styles.closeText}>마감 완료</span>}
+        {closedStatus && <span className={styles.closeText}>{closedText}</span>}
       </div>
       <div className={styles.contentContainer}>
         <h2 className={styles.storeName}>{data.name}</h2>
         <div className={styles.content}>
-          {data.closed ? (
+          {closedStatus ? (
             <Image
               src={clockGrayIcon}
               alt='시계 아이콘'
@@ -59,7 +72,7 @@ function Card({ data }: CardData) {
           </h3>
         </div>
         <div className={styles.content}>
-          {data.closed ? (
+          {closedStatus ? (
             <Image
               src={locationGrayIcon}
               alt='위치 아이콘'
