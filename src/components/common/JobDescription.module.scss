@@ -1,0 +1,14 @@
+@import '/src/styles/_index';
+
+.container {
+  @include text-16-l;
+
+  padding: 3.2rem;
+  line-height: 2.6rem;
+  background-color: $gray-10;
+  border-radius: 12px;
+}
+
+.title {
+  @include text-16-b;
+}
