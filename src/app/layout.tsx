@@ -1,4 +1,5 @@
 import type { Metadata } from 'next';
+import styles from './page.module.scss';
 import './globals.scss';
 
 export const metadata: Metadata = {
@@ -13,7 +14,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang='ko'>
-      <body>{children}</body>
+      <body className={styles.layout}>{children}</body>
     </html>
   );
 }
