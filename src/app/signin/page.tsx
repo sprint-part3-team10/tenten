@@ -1,6 +1,8 @@
 'use client';
 
-import Input from '@/components/common/Input';
+import Logo from '@/public/icons/logo.svg';
+import Button from '@/src/components/common/Button';
+import Input from '@/src/components/common/input/Input';
 import Image from 'next/image';
 import Link from 'next/link';
 import { ChangeEvent, FormEvent, useState } from 'react';
@@ -50,37 +52,29 @@ export default function SignIn() {
   return (
     <div className={styles.container}>
       <Link href='/'>
-        <Image
-          src='/images/logo.svg'
-          alt='홈페이지 로고'
-          width={248}
-          height={45}
-        />
+        <Image src={Logo} alt='홈페이지 로고' width={248} height={45} />
       </Link>
       <form className={styles.form} onSubmit={handleSubmit}>
-        <div className={styles.email}>
-          <Input
-            label='이메일'
-            name='email'
-            inputType='email'
-            value={values.email}
-            onChange={handleChange}
-            isError={emailError}
-            errorMessage='올바른 이메일 형식이 아닙니다'
-          />
-        </div>
-        <div className={styles.password}>
-          <Input
-            label='비밀번호'
-            name='password'
-            inputType='password'
-            value={values.password}
-            onChange={handleChange}
-          />
-        </div>
-        <button type='submit' className={styles.btn}>
-          로그인하기
-        </button>
+        <Input
+          label='이메일'
+          name='email'
+          inputType='email'
+          value={values.email}
+          preContent='example@example.com'
+          onChange={handleChange}
+          isError={emailError}
+          errorMessage='올바른 이메일 형식이 아닙니다'
+        />
+        <Input
+          label='비밀번호'
+          name='password'
+          inputType='password'
+          preContent='비밀번호'
+          value={values.password}
+          onChange={handleChange}
+        />
+        <Button buttonType={'submit'} text={'로그인 하기'} size={'L'} />
+
         <div className={styles.movePage}>
           회원이 아니신가요?{' '}
           <Link className={styles.signLink} href='/signup'>
@@ -88,6 +82,16 @@ export default function SignIn() {
           </Link>
         </div>
       </form>
+      <Button buttonType={'submit'} text={'Large 버튼 예시'} size={'L'} />
+      <Button buttonType={'submit'} text={'Middle 버튼 예시'} size={'M'} />
+      <Button buttonType={'submit'} text={'Small 버튼 예시'} size={'S'} />
+      <Button buttonType={'submit'} text={'White 버튼'} isWhite={true} />
+      <Button
+        buttonType={'submit'}
+        text={'반응형+disable 케이스'}
+        isWhite={true}
+        isDisable={true}
+      />
     </div>
   );
 }
