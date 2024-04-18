@@ -1,0 +1,16 @@
+@import '/src/styles/index';
+@import '/src/app/signup/page.module';
+
+.container {
+  @include container;
+}
+
+.form {
+  display: flex;
+  flex-direction: column;
+  gap: 2.8rem;
+}
+
+.movePage {
+  @include move;
+}
