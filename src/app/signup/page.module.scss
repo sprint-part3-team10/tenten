@@ -1,0 +1,35 @@
+@import '/src/styles/index';
+
+@mixin container {
+  display: flex;
+  flex-direction: column;
+  gap: 4rem;
+  align-items: center;
+  justify-content: center;
+  max-width: 35rem;
+  margin: 15rem auto;
+}
+
+@mixin form {
+  display: flex;
+  flex-direction: column;
+  gap: 2.8rem;
+}
+
+@mixin move {
+  @include text-16-l;
+
+  text-align: center;
+}
+
+.container {
+  @include container;
+}
+
+.form {
+  @include form;
+}
+
+.movePage {
+  @include move;
+}
