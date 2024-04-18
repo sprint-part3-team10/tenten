@@ -1,9 +1,23 @@
 import classNames from 'classnames';
 import Image from 'next/image';
-import styles from './Label.module.scss';
 import close from '@/public/icons/labelClose.svg';
+import styles from './Label.module.scss';
 
-function Label({ labelType, content }: { labelType: string; content: string }) {
+interface LabelProps {
+  labelType: string;
+  content: string;
+}
+interface StatusLabelType {
+  [status: string]: string;
+}
+
+const statusLabel: StatusLabelType = {
+  accepted: '승인 완료',
+  rejected: '거절',
+  pending: '대기중',
+};
+
+function Label({ labelType, content }: LabelProps) {
   return labelType === 'location' ? (
     <div className={classNames(styles.label, styles.labelLocation)}>
       {content}
@@ -18,12 +32,12 @@ function Label({ labelType, content }: { labelType: string; content: string }) {
   ) : (
     <div
       className={classNames(styles.label, {
-        [styles.labelAccept]: content === 'accepted',
-        [styles.labelReject]: content === 'rejected',
-        [styles.labelWaiting]: content === 'pending',
+        [styles.labelAccept]: statusLabel[content] === '승인 완료',
+        [styles.labelReject]: statusLabel[content] === '거절',
+        [styles.labelWaiting]: statusLabel[content] === '대기중',
       })}
     >
-      {content}
+      {statusLabel[content]}
     </div>
   );
 }
