@@ -5,7 +5,6 @@ import Button from '@/src/components/common/Button';
 import Input from '@/src/components/common/input/Input';
 import Image from 'next/image';
 import Link from 'next/link';
-import { ChangeEvent, FormEvent, useState } from 'react';
 import { useForm } from 'react-hook-form';
 import styles from './page.module.scss';
 
@@ -27,21 +26,6 @@ export default function SignIn() {
 
   const { email: emailError, password: passwordError } = errors;
 
-  // const handleChange = async (e: ChangeEvent<HTMLInputElement>) => {
-  //   const { name, value } = e.target;
-
-  //   if (name === 'email') {
-  //     setEmailError(!emailRegEx.test(value));
-  //   } else if (name === 'password') {
-  //     setPasswordError(!passwordRegEx.test(value));
-  //   }
-
-  //   setValues(prevValues => ({
-  //     ...prevValues,
-  //     [name]: value,
-  //   }));
-  // };
-
   const onSubmit = async (formData: SigninFormData) => {
     try {
       // await login(data);
@@ -54,6 +38,7 @@ export default function SignIn() {
       }
     }
   };
+
   return (
     <div className={styles.container}>
       <Link href='/'>
@@ -91,26 +76,6 @@ export default function SignIn() {
           </Link>
         </div>
       </form>
-      <Button buttonType='submit' text='Large 버튼 예시' size='L' />
-      <Button
-        buttonType='submit'
-        text='Middle 버튼 예시'
-        size='M'
-        widthValue='20rem'
-      />
-      <Button
-        buttonType='submit'
-        text='Small 버튼 예시'
-        size='S'
-        widthValue='30rem'
-      />
-      <Button buttonType='submit' text='1' isWhite />
-      <Button
-        buttonType='submit'
-        text='반응형+disable 케이스'
-        isWhite
-        isDisable
-      />
     </div>
   );
 }
