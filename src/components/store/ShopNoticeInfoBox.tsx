@@ -25,7 +25,7 @@ interface ShopData {
 //   href: string;
 // }
 
-interface Props {
+interface ShopNoticeInfoBoxProps {
   term: boolean;
   noticeData: {
     id: string;
@@ -42,7 +42,7 @@ interface Props {
   // shopData?: (ShopData & User) | null;
 }
 
-function ShopNoticeInfoBox({ term, noticeData }: Props) {
+function ShopNoticeInfoBox({ term, noticeData }: ShopNoticeInfoBoxProps) {
   return (
     <div className={styles.container}>
       <div className={styles.imageContainer}>
