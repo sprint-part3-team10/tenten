@@ -1,0 +1,87 @@
+@import '/src/styles/index';
+
+@mixin button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  color: $white;
+  background: #ea3c12;
+  border-radius: 0.6rem;
+
+  &:hover {
+    background: $red-30;
+  }
+
+  &:disabled {
+    cursor: not-allowed;
+    background: $gray-40;
+  }
+}
+
+@mixin white {
+  @include button;
+
+  color: #ea3c12;
+  background: $white;
+  border: 1px solid #ea3c12;
+
+  &:hover {
+    background: $red-10;
+  }
+
+  &:disabled {
+    color: $white;
+    background: $gray-40;
+    border: none;
+  }
+}
+
+@mixin large {
+  @include text-16-b;
+
+  padding: 1.4rem 13rem;
+  line-height: 2rem;
+}
+
+@mixin medium {
+  @include text-14-b;
+
+  padding: 1rem 2rem;
+  line-height: 2rem;
+}
+
+@mixin small {
+  @include text-12-l;
+
+  padding: 0.8rem 1.2rem;
+  line-height: 2rem;
+}
+
+.commonButton {
+  @include button;
+
+  &.S {
+    @include small;
+  }
+
+  &.M {
+    @include medium;
+  }
+
+  &.L {
+    @include large;
+  }
+
+  @include small;
+
+  @include media(tablet) {
+    @include medium;
+  }
+  @include media(pc) {
+    @include large;
+  }
+}
+
+.commonButton.white {
+  @include white;
+}
