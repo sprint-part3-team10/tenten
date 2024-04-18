@@ -1,0 +1,44 @@
+@import '/src/styles/index';
+
+.background {
+  position: fixed;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: rgb(0 0 0 / 40%);
+}
+
+.box {
+  display: flex;
+  flex-direction: column;
+  gap: 1.2rem;
+  align-items: center;
+  width: 40rem;
+  padding: 3rem;
+  background-color: $white;
+  border-radius: 0.8rem;
+}
+
+.buttonContainer {
+  display: flex;
+  gap: 1rem;
+}
+
+.button {
+  @include text-16-b;
+
+  padding: 1rem 1.6rem;
+  color: $white;
+  background-color: $red-40;
+  border-radius: 0.8rem;
+}
+
+.white.button {
+  color: $red-40;
+  background-color: $white;
+  border: 1px solid $red-40;
+}
+
+// 아이콘이 있는데 버튼 하나: 흰색버튼
+// 아이콘이 있는데 버튼 둘: 왼쪽 하양, 오른쪽 빨강
