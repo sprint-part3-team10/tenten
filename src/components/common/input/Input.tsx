@@ -1,44 +1,40 @@
 import classNames from 'classnames';
-import { useForm } from 'react-hook-form';
+import { FieldError, UseFormRegisterReturn } from 'react-hook-form';
 import styles from './Input.module.scss';
 
 interface InputProps {
   label: string;
-  name: string;
-  inputType: string;
-  value: string;
-  preContent: string;
-  onChange: any;
-  isError?: boolean;
-  errorMessage?: string;
+  inputType?: 'text' | 'email' | 'password';
+  value?: string | number;
+  error?: FieldError;
+  register: UseFormRegisterReturn;
+  isStatic?: boolean;
 }
 
 export default function Input({
   label,
-  name,
   inputType,
   value,
-  preContent = '입력',
-  onChange,
-  isError,
-  errorMessage,
+  error,
+  register,
+  isStatic = true,
 }: InputProps) {
+  const isError: boolean = !!error;
   return (
-    <div className={styles.inputContainer}>
-      <label className={styles.label} htmlFor={name}>
+    <div className={styles.inputContainer} isStatic={isStatic}>
+      <label className={styles.label} htmlFor={inputType}>
         {label}
       </label>
       <input
         className={classNames(styles.inputBox, {
           [styles.inputBoxError]: isError,
         })}
-        name={name}
-        value={value}
-        placeholder={preContent}
         type={inputType}
-        onChange={onChange}
+        value={value}
+        placeholder='입력'
+        {...register}
       />
-      {isError && <div className={styles.error}>{errorMessage}</div>}
+      {error && <div className={styles.error}>{error.message}</div>}
     </div>
   );
 }
