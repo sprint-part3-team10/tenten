@@ -1,4 +1,5 @@
 import Image from 'next/image';
+import classNames from 'classnames';
 import styles from './ShopNoticeInfoBox.module.scss';
 import WageComparisonBadge from '../common/WageComparisonBadge';
 import formatWage from '../../lib/formatWage';
@@ -22,25 +23,27 @@ function ShopNoticeInfoBox({
   description,
   address1,
 }: ShopNoticeInfoBoxProps) {
+  const NOTICE = kind === 'notice';
+
   return (
-    <div className={styles.container}>
+    <div
+      className={classNames(styles.container, {
+        [styles.white]: NOTICE,
+      })}
+    >
       <div className={styles.imageContainer}>
         <Image fill src={imageUrl} alt='식당 이미지' className={styles.image} />
       </div>
       <div className={styles.textButtonSpace}>
         <div className={styles.textInfo}>
-          <p className={styles.category}>
-            {kind === 'notice' ? '시급' : '식당'}
-          </p>
+          <p className={styles.category}>{NOTICE ? '시급' : '식당'}</p>
           <div className={styles.title}>
-            <span>
-              {kind === 'notice' ? formatWage(Number(mainText)) : mainText}
-            </span>
-            {kind === 'notice' && <WageComparisonBadge />}
+            <span>{NOTICE ? formatWage(Number(mainText)) : mainText}</span>
+            {NOTICE && <WageComparisonBadge />}
           </div>
-          {kind === 'notice' && (
+          {NOTICE && (
             <div className={styles.term}>
-              {kind === 'notice' && `${startsAt}에서 ${workhour}시간 노동`}
+              {NOTICE && `${startsAt}에서 ${workhour}시간 노동`}
             </div>
           )}
           <div className={styles.address}>{address1}</div>
