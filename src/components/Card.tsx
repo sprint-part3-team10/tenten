@@ -7,6 +7,7 @@ import locationIcon from '@/public/icons/location.svg';
 import locationGrayIcon from '@/public/icons/location_gray.svg';
 import clockIcon from '@/public/icons/clock.svg';
 import clockGrayIcon from '@/public/icons/clock_gray.svg';
+import Link from 'next/link';
 import styles from './Card.module.scss';
 import { formatDateAndTime, getTimeDifference } from '../lib/format';
 
@@ -32,69 +33,60 @@ function Card({ data }: CardData) {
       setClosedStatus(true);
       setClosedText('지난 공고');
     }
-  }, [data.startsAt]);
+  }, []);
 
   return (
-    <div
-      className={classNames(styles.card, {
-        [styles.closed]: closedStatus,
-      })}
-    >
+    <Link href={`/${data.id}`}>
       <div
-        className={classNames(styles.imgContainer, {
-          [styles.closedImg]: closedStatus,
+        className={classNames(styles.card, {
+          [styles.closed]: closedStatus,
         })}
       >
-        <Image
-          src={data.imageUrl}
-          alt='가게 이미지'
-          fill
-          style={{ objectFit: 'cover' }}
-        />
-        {closedStatus && <span className={styles.closeText}>{closedText}</span>}
-      </div>
-      <div className={styles.contentContainer}>
-        <h2 className={styles.storeName}>{data.name}</h2>
-        <div className={styles.content}>
-          {closedStatus ? (
+        <div
+          className={classNames(styles.imgContainer, {
+            [styles.closedImg]: closedStatus,
+          })}
+        >
+          <Image
+            src={data.imageUrl}
+            alt='가게 이미지'
+            fill
+            style={{ objectFit: 'cover' }}
+            priority
+            sizes='28rem'
+          />
+          {closedStatus && (
+            <span className={styles.closeText}>{closedText}</span>
+          )}
+        </div>
+        <div className={styles.contentContainer}>
+          <h2 className={styles.storeName}>{data.name}</h2>
+          <div className={styles.content}>
             <Image
-              src={clockGrayIcon}
+              src={closedStatus ? clockGrayIcon : clockIcon}
               alt='시계 아이콘'
               width={20}
               height={20}
             />
-          ) : (
-            <Image src={clockIcon} alt='시계 아이콘' width={20} height={20} />
-          )}
-
-          <h3 className={styles.explain}>
-            {formatDateAndTime(data.startsAt, data.workhour)}
-          </h3>
-        </div>
-        <div className={styles.content}>
-          {closedStatus ? (
+            <h3 className={styles.explain}>
+              {formatDateAndTime(data.startsAt, data.workhour)}
+            </h3>
+          </div>
+          <div className={styles.content}>
             <Image
-              src={locationGrayIcon}
+              src={closedStatus ? locationGrayIcon : locationIcon}
               alt='위치 아이콘'
               width={20}
               height={20}
             />
-          ) : (
-            <Image
-              src={locationIcon}
-              alt='위치 아이콘'
-              width={20}
-              height={20}
-            />
-          )}
-
-          <h3 className={styles.explain}>{data.address1}</h3>
+            <h3 className={styles.explain}>{data.address1}</h3>
+          </div>
+        </div>
+        <div>
+          <h1 className={styles.price}>{data.hourlyPay}</h1>
         </div>
       </div>
-      <div>
-        <h1 className={styles.price}>{data.hourlyPay}</h1>
-      </div>
-    </div>
+    </Link>
   );
 }
 
