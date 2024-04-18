@@ -8,6 +8,10 @@
   background: #ea3c12;
   border-radius: 0.6rem;
 
+  &:hover {
+    background: $red-30;
+  }
+
   &:disabled {
     cursor: not-allowed;
     background: $gray-40;
@@ -19,10 +23,15 @@
 
   color: #ea3c12;
   background: $white;
-  border: 0.1rem solid #ea3c12;
+  border: 1px solid #ea3c12;
+
+  &:hover {
+    background: $red-10;
+  }
 
   &:disabled {
     color: $white;
+    background: $gray-40;
     border: none;
   }
 }
@@ -50,9 +59,8 @@
 
 .commonButton {
   @include button;
-  @include media(mobile) {
-    @include small;
-  }
+  @include small;
+
   @include media(tablet) {
     @include medium;
   }
@@ -61,17 +69,8 @@
   }
 }
 
-.commonButtonWhite {
+.commonButton.white {
   @include white;
-  @include media(mobile) {
-    @include small;
-  }
-  @include media(tablet) {
-    @include medium;
-  }
-  @include media(pc) {
-    @include large;
-  }
 }
 
 .buttonL {
