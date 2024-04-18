@@ -1,11 +1,13 @@
 'use client';
 
 import Image from 'next/image';
+import { useRef } from 'react';
 import styles from './Modal.module.scss';
 import warningIcon from '@/public/icons/modalWarning.svg';
 import checkIcon from '@/public/icons/modalCheck.svg';
+import useOutsideClick from '@/src/hooks/useOutsideClick';
 
-interface Props {
+interface ModalProps {
   icon: 'warning' | 'check' | null;
   message: string;
   buttonText: [string] | [string, string];
@@ -21,7 +23,13 @@ interface Props {
  * @returns
  */
 
-function Modal({ icon, message, buttonText = ['닫기'], setModalOpen }: Props) {
+function Modal({
+  icon,
+  message,
+  buttonText = ['닫기'],
+  setModalOpen,
+}: ModalProps) {
+  const ref = useRef<HTMLDivElement>(null);
   const iconSelector = {
     warning: warningIcon,
     check: checkIcon,
@@ -31,9 +39,11 @@ function Modal({ icon, message, buttonText = ['닫기'], setModalOpen }: Props) 
     setModalOpen(false);
   };
 
+  useOutsideClick(ref, handleClose);
+
   return (
-    <div className={styles.background} onClick={handleClose}>
-      <div className={styles.box}>
+    <div className={styles.background}>
+      <div ref={ref} className={styles.box}>
         {icon && (
           <Image
             width={24}
@@ -52,7 +62,11 @@ function Modal({ icon, message, buttonText = ['닫기'], setModalOpen }: Props) 
               {buttonText[0]}
             </button>
           )}
-          <button className={`${styles.button}`} type='button'>
+          <button
+            className={`${styles.button}`}
+            type='button'
+            onClick={handleClose}
+          >
             {buttonText[1] || buttonText[0]}
           </button>
         </div>
