@@ -1,0 +1,71 @@
+@import '../../styles/index';
+
+.container {
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
+  min-width: 35rem;
+  max-width: 66.5rem;
+  padding: 3.2rem;
+  background-color: $red-10;
+  border-radius: 12px;
+}
+
+.profileInfo {
+  display: flex;
+  flex-direction: column;
+  gap: 1.4rem;
+}
+
+.name {
+  @include text-16-b;
+
+  color: $red-50;
+
+  @include media(mobile) {
+    @include text-14-b;
+  }
+}
+
+.nameText {
+  @include text-28-b;
+
+  margin-bottom: 0.6rem;
+  color: $black;
+  letter-spacing: 0.2rem;
+
+  @include media(mobile) {
+    @include text-24-b;
+  }
+}
+
+.phone,
+.address {
+  @include text-16-l;
+
+  color: $gray-50;
+  vertical-align: super;
+
+  @include media(mobile) {
+    @include text-14-l;
+  }
+}
+
+.icon {
+  margin-right: 0.6rem;
+
+  @include media(mobile) {
+    width: 16px;
+    height: 16px;
+  }
+}
+
+.bio {
+  @include text-16-l;
+
+  margin-top: 2rem;
+
+  @include media(mobile) {
+    @include text-14-l;
+  }
+}
