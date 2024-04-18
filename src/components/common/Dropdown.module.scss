@@ -7,11 +7,11 @@
 }
 
 .dropdownContainer {
+  @include text-14-l;
+
   position: relative;
   display: flex;
   flex-direction: column;
-
-  @include text-14-l;
 
   .inputBox {
     position: relative;
@@ -21,21 +21,21 @@
     width: 100%;
 
     .input {
+      @include border-gray;
+
       padding: 1.6rem 2rem;
       cursor: pointer;
       outline: none;
-
-      @include border-gray;
     }
 
     .input.onlyFilterInput {
+      @include text-14-b;
+
       height: 3rem;
       padding: 1.5rem;
       text-align: start;
       background: $gray-10;
       border: none;
-
-      @include text-14-b;
     }
 
     .arrow {
@@ -51,6 +51,8 @@
   }
 
   .selectList {
+    @include border-gray;
+
     position: absolute;
     top: 110%;
     z-index: 1;
@@ -61,8 +63,6 @@
     height: 15rem;
     overflow: auto;
     box-shadow: 0 0.4rem 2.5rem 0 rgb(0 0 0 / 10%);
-
-    @include border-gray;
 
     li {
       width: 100%;
