@@ -18,7 +18,7 @@ export default function Footer() {
             FAQ
           </Link>
         </div>
-        <div className={styles.icons}>
+        <div className={styles.sns}>
           <Link href='https://www.mail.google.com/'>
             <Image src={Envelope} alt='envelope Logo' width={25} height={25} />
           </Link>
