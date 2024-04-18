@@ -1,0 +1,18 @@
+@import '../../styles/index';
+
+.box {
+  width: 100%;
+  padding: 6rem 2.4rem;
+  border: 0.1rem solid $gray-20;
+  border-radius: 12px;
+}
+
+.description {
+  @include text-16-l;
+
+  text-align: center;
+}
+
+.button {
+  margin-top: 2.4rem;
+}

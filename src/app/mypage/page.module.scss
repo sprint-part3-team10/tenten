@@ -1,0 +1,21 @@
+@import '../../styles/index';
+
+.section {
+  display: flex;
+  justify-content: space-between;
+
+  @include media(tablet) {
+    flex-direction: column;
+    gap: 2rem;
+  }
+}
+
+.title {
+  @include text-28-b;
+
+  width: 100%;
+
+  @include media(mobile) {
+    @include text-20-b;
+  }
+}

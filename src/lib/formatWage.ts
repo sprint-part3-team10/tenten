@@ -4,8 +4,8 @@ const formatWage = (wage: number) => {
   wageString = wageString
     .split('')
     .reverse()
-    .reduce((acc: string[], e: string, i) => {
-      if (i && (i + 1) % 3 === 0) return [...acc, e, ','];
+    .reduce((acc: string[], e: string, i, self) => {
+      if ((i + 1) % 3 === 0 && self[i + 1]) return [...acc, e, ','];
       return [...acc, e];
     }, [])
     .reverse()
