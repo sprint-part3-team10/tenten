@@ -16,11 +16,15 @@
 @mixin box {
   @include text-16-l;
 
-  width: 35rem;
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  width: 100%;
   padding: 1.6rem 2rem;
   color: $black;
   background: $white;
-  border: 0.1rem solid #cbc9cf;
+  border: 1px solid #cbc9cf;
   border-radius: 0.6rem;
 }
 
@@ -30,6 +34,24 @@
 
 .inputBox.inputBoxError {
   border: 1px solid $red-40;
+}
+
+.input {
+  border: none;
+
+  &:focus {
+    border: none;
+    outline: none;
+  }
+}
+
+.won {
+  @include text-16-l;
+
+  position: absolute;
+  top: 50%;
+  right: 2rem;
+  transform: translateY(-50%);
 }
 
 .error {
