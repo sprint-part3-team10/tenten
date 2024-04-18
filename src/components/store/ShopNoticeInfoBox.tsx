@@ -3,7 +3,7 @@ import styles from './ShopNoticeInfoBox.module.scss';
 import WageComparisonBadge from '../common/WageComparisonBadge';
 import formatWage from '../../lib/formatWage';
 
-interface Props {
+interface ShopNoticeInfoBoxProps {
   kind: 'notice' | 'shop';
   mainText: string | number;
   startsAt?: string;
@@ -21,7 +21,7 @@ function ShopNoticeInfoBox({
   workhour,
   description,
   address1,
-}: Props) {
+}: ShopNoticeInfoBoxProps) {
   return (
     <div className={styles.container}>
       <div className={styles.imageContainer}>
