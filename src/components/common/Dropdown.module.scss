@@ -64,6 +64,19 @@
     overflow: auto;
     box-shadow: 0 0.4rem 2.5rem 0 rgb(0 0 0 / 10%);
 
+    &::-webkit-scrollbar {
+      width: 0.5rem;
+    }
+
+    &::-webkit-scrollbar-thumb {
+      background: $gray-50;
+      border-radius: 1rem;
+    }
+
+    &::-webkit-scrollbar-track {
+      background: $white;
+    }
+
     li {
       width: 100%;
       padding: 1rem;
