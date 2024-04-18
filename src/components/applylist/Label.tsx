@@ -11,7 +11,7 @@ import styles from './Label.module.scss';
 interface LabelProps {
   labelType: string;
   content: string;
-  onClick: () => void;
+  onClick: React.MouseEventHandler<HTMLDivElement>;
 }
 interface StatusLabelType {
   [status: string]: string;
@@ -23,7 +23,7 @@ const statusLabel: StatusLabelType = {
   pending: '대기중',
 };
 
-function Label({ labelType, content, onClick }: LabelProps) {
+function Label({ labelType, content, onClick = () => {} }: LabelProps) {
   return labelType === 'location' ? (
     <div className={classNames(styles.label, styles.labelLocation)}>
       {content}
