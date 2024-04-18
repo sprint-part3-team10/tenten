@@ -5,10 +5,10 @@ import redArrow from '@/public/icons/wageArrowRed.svg';
 import whiteArrow from '@/public/icons/wageArrowWhite.svg';
 
 interface WageComparisonBadgeProps {
-  change: boolean;
+  change?: boolean;
 }
 
-function WageComparisonBadge({ change = true }: WageComparisonBadgeProps) {
+function WageComparisonBadge({ change = false }: WageComparisonBadgeProps) {
   return (
     <div
       className={classNames(styles.badge, {
@@ -37,3 +37,7 @@ function WageComparisonBadge({ change = true }: WageComparisonBadgeProps) {
 }
 
 export default WageComparisonBadge;
+
+WageComparisonBadge.defaultProps = {
+  change: false,
+};
