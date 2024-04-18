@@ -1,7 +1,7 @@
 import NoList from '@/src/components/applyList/NoList';
 import MyProfile from '@/src/components/myProfile/MyProfile';
+import ApplyTable from '@/src/components/applyList/ApplyTable';
 import styles from './page.module.scss';
-import ApplyTable from '@/src/components/applylist/ApplyTable';
 
 function mypage() {
   const listNum = 1;

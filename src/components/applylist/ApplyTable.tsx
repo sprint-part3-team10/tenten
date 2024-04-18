@@ -1,7 +1,23 @@
 /* eslint-disable jsx-a11y/control-has-associated-label */
 import classNames from 'classnames';
+import { formatDateAndTime } from '@/src/lib/format';
 import Label from './Label';
 import styles from './ApplyTable.module.scss';
+
+const mockData = {
+  shop: {
+    item: {
+      id: '1234',
+      name: '해피 버거',
+      address1: '서울시 은평구',
+    },
+  },
+  notice: {
+    startsAt: '2023-07-07T18:00:00.000Z',
+    workhour: 10,
+    hourlyPay: 30000,
+  },
+};
 
 function ApplyTable() {
   return (
@@ -9,46 +25,61 @@ function ApplyTable() {
       <table className={styles.table}>
         <thead>
           <tr className={styles.titleRow}>
-            <th className={styles.title}>가게</th>
+            <th className={classNames(styles.title, styles.nameCol)}>가게</th>
             <th className={classNames(styles.title, styles.timeCol)}>일자</th>
             <th className={classNames(styles.title, styles.payCol)}>시급</th>
-            <th className={styles.title}>상태</th>
+            <th className={classNames(styles.title, styles.statusCol)}>상태</th>
           </tr>
         </thead>
         <tbody>
           <tr>
-            <td className={styles.listRow}>HS 과일주스</td>
+            <td className={classNames(styles.listRow, styles.nameCol)}>
+              {mockData.shop.item.name}
+            </td>
             <td className={classNames(styles.listRow, styles.timeCol)}>
-              2023-01-12 10:00 ~ 12:00 (2시간)
+              {formatDateAndTime(
+                mockData.notice.startsAt,
+                mockData.notice.workhour,
+              )}
             </td>
             <td className={classNames(styles.listRow, styles.payCol)}>
-              15,000원
+              {mockData.notice.hourlyPay}
             </td>
-            <td className={styles.listRow}>
+            <td className={classNames(styles.listRow, styles.statusCol)}>
               <Label labelType='location' content='서울시 도봉구' />
             </td>
           </tr>
           <tr>
-            <td className={styles.listRow}>수리 에스프레소 샵</td>
+            <td className={classNames(styles.listRow, styles.nameCol)}>
+              {mockData.shop.item.name}
+            </td>
             <td className={classNames(styles.listRow, styles.timeCol)}>
-              2023-01-12 10:00 ~ 12:00 (2시간)
+              {formatDateAndTime(
+                mockData.notice.startsAt,
+                mockData.notice.workhour,
+              )}
             </td>
             <td className={classNames(styles.listRow, styles.payCol)}>
-              15,000원
+              {mockData.notice.hourlyPay}
             </td>
-            <td className={styles.listRow}>
+            <td className={classNames(styles.listRow, styles.statusCol)}>
               <Label labelType='status' content='accepted' />
             </td>
           </tr>
           <tr>
-            <td className={styles.listRow}>초가을집</td>
+            <td className={classNames(styles.listRow, styles.nameCol)}>
+              {mockData.shop.item.name}
+            </td>
             <td className={classNames(styles.listRow, styles.timeCol)}>
-              2023-01-12 10:00 ~ 12:00 (2시간)
+              {formatDateAndTime(
+                mockData.notice.startsAt,
+                mockData.notice.workhour,
+              )}
             </td>
             <td className={classNames(styles.listRow, styles.payCol)}>
-              15,000원
+              {mockData.notice.hourlyPay}
             </td>
-            <td className={styles.listRow}>
+            <td className={classNames(styles.listRow, styles.statusCol)}>
               <Label labelType='status' content='rejected' />
             </td>
           </tr>

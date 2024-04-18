@@ -22,19 +22,35 @@
 
 .listRow {
   padding: 2rem 1.2rem;
-  border: 1px solid $gray-20;
+}
+
+.nameCol {
+  width: 25%;
+  border-bottom: 1px solid $gray-20;
 }
 
 .payCol {
+  width: 20%;
+  border-bottom: 1px solid $gray-20;
+
   @include media(tablet) {
     display: none;
   }
 }
 
 .timeCol {
+  width: 30%;
+  max-width: 30rem;
+  border-bottom: 1px solid $gray-20;
+
   @include media(mobile) {
     display: none;
   }
+}
+
+.statusCol {
+  width: 25%;
+  border-bottom: 1px solid $gray-20;
 }
 
 .pagenation {
