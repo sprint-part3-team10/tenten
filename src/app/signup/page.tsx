@@ -26,8 +26,12 @@ export default function SignUp() {
   const {
     register,
     handleSubmit,
+    watch,
     formState: { errors },
   } = useForm<SignupFormData>({ mode: 'onChange' });
+
+  const password = watch('password');
+  console.log(password);
 
   const {
     email: emailError,
@@ -92,10 +96,8 @@ export default function SignUp() {
           inputType='password'
           error={passwordCheckError}
           register={register('passwordCheck', {
-            pattern: {
-              value: passwordRegEx,
-              message: '비밀번호는 8-16자, 문자 및 숫자를 포함해야 합니다',
-            },
+            validate: value =>
+              value === password || '비밀번호가 일치하지 않습니다',
           })}
         />
         <TypeSelector
