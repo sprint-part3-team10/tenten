@@ -62,7 +62,11 @@ export default function Input({
           {...register}
         />
         {(label === '비밀번호' || label === '비밀번호 확인') && (
-          <button onClick={toggleVisibility} className={styles.eye}>
+          <button
+            type='button'
+            onClick={toggleVisibility}
+            className={styles.eye}
+          >
             {isVisible ? (
               <Image
                 src='icons/eyeon.svg'
