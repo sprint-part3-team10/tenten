@@ -5,25 +5,39 @@ import redArrow from '@/public/icons/wageArrowRed.svg';
 import whiteArrow from '@/public/icons/wageArrowWhite.svg';
 
 interface WageComparisonBadgeProps {
-  kind: 'badge' | 'text';
+  change?: boolean;
 }
 
-function WageComparisonBadge({ kind = 'badge' }: WageComparisonBadgeProps) {
+function WageComparisonBadge({ change = false }: WageComparisonBadgeProps) {
   return (
     <div
       className={classNames(styles.badge, {
-        [styles.text]: kind === 'text',
+        [styles.text]: change,
       })}
     >
       기존 시급보다 50%
       <Image
+        className={classNames({ [styles.whiteArrow]: change })}
         width={20}
         height={20}
-        src={kind === 'badge' ? whiteArrow : redArrow}
-        alt='시급 비교 화살표'
+        src={whiteArrow}
+        alt='하얀색 화살표'
       />
+      {change && (
+        <Image
+          className={styles.redArrow}
+          width={20}
+          height={20}
+          src={redArrow}
+          alt='붉은색 화살표'
+        />
+      )}
     </div>
   );
 }
 
 export default WageComparisonBadge;
+
+WageComparisonBadge.defaultProps = {
+  change: false,
+};

@@ -36,7 +36,7 @@ function ShopNoticeInfoBox({
             <span>
               {kind === 'notice' ? formatWage(Number(mainText)) : mainText}
             </span>
-            {kind === 'notice' && <WageComparisonBadge kind='badge' />}
+            {kind === 'notice' && <WageComparisonBadge />}
           </div>
           {kind === 'notice' && (
             <div className={styles.term}>
