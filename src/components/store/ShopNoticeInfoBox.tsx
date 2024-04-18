@@ -12,6 +12,7 @@ interface ShopNoticeInfoBoxProps {
   description: string;
   imageUrl: string;
   address1: string;
+  closed?: boolean;
 }
 
 function ShopNoticeInfoBox({
@@ -22,8 +23,12 @@ function ShopNoticeInfoBox({
   workhour,
   description,
   address1,
+  closed,
 }: ShopNoticeInfoBoxProps) {
   const NOTICE = kind === 'notice';
+  const NOW = new Date().getTime();
+  const STARTS_AT = new Date(startsAt as string).getTime();
+  const EXPIRED = NOW > STARTS_AT;
 
   return (
     <div
@@ -33,6 +38,8 @@ function ShopNoticeInfoBox({
     >
       <div className={styles.imageContainer}>
         <Image fill src={imageUrl} alt='식당 이미지' className={styles.image} />
+        {closed && <div className={styles.closed}>마감 완료</div>}
+        {!closed && EXPIRED && <div className={styles.closed}>지난 공고</div>}
       </div>
       <div className={styles.textButtonSpace}>
         <div className={styles.textInfo}>
@@ -61,6 +68,7 @@ function ShopNoticeInfoBox({
 ShopNoticeInfoBox.defaultProps = {
   startsAt: '',
   workhour: 0,
+  closed: false,
 };
 
 export default ShopNoticeInfoBox;
