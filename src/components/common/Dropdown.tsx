@@ -13,7 +13,7 @@ interface DropdownProps {
   width?: string;
   optionList: string[];
   value: string;
-  setValue: React.Dispatch<React.SetStateAction<string>>;
+  onClick: (selectedValue: string) => void;
 }
 
 export default function Dropdown({
@@ -21,7 +21,7 @@ export default function Dropdown({
   width = '100%',
   optionList,
   value,
-  setValue,
+  onClick,
 }: DropdownProps) {
   const [isOpen, setIsOpen] = useState(false);
   const ref = useRef<HTMLDivElement>(null);
@@ -37,7 +37,7 @@ export default function Dropdown({
   };
 
   const handleOptionClick = (option: string) => {
-    setValue(option);
+    onClick(option);
     setIsOpen(false);
   };
 
