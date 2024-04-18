@@ -5,7 +5,7 @@
   justify-content: center;
   width: 100%;
   padding: 3.7rem 24rem;
-  background: red;
+  background: $gray-10;
 }
 
 .items {
@@ -14,4 +14,28 @@
   align-self: stretch;
   justify-content: space-between;
   width: 100%;
+}
+
+.copyright {
+  @include text-16-l;
+
+  line-height: 2.6rem;
+  color: $gray-50;
+}
+
+.toLink {
+  display: flex;
+  gap: 3rem;
+}
+
+.link {
+  @include text-16-l;
+
+  line-height: 2.6rem;
+  color: $gray-50;
+}
+
+.icons {
+  display: flex;
+  gap: 1rem;
 }
