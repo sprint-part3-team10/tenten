@@ -9,8 +9,7 @@ import useOutsideClick from '@/src/hooks/useOutsideClick';
 import styles from './Dropdown.module.scss';
 
 interface DropdownProps {
-  id?: string;
-  name?: string;
+  labelName?: string;
   width?: string;
   optionList: string[];
   value: string;
@@ -18,29 +17,28 @@ interface DropdownProps {
 }
 
 export default function Dropdown({
-  id,
-  name,
+  labelName,
   width = '100%',
   optionList,
   value,
   setValue,
 }: DropdownProps) {
-  const [isSelecting, setIsSelecting] = useState(false);
+  const [isOpen, setIsOpen] = useState(false);
   const ref = useRef<HTMLDivElement>(null);
 
   const handleOutsideClick = () => {
-    setIsSelecting(false);
+    setIsOpen(false);
   };
 
   useOutsideClick(ref, handleOutsideClick);
 
   const toggleDropDown = () => {
-    setIsSelecting(prevValue => !prevValue);
+    setIsOpen(prevValue => !prevValue);
   };
 
   const handleOptionClick = (option: string) => {
     setValue(option);
-    setIsSelecting(false);
+    setIsOpen(false);
   };
 
   return (
@@ -52,29 +50,29 @@ export default function Dropdown({
       }}
     >
       <div className={styles.inputBox} onClick={toggleDropDown}>
-        {id && <label htmlFor={id}>{name} *</label>}
+        {labelName && <label htmlFor={labelName}>{labelName} *</label>}
         <input
           className={classNames(styles.input, {
-            [styles.onlyFilterInput]: !id,
+            [styles.onlyFilterInput]: !labelName,
           })}
-          id={id}
-          name={name}
+          id={labelName}
+          name={labelName}
           value={value}
           placeholder='선택'
           readOnly
         />
         <Image
           className={classNames(styles.arrow, {
-            [styles.onlyFilterArrow]: !id,
+            [styles.onlyFilterArrow]: !labelName,
           })}
-          src={isSelecting ? upArrow : downArrow}
+          src={isOpen ? upArrow : downArrow}
           alt='방향화살표'
         />
       </div>
-      {isSelecting && (
+      {isOpen && (
         <ul
           className={classNames(styles.selectList, {
-            [styles.onlyFilterList]: !id,
+            [styles.onlyFilterList]: !labelName,
           })}
         >
           {optionList.map(option => (
