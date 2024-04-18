@@ -9,10 +9,7 @@ import Logo from '@/public/icons/logo.svg';
 import Button from '@/src/components/common/Button';
 import { useForm } from 'react-hook-form';
 import styles from './page.module.scss';
-
-// email, 비밀번호 조건 RegEx
-const emailRegEx = /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}$/i;
-const passwordRegEx = /^(?=.*[a-zA-Z])(?=.*[0-9]).{8,16}$/;
+import { EMAIL_REGEX, PASSWORD_REGEX } from '@/src/constants/signRegEx';
 
 interface SignupFormData {
   email: string;
@@ -73,7 +70,7 @@ export default function SignUp() {
           error={emailError}
           register={register('email', {
             pattern: {
-              value: emailRegEx,
+              value: EMAIL_REGEX,
               message: '올바른 이메일 형식이 아닙니다',
             },
           })}
@@ -85,7 +82,7 @@ export default function SignUp() {
           error={passwordError}
           register={register('password', {
             pattern: {
-              value: passwordRegEx,
+              value: PASSWORD_REGEX,
               message: '비밀번호는 8-16자, 문자 및 숫자를 포함해야 합니다',
             },
           })}
