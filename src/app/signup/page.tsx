@@ -6,92 +6,53 @@ import Image from 'next/image';
 import Link from 'next/link';
 import { ChangeEvent, FormEvent, useState } from 'react';
 import Logo from '@/public/icons/logo.svg';
-import styles from './page.module.scss';
 import Button from '@/src/components/common/Button';
+import { useForm } from 'react-hook-form';
+import styles from './page.module.scss';
 
 // email, 비밀번호 조건 RegEx
 const emailRegEx = /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}$/i;
 const passwordRegEx = /^(?=.*[a-zA-Z])(?=.*[0-9]).{8,16}$/;
 
-interface Values {
-  name: string;
+interface SignupFormData {
   email: string;
   password: string;
   passwordCheck: string;
-  type: 'employee' | 'employer';
-  isPwError: boolean;
 }
 
 export default function SignUp() {
-  const [values, setValues] = useState<Values>({
-    name: '',
-    email: '',
-    password: '',
-    passwordCheck: '',
-    type: 'employee',
-    isPwError: false,
-  });
   const [isEmployer, setIsEmployer] = useState<boolean>(true);
-  const [emailError, setEmailError] = useState<boolean>(false);
-  const [passwordError, setPasswordError] = useState<boolean>(false);
+  const [userType, setUserType] = useState<string>('employee');
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+  } = useForm<SignupFormData>({ mode: 'onChange' });
 
-  const handleChange = async (e: ChangeEvent<HTMLInputElement>) => {
-    const { name, value } = e.target;
-
-    if (name === 'email') {
-      setEmailError(!emailRegEx.test(value));
-    } else if (name === 'password') {
-      setPasswordError(!passwordRegEx.test(value));
-    }
-
-    setValues(prevValues => ({
-      ...prevValues,
-      [name]: value,
-    }));
-  };
+  const {
+    email: emailError,
+    password: passwordError,
+    passwordCheck: passwordCheckError,
+  } = errors;
 
   const handleType = () => {
     setIsEmployer(!isEmployer);
     if (isEmployer) {
-      setValues(prevValues => ({
-        ...prevValues,
-        type: 'employer',
-      }));
+      setUserType('employer');
     } else {
-      setValues(prevValues => ({
-        ...prevValues,
-        type: 'employee',
-      }));
+      setUserType('employee');
     }
   };
-  console.log(values.type);
-  const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
-    e.preventDefault();
-    if (values.password !== values.passwordCheck) {
-      console.log('warn', '비밀번호가 일치하지 않습니다.');
-    } else {
-      console.log('');
-    }
-
-    const { email, password, type } = values;
+  console.log(userType);
+  const onSubmit = async (formData: SignupFormData) => {
     try {
-      // await axios.post("/users", {
-      //   email,
-      //   password,
-      //   type,
-      // });
-      // 가입이 완료되었다는 modal 실행 필요
-      // await login({ email, password });
+      // await signin(data);
       // navigate("/");
-    } catch (error) {
-      if (error.response && error.response.status === 400) {
-        console.log('error', '잘못된 형식의 요청입니다');
-      } else if (error.response && error.response.status === 409) {
-        // 이메일 중복 에러 처리
-        console.log('error', '이미 사용 중인 이메일입니다.');
+    } catch (error: any) {
+      if (error.response && error.response.status === 404) {
+        console.log('error', '존재하지 않거나 비밀번호가 일치하지 않습니다');
       } else {
-        // 기타 에러 처리
-        console.log('error', '회원가입 중 오류가 발생했습니다.');
+        console.log('error', '로그인 중 오류가 발생했습니다.');
       }
     }
   };
@@ -101,54 +62,48 @@ export default function SignUp() {
       <Link href='/'>
         <Image src={Logo} alt='홈페이지 로고' width={248} height={45} />
       </Link>
-      <form className={styles.form} onSubmit={handleSubmit}>
-        <div>
-          <Input
-            label='이메일'
-            name='email'
-            inputType='email'
-            value={values.email}
-            preContent='example@example.com'
-            onChange={handleChange}
-            isError={emailError}
-            errorMessage='올바른 이메일 형식이 아닙니다'
-          />
-        </div>
-        <div>
-          <Input
-            label='비밀번호'
-            name='password'
-            inputType='password'
-            value={values.password}
-            preContent='비밀번호'
-            onChange={handleChange}
-            isError={passwordError}
-            errorMessage='최소 8자 이상, 두 종류 이상의 문자로 설정해주세요'
-          />
-        </div>
-        <div>
-          <Input
-            label='비밀번호 확인'
-            name='passwordCheck'
-            inputType='password'
-            value={values.passwordCheck}
-            preContent='비밀번호 확인'
-            onChange={handleChange}
-            isError={values.password !== values.passwordCheck}
-            errorMessage='비밀번호가 일치하지 않습니다'
-          />
-        </div>
+      <form className={styles.form} onSubmit={handleSubmit(onSubmit)}>
+        <Input
+          label='이메일'
+          inputType='email'
+          error={emailError}
+          register={register('email', {
+            pattern: {
+              value: emailRegEx,
+              message: '올바른 이메일 형식이 아닙니다',
+            },
+          })}
+        />
+
+        <Input
+          label='비밀번호'
+          inputType='password'
+          error={passwordError}
+          register={register('password', {
+            pattern: {
+              value: passwordRegEx,
+              message: '비밀번호는 8-16자, 문자 및 숫자를 포함해야 합니다',
+            },
+          })}
+        />
+
+        <Input
+          label='비밀번호 확인'
+          inputType='password'
+          error={passwordCheckError}
+          register={register('passwordCheck', {
+            pattern: {
+              value: passwordRegEx,
+              message: '비밀번호는 8-16자, 문자 및 숫자를 포함해야 합니다',
+            },
+          })}
+        />
         <TypeSelector
           label='회원 유형'
           onChange={handleType}
           isEmployer={isEmployer}
         />
-        <Button
-          buttonType={'submit'}
-          text={'가입하기'}
-          size={'L'}
-          isWhite={true}
-        />
+        <Button buttonType='submit' text='가입하기' size='L' isWhite />
         <div className={styles.movePage}>
           이미 가입하셨나요?{' '}
           <Link className={styles.link} href='/signin'>
