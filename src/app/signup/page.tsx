@@ -102,7 +102,7 @@ export default function SignUp() {
           onChange={handleType}
           isEmployer={isEmployer}
         />
-        <Button buttonType='submit' text='가입하기' size='L' isWhite />
+        <Button buttonType='submit' text='가입하기' size='L' />
         <div className={styles.movePage}>
           이미 가입하셨나요?{' '}
           <Link className={styles.link} href='/signin'>
