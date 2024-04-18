@@ -1,3 +1,5 @@
+import classNames from 'classnames';
+import { useForm } from 'react-hook-form';
 import styles from './Input.module.scss';
 
 interface InputProps {
@@ -22,37 +24,21 @@ export default function Input({
   errorMessage,
 }: InputProps) {
   return (
-    <>
-      <div className={styles.inputContainer}>
-        <label className={styles.label} htmlFor={name}>
-          {label}
-        </label>
-        {isError ? (
-          <>
-            <input
-              className={styles.inputBoxError}
-              name={name}
-              value={value}
-              placeholder={preContent}
-              type={inputType}
-              onChange={onChange}
-            />
-          </>
-        ) : (
-          <>
-            <input
-              className={styles.inputBox}
-              id={name}
-              name={name}
-              value={value}
-              placeholder={preContent}
-              type={inputType}
-              onChange={onChange}
-            />
-          </>
-        )}
-        {isError && <div className={styles.error}>{errorMessage}</div>}
-      </div>
-    </>
+    <div className={styles.inputContainer}>
+      <label className={styles.label} htmlFor={name}>
+        {label}
+      </label>
+      <input
+        className={classNames(styles.inputBox, {
+          [styles.inputBoxError]: isError,
+        })}
+        name={name}
+        value={value}
+        placeholder={preContent}
+        type={inputType}
+        onChange={onChange}
+      />
+      {isError && <div className={styles.error}>{errorMessage}</div>}
+    </div>
   );
 }

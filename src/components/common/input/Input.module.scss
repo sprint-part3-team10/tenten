@@ -28,10 +28,8 @@
   @include box;
 }
 
-.inputBoxError {
-  @include box;
-
-  border: 0.1rem solid $red-40;
+.inputBox.inputBoxError {
+  border: 1px solid $red-40;
 }
 
 .error {
