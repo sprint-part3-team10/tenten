@@ -3,7 +3,39 @@
 .box {
   width: 35rem;
   height: 25.8rem;
+  padding-top: 2rem;
+  padding-left: 2.8rem;
+  overflow: scroll;
+  overflow-x: hidden;
   background: $white;
   border: 1px solid$gray-20;
   border-radius: 0.6rem;
+
+  &::-webkit-scrollbar {
+    width: 0.5rem;
+  }
+
+  &::-webkit-scrollbar-thumb {
+    height: 5%;
+    background: $gray-50;
+    border-radius: 1rem;
+  }
+
+  &::-webkit-scrollbar-track {
+    background: $white;
+  }
+}
+
+.button {
+  @include text-14-l;
+
+  width: 50%;
+  height: 4.5rem;
+  line-height: 2.2rem; /* 157.143% */
+  text-align: left;
+  background-color: $white;
+
+  &:hover {
+    @include text-14-b;
+  }
 }
