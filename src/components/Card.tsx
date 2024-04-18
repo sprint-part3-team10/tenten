@@ -1,8 +1,5 @@
-'use client';
-
 import Image from 'next/image';
 import classNames from 'classnames';
-import { useEffect, useState } from 'react';
 import locationIcon from '@/public/icons/location.svg';
 import locationGrayIcon from '@/public/icons/location_gray.svg';
 import clockIcon from '@/public/icons/clock.svg';
@@ -25,65 +22,65 @@ interface CardData {
 }
 
 function Card({ data }: CardData) {
-  const [closedText, setClosedText] = useState('마감 완료');
-  const [closedStatus, setClosedStatus] = useState(data.closed);
+  let closedText = '마감 완료';
+  let closedStatus = data.closed;
 
-  useEffect(() => {
-    if (getTimeDifference(data.startsAt)) {
-      setClosedStatus(true);
-      setClosedText('지난 공고');
-    }
-  }, []);
+  if (getTimeDifference(data.startsAt)) {
+    closedStatus = true;
+    closedText = '지난 공고';
+  }
 
   return (
-    <Link href={`/${data.id}`}>
-      <div
-        className={classNames(styles.card, {
-          [styles.closed]: closedStatus,
-        })}
-      >
+    <Link href={`/${data.id}`} passHref>
+      <div>
         <div
-          className={classNames(styles.imgContainer, {
-            [styles.closedImg]: closedStatus,
+          className={classNames(styles.card, {
+            [styles.closed]: closedStatus,
           })}
         >
-          <Image
-            src={data.imageUrl}
-            alt='가게 이미지'
-            fill
-            style={{ objectFit: 'cover' }}
-            priority
-            sizes='28rem'
-          />
-          {closedStatus && (
-            <span className={styles.closeText}>{closedText}</span>
-          )}
-        </div>
-        <div className={styles.contentContainer}>
-          <h2 className={styles.storeName}>{data.name}</h2>
-          <div className={styles.content}>
+          <div
+            className={classNames(styles.imgContainer, {
+              [styles.closedImg]: closedStatus,
+            })}
+          >
             <Image
-              src={closedStatus ? clockGrayIcon : clockIcon}
-              alt='시계 아이콘'
-              width={20}
-              height={20}
+              src={data.imageUrl}
+              alt='가게 이미지'
+              fill
+              style={{ objectFit: 'cover' }}
+              priority
+              sizes='28rem'
             />
-            <h3 className={styles.explain}>
-              {formatDateAndTime(data.startsAt, data.workhour)}
-            </h3>
+            {closedStatus && (
+              <span className={styles.closeText}>{closedText}</span>
+            )}
           </div>
-          <div className={styles.content}>
-            <Image
-              src={closedStatus ? locationGrayIcon : locationIcon}
-              alt='위치 아이콘'
-              width={20}
-              height={20}
-            />
-            <h3 className={styles.explain}>{data.address1}</h3>
+          <div className={styles.contentContainer}>
+            <h2 className={styles.storeName}>{data.name}</h2>
+            <div className={styles.content}>
+              <Image
+                src={closedStatus ? clockGrayIcon : clockIcon}
+                alt='시계 아이콘'
+                width={20}
+                height={20}
+              />
+              <h3 className={styles.explain}>
+                {formatDateAndTime(data.startsAt, data.workhour)}
+              </h3>
+            </div>
+            <div className={styles.content}>
+              <Image
+                src={closedStatus ? locationGrayIcon : locationIcon}
+                alt='위치 아이콘'
+                width={20}
+                height={20}
+              />
+              <h3 className={styles.explain}>{data.address1}</h3>
+            </div>
           </div>
-        </div>
-        <div>
-          <h1 className={styles.price}>{data.hourlyPay}</h1>
+          <div>
+            <h1 className={styles.price}>{data.hourlyPay}</h1>
+          </div>
         </div>
       </div>
     </Link>
