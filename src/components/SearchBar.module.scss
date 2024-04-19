@@ -1,0 +1,29 @@
+@import '/src/styles/index';
+
+.container {
+  display: flex;
+  width: 45rem;
+  padding: 1rem;
+  align-items: center;
+  gap: 1rem;
+
+  border-radius: 1rem;
+  background: $gray-10;
+
+  @include media(tablet) {
+    width: 34rem;
+  }
+  @include media(mobile) {
+    width: 100%;
+  }
+}
+
+.searchInput {
+  @include text-14-l;
+
+  width: 100%;
+  border: none;
+  outline: none;
+  background: inherit;
+  color: $gray-40;
+}
