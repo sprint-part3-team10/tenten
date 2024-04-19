@@ -86,7 +86,7 @@ function ApplyTable() {
         </tbody>
         <tfoot>
           <tr>
-            <td colSpan={4} className={styles.pagenation}>
+            <td colSpan={4} className={styles.pagination}>
               1 2 3 4 5
             </td>
           </tr>
