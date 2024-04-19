@@ -2,7 +2,7 @@
 
 .tableContainer {
   border: 1px solid $gray-20;
-  border-radius: 10px;
+  border-radius: 1rem;
 }
 
 .table {
@@ -24,7 +24,36 @@
   padding: 2rem 1.2rem;
 }
 
-.pagenation {
+.nameCol {
+  width: 25%;
+  border-bottom: 1px solid $gray-20;
+}
+
+.payCol {
+  width: 20%;
+  border-bottom: 1px solid $gray-20;
+
+  @include media(tablet) {
+    display: none;
+  }
+}
+
+.timeCol {
+  width: 30%;
+  max-width: 30rem;
+  border-bottom: 1px solid $gray-20;
+
+  @include media(mobile) {
+    display: none;
+  }
+}
+
+.statusCol {
+  width: 25%;
+  border-bottom: 1px solid $gray-20;
+}
+
+.pagination {
   padding: 0.8rem 1.2rem;
   text-align: center;
 }
