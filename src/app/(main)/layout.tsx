@@ -18,6 +18,7 @@ export default function RootLayout({
       <body className={styles.body}>
         <main className={styles.layout}>{children}</main>
         <Footer />
+        <div id='modal' />
       </body>
     </html>
   );
