@@ -8,13 +8,16 @@ import styles from './page.module.scss';
 import Image from 'next/image';
 import alarmsRead from '@/public/icons/alarmsRead.svg';
 import alarmsNotRead from '@/public/icons/alarmsNotRead.svg';
-import { useState } from 'react';
+import { useRef, useState } from 'react';
+import useOutsideClick from '@/src/hooks/useOutsideClick';
 
 function mypage() {
   const listNum = 1;
   const notRead = 0;
   const alarmIcon = notRead ? alarmsNotRead : alarmsRead;
+  const ref = useRef<HTMLDivElement>(null);
   const [isOpen, setIsOpen] = useState(false);
+
   const handleCloseClick = () => {
     setIsOpen(false);
   };
@@ -22,9 +25,11 @@ function mypage() {
     setIsOpen(true);
   };
 
+  useOutsideClick(ref, handleCloseClick);
+
   return (
     <>
-      <div onClick={handleOpenAlarms} className={styles.button}>
+      <div onClick={handleOpenAlarms} className={styles.button} ref={ref}>
         <Image src={alarmIcon} width={24} height={24} alt='알람확인아이콘' />
 
         {isOpen && (
