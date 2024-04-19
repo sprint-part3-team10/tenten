@@ -41,5 +41,10 @@
   display: flex;
   gap: 0.8rem;
   justify-content: center;
+
+  &.bottomRight {
+    justify-content: flex-end;
+  }
+
   width: 100%;
 }
