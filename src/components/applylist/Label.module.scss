@@ -3,7 +3,7 @@
 .label {
   @include text-14-b;
 
-  display: inline-block;
+  display: inline;
   padding: 0.6rem 1rem;
   border-radius: 2rem;
 }
@@ -28,6 +28,6 @@
   background-color: $red-10;
 }
 
-.close {
+.delete {
   vertical-align: text-top;
 }
