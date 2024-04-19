@@ -1,0 +1,61 @@
+@import '/src/styles/index';
+
+.container {
+  position: fixed;
+  z-index: 2;
+  width: 100%;
+  height: 8rem;
+  background: $white;
+  display: flex;
+
+  @include media(tablet) {
+    padding: 0 5rem;
+  }
+
+  @include media(mobile) {
+    display: block;
+    padding-top: 2rem;
+    height: 12rem;
+  }
+}
+
+.headerBox {
+  display: flex;
+  width: 110rem;
+  align-items: center;
+  margin: 0 auto;
+  position: relative;
+
+  @include media(mobile) {
+    width: 100%;
+  }
+}
+
+.logo {
+  margin-right: 10rem;
+
+  @include media(tablet) {
+    margin-right: 6rem;
+  }
+}
+
+.searchBar {
+  @include media(mobile) {
+    position: absolute;
+    width: 100%;
+    top: 4rem;
+  }
+}
+
+.activeList {
+  display: flex;
+  gap: 1rem;
+  white-space: nowrap;
+  margin-left: auto;
+
+  button {
+    @include text-16-b;
+
+    background: $white;
+  }
+}
