@@ -1,13 +1,21 @@
+'use client';
+
 import Envelope from '@/public/icons/envelope.svg';
 import Facebook from '@/public/icons/facebook.svg';
 import Instagram from '@/public/icons/instagram.svg';
 import Image from 'next/image';
 import Link from 'next/link';
 import styles from './Footer.module.scss';
+import useHideComponent from '@/hooks/useHideComponent';
 
 export default function Footer() {
+  const hideFooter = useHideComponent();
+
   return (
-    <footer className={styles.container}>
+    <footer
+      className={styles.container}
+      style={{ display: hideFooter ? 'none' : '' }}
+    >
       <div className={styles.items}>
         <span className={styles.copyright}>©codeit - 2023</span>
         <div className={styles.toLink}>
