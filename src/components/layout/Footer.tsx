@@ -9,12 +9,12 @@ import styles from './Footer.module.scss';
 import useHideComponent from '@/src/hooks/useHideComponent';
 
 export default function Footer() {
-  const isFooterHidden = useHideComponent();
+  // const isFooterHidden = useHideComponent();
 
   return (
     <footer
       className={styles.container}
-      style={{ display: isFooterHidden ? 'none' : '' }}
+      // style={{ display: isFooterHidden ? 'none' : '' }}
     >
       <div className={styles.items}>
         <span className={styles.copyright}>©codeit - 2023</span>
