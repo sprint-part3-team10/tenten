@@ -15,5 +15,5 @@ export function getTimeDifference(targetDate: string) {
   const now = new Date().getTime();
   const differenceMs = target - now;
 
-  return differenceMs < 60000;
+  return differenceMs < 0;
 }
