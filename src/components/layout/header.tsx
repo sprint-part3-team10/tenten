@@ -1,8 +1,8 @@
 import Image from 'next/image';
-import Link from 'next/link';
-import SearchBar from '../SearchBar';
 import logo from '@/public/icons/logo.svg';
+import Link from 'next/link';
 import styles from './Header.module.scss';
+import SearchBar from '../SearchBar';
 
 export default function Header() {
   return (
