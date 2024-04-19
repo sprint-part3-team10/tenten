@@ -1,17 +1,20 @@
 @import '/src/styles/index';
 
 .container {
-  margin-bottom: 6rem;
+  margin-bottom: 12rem;
 }
 
 .category {
   @include text-16-b;
 
+  margin-bottom: 0.8rem;
   color: $red-40;
 }
 
 .sectionTitle {
   @include text-28-b;
+
+  margin-bottom: 2.4rem;
 }
 
 .recentCards {
@@ -19,7 +22,7 @@
   flex-wrap: wrap;
   gap: 1.4rem;
   max-width: 96rem;
-  margin: 0 auto;
+  margin: 0 auto 6rem;
 
   & > a {
     flex-basis: 32%;
