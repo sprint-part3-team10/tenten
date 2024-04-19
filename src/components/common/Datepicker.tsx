@@ -29,7 +29,7 @@ export default function DatePicker({
         showPopperArrow={false}
         showTimeSelect
         timeFormat='HH:mm'
-        timeIntervals={15}
+        timeIntervals={5}
         timeCaption='time'
       />
     </div>
