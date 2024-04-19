@@ -4,13 +4,13 @@
   display: flex;
   gap: 1rem;
   align-items: center;
-  width: 45rem;
+  width: 50rem;
   padding: 1rem;
   background: $gray-10;
   border-radius: 1rem;
 
   @include media(tablet) {
-    width: 34rem;
+    width: 40rem;
   }
   @include media(mobile) {
     width: 100%;
