@@ -6,16 +6,10 @@ import Instagram from '@/public/icons/instagram.svg';
 import Image from 'next/image';
 import Link from 'next/link';
 import styles from './Footer.module.scss';
-import useHideComponent from '@/src/hooks/useHideComponent';
 
 export default function Footer() {
-  // const isFooterHidden = useHideComponent();
-
   return (
-    <footer
-      className={styles.container}
-      // style={{ display: isFooterHidden ? 'none' : '' }}
-    >
+    <footer className={styles.container}>
       <div className={styles.items}>
         <span className={styles.copyright}>©codeit - 2023</span>
         <div className={styles.toLink}>
