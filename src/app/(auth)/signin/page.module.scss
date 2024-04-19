@@ -1,5 +1,5 @@
-@import '/src/styles/index';
-@import '/src/app/signup/page.module';
+@import '../../../styles/index';
+@import '../signup/page.module';
 
 .container {
   @include container;
