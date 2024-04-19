@@ -1,12 +1,13 @@
 import styles from './NoList.module.scss';
 
+interface NoListProps {
+  description: string;
+  // buttonAction: string;
+}
 function NoList({
   description,
   // buttonAction,
-}: {
-  description: string;
-  // buttonAction: string;
-}) {
+}: NoListProps) {
   return (
     <div className={styles.box}>
       <p className={styles.description}>{description}</p>

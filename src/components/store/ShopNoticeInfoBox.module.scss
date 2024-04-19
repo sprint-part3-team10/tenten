@@ -1,0 +1,111 @@
+@import '/src/styles/index';
+
+.container {
+  @include media(mobile) {
+    width: 94vw;
+  }
+
+  @include media(tablet) {
+    flex-direction: column;
+    max-width: 68rem;
+  }
+
+  display: flex;
+  gap: 2.5rem;
+  max-width: 96rem;
+  padding: 2.4rem;
+  margin: 0 auto;
+  font-size: 1.6rem;
+  background-color: $red-10;
+
+  &.white {
+    background-color: $white;
+  }
+
+  border-radius: 1.2rem;
+}
+
+.imageContainer {
+  @include media(tablet) {
+    width: 100%;
+  }
+
+  position: relative;
+  width: 60%;
+  height: 30rem;
+}
+
+.image {
+  border-radius: 1.2rem;
+}
+
+.closed {
+  @include text-28-b;
+
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: $white;
+  background-color: rgb(0 0 0 / 60%);
+  border-radius: 1.2rem;
+}
+
+.textButtonSpace {
+  @include media(tablet) {
+    gap: 4rem;
+    width: 100%;
+  }
+
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  width: 40%;
+  padding-top: 1rem;
+}
+
+.textInfo {
+  display: flex;
+  flex-direction: column;
+  gap: 1.4rem;
+}
+
+.category {
+  @include text-16-b;
+
+  color: #ea3c12;
+}
+
+.title {
+  @include text-28-b;
+
+  display: flex;
+  gap: 0.8rem;
+  align-items: center;
+}
+
+.term {
+  @include text-16-l;
+
+  color: $gray-50;
+}
+
+.address {
+  color: $gray-50;
+}
+
+.description {
+  line-height: 2.6rem;
+}
+
+.button {
+  @include text-18-b;
+
+  width: 100%;
+  padding: 1.4rem;
+  color: $red-40;
+  background-color: $white;
+  border: 1px solid $red-40;
+  border-radius: 0.6rem;
+}

@@ -1,0 +1,37 @@
+@import '/src/styles/index';
+
+.badge {
+  @include text-14-b;
+
+  display: inline-flex;
+  align-items: center;
+  padding: 0.8rem;
+  color: $white;
+  background-color: $red-40;
+  border-radius: 2rem;
+}
+
+.text {
+  @include media(mobile) {
+    padding: 0;
+    color: $red-40;
+    background-color: transparent;
+    border-radius: 0;
+  }
+}
+
+.whiteArrow {
+  @include media(mobile) {
+    display: none;
+  }
+
+  display: unset;
+}
+
+.redArrow {
+  @include media(mobile) {
+    display: unset;
+  }
+
+  display: none;
+}
