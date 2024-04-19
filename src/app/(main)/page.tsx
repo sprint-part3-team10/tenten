@@ -1,4 +1,4 @@
-import Card from '../components/Card';
+import Card from '@/src/components/Card';
 import styles from './page.module.scss';
 
 export default function Home() {

@@ -5,7 +5,7 @@
 
   display: inline;
   padding: 0.6rem 1rem;
-  border-radius: 20px;
+  border-radius: 2rem;
 }
 
 .labelAccept {
@@ -21,4 +21,13 @@
 .labelWaiting {
   color: $green-20;
   background-color: $green-10;
+}
+
+.labelLocation {
+  color: $red-50;
+  background-color: $red-10;
+}
+
+.delete {
+  vertical-align: text-top;
 }

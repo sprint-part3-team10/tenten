@@ -1,5 +1,7 @@
 import type { Metadata } from 'next';
-import './globals.scss';
+import styles from './page.module.scss';
+import '@/src/app/globals.scss';
+import Footer from '@/src/components/layout/Footer';
 
 export const metadata: Metadata = {
   title: 'Create Next App',
@@ -13,9 +15,9 @@ export default function RootLayout({
 }>) {
   return (
     <html lang='ko'>
-      <body>
-        {children}
-        <div id='modal' />
+      <body className={styles.body}>
+        <main className={styles.layout}>{children}</main>
+        <Footer />
       </body>
     </html>
   );
