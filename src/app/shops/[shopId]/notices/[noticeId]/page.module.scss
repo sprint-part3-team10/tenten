@@ -1,0 +1,27 @@
+@import '/src/styles/index';
+
+.container {
+  margin-bottom: 6rem;
+}
+
+.category {
+  @include text-16-b;
+
+  color: $red-40;
+}
+
+.sectionTitle {
+  @include text-28-b;
+}
+
+.recentCards {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1.4rem;
+  max-width: 96rem;
+  margin: 0 auto;
+
+  & > a {
+    flex-basis: 32%;
+  }
+}
