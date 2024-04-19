@@ -6,12 +6,14 @@ import styles from './Modal.module.scss';
 import warningIcon from '@/public/icons/modalWarning.svg';
 import checkIcon from '@/public/icons/modalCheck.svg';
 import useOutsideClick from '@/src/hooks/useOutsideClick';
+import Button from '../Button';
 
 interface ModalProps {
   icon?: 'warning' | 'check';
   message: string;
   buttonText: [string] | [string, string];
   handleModal: (value: boolean) => void;
+  buttonWidth: string;
 }
 
 /**
@@ -19,7 +21,7 @@ interface ModalProps {
  * @param icon 모달에 체크나 느낌표 아이콘을 띄울지 여부
  * @param {string} message 모달 메세지
  * @param {array} buttonText 버튼에 쓸 글자를 배열로 전달. 배열 길이에 따라 버튼 갯수가 정해집니다 (두 개까지)
- * @param setModalOpen 클릭 시 닫히도록 할 setState 함수
+ * @param handleModal 클릭 시 닫히도록 할 setState 함수
  * @returns
  */
 
@@ -28,6 +30,7 @@ function Modal({
   message,
   buttonText = ['닫기'],
   handleModal,
+  buttonWidth,
 }: ModalProps) {
   const ref = useRef<HTMLDivElement>(null);
   const iconSelector = {
@@ -55,21 +58,24 @@ function Modal({
         <div>{message}</div>
         <div className={styles.buttonContainer}>
           {buttonText.length === 2 && (
-            <button
-              className={`${styles.button} ${styles.white}`}
-              type='button'
-              onClick={handleClick}
-            >
-              {buttonText[0]}
-            </button>
+            <div onClick={handleClick}>
+              <Button
+                buttonType='button'
+                text={buttonText[0]}
+                size='M'
+                widthValue={buttonWidth}
+                isWhite
+              />
+            </div>
           )}
-          <button
-            className={`${styles.button}`}
-            type='button'
-            onClick={handleClick}
-          >
-            {buttonText[1] || buttonText[0]}
-          </button>
+          <div onClick={handleClick}>
+            <Button
+              buttonType='button'
+              text={buttonText[1] || buttonText[0]}
+              size='M'
+              widthValue={buttonWidth}
+            />
+          </div>
         </div>
       </div>
     </div>
