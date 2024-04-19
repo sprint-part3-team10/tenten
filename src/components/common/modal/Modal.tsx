@@ -8,7 +8,7 @@ import checkIcon from '@/public/icons/modalCheck.svg';
 import useOutsideClick from '@/src/hooks/useOutsideClick';
 
 interface ModalProps {
-  icon: 'warning' | 'check' | null;
+  icon?: 'warning' | 'check';
   message: string;
   buttonText: [string] | [string, string];
   handleModal: (value: boolean) => void;
@@ -58,6 +58,7 @@ function Modal({
             <button
               className={`${styles.button} ${styles.white}`}
               type='button'
+              onClick={handleClick}
             >
               {buttonText[0]}
             </button>
@@ -74,5 +75,9 @@ function Modal({
     </div>
   );
 }
+
+Modal.defaultProps = {
+  icon: undefined,
+};
 
 export default Modal;
