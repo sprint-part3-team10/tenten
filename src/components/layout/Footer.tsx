@@ -6,7 +6,7 @@ import Instagram from '@/public/icons/instagram.svg';
 import Image from 'next/image';
 import Link from 'next/link';
 import styles from './Footer.module.scss';
-import useHideComponent from '@/hooks/useHideComponent';
+import useHideComponent from '@/src/hooks/useHideComponent';
 
 export default function Footer() {
   const isFooterHidden = useHideComponent();
