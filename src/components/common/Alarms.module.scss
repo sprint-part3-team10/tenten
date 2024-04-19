@@ -12,7 +12,6 @@
   border-radius: 1rem;
 
   @include media(mobile) {
-    position: absolute;
     top: 0;
     left: 0;
     width: 100vw;
