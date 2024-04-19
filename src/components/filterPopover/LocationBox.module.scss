@@ -1,10 +1,10 @@
 @import '../../styles/index';
 
 .box {
-  width: 35rem;
+  width: 100%;
+  min-width: 35rem;
   height: 25.8rem;
-  padding-top: 2rem;
-  padding-left: 2.8rem;
+  padding: 1.5rem 0 2rem 2.8rem;
   overflow: scroll;
   overflow-x: hidden;
   background: $white;
@@ -16,7 +16,6 @@
   }
 
   &::-webkit-scrollbar-thumb {
-    height: 5%;
     background: $gray-50;
     border-radius: 1rem;
   }
@@ -30,12 +29,12 @@
   @include text-14-l;
 
   width: 50%;
-  height: 4.5rem;
-  line-height: 2.2rem; /* 157.143% */
+  height: 4.4rem;
+  line-height: 2.2rem;
   text-align: left;
   background-color: $white;
 
-  &:hover {
+  & span:hover {
     @include text-14-b;
   }
 }

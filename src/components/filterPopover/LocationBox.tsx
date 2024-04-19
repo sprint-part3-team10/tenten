@@ -42,7 +42,7 @@ function LocationBox() {
     <div className={styles.box}>
       {LOCATION_LIST.map(item => (
         <button className={styles.button} onClick={() => handleClick(item)}>
-          {item}
+          <span>{item}</span>
         </button>
       ))}
     </div>
