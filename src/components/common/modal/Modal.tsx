@@ -11,7 +11,7 @@ interface ModalProps {
   icon: 'warning' | 'check' | null;
   message: string;
   buttonText: [string] | [string, string];
-  setModalOpen: (value: boolean) => void;
+  handleModal: (value: boolean) => void;
 }
 
 /**
@@ -27,7 +27,7 @@ function Modal({
   icon,
   message,
   buttonText = ['닫기'],
-  setModalOpen,
+  handleModal,
 }: ModalProps) {
   const ref = useRef<HTMLDivElement>(null);
   const iconSelector = {
@@ -35,11 +35,11 @@ function Modal({
     check: checkIcon,
   };
 
-  const handleClose = () => {
-    setModalOpen(false);
+  const handleClick = () => {
+    handleModal(false);
   };
 
-  useOutsideClick(ref, handleClose);
+  useOutsideClick(ref, handleClick);
 
   return (
     <div className={styles.background}>
@@ -65,7 +65,7 @@ function Modal({
           <button
             className={`${styles.button}`}
             type='button'
-            onClick={handleClose}
+            onClick={handleClick}
           >
             {buttonText[1] || buttonText[0]}
           </button>
