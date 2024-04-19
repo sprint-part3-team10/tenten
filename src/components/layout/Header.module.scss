@@ -3,10 +3,10 @@
 .container {
   position: fixed;
   z-index: 2;
+  display: flex;
   width: 100%;
   height: 8rem;
   background: $white;
-  display: flex;
 
   @include media(tablet) {
     padding: 0 5rem;
@@ -14,17 +14,17 @@
 
   @include media(mobile) {
     display: block;
-    padding-top: 2rem;
     height: 12rem;
+    padding-top: 2rem;
   }
 }
 
 .headerBox {
-  display: flex;
-  width: 110rem;
-  align-items: center;
-  margin: 0 auto;
   position: relative;
+  display: flex;
+  align-items: center;
+  width: 110rem;
+  margin: 0 auto;
 
   @include media(mobile) {
     width: 100%;
@@ -42,16 +42,16 @@
 .searchBar {
   @include media(mobile) {
     position: absolute;
-    width: 100%;
     top: 4rem;
+    width: 100%;
   }
 }
 
 .activeList {
   display: flex;
   gap: 1rem;
-  white-space: nowrap;
   margin-left: auto;
+  white-space: nowrap;
 
   button {
     @include text-16-b;
