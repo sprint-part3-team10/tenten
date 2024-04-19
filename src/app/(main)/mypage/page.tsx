@@ -1,14 +1,39 @@
+'use client';
+
 import NoList from '@/src/components/applyList/NoList';
 import MyProfile from '@/src/components/myProfile/MyProfile';
 import ApplyTable from '@/src/components/applyList/ApplyTable';
 import Alarms from '@/src/components/common/Alarms';
 import styles from './page.module.scss';
+import Image from 'next/image';
+import alarmsRead from '@/public/icons/alarmsRead.svg';
+import alarmsNotRead from '@/public/icons/alarmsNotRead.svg';
+import { useState } from 'react';
 
 function mypage() {
   const listNum = 1;
+  const notRead = 0;
+  const alarmIcon = notRead ? alarmsNotRead : alarmsRead;
+  const [isOpen, setIsOpen] = useState(false);
+  const handleCloseClick = () => {
+    setIsOpen(false);
+  };
+  const handleOpenAlarms = () => {
+    setIsOpen(true);
+  };
+
   return (
     <>
-      <Alarms />
+      <div onClick={handleOpenAlarms} className={styles.button}>
+        <Image src={alarmIcon} width={24} height={24} alt='알람확인아이콘' />
+
+        {isOpen && (
+          <div className={styles.alarms}>
+            <Alarms handleCloseClick={handleCloseClick} />
+          </div>
+        )}
+      </div>
+
       <div className={styles.section}>
         <div className={styles.title}>내 프로필</div>
         <MyProfile />
