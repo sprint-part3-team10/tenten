@@ -1,5 +1,23 @@
 @import '../styles/index';
 
+.body {
+  overflow-x: hidden;
+
+  &::-webkit-scrollbar {
+    width: 0.5rem;
+  }
+
+  &::-webkit-scrollbar-thumb {
+    height: 5%;
+    background: $gray-50;
+    border-radius: 1rem;
+  }
+
+  &::-webkit-scrollbar-track {
+    background: $white;
+  }
+}
+
 .layout {
   width: 100vw;
   min-height: 100vh;
