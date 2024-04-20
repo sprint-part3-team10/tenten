@@ -1,1 +1,12 @@
 GET https://bootcamp-api.codeit.kr/api/0-1/the-julge/shops/4490151c-5217-4157-b072-9c37b05bed47/notices/99996477-82db-4bda-aae1-4044f11d9a8b
+
+###
+
+POST https://bootcamp-api.codeit.kr/api/04-10/the-julge/users
+Content-Type: application/json
+
+{
+  "email": "string",
+  "password": "string",
+  "type": "employee"
+}
