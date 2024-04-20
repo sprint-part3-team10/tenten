@@ -46,7 +46,7 @@ export default function Dropdown({
       ref={ref}
       className={styles.dropdownContainer}
       style={{
-        width: width,
+        width,
       }}
     >
       <div className={styles.inputBox} onClick={toggleDropDown}>
