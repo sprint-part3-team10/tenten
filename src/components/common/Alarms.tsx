@@ -5,6 +5,11 @@ import { formatDateAndTime } from '@/src/lib/format';
 import { STATUS_LABEL } from '@/src/constants/constant';
 import classNames from 'classnames';
 import styles from './Alarms.module.scss';
+import close from '@/public/icons/close.svg';
+
+interface AlarmsProps {
+  handleCloseClick: () => void;
+}
 
 const mockData = {
   count: 6,
@@ -29,7 +34,7 @@ const mockData = {
   },
 };
 
-export default function Alarms() {
+export default function Alarms({ handleCloseClick }: AlarmsProps) {
   const status = mockData.items.item.result;
   const alarmImage = status === 'accepted' ? approve : reject;
   const resultAlarm = STATUS_LABEL[status].split(' ')[0];
@@ -41,6 +46,9 @@ export default function Alarms() {
 
   return (
     <div className={styles.container}>
+      <button className={styles.close} onClick={handleCloseClick}>
+        <Image width={24} height={24} src={close} alt='close' />
+      </button>
       <h1 className={styles.title}>알림 {mockData.count}개</h1>
 
       <div className={styles.notiBox}>
