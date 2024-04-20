@@ -12,16 +12,19 @@ interface MyPageProps {
 async function mypage({ params }: MyPageProps) {
   const { userId } = params;
 
-  const listNum = 1;
+  const listNum = 0;
 
-  return (
-    <>
-      <div className={styles.section}>
-        <div className={styles.title}>내 프로필</div>
-        <MyProfile id={userId} />
-      </div>
-      {listNum && <ApplyTable />}
-    </>
+  return listNum === 0 ? (
+    <NoList
+      title='내 프로필'
+      description='내 프로필을 등록하고 원하는 가게에 지원해 보세요.'
+      text='내 프로필 등록하기'
+    />
+  ) : (
+    <div className={styles.section}>
+      <div className={styles.title}>내 프로필</div>
+      <MyProfile id={userId} />
+    </div>
   );
 }
 
