@@ -1,13 +1,16 @@
 @import '../../../styles/index';
 
 .toast {
+  @include text-16-l;
+
   position: fixed;
   bottom: 10%;
   left: 50%;
   display: flex;
-  font-size: 32px;
-  color: black;
-  background: $gray-10;
+  padding: 2rem 3rem;
+  color: $white;
+  background: $black;
+  border-radius: 0.8rem;
   transition: transform 0.5s ease-in-out;
   transform: translateX(-50%);
   animation: slideUp 0.5s ease-in-out;
