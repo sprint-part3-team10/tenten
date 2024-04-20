@@ -4,10 +4,10 @@
   width: 100%;
   min-width: 35rem;
   height: 25.8rem;
-  padding: 1.5rem 0 2rem 2.8rem;
+  padding-top: 2rem;
+  padding-left: 2.8rem;
   overflow: scroll;
   overflow-x: hidden;
-  background: $white;
   border: 1px solid$gray-20;
   border-radius: 0.6rem;
 
@@ -16,23 +16,29 @@
   }
 
   &::-webkit-scrollbar-thumb {
-    background: $gray-50;
+    background: $gray-40;
     border-radius: 1rem;
-  }
-
-  &::-webkit-scrollbar-track {
-    background: $white;
   }
 }
 
-.button {
-  @include text-14-l;
+.labelContainer {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.75rem;
+  margin-top: 1rem;
+}
 
+.location {
+  display: inline-block;
   width: 50%;
   height: 4.4rem;
   line-height: 2.2rem;
   text-align: left;
-  background-color: $white;
+  cursor: pointer;
+
+  & span {
+    @include text-14-l;
+  }
 
   & span:hover {
     @include text-14-b;

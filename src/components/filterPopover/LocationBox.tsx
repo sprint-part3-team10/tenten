@@ -1,54 +1,41 @@
 'use client';
 
 import React, { useState } from 'react';
+import { LOCATION_LIST } from '@/src/constants/dropdownList';
 import styles from './LocationBox.module.scss';
-
-export const LOCATION_LIST = [
-  '서울시 종로구',
-  '서울시 중구',
-  '서울시 용산구',
-  '서울시 성동구',
-  '서울시 광진구',
-  '서울시 동대문구',
-  '서울시 중랑구',
-  '서울시 성북구',
-  '서울시 강북구',
-  '서울시 도봉구',
-  '서울시 노원구',
-  '서울시 은평구',
-  '서울시 서대문구',
-  '서울시 마포구',
-  '서울시 양천구',
-  '서울시 강서구',
-  '서울시 구로구',
-  '서울시 금천구',
-  '서울시 영등포구',
-  '서울시 동작구',
-  '서울시 관악구',
-  '서울시 서초구',
-  '서울시 강남구',
-  '서울시 송파구',
-  '서울시 강동구',
-];
+import Label from '../applylist/Label';
 
 function LocationBox() {
   const [clickedLocation, setClickedLocation] = useState<string[]>([]);
 
   const handleClick = (item: string) => {
-    setClickedLocation([...clickedLocation, item]);
+    if (!clickedLocation.includes(item))
+      setClickedLocation([...clickedLocation, item]);
+  };
+
+  const handleDeleteLocation = (item: string) => {
+    setClickedLocation(clickedLocation.filter(prev => prev !== item));
   };
 
   return (
-    <div className={styles.box}>
-      {LOCATION_LIST.map(item => (
-        <button
-          className={styles.button}
-          type='button'
-          onClick={() => handleClick(item)}
-        >
-          <span>{item}</span>
-        </button>
-      ))}
+    <div>
+      <div className={styles.box}>
+        {LOCATION_LIST.map(item => (
+          <div key={item} className={styles.location}>
+            <span onClick={() => handleClick(item)}>{item}</span>
+          </div>
+        ))}
+      </div>
+      <div className={styles.labelContainer}>
+        {clickedLocation.map(item => (
+          <Label
+            key={item}
+            labelType='location'
+            content={item}
+            onClick={() => handleDeleteLocation(item)}
+          />
+        ))}
+      </div>
     </div>
   );
 }
