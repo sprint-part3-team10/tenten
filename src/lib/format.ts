@@ -10,10 +10,20 @@ export function formatDateAndTime(dateString: string, workhour: number) {
   return `${dateString.slice(0, 10)} ${startHours}:${minutes} ~ ${endHours}:${minutes} (${workhour}시간)`;
 }
 
-export function getTimeDifference(targetDate: string) {
-  const target = new Date(targetDate).getTime();
-  const now = new Date().getTime();
-  const differenceMs = target - now;
+export function formatWage(wage: number) {
+  let wageString = String(wage);
 
-  return differenceMs < 0;
+  wageString = wageString
+    .split('')
+    .reverse()
+    .reduce((acc: string[], e: string, i, self) => {
+      if ((i + 1) % 3 === 0 && self[i + 1]) return [...acc, e, ','];
+      return [...acc, e];
+    }, [])
+    .reverse()
+    .join('');
+
+  wageString += '원';
+
+  return wageString;
 }
