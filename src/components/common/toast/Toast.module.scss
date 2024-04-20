@@ -1,0 +1,24 @@
+@import '../../../styles/index';
+
+.toast {
+  position: fixed;
+  bottom: 10%;
+  left: 50%;
+  display: flex;
+  font-size: 32px;
+  color: black;
+  background: $gray-10;
+  transition: transform 0.5s ease-in-out;
+  transform: translateX(-50%);
+  animation: slideUp 0.5s ease-in-out;
+
+  @keyframes slideUp {
+    from {
+      transform: translateY(100%) translateX(-50%); /* 처음 위치 */
+    }
+
+    to {
+      transform: translateY(0) translateX(-50%); /* 최종 위치 */
+    }
+  }
+}
