@@ -7,28 +7,34 @@ import classNames from 'classnames';
 import Image from 'next/image';
 import styles from './Pagination.module.scss';
 
-// limit, section, 요청 보낼 url, response 받을 배열, 배열에 set하는 함수
-function Pagination() {
-  const totalCount = 100; // 전체 아이템
-  const limit = 6; // 보여줄 item 갯수
-  const totalPages = Math.ceil(totalCount / limit); // 나올 페이지 수
-  const sectionSize = 7; // 한 번에 보여줄 페이지 수
+interface PaginationProps {
+  totalCount: number;
+  limit: number;
+  selectedPage: number;
+  handlePageChange: (page: number) => void;
+}
+
+function Pagination({
+  totalCount,
+  limit,
+  selectedPage,
+  handlePageChange,
+}: PaginationProps) {
+  const totalPages = Math.ceil(totalCount / limit);
+  const sectionSize = 7;
   const pageNumbers = Array.from({ length: totalPages }, (_, i) => ++i);
-  const sectionPageNumbers = []; // 섹션별 페이지 배열을 담을 배열
-  const [selectedPage, setSelectedPage] = useState(1);
+  const sectionPageNumbers = [];
   const [selectedSection, setSelectedSection] = useState(0);
 
   for (let i = 0; i < Math.ceil(totalPages / sectionSize); i++) {
-    // 페이지 수를 섹션 단위로 나누어 반복
-    const startIndex = i * sectionSize; // 현재 섹션의 시작 인덱스
-    const endIndex = Math.min(startIndex + sectionSize, totalPages); // 현재 섹션의 끝 인덱스
-    const sectionPages = pageNumbers.slice(startIndex, endIndex); // 현재 섹션에 해당하는 페이지 번호 배열
-    sectionPageNumbers.push(sectionPages); // 현재 섹션의 페이지 배열을 섹션별 배열에 추가
+    const startIndex = i * sectionSize;
+    const endIndex = Math.min(startIndex + sectionSize, totalPages);
+    const sectionPages = pageNumbers.slice(startIndex, endIndex);
+    sectionPageNumbers.push(sectionPages);
   }
 
   const handleClickNumber = (num: number) => {
-    setSelectedPage(num);
-    console.log(selectedPage);
+    handlePageChange(num);
   };
 
   const handleArrowClick = (direction: string) => {
@@ -36,22 +42,22 @@ function Pagination() {
       setSelectedSection(prev => {
         if (prev > 0) {
           const newSection = prev - 1;
-          setSelectedPage(newSection * sectionSize + 1);
           return newSection;
         }
-        setSelectedPage(1);
         return prev;
       });
+      handlePageChange(
+        (Math.ceil(selectedPage / sectionSize) - 2) * sectionSize + 1,
+      );
     } else if (direction === 'right') {
       setSelectedSection(prev => {
         if (prev < sectionPageNumbers.length - 1) {
           const newSection = prev + 1;
-          setSelectedPage(newSection * sectionSize + 1);
           return newSection;
         }
-        setSelectedPage(totalPages);
         return prev;
       });
+      handlePageChange(Math.ceil(selectedPage / sectionSize) * sectionSize + 1);
     }
   };
 
