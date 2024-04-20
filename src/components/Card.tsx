@@ -6,11 +6,13 @@ import clockIcon from '@/public/icons/clock.svg';
 import clockGrayIcon from '@/public/icons/clock_gray.svg';
 import Link from 'next/link';
 import styles from './Card.module.scss';
-import { formatDateAndTime, getTimeDifference } from '../lib/format';
+import { formatWage, formatDateAndTime } from '../lib/format';
+import getTimeDifference from '../lib/caculate';
 
 interface CardData {
   data: {
-    id: string;
+    item_id: string;
+    shop_id: string;
     name: string;
     startsAt: string;
     workhour: number;
@@ -31,7 +33,7 @@ function Card({ data }: CardData) {
   }
 
   return (
-    <Link href={`/${data.id}`} passHref>
+    <Link href={`/shops/${data.shop_id}/notices/${data.item_id}`} passHref>
       <div>
         <div
           className={classNames(styles.card, {
@@ -79,7 +81,7 @@ function Card({ data }: CardData) {
             </div>
           </div>
           <div>
-            <h1 className={styles.price}>{data.hourlyPay}</h1>
+            <h1 className={styles.price}>{formatWage(data.hourlyPay)}</h1>
           </div>
         </div>
       </div>
