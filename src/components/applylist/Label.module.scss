@@ -24,10 +24,15 @@
 }
 
 .labelLocation {
+  display: flex;
+  align-items: center;
   color: $red-50;
   background-color: $red-10;
 }
 
 .delete {
+  width: 100%;
+  padding-left: 0.4rem;
   vertical-align: text-top;
+  cursor: pointer;
 }
