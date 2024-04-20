@@ -3,6 +3,7 @@ import location from '@/public/icons/location.svg';
 import phone from '@/public/icons/phone.svg';
 import getProfileData from '@/src/api/getProfileData';
 import styles from './MyProfile.module.scss';
+import Button from '../common/Button';
 
 // const mockData = {
 //   name: '김승우',
@@ -45,7 +46,9 @@ export default async function MyProfile({ id }: MyProfileProps) {
         </div>
         <p className={styles.bio}>{result.bio}</p>
       </div>
-      {/* 버튼 컴포넌트 */}
+      <div className={styles.button}>
+        <Button buttonType='button' text='편집하기' size='M' isWhite />
+      </div>
     </div>
   );
 }

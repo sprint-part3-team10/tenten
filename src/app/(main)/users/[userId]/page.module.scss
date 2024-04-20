@@ -13,8 +13,6 @@
 .title {
   @include text-28-b;
 
-  width: 100%;
-
   @include media(mobile) {
     @include text-20-b;
   }

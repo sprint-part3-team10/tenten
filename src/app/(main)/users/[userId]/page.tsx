@@ -20,14 +20,7 @@ async function mypage({ params }: MyPageProps) {
         <div className={styles.title}>내 프로필</div>
         <MyProfile id={userId} />
       </div>
-      {listNum ? (
-        <ApplyTable />
-      ) : (
-        <NoList
-          description='아직 신청 내역이 없어요.'
-          // buttonAction='공고 보러가기'
-        />
-      )}
+      {listNum && <ApplyTable />}
     </>
   );
 }

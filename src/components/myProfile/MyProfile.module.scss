@@ -2,6 +2,7 @@
 
 .container {
   display: flex;
+  gap: 0.8rem;
   justify-content: space-between;
   width: 100%;
   min-width: 35rem;
@@ -15,6 +16,7 @@
   display: flex;
   flex-direction: column;
   gap: 1.4rem;
+  width: fill;
 }
 
 .name {
@@ -67,5 +69,13 @@
 
   @include media(mobile) {
     @include text-14-l;
+  }
+}
+
+.button {
+  width: 17rem;
+
+  @include media(mobile) {
+    @include text-14-b;
   }
 }
