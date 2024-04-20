@@ -3,9 +3,8 @@
 import NoList from '@/src/components/applyList/NoList';
 import MyProfile from '@/src/components/myProfile/MyProfile';
 import ApplyTable from '@/src/components/applyList/ApplyTable';
-import styles from './page.module.scss';
-import Image from 'next/image';
 import AlarmSet from '@/src/components/common/AlarmSet';
+import styles from './page.module.scss';
 
 function mypage() {
   const listNum = 1;
