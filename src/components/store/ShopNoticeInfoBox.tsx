@@ -1,8 +1,8 @@
 import Image from 'next/image';
 import classNames from 'classnames';
+import { formatWage } from '@/src/lib/format';
 import styles from './ShopNoticeInfoBox.module.scss';
 import WageComparisonBadge from '../common/WageComparisonBadge';
-import formatWage from '../../lib/formatWage';
 
 interface ShopNoticeInfoBoxProps {
   kind: 'notice' | 'shop';
@@ -19,11 +19,11 @@ function ShopNoticeInfoBox({
   kind,
   imageUrl,
   mainText,
-  startsAt,
-  workhour,
+  startsAt = '',
+  workhour = 0,
   description,
   address1,
-  closed,
+  closed = false,
 }: ShopNoticeInfoBoxProps) {
   const NOTICE = kind === 'notice';
   const NOW = new Date().getTime();
@@ -63,12 +63,5 @@ function ShopNoticeInfoBox({
     </div>
   );
 }
-
-// interface에 ?: 사용 시 오류 대응
-ShopNoticeInfoBox.defaultProps = {
-  startsAt: '',
-  workhour: 0,
-  closed: false,
-};
 
 export default ShopNoticeInfoBox;

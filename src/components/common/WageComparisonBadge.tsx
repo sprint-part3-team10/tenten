@@ -1,8 +1,8 @@
 import Image from 'next/image';
 import classNames from 'classnames';
-import styles from './WageComparisonBadge.module.scss';
 import redArrow from '@/public/icons/wageArrowRed.svg';
 import whiteArrow from '@/public/icons/wageArrowWhite.svg';
+import styles from './WageComparisonBadge.module.scss';
 
 interface WageComparisonBadgeProps {
   change?: boolean;
@@ -37,7 +37,3 @@ function WageComparisonBadge({ change = false }: WageComparisonBadgeProps) {
 }
 
 export default WageComparisonBadge;
-
-WageComparisonBadge.defaultProps = {
-  change: false,
-};
