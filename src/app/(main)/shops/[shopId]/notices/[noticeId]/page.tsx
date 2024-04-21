@@ -124,35 +124,42 @@ const getData = async (shopId: string, noticeId: string): Promise<Notice> => {
 async function NoticePage({ params }: NoticePageProps) {
   const { shopId, noticeId } = params;
 
-  const notice = await getData(shopId, noticeId);
+  const { item: notice } = await getData(shopId, noticeId);
+  const {
+    shop: { item: shop },
+  } = notice;
+  const infoData = {
+    kind: 'notice' as const,
+    mainText: notice.hourlyPay,
+    startsAt: notice.startsAt,
+    workhour: notice.workhour,
+    description: shop.description,
+    imageUrl: shop.imageUrl,
+    address1: shop.address1,
+    originalHourlyPay: shop.originalHourlyPay,
+    hourlyPay: notice.hourlyPay,
+    closed: notice.closed,
+  };
   const cardData = {
-    closed: notice.item.closed,
-    hourlyPay: notice.item.hourlyPay,
-    item_id: notice.item.id,
-    shop_id: notice.item.shop.item.id,
-    address1: notice.item.shop.item.address1,
-    imageUrl: notice.item.shop.item.imageUrl,
-    name: notice.item.shop.item.name,
-    startsAt: notice.item.startsAt,
-    workhour: notice.item.workhour,
+    closed: notice.closed,
+    hourlyPay: notice.hourlyPay,
+    item_id: notice.id,
+    shop_id: shop.id,
+    address1: shop.address1,
+    imageUrl: shop.imageUrl,
+    name: shop.name,
+    startsAt: notice.startsAt,
+    workhour: notice.workhour,
   };
 
   return (
     <>
       <section className={styles.container}>
         <h2 className={styles.category}>식당</h2>
-        <h1 className={styles.sectionTitle}>{notice.item.shop.item.name}</h1>
-        <ShopNoticeInfoBox
-          address1={notice.item.shop.item.address1}
-          description={notice.item.shop.item.description}
-          imageUrl={notice.item.shop.item.imageUrl}
-          kind='notice'
-          mainText={notice.item.hourlyPay}
-          startsAt={notice.item.startsAt}
-          workhour={notice.item.workhour}
-        />
+        <h1 className={styles.sectionTitle}>{shop.name}</h1>
+        <ShopNoticeInfoBox data={infoData} />
         <div style={{ marginBottom: '2.4rem' }} />
-        <JobDescription description={notice.item.description} />
+        <JobDescription description={notice.description} />
       </section>
       <section>
         <h1 className={styles.sectionTitle}>최근에 본 공고</h1>

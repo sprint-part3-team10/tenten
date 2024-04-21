@@ -32,16 +32,6 @@ function ShopNoticeInfoBox({ data }: ShopNoticeInfoBoxProps) {
     hourlyPay,
     closed,
   } = data;
-function ShopNoticeInfoBox({
-  kind,
-  imageUrl,
-  mainText,
-  startsAt = '',
-  workhour = 0,
-  description,
-  address1,
-  closed = false,
-}: ShopNoticeInfoBoxProps) {
   const NOTICE = kind === 'notice';
   const NOW = new Date().getTime();
   const STARTS_AT = new Date(startsAt as string).getTime();
@@ -72,7 +62,7 @@ function ShopNoticeInfoBox({
           </div>
           {NOTICE && (
             <div className={styles.term}>
-              {formatDateAndTime(startsAt, workhour)}
+              {formatDateAndTime(startsAt as string, workhour as number)}
             </div>
           )}
           <div className={styles.address}>{address1}</div>
