@@ -12,6 +12,8 @@ interface ShopNoticeInfoBoxProps {
   description: string;
   imageUrl: string;
   address1: string;
+  originalHourlyPay: number;
+  hourlyPay: number;
   closed?: boolean;
 }
 
@@ -23,6 +25,8 @@ function ShopNoticeInfoBox({
   workhour,
   description,
   address1,
+  originalHourlyPay,
+  hourlyPay,
   closed,
 }: ShopNoticeInfoBoxProps) {
   const NOTICE = kind === 'notice';
@@ -46,7 +50,12 @@ function ShopNoticeInfoBox({
           <p className={styles.category}>{NOTICE ? '시급' : '식당'}</p>
           <div className={styles.title}>
             <span>{NOTICE ? formatWage(Number(mainText)) : mainText}</span>
-            {NOTICE && <WageComparisonBadge />}
+            {NOTICE && (
+              <WageComparisonBadge
+                originalHourlyPay={originalHourlyPay}
+                hourlyPay={hourlyPay}
+              />
+            )}
           </div>
           {NOTICE && (
             <div className={styles.term}>
