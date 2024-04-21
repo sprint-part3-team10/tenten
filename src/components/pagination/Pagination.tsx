@@ -39,24 +39,14 @@ function Pagination({
 
   const handleArrowClick = (direction: string) => {
     if (direction === 'left') {
-      setSelectedSection(prev => {
-        if (prev > 0) {
-          const newSection = prev - 1;
-          return newSection;
-        }
-        return prev;
-      });
+      setSelectedSection(prev => (prev > 0 ? prev - 1 : prev));
       handlePageChange(
         (Math.ceil(selectedPage / sectionSize) - 2) * sectionSize + 1,
       );
     } else if (direction === 'right') {
-      setSelectedSection(prev => {
-        if (prev < sectionPageNumbers.length - 1) {
-          const newSection = prev + 1;
-          return newSection;
-        }
-        return prev;
-      });
+      setSelectedSection(prev =>
+        prev < sectionPageNumbers.length - 1 ? prev + 1 : prev,
+      );
       handlePageChange(Math.ceil(selectedPage / sectionSize) * sectionSize + 1);
     }
   };
