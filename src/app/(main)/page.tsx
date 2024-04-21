@@ -2,7 +2,8 @@
 
 import Card from '@/src/components/Card';
 import Pagination from '@/src/components/pagination/Pagination';
-import { useEffect, useState } from 'react';
+import { useEffect } from 'react';
+import usePagination from '@/src/hooks/usePagination';
 import styles from './page.module.scss';
 
 export default function Home() {
@@ -18,12 +19,7 @@ export default function Home() {
     closed: false,
   };
   const LIMIT = 6;
-  const [selectedPage, setSelectedPage] = useState(1);
-  const [offset, setOffset] = useState(0);
-  const handlePageChange = (page: number) => {
-    setSelectedPage(page);
-    setOffset((page - 1) * LIMIT);
-  };
+  const { offset, selectedPage, handlePageChange } = usePagination(LIMIT);
   useEffect(() => {
     console.log('offset', offset);
   }, [offset]);
