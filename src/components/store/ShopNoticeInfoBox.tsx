@@ -1,34 +1,37 @@
 import Image from 'next/image';
 import classNames from 'classnames';
+import { formatWage } from '@/src/lib/format';
 import styles from './ShopNoticeInfoBox.module.scss';
 import WageComparisonBadge from '../common/WageComparisonBadge';
-import formatWage from '../../lib/formatWage';
 
 interface ShopNoticeInfoBoxProps {
-  kind: 'notice' | 'shop';
-  mainText: string | number;
-  startsAt?: string;
-  workhour?: number;
-  description: string;
-  imageUrl: string;
-  address1: string;
-  originalHourlyPay: number;
-  hourlyPay: number;
-  closed?: boolean;
+  data: {
+    kind: 'notice' | 'shop';
+    mainText: string | number;
+    startsAt?: string;
+    workhour?: number;
+    description: string;
+    imageUrl: string;
+    address1: string;
+    originalHourlyPay: number;
+    hourlyPay: number;
+    closed?: boolean;
+  };
 }
 
-function ShopNoticeInfoBox({
-  kind,
-  imageUrl,
-  mainText,
-  startsAt,
-  workhour,
-  description,
-  address1,
-  originalHourlyPay,
-  hourlyPay,
-  closed,
-}: ShopNoticeInfoBoxProps) {
+function ShopNoticeInfoBox({ data }: ShopNoticeInfoBoxProps) {
+  const {
+    kind,
+    mainText,
+    startsAt,
+    workhour,
+    description,
+    imageUrl,
+    address1,
+    originalHourlyPay,
+    hourlyPay,
+    closed,
+  } = data;
   const NOTICE = kind === 'notice';
   const NOW = new Date().getTime();
   const STARTS_AT = new Date(startsAt as string).getTime();
