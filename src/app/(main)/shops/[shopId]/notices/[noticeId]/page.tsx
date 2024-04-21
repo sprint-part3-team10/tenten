@@ -1,6 +1,7 @@
 import Card from '@/src/components/Card';
 import JobDescription from '@/src/components/store/JobDescription';
 import ShopNoticeInfoBox from '@/src/components/store/ShopNoticeInfoBox';
+import getNoticeData from '@/src/api/getNoticeData';
 import styles from './page.module.scss';
 
 // 샘플 api주소 https://bootcamp-api.codeit.kr/api/0-1/the-julge/shops/4490151c-5217-4157-b072-9c37b05bed47/notices/99996477-82db-4bda-aae1-4044f11d9a8b
@@ -83,48 +84,16 @@ const mock = {
   ],
 };
 
-const BASE_URL = 'https://bootcamp-api.codeit.kr/api/0-1/the-julge';
-
 interface NoticePageProps {
   params: {
     [param: string]: string;
   };
 }
 
-interface Notice {
-  item: {
-    id: string;
-    hourlyPay: number;
-    startsAt: string;
-    workhour: number;
-    description: string;
-    closed: boolean;
-    shop: {
-      item: {
-        id: string;
-        name: string;
-        category: string;
-        address1: string;
-        address2: string;
-        description: string;
-        imageUrl: string;
-        originalHourlyPay: number;
-      };
-      href: string;
-    };
-    currentUserApplication: null;
-  };
-}
-
-const getData = async (shopId: string, noticeId: string): Promise<Notice> => {
-  const res = await fetch(`${BASE_URL}/shops/${shopId}/notices/${noticeId}`);
-  return res.json();
-};
-
 async function NoticePage({ params }: NoticePageProps) {
   const { shopId, noticeId } = params;
 
-  const { item: notice } = await getData(shopId, noticeId);
+  const { item: notice } = await getNoticeData(shopId, noticeId);
   const {
     shop: { item: shop },
   } = notice;
