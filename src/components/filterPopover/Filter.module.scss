@@ -12,7 +12,7 @@
   border-radius: 0.5rem;
 }
 
-.buttonContainer {
+.popoverContainer {
   position: relative;
   width: fit-content;
   margin-left: 50rem;
@@ -56,17 +56,36 @@
   cursor: pointer;
 }
 
-.locationContainer {
+@mixin container {
   display: flex;
-  flex-direction: column;
-  gap: 1.2rem;
   padding-bottom: 2.4rem;
   margin-bottom: 2.4rem;
-  border-bottom: 2px solid $gray-10;
 
   & > h2 {
     @include text-16-l;
 
     line-height: 2.6rem;
   }
+}
+
+.contentContainer {
+  @include container;
+
+  flex-direction: column;
+  gap: 1.2rem;
+  border-bottom: 2px solid $gray-10;
+}
+
+.payContainer {
+  @include container;
+
+  & > h2 {
+    padding-top: 4.5rem;
+    padding-left: 1.2rem;
+  }
+}
+
+.buttonContainer {
+  display: flex;
+  gap: 0.8rem;
 }

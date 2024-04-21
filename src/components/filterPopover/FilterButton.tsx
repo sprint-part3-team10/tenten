@@ -1,6 +1,6 @@
 'use client';
 
-import React, { useState } from 'react';
+import { useState } from 'react';
 import styles from './Filter.module.scss';
 import FilterPopover from './FilterPopover';
 
@@ -14,7 +14,7 @@ function FilterButton() {
   };
 
   return (
-    <div className={styles.buttonContainer}>
+    <div className={styles.popoverContainer}>
       <button
         className={styles.button}
         type='button'
