@@ -128,7 +128,8 @@ async function NoticePage({ params }: NoticePageProps) {
   const cardData = {
     closed: notice.item.closed,
     hourlyPay: notice.item.hourlyPay,
-    id: notice.item.id,
+    item_id: notice.item.id,
+    shop_id: notice.item.shop.item.id,
     address1: notice.item.shop.item.address1,
     imageUrl: notice.item.shop.item.imageUrl,
     name: notice.item.shop.item.name,

@@ -1,6 +1,6 @@
 import Image from 'next/image';
 import classNames from 'classnames';
-import { formatWage } from '@/src/lib/format';
+import { formatDateAndTime, formatWage } from '@/src/lib/format';
 import styles from './ShopNoticeInfoBox.module.scss';
 import WageComparisonBadge from '../common/WageComparisonBadge';
 
@@ -50,7 +50,7 @@ function ShopNoticeInfoBox({
           </div>
           {NOTICE && (
             <div className={styles.term}>
-              {NOTICE && `${startsAt}에서 ${workhour}시간 노동`}
+              {formatDateAndTime(startsAt, workhour)}
             </div>
           )}
           <div className={styles.address}>{address1}</div>
