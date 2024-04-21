@@ -8,7 +8,7 @@ import { useState } from 'react';
 
 interface InputProps {
   label: string;
-  inputType?: 'email' | 'text' | 'password';
+  inputType?: 'email' | 'text' | 'password' | 'number';
   value?: string | number;
   placeholder?: string;
   width?: string;
