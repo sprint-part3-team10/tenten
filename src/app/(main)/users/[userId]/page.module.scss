@@ -24,6 +24,10 @@
   }
 }
 
+.profileBox {
+  margin: 0 auto;
+}
+
 .tabletFit {
   @include media(tablet) {
     display: flex;
@@ -33,17 +37,17 @@
 }
 
 .backgroundArea {
-  padding: 0 calc((100vw - 96.5rem) / 2) 6rem;
+  padding: 6rem calc((100vw - 96.5rem) / 2) 12rem;
   margin: 0 calc((-100vw + 96.5rem) / 2) -6rem;
   background-color: $gray-5;
 
   @include media(tablet) {
-    padding: 0 3.2rem 6rem;
+    padding: 6rem 3.2rem;
     margin: 0 -3.2rem -6rem;
   }
 
   @include media(mobile) {
-    padding: 0 1.2rem 4rem;
+    padding: 4rem 1.2rem 8rem;
     margin: 0 -1.2rem -4rem;
   }
 }
