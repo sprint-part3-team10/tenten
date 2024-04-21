@@ -21,6 +21,6 @@ POST https://bootcamp-api.codeit.kr/api/0-1/the-julge/token
 Content-Type: application/json
 
 {
-  "email": "wowm@vldksh.com",
-  "password": "wowmvldksh1"
+  "email": "string",
+  "password": "string"
 }
