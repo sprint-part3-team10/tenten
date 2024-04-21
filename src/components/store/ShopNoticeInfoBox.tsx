@@ -1,30 +1,37 @@
 import Image from 'next/image';
 import classNames from 'classnames';
+import { formatDateAndTime, formatWage } from '@/src/lib/format';
 import styles from './ShopNoticeInfoBox.module.scss';
 import WageComparisonBadge from '../common/WageComparisonBadge';
-import formatWage from '../../lib/formatWage';
 
 interface ShopNoticeInfoBoxProps {
-  kind: 'notice' | 'shop';
-  mainText: string | number;
-  startsAt?: string;
-  workhour?: number;
-  description: string;
-  imageUrl: string;
-  address1: string;
-  closed?: boolean;
+  data: {
+    kind: 'notice' | 'shop';
+    mainText: string | number;
+    startsAt?: string;
+    workhour?: number;
+    description: string;
+    imageUrl: string;
+    address1: string;
+    originalHourlyPay: number;
+    hourlyPay: number;
+    closed?: boolean;
+  };
 }
 
-function ShopNoticeInfoBox({
-  kind,
-  imageUrl,
-  mainText,
-  startsAt,
-  workhour,
-  description,
-  address1,
-  closed,
-}: ShopNoticeInfoBoxProps) {
+function ShopNoticeInfoBox({ data }: ShopNoticeInfoBoxProps) {
+  const {
+    kind,
+    mainText,
+    startsAt,
+    workhour,
+    description,
+    imageUrl,
+    address1,
+    originalHourlyPay,
+    hourlyPay,
+    closed,
+  } = data;
   const NOTICE = kind === 'notice';
   const NOW = new Date().getTime();
   const STARTS_AT = new Date(startsAt as string).getTime();
@@ -46,11 +53,16 @@ function ShopNoticeInfoBox({
           <p className={styles.category}>{NOTICE ? '시급' : '식당'}</p>
           <div className={styles.title}>
             <span>{NOTICE ? formatWage(Number(mainText)) : mainText}</span>
-            {NOTICE && <WageComparisonBadge />}
+            {NOTICE && (
+              <WageComparisonBadge
+                originalHourlyPay={originalHourlyPay}
+                hourlyPay={hourlyPay}
+              />
+            )}
           </div>
           {NOTICE && (
             <div className={styles.term}>
-              {NOTICE && `${startsAt}에서 ${workhour}시간 노동`}
+              {formatDateAndTime(startsAt as string, workhour as number)}
             </div>
           )}
           <div className={styles.address}>{address1}</div>
@@ -63,12 +75,5 @@ function ShopNoticeInfoBox({
     </div>
   );
 }
-
-// interface에 ?: 사용 시 오류 대응
-ShopNoticeInfoBox.defaultProps = {
-  startsAt: '',
-  workhour: 0,
-  closed: false,
-};
 
 export default ShopNoticeInfoBox;
