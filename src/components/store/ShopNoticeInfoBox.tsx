@@ -5,16 +5,33 @@ import styles from './ShopNoticeInfoBox.module.scss';
 import WageComparisonBadge from '../common/WageComparisonBadge';
 
 interface ShopNoticeInfoBoxProps {
-  kind: 'notice' | 'shop';
-  mainText: string | number;
-  startsAt?: string;
-  workhour?: number;
-  description: string;
-  imageUrl: string;
-  address1: string;
-  closed?: boolean;
+  data: {
+    kind: 'notice' | 'shop';
+    mainText: string | number;
+    startsAt?: string;
+    workhour?: number;
+    description: string;
+    imageUrl: string;
+    address1: string;
+    originalHourlyPay: number;
+    hourlyPay: number;
+    closed?: boolean;
+  };
 }
 
+function ShopNoticeInfoBox({ data }: ShopNoticeInfoBoxProps) {
+  const {
+    kind,
+    mainText,
+    startsAt,
+    workhour,
+    description,
+    imageUrl,
+    address1,
+    originalHourlyPay,
+    hourlyPay,
+    closed,
+  } = data;
 function ShopNoticeInfoBox({
   kind,
   imageUrl,
@@ -46,7 +63,12 @@ function ShopNoticeInfoBox({
           <p className={styles.category}>{NOTICE ? '시급' : '식당'}</p>
           <div className={styles.title}>
             <span>{NOTICE ? formatWage(Number(mainText)) : mainText}</span>
-            {NOTICE && <WageComparisonBadge />}
+            {NOTICE && (
+              <WageComparisonBadge
+                originalHourlyPay={originalHourlyPay}
+                hourlyPay={hourlyPay}
+              />
+            )}
           </div>
           {NOTICE && (
             <div className={styles.term}>
