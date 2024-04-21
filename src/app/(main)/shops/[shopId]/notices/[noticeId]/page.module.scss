@@ -18,13 +18,22 @@
 }
 
 .recentCards {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 1.4rem;
-  max-width: 96rem;
-  margin: 0 auto 6rem;
+  // display: flex;
+  // flex-wrap: wrap;
+  // gap: 1.4rem;
+  // max-width: 96rem;
+  // margin: 0 auto 6rem;
 
-  & > a {
-    flex-basis: 32%;
+  // & > a {
+  //   flex-basis: 32%;
+  // }
+
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 3.1rem 1.4rem;
+  height: 100%;
+
+  @include media(tablet) {
+    grid-template-columns: repeat(2, 1fr);
   }
 }
