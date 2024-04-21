@@ -2,6 +2,7 @@ import NoList from '@/src/components/applyList/NoList';
 import MyProfile from '@/src/components/myProfile/MyProfile';
 import ApplyTable from '@/src/components/applyList/ApplyTable';
 import getProfileData from '@/src/api/getProfileData';
+import getUserApplyCount from '@/src/api/getUserApplyCount';
 import styles from './page.module.scss';
 
 interface MyPageProps {
@@ -15,7 +16,7 @@ async function mypage({ params }: MyPageProps) {
 
   const result = await getProfileData(userId);
   const { name, phone, address, bio } = result;
-  const listNum = 1;
+  const listNum = await getUserApplyCount(userId);
 
   return name !== 'string' ? (
     <NoList
@@ -31,20 +32,20 @@ async function mypage({ params }: MyPageProps) {
           <MyProfile name={name} phone={phone} address={address} bio={bio} />
         </div>
       </div>
-      {listNum ? (
-        <div className={styles.backgroundArea}>
+      <div className={styles.backgroundArea}>
+        {listNum ? (
           <div className={styles.applyArea}>
             <div className={styles.title}>신청 내역</div>
             <ApplyTable />
           </div>
-        </div>
-      ) : (
-        <NoList
-          title='신청 내역'
-          description='아직 신청 내역이 없어요.'
-          text='공고 보러가기'
-        />
-      )}
+        ) : (
+          <NoList
+            title='신청 내역'
+            description='아직 신청 내역이 없어요.'
+            text='공고 보러가기'
+          />
+        )}
+      </div>
     </>
   );
 }
