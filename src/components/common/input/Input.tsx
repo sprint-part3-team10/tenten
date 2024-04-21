@@ -10,20 +10,22 @@ interface InputProps {
   label: string;
   inputType?: 'email' | 'text' | 'password';
   value?: string | number;
-  widthValue?: string;
+  placeholder?: string;
+  width?: string;
   error?: FieldError;
-  register: UseFormRegisterReturn;
-  isStatic?: boolean;
+  register?: UseFormRegisterReturn;
+  onChange?: (e: React.ChangeEvent<HTMLInputElement>) => void;
 }
 
 export default function Input({
   label,
-  inputType,
+  inputType = 'text',
   value,
-  widthValue = '100%',
+  placeholder = '입력',
+  width = '100%',
   error,
   register,
-  isStatic = true,
+  onChange,
 }: InputProps) {
   const [isVisible, setIsVisible] = useState(false);
   const isError: boolean = !!error;
@@ -39,11 +41,7 @@ export default function Input({
   };
 
   return (
-    <div
-      className={styles.inputContainer}
-      isStatic={isStatic}
-      style={{ width: widthValue }}
-    >
+    <div className={styles.inputContainer} style={{ width: width }}>
       <label className={styles.label} htmlFor={inputType}>
         {label}
       </label>
@@ -58,8 +56,9 @@ export default function Input({
           })}
           type={inputType}
           value={value}
-          placeholder='입력'
+          placeholder={placeholder}
           {...register}
+          onChange={onChange}
         />
         {(label === '비밀번호' || label === '비밀번호 확인') && (
           <button
@@ -84,7 +83,9 @@ export default function Input({
             )}
           </button>
         )}
-        {label === '시급*' && <span className={styles.won}>원</span>}
+        {(label === '시급*' || label === '금액') && (
+          <span className={styles.won}>원</span>
+        )}
       </div>
 
       {error && <div className={styles.error}>{error.message}</div>}
