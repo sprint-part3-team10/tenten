@@ -1,4 +1,9 @@
+'use client';
+
 import Card from '@/src/components/Card';
+import Pagination from '@/src/components/pagination/Pagination';
+import { useEffect } from 'react';
+import usePagination from '@/src/hooks/usePagination';
 import styles from './page.module.scss';
 
 export default function Home() {
@@ -13,10 +18,21 @@ export default function Home() {
     imageUrl: '/images/cherry.png',
     closed: false,
   };
+  const LIMIT = 6;
+  const { offset, selectedPage, handlePageChange } = usePagination(LIMIT);
+  useEffect(() => {
+    console.log('offset', offset);
+  }, [offset]);
 
   return (
     <div className={styles.test}>
       <Card data={mockData} />
+      <Pagination
+        totalCount={100}
+        limit={LIMIT}
+        selectedPage={selectedPage}
+        handlePageChange={handlePageChange}
+      />
     </div>
   );
 }
