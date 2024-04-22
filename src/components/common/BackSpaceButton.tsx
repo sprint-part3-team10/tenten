@@ -1,5 +1,5 @@
 import Image from 'next/image';
-import backSpace from '@/public/icons/backSpace.svg';
+import leftArrow from '@/public/icons/leftArrow.svg';
 
 interface CloseButtonProps {
   onClose: () => void;
@@ -14,7 +14,7 @@ export default function CloseButton({ onClose, size }: CloseButtonProps) {
         cursor: 'pointer',
       }}
     >
-      <Image src={backSpace} width={size} height={size} alt='X버튼' />
+      <Image src={leftArrow} width={size} height={size} alt='뒤로가기' />
     </div>
   );
 }
