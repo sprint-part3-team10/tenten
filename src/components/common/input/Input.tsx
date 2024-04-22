@@ -8,7 +8,7 @@ import styles from './Input.module.scss';
 
 interface InputProps {
   label: string;
-  inputType?: 'email' | 'text' | 'password' | 'number';
+  inputType?: 'text' | 'password' | 'number';
   value?: string | number;
   placeholder?: string;
   width?: string;
