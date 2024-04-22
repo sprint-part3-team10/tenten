@@ -62,33 +62,35 @@ export default function Home() {
   return (
     <div className={styles.container}>
       <div className={styles.header}>
-        <p>내 프로필</p>
         <BackSpaceButton onClose={handleGoBack} size={25} />
+        <p>내 프로필</p>
       </div>
       <form className={styles.formBox} onSubmit={handleSubmit(onSubmit)}>
         <div className={styles.inputArea}>
           <Input
-            label='이름*'
+            label='이름 *'
             inputType='text'
             error={nameError}
+            placeholder='예) 홍길동'
             register={register('name', {
               required: '필수 입력사항입니다.',
             })}
           />
           <Input
-            label='연락처*'
+            label='연락처 *'
             inputType='text'
             error={phoneNumberError}
+            placeholder='예) 010-0000-0000'
             register={register('phoneNumber', {
               required: '필수 입력사항입니다.',
               pattern: {
-                value: /^[0-9]+$/,
-                message: '숫자만 입력해 주세요!',
+                value: /^010-\d{4}-\d{4}$/,
+                message: '연락처를 정확히 입력해주세요. 예) 010-0000-0000',
               },
             })}
           />
           <Dropdown
-            labelName='선호지역'
+            labelName='선호 지역'
             optionList={LOCATION_LIST}
             register={register('location')}
             value={watch('location')}
@@ -96,7 +98,9 @@ export default function Home() {
           />
         </div>
         <TextArea
-          labelName='소개*'
+          labelName='자기 소개 *'
+          textLimit={10}
+          placeholder='본인을 소개해 주세요!'
           register={register('introduction', {
             required: '필수 입력사항입니다.',
           })}
