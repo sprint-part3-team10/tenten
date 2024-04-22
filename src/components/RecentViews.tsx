@@ -1,5 +1,6 @@
 'use client';
 
+import { useEffect, useState } from 'react';
 import Card from './Card';
 import styles from './RecentViews.module.scss';
 
@@ -18,8 +19,11 @@ interface RecentViewsProps {
 }
 
 const RecentViews = ({ cardData }: RecentViewsProps) => {
-  if (typeof localStorage !== 'undefined') {
+  const [cards, setCards] = useState<RecentViewsProps['cardData'][]>([]);
+
+  useEffect(() => {
     const prevItems = window.localStorage.getItem('recentViews');
+
     if (prevItems) {
       const { items } = JSON.parse(prevItems);
       const newItems: RecentViewsProps['cardData'][] = [];
@@ -34,25 +38,40 @@ const RecentViews = ({ cardData }: RecentViewsProps) => {
         return acc;
       }, []);
 
-      localStorage.setItem('recentViews', JSON.stringify({ items: newItems }));
+      setCards(newItems.slice(1, 7));
+
+      localStorage.setItem(
+        'recentViews',
+        JSON.stringify({ items: newItems.slice(0, 7) }),
+      );
     } else {
       localStorage.setItem(
         'recentViews',
         JSON.stringify({ items: [cardData] }),
       );
     }
-  }
+  }, []);
 
   return (
     <section>
       <h1 className={styles.sectionTitle}>최근에 본 공고</h1>
       <div className={styles.recentCards}>
-        <Card data={cardData} />
-        <Card data={cardData} />
-        <Card data={cardData} />
-        <Card data={cardData} />
-        <Card data={cardData} />
-        <Card data={cardData} />
+        {cards.map(card => (
+          <Card
+            key={card.item_id}
+            data={{
+              address1: card.address1,
+              closed: card.closed,
+              hourlyPay: card.hourlyPay,
+              imageUrl: card.imageUrl,
+              item_id: card.item_id,
+              name: card.name,
+              shop_id: card.shop_id,
+              startsAt: card.startsAt,
+              workhour: card.workhour,
+            }}
+          />
+        ))}
       </div>
     </section>
   );
