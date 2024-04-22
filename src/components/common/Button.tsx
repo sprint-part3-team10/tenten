@@ -8,6 +8,7 @@ interface ButtonProps {
   widthValue?: string;
   isWhite?: boolean;
   isDisable?: boolean;
+  onClick?: any;
 }
 
 export default function Button({
@@ -17,6 +18,7 @@ export default function Button({
   widthValue = '100%',
   isWhite = false,
   isDisable = false,
+  onClick,
 }: ButtonProps) {
   return (
     <button
@@ -28,6 +30,7 @@ export default function Button({
       type={buttonType}
       disabled={isDisable}
       style={{ width: widthValue }}
+      onClick={onClick}
     >
       {text}
     </button>
