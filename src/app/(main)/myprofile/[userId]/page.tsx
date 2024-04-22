@@ -18,7 +18,7 @@ async function mypage({ params }: MyPageProps) {
   const { name, phone, address, bio } = result;
   const listNum = await getUserApplyCount(userId);
 
-  return name !== 'string' ? (
+  return name === 'string' ? (
     <NoList
       title='내 프로필'
       description='내 프로필을 등록하고 원하는 가게에 지원해 보세요.'

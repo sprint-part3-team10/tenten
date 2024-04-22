@@ -4,7 +4,7 @@ const getUserApplyCount = async (userId: string): Promise<number> => {
   const res = await fetch(`${BASE_URL}/users/${userId}/applications`, {
     headers: {
       Authorization:
-        'bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiIwNjZmMDgwYy01MjY1LTRiNzAtODM2ZS0wZjEzNjBiNTcwMTAiLCJpYXQiOjE3MTM3MDQ4MDZ9.D1eYnvSCpm5P3p9WzwHktzdJCO11dyNzfOSNydO3xHA',
+        'bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiIwNjZmMDgwYy01MjY1LTRiNzAtODM2ZS0wZjEzNjBiNTcwMTAiLCJpYXQiOjE3MTM3NzE4MTZ9.iThYxjVCfoeIYhDlzhpR79rgOjnaSRb1nKhZxvDaVtM',
     },
   });
   const result = await res.json();
