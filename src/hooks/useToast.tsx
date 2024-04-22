@@ -3,6 +3,7 @@ import { useState, useEffect } from 'react';
 export default function (duration = 3000) {
   const [showToast, setShowToast] = useState(false);
   const [timerId, setTimerId] = useState(null);
+  const [toastMessage, setToastMessage] = useState('');
 
   const displayToast = () => {
     setShowToast(true);
@@ -17,12 +18,19 @@ export default function (duration = 3000) {
   };
 
   useEffect(() => {
-    return () => {
+    if (toastMessage) {
+      displayToast();
+    }
+  }, [toastMessage]);
+
+  useEffect(
+    () => () => {
       if (timerId) {
         clearTimeout(timerId);
       }
-    };
-  }, [timerId]);
+    },
+    [timerId],
+  );
 
-  return { showToast, displayToast };
+  return { showToast, toastMessage, setToastMessage, displayToast };
 }
