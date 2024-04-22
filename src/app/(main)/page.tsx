@@ -1,3 +1,5 @@
+'use client';
+
 import Card from '@/src/components/Card';
 import { cookies } from 'next/headers';
 import styles from './page.module.scss';
