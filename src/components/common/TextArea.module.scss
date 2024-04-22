@@ -1,13 +1,12 @@
 @import '/src/styles/index';
 
 .textAreaBox {
+  position: relative;
   display: flex;
   flex-direction: column;
   gap: 1.2rem;
   align-items: flex-start;
   width: 100%;
-
-  position: relative;
 }
 
 .textAreaBox label {
@@ -47,7 +46,11 @@
   @include text-12-l;
 
   position: absolute;
-  bottom: 1rem;
   right: 1rem;
+  bottom: 1rem;
   color: $gray-50;
+}
+
+.textLimit.errorPosition {
+  bottom: 4rem;
 }

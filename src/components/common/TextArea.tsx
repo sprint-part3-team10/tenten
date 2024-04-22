@@ -44,7 +44,11 @@ export default function TextArea({
         {...register}
         onChange={handleOnChange}
       />
-      <div className={styles.textLimit}>
+      <div
+        className={classNames(styles.textLimit, {
+          [styles.errorPosition]: !!error,
+        })}
+      >
         <p>
           (
           <span className={`${isTextLengthOver ? styles.textLengthOver : ''}`}>
