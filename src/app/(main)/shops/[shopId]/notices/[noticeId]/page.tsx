@@ -1,8 +1,8 @@
-import Card from '@/src/components/Card';
 import JobDescription from '@/src/components/store/JobDescription';
 import ShopNoticeInfoBox from '@/src/components/store/ShopNoticeInfoBox';
 import getNoticeData from '@/src/api/getNoticeData';
 import styles from './page.module.scss';
+import RecentViews from '@/src/components/RecentViews';
 
 // 샘플 api주소 https://bootcamp-api.codeit.kr/api/0-1/the-julge/shops/4490151c-5217-4157-b072-9c37b05bed47/notices/99996477-82db-4bda-aae1-4044f11d9a8b
 // 샘플 url http://localhost:3000/shops/4490151c-5217-4157-b072-9c37b05bed47/notices/99996477-82db-4bda-aae1-4044f11d9a8b
@@ -53,17 +53,7 @@ async function NoticePage({ params }: NoticePageProps) {
         <div style={{ marginBottom: '2.4rem' }} />
         <JobDescription description={notice.description} />
       </section>
-      <section>
-        <h1 className={styles.sectionTitle}>최근에 본 공고</h1>
-        <div className={styles.recentCards}>
-          <Card data={cardData} />
-          <Card data={cardData} />
-          <Card data={cardData} />
-          <Card data={cardData} />
-          <Card data={cardData} />
-          <Card data={cardData} />
-        </div>
-      </section>
+      <RecentViews cardData={cardData} />
     </>
   );
 }
