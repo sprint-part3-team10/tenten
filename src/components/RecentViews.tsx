@@ -55,6 +55,9 @@ const RecentViews = ({ cardData }: RecentViewsProps) => {
   return (
     <section>
       <h1 className={styles.sectionTitle}>최근에 본 공고</h1>
+      {!cards.length && (
+        <div className={styles.empty}>최근에 본 공고가 없어요.</div>
+      )}
       <div className={styles.recentCards}>
         {cards.map(card => (
           <Card
