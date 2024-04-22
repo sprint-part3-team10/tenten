@@ -1,0 +1,64 @@
+@import '/src/styles/index';
+
+.container {
+  display: flex;
+  flex-direction: column;
+  gap: 3rem;
+  align-items: center;
+
+  @include media(tablet) {
+    padding: 0 2rem;
+  }
+
+  @include media(tablet) {
+    padding: 0 5rem;
+  }
+}
+
+.header {
+  @include text-28-b;
+
+  display: flex;
+  align-items: center;
+  align-self: stretch;
+  justify-content: space-between;
+}
+
+.formBox {
+  display: flex;
+  flex-direction: column;
+  gap: 3rem;
+  width: 100%;
+}
+
+.inputArea {
+  display: flex;
+  gap: 2rem;
+
+  @include media(tablet) {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 2rem;
+  }
+
+  @include media(mobile) {
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+  }
+}
+
+.submitButton {
+  display: flex;
+  justify-content: center;
+  width: 100%;
+
+  .buttonSize {
+    @include media(tablet) {
+      width: 55%;
+    }
+    @include media(mobile) {
+      width: 100%;
+    }
+  }
+}
