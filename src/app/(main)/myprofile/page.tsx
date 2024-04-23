@@ -5,19 +5,17 @@ import getProfileData from '@/src/api/getProfileData';
 import getUserApply from '@/src/api/getUserApply';
 import styles from './page.module.scss';
 
-interface MyPageProps {
-  params: {
-    [param: string]: string;
-  };
-}
 // const userType = 'employee' : employee일 때 해당 페이지로 이동
 
-async function mypage({ params }: MyPageProps) {
-  const { userId } = params;
+async function myprofile() {
+  const { name, phone, address, bio } = await getProfileData(
+    '066f080c-5265-4b70-836e-0f1360b57010',
+  );
+  console.log(name);
 
-  const { name, phone, address, bio } = await getProfileData(userId);
-
-  const { count, items } = await getUserApply(userId);
+  const { count, items } = await getUserApply(
+    '066f080c-5265-4b70-836e-0f1360b57010',
+  );
 
   return !name ? (
     <NoList
@@ -51,4 +49,4 @@ async function mypage({ params }: MyPageProps) {
   );
 }
 
-export default mypage;
+export default myprofile;
