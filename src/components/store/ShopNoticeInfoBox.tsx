@@ -2,6 +2,8 @@ import Image from 'next/image';
 import classNames from 'classnames';
 import { formatDateAndTime, formatWage } from '@/src/lib/format';
 import { ReactElement } from 'react';
+import clockIcon from '@/public/icons/clock.svg';
+import locationIcon from '@/public/icons/location.svg';
 import styles from './ShopNoticeInfoBox.module.scss';
 import WageComparisonBadge from '../common/WageComparisonBadge';
 
@@ -64,10 +66,19 @@ function ShopNoticeInfoBox({ data, children }: ShopNoticeInfoBoxProps) {
           </div>
           {NOTICE && (
             <div className={styles.term}>
+              <Image src={clockIcon} alt='시계 아이콘' width={20} height={20} />
               {formatDateAndTime(startsAt as string, workhour as number)}
             </div>
           )}
-          <div className={styles.address}>{address1}</div>
+          <div className={styles.address}>
+            <Image
+              src={locationIcon}
+              alt='위치 아이콘'
+              width={20}
+              height={20}
+            />
+            {address1}
+          </div>
           <div className={styles.description}>{description}</div>
         </div>
         {children}
