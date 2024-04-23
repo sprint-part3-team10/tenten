@@ -17,11 +17,11 @@ export default function DatePicker({
   return (
     <div
       style={{
-        width: width,
+        width,
       }}
     >
       <ReactDatePicker
-        dateFormat='yyyy년 MM월 dd일 aa h:mm '
+        dateFormat='yyyy년 MM월 dd일 aa h:mm'
         minDate={new Date()}
         selected={value}
         onChange={onChange}
@@ -30,7 +30,7 @@ export default function DatePicker({
         showTimeSelect
         timeFormat='HH:mm'
         timeIntervals={5}
-        timeCaption='time'
+        timeCaption='시간대'
       />
     </div>
   );
