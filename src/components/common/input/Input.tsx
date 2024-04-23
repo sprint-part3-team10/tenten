@@ -2,13 +2,13 @@
 
 import classNames from 'classnames';
 import { FieldError, UseFormRegisterReturn } from 'react-hook-form';
-import styles from './Input.module.scss';
 import Image from 'next/image';
 import { useState } from 'react';
+import styles from './Input.module.scss';
 
 interface InputProps {
   label: string;
-  inputType?: 'email' | 'text' | 'password' | 'number';
+  inputType?: 'text' | 'password' | 'number';
   value?: string | number;
   placeholder?: string;
   width?: string;
@@ -41,7 +41,7 @@ export default function Input({
   };
 
   return (
-    <div className={styles.inputContainer} style={{ width: width }}>
+    <div className={styles.inputContainer} style={{ width }}>
       <label className={styles.label} htmlFor={inputType}>
         {label}
       </label>

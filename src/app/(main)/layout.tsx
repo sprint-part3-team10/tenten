@@ -16,9 +16,9 @@ export default function RootLayout({
 }>) {
   return (
     <html lang='ko'>
-      <body className={styles.body}>
+      <body suppressHydrationWarning>
         <Header />
-        <main className={styles.layout}>{children}</main>
+        <main>{children}</main>
         <Footer />
         <div id='modal' />
       </body>
