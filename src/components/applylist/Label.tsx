@@ -18,6 +18,7 @@ const statusLabel: StatusLabelType = {
   accepted: '승인 완료',
   rejected: '거절',
   pending: '대기중',
+  canceled: '취소',
 };
 
 function Label({ labelType, content, onClick }: LabelProps) {
@@ -40,6 +41,7 @@ function Label({ labelType, content, onClick }: LabelProps) {
         [styles.labelAccept]: statusLabel[content] === '승인 완료',
         [styles.labelReject]: statusLabel[content] === '거절',
         [styles.labelWaiting]: statusLabel[content] === '대기중',
+        [styles.labelCancel]: statusLabel[content] === '취소',
       })}
     >
       {statusLabel[content]}
