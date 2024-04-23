@@ -88,7 +88,7 @@ function Pagination({
           className={classNames({
             [styles.hidden]:
               selectedSection === sectionPageNumbers.length - 1 ||
-              selectedSection === 0,
+              sectionPageNumbers.length === 1,
           })}
           src={rightArrowIcon}
           alt='오른쪽 화살표'
