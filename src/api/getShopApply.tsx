@@ -1,6 +1,6 @@
 import { BASE_URL } from './api';
 
-interface ShopApplyProps {
+interface ShopApplyData {
   count: number;
   items: object[];
 }
@@ -8,7 +8,7 @@ interface ShopApplyProps {
 const getShopApply = async (
   shopId: string,
   noticeId: string,
-): Promise<ShopApplyProps> => {
+): Promise<ShopApplyData> => {
   const res = await fetch(
     `${BASE_URL}/shops/${shopId}/notices/${noticeId}/applications`,
     {

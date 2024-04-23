@@ -1,12 +1,12 @@
 import { BASE_URL } from './api';
 
-interface ProfileProps {
+interface ProfileData {
   name: string;
   phone: string;
   address: string;
   bio: string;
 }
-const getProfileData = async (userId: string): Promise<ProfileProps> => {
+const getProfileData = async (userId: string): Promise<ProfileData> => {
   const res = await fetch(`${BASE_URL}/users/${userId}`);
   const result = await res.json();
 

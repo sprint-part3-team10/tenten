@@ -2,7 +2,7 @@ import NoList from '@/src/components/applyList/NoList';
 import MyProfile from '@/src/components/myProfile/MyProfile';
 import ApplyTable from '@/src/components/applyList/ApplyTable';
 import getProfileData from '@/src/api/getProfileData';
-import getUserApplyCount from '@/src/api/getUserApply';
+import getUserApply from '@/src/api/getUserApply';
 import styles from './page.module.scss';
 
 interface MyPageProps {
@@ -15,10 +15,9 @@ interface MyPageProps {
 async function mypage({ params }: MyPageProps) {
   const { userId } = params;
 
-  const result = await getProfileData(userId);
-  const { name, phone, address, bio } = result;
+  const { name, phone, address, bio } = await getProfileData(userId);
 
-  const { count, items } = await getUserApplyCount(userId);
+  const { count, items } = await getUserApply(userId);
 
   return !name ? (
     <NoList

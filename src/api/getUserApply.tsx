@@ -1,11 +1,11 @@
 import { BASE_URL } from './api';
 
-interface UserApplyProps {
+interface UserApplyData {
   count: number;
   items: object[];
 }
 
-const getUserApply = async (userId: string): Promise<UserApplyProps> => {
+const getUserApply = async (userId: string): Promise<UserApplyData> => {
   const res = await fetch(`${BASE_URL}/users/${userId}/applications`, {
     headers: {
       Authorization:
