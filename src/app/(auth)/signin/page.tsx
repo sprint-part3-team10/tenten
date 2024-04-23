@@ -33,8 +33,9 @@ export default function SignIn() {
   const { email: emailError, password: passwordError } = errors;
 
   const onSubmit = async ({ email, password }: SigninFormData) => {
+    setToastMessage('');
     try {
-      const result = await postLogin(email, password);
+      await postLogin(email, password);
       router.push('/');
     } catch (error: any) {
       setToastMessage(error.message);
