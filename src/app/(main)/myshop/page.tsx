@@ -11,6 +11,12 @@ export default async function MyShop() {
     return (
       <section>
         <h1 className={styles.sectionTitle}>내 가게</h1>
+        <div className={styles.emptyBox}>
+          <p className={styles.addShopText}>
+            내 가게를 소개하고 공고도 등록해 보세요.
+          </p>
+          <Button buttonType='button' text='가게 등록하기' width='40%' />
+        </div>
       </section>
     );
 

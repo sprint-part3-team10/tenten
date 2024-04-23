@@ -11,3 +11,22 @@
   gap: 0.8rem;
   width: 100%;
 }
+
+.emptyBox {
+  display: flex;
+  flex-direction: column;
+  gap: 2.4rem;
+  align-items: center;
+  justify-content: center;
+  height: 22rem;
+  border: 1px solid $gray-20;
+  border-radius: 0.8rem;
+
+  @include media(mobile) {
+    height: 20rem;
+  }
+}
+
+.addShopText {
+  @include text-16-l;
+}
