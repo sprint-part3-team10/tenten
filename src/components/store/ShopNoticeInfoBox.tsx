@@ -61,6 +61,7 @@ function ShopNoticeInfoBox({ data, children }: ShopNoticeInfoBoxProps) {
               <WageComparisonBadge
                 originalHourlyPay={originalHourlyPay}
                 hourlyPay={hourlyPay}
+                closed={EXPIRED || closed}
               />
             )}
           </div>

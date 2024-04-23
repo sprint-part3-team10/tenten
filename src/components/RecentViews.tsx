@@ -18,7 +18,7 @@ interface RecentViewsProps {
   };
 }
 
-const RecentViews = ({ cardData }: RecentViewsProps) => {
+function RecentViews({ cardData }: RecentViewsProps) {
   const [cards, setCards] = useState<RecentViewsProps['cardData'][]>([]);
 
   useEffect(() => {
@@ -53,31 +53,33 @@ const RecentViews = ({ cardData }: RecentViewsProps) => {
   }, []);
 
   return (
-    <section>
-      <h1 className={styles.sectionTitle}>최근에 본 공고</h1>
-      {!cards.length && (
-        <div className={styles.empty}>최근에 본 공고가 없어요.</div>
-      )}
-      <div className={styles.recentCards}>
-        {cards.map(card => (
-          <Card
-            key={card.item_id}
-            data={{
-              address1: card.address1,
-              closed: card.closed,
-              hourlyPay: card.hourlyPay,
-              imageUrl: card.imageUrl,
-              item_id: card.item_id,
-              name: card.name,
-              shop_id: card.shop_id,
-              startsAt: card.startsAt,
-              workhour: card.workhour,
-            }}
-          />
-        ))}
+    <section className={styles.outer}>
+      <div className={styles.container}>
+        <h1 className={styles.sectionTitle}>최근에 본 공고</h1>
+        {!cards.length && (
+          <div className={styles.empty}>최근에 본 공고가 없어요.</div>
+        )}
+        <div className={styles.recentCards}>
+          {cards.map(card => (
+            <Card
+              key={card.item_id}
+              data={{
+                address1: card.address1,
+                closed: card.closed,
+                hourlyPay: card.hourlyPay,
+                imageUrl: card.imageUrl,
+                item_id: card.item_id,
+                name: card.name,
+                shop_id: card.shop_id,
+                startsAt: card.startsAt,
+                workhour: card.workhour,
+              }}
+            />
+          ))}
+        </div>
       </div>
     </section>
   );
-};
+}
 
 export default RecentViews;

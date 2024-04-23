@@ -1,19 +1,22 @@
 import Image from 'next/image';
 import classNames from 'classnames';
+import grayArrow from '@/public/icons/wageArrowGray.svg';
 import redArrow from '@/public/icons/wageArrowRed.svg';
 import whiteArrow from '@/public/icons/wageArrowWhite.svg';
 import styles from './WageComparisonBadge.module.scss';
 
 interface WageComparisonBadgeProps {
-  change?: boolean;
   hourlyPay: number;
   originalHourlyPay: number;
+  closed?: boolean;
+  change?: boolean;
 }
 
 function WageComparisonBadge({
   originalHourlyPay,
   hourlyPay,
   change = false,
+  closed = false,
 }: WageComparisonBadgeProps) {
   const increaseRate = Math.ceil((hourlyPay / originalHourlyPay) * 100);
 
@@ -21,6 +24,8 @@ function WageComparisonBadge({
     <div
       className={classNames(styles.badge, {
         [styles.text]: change,
+        [styles.closedBadge]: closed,
+        [styles.closedText]: closed && change,
       })}
     >
       기존 시급보다 {increaseRate}%
@@ -33,10 +38,13 @@ function WageComparisonBadge({
       />
       {change && (
         <Image
-          className={styles.redArrow}
+          className={classNames({
+            [styles.grayArrow]: closed,
+            [styles.redArrow]: !closed,
+          })}
           width={20}
           height={20}
-          src={redArrow}
+          src={closed ? grayArrow : redArrow}
           alt='붉은색 화살표'
         />
       )}
