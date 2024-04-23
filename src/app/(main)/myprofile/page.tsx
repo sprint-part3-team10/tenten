@@ -1,133 +1,60 @@
-'use client';
-
-import { useState } from 'react';
-import { useRouter } from 'next/navigation';
-import { useForm } from 'react-hook-form';
-import Input from '@/src/components/common/input/Input';
-import Dropdown from '@/src/components/common/Dropdown';
-import Button from '@/src/components/common/Button';
-import TextArea from '@/src/components/common/TextArea';
-import ModalPortal from '@/src/components/common/modal/ModalPortal';
-import Modal from '@/src/components/common/modal/Modal';
-import { LOCATION_LIST } from '@/src/constants/dropdownList';
-import BackSpaceButton from '@/src/components/common/BackSpaceButton';
-import { PHONE_NUMBER_REGEX } from '@/src/constants/regEx';
+import NoList from '@/src/components/applyList/NoList';
+import MyProfile from '@/src/components/myProfile/MyProfile';
+import ApplyTable from '@/src/components/applyList/ApplyTable';
+import getProfileData from '@/src/api/getProfileData';
+import getUserApply from '@/src/api/getUserApply';
 import styles from './page.module.scss';
 
-interface MyProfileFormData {
-  name: string;
-  phoneNumber: string;
-  location: string;
-  introduction: string;
+// userType = 'employee' : employee일 때 해당 페이지로 이동
+
+interface MyprofileProps {
+  params: {
+    [param: string]: string;
+  };
 }
 
-export default function Home() {
-  const [isShow, setIsShow] = useState(false);
-  const handleShowModal = (modalState: boolean) => {
-    setIsShow(modalState);
-  };
-  const {
-    register,
-    handleSubmit,
-    formState: { errors },
-    watch,
-    setValue,
-  } = useForm<MyProfileFormData>({
-    mode: 'onSubmit',
-    defaultValues: {
-      name: '',
-      phoneNumber: '',
-      location: '',
-    },
-  });
-  const {
-    name: nameError,
-    phoneNumber: phoneNumberError,
-    introduction: introductionError,
-  } = errors;
-  const onSubmit = (formData: MyProfileFormData) => {
-    console.log(formData);
-    handleShowModal(true);
-  };
-  const handleLocationInputChange = (selectedValue: string) => {
-    setValue('location', selectedValue);
-  };
+async function myprofile({ params }: MyprofileProps) {
+  // const { userId } = params;
+  const userId = '56ca6bf4-6b6f-4f4f-9731-b837ccdbcb6b';
 
-  const handleTextAreaChange = (e: React.ChangeEvent<HTMLTextAreaElement>) => {
-    setValue('introduction', e.target.value);
-  };
-  const router = useRouter();
-  const handleGoBack = () => {
-    router.back();
-  };
-  return (
-    <div className={styles.container}>
-      <div className={styles.header}>
-        <BackSpaceButton onClose={handleGoBack} size={25} />
-        <p>내 프로필</p>
-      </div>
-      <form className={styles.formBox} onSubmit={handleSubmit(onSubmit)}>
-        <div className={styles.inputArea}>
-          <Input
-            label='이름 *'
-            inputType='text'
-            error={nameError}
-            placeholder='예) 홍길동'
-            register={register('name', {
-              required: '필수 입력사항입니다.',
-            })}
-          />
-          <Input
-            label='연락처 *'
-            inputType='text'
-            error={phoneNumberError}
-            placeholder='예) 010-0000-0000'
-            register={register('phoneNumber', {
-              required: '필수 입력사항입니다.',
-              pattern: {
-                value: PHONE_NUMBER_REGEX,
-                message: '연락처를 정확히 입력해주세요. 예) 010-0000-0000',
-              },
-            })}
-          />
-          <Dropdown
-            labelName='선호 지역'
-            optionList={LOCATION_LIST}
-            register={register('location')}
-            value={watch('location')}
-            onChange={handleLocationInputChange}
-          />
-        </div>
-        <TextArea
-          labelName='자기 소개 *'
-          textLimit={10}
-          placeholder='본인을 소개해 주세요!'
-          register={register('introduction', {
-            required: '필수 입력사항입니다.',
-          })}
-          value={watch('introduction')}
-          onChange={handleTextAreaChange}
-          error={introductionError}
-        />
-        <div className={styles.submitButton}>
-          <div className={styles.buttonSize}>
-            <Button buttonType='submit' text='등록하기' size='L' />
-          </div>
-        </div>
-      </form>
-      {isShow && (
-        <ModalPortal>
-          <Modal
-            icon='check'
-            message='등록이 완료되었습니다.'
-            minWidth='20rem'
-            maxWidth='40rem'
-            buttonText={['확인']}
-            buttonWidthPercent='25%'
-            handleModal={handleShowModal}
-          />
-        </ModalPortal>
-      )}
+  const { name, phone, address, bio } = await getProfileData(userId);
+
+  const { count, items } = await getUserApply(userId);
+
+  return !name ? (
+    <div className={styles.layout}>
+      <NoList
+        title='내 프로필'
+        description='내 프로필을 등록하고 원하는 가게에 지원해 보세요.'
+        text='내 프로필 등록하기'
+      />
     </div>
+  ) : (
+    <>
+      <div className={styles.section}>
+        <div className={styles.title}>내 프로필</div>
+        <div className={styles.profileBox}>
+          <MyProfile name={name} phone={phone} address={address} bio={bio} />
+        </div>
+      </div>
+      <div className={styles.backgroundArea}>
+        <div className={styles.tableArea}>
+          {count ? (
+            <div>
+              <div className={styles.title}>신청 내역</div>
+              <ApplyTable totalCount={count} applies={items} />
+            </div>
+          ) : (
+            <NoList
+              title='신청 내역'
+              description='아직 신청 내역이 없어요.'
+              text='공고 보러가기'
+            />
+          )}
+        </div>
+      </div>
+    </>
   );
 }
+
+export default myprofile;
