@@ -1,0 +1,32 @@
+@import '/src/styles/index';
+
+.sectionTitle {
+  @include text-28-b;
+
+  margin-bottom: 2.4rem;
+}
+
+.recentCards {
+  // display: flex;
+  // flex-wrap: wrap;
+  // gap: 1.4rem;
+  // max-width: 96rem;
+  // margin: 0 auto 6rem;
+
+  // & > a {
+  //   flex-basis: 32%;
+  // }
+
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 3.1rem 1.4rem;
+  height: 100%;
+
+  @include media(tablet) {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+.empty {
+  @include text-16-l;
+}
