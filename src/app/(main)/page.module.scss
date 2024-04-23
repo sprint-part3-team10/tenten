@@ -1,40 +1,5 @@
 @import '../../styles/index';
 
-.body {
-  overflow-x: hidden;
-
-  &::-webkit-scrollbar {
-    width: 0.5rem;
-  }
-
-  &::-webkit-scrollbar-thumb {
-    height: 5%;
-    background: $gray-50;
-    border-radius: 1rem;
-  }
-
-  &::-webkit-scrollbar-track {
-    background: $white;
-  }
-}
-
-.layout {
-  width: 100vw;
-  min-height: 100vh;
-  padding: 0 calc((100vw - 96.5rem) / 2);
-  padding-top: 14rem;
-  padding-bottom: 6rem;
-
-  @include media(tablet) {
-    padding: 6rem 3.2rem;
-    padding-top: 14rem;
-  }
-  @include media(mobile) {
-    padding: 4rem 1.2rem;
-    padding-top: 16rem;
-  }
-}
-
 .cardListContainer {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
