@@ -2,7 +2,6 @@ import Card from '@/src/components/Card';
 import JobDescription from '@/src/components/store/JobDescription';
 import ShopNoticeInfoBox from '@/src/components/store/ShopNoticeInfoBox';
 import getNoticeData from '@/src/api/getNoticeData';
-import getShopApply from '@/src/api/getShopApply';
 import styles from './page.module.scss';
 
 // 샘플 api주소 https://bootcamp-api.codeit.kr/api/0-1/the-julge/shops/4490151c-5217-4157-b072-9c37b05bed47/notices/99996477-82db-4bda-aae1-4044f11d9a8b
@@ -18,12 +17,6 @@ async function NoticePage({ params }: NoticePageProps) {
   const { shopId, noticeId } = params;
 
   const { item: notice } = await getNoticeData(shopId, noticeId);
-  const { count, items } = await getShopApply(
-    '8d5c848a-e250-401c-837d-20d89d79680f',
-    '750f3a60-1677-4a6e-84d7-2df15ccb9b05',
-  );
-  console.log(count, items);
-
   const {
     shop: { item: shop },
   } = notice;

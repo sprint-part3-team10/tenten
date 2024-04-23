@@ -11,7 +11,7 @@ import Label from './Label';
 import styles from './ApplyTable.module.scss';
 import Pagination from '../pagination/Pagination';
 
-interface UserApplyTableProps {
+interface ApplyTableProps {
   totalCount: number;
   applies: {
     item: {
@@ -41,33 +41,18 @@ interface UserApplyTableProps {
   }[];
 }
 
-interface ShopApplyTableProps {
-  totalCount: number;
-  applies: {
-    item: {
-      name: string;
-      bio: string;
-      phone: string;
-      status: string;
-    }[];
-  };
-}
-
 const titleCol = {
   employee: ['가게', '일자', '시급', '상태'],
   employer: ['신청자', '소개', '전화번호', '상태'],
 };
 
-function ApplyTable({
-  totalCount,
-  applies,
-}: UserApplyTableProps | ShopApplyTableProps) {
+function ApplyTable({ totalCount, applies }: ApplyTableProps) {
   const LIMIT = 5;
   const { offset, selectedPage, handlePageChange } = usePagination(LIMIT);
   useEffect(() => {
     console.log('offset', offset);
   }, [offset]);
-  const userType = 'employee'; // 쿠키로 구현 예정
+  const userType = 'employer'; // 쿠키로 구현 예정
 
   return (
     <div className={styles.tableContainer}>
@@ -93,12 +78,12 @@ function ApplyTable({
             applies.map(apply => (
               <tr key={apply.item.id}>
                 <td className={classNames(styles.listRow, styles.nameCol)}>
-                  {userType === 'employee'
+                  {userType !== 'employer'
                     ? apply.item.shop.item.name
                     : apply.item.user.item.name}
                 </td>
                 <td className={classNames(styles.listRow, styles.timeCol)}>
-                  {userType === 'employee'
+                  {userType !== 'employer'
                     ? formatDateAndTime(
                         apply.item.notice.item.startsAt,
                         apply.item.notice.item.workhour,
@@ -106,12 +91,12 @@ function ApplyTable({
                     : apply.item.user.item.bio}
                 </td>
                 <td className={classNames(styles.listRow, styles.payCol)}>
-                  {userType === 'employee'
+                  {userType !== 'employer'
                     ? formatWage(apply.item.notice.item.hourlyPay)
                     : apply.item.user.item.phone}
                 </td>
                 <td className={classNames(styles.listRow, styles.statusCol)}>
-                  {userType === 'employee' ? (
+                  {userType !== 'employer' ? (
                     <Label labelType='status' content={apply.item.status} />
                   ) : apply.item.status !== 'pending' ? (
                     <Label labelType='status' content={apply.item.status} />

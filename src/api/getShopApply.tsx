@@ -14,9 +14,8 @@ const getShopApply = async (
     {
       headers: {
         Authorization:
-          'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI1NmNhNmJmNC02YjZmLTRmNGYtOTczMS1iODM3Y2NkYmNiNmIiLCJpYXQiOjE3MTM4NjgxMzl9.GHg7XOLvw6AbVZz-ws4cVyJae5k3dGs8DZIR8Hu_BXk',
+          'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiIwNjZmMDgwYy01MjY1LTRiNzAtODM2ZS0wZjEzNjBiNTcwMTAiLCJpYXQiOjE3MTM4NDU3MDF9.ENlpxw52TG-_--EX2J5r42vdrXFq0t_R_ln6OnAqAJY',
       },
-      cache: 'no-store',
     },
   );
   const result = await res.json();

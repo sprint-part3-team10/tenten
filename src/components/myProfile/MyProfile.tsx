@@ -4,6 +4,13 @@ import phoneIcon from '@/public/icons/phone.svg';
 import styles from './MyProfile.module.scss';
 import Button from '../common/Button';
 
+// const mockData = {
+//   name: '김승우',
+//   phone: '010-1234-5678',
+//   address: '서울시 도봉구',
+//   bio: '열심히 일 하겠습니다',
+// };
+
 interface MyProfileProps {
   name: string;
   phone: string;
@@ -40,7 +47,7 @@ export default async function MyProfile({
             alt='area'
             className={styles.icon}
           />
-          <span className={styles.address}>선호 지역: {address || '-'}</span>
+          <span className={styles.address}>선호 지역: {address}</span>
         </div>
         <p className={styles.bio}>{bio}</p>
       </div>
