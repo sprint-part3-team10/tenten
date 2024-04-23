@@ -18,7 +18,7 @@ interface RecentViewsProps {
   };
 }
 
-const RecentViews = ({ cardData }: RecentViewsProps) => {
+function RecentViews({ cardData }: RecentViewsProps) {
   const [cards, setCards] = useState<RecentViewsProps['cardData'][]>([]);
 
   useEffect(() => {
@@ -78,6 +78,6 @@ const RecentViews = ({ cardData }: RecentViewsProps) => {
       </div>
     </section>
   );
-};
+}
 
 export default RecentViews;
