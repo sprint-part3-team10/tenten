@@ -1,20 +1,24 @@
-'use client';
-
-import React, { useState } from 'react';
+import React from 'react';
 import { LOCATION_LIST } from '@/src/constants/dropdownList';
 import styles from './LocationBox.module.scss';
 import Label from '../applylist/Label';
 
-function LocationBox() {
-  const [clickedLocation, setClickedLocation] = useState<string[]>([]);
+interface LocationBoxProps {
+  clickedLocation: string[];
+  handleChangeLocation: (value: string[]) => void;
+}
 
+function LocationBox({
+  clickedLocation,
+  handleChangeLocation,
+}: LocationBoxProps) {
   const handleClick = (item: string) => {
     if (!clickedLocation.includes(item))
-      setClickedLocation([...clickedLocation, item]);
+      handleChangeLocation([...clickedLocation, item]);
   };
 
   const handleDeleteLocation = (item: string) => {
-    setClickedLocation(clickedLocation.filter(prev => prev !== item));
+    handleChangeLocation(clickedLocation.filter(prev => prev !== item));
   };
 
   return (
@@ -27,14 +31,15 @@ function LocationBox() {
         ))}
       </div>
       <div className={styles.labelContainer}>
-        {clickedLocation.map(item => (
-          <Label
-            key={item}
-            labelType='location'
-            content={item}
-            onClick={() => handleDeleteLocation(item)}
-          />
-        ))}
+        {clickedLocation &&
+          clickedLocation.map(item => (
+            <Label
+              key={item}
+              labelType='location'
+              content={item}
+              onClick={() => handleDeleteLocation(item)}
+            />
+          ))}
       </div>
     </div>
   );
