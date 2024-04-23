@@ -59,7 +59,7 @@ const postLogin = async (
     path: '/',
   });
   cookieStore.set({
-    name: 'type',
+    name: 'userType',
     value: user.item.type,
     httpOnly: true,
     path: '/',
