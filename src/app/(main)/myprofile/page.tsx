@@ -31,18 +31,20 @@ async function myprofile() {
         </div>
       </div>
       <div className={styles.backgroundArea}>
-        {count ? (
-          <div className={styles.applyArea}>
-            <div className={styles.title}>신청 내역</div>
-            <ApplyTable totalCount={count} applies={items} />
-          </div>
-        ) : (
-          <NoList
-            title='신청 내역'
-            description='아직 신청 내역이 없어요.'
-            text='공고 보러가기'
-          />
-        )}
+        <div className={styles.tableArea}>
+          {count ? (
+            <div>
+              <div className={styles.title}>신청 내역</div>
+              <ApplyTable totalCount={count} applies={items} />
+            </div>
+          ) : (
+            <NoList
+              title='신청 내역'
+              description='아직 신청 내역이 없어요.'
+              text='공고 보러가기'
+            />
+          )}
+        </div>
       </div>
     </>
   );

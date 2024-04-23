@@ -2,16 +2,13 @@
 
 .container {
   display: flex;
-  gap: 0.8rem;
+  gap: 10rem;
   min-width: 35rem;
   max-width: 68rem;
   padding: 3.2rem;
   background-color: $red-10;
   border-radius: 1.2rem;
 
-  @include media(tablet) {
-    gap: 10rem;
-  }
   @include media(mobile) {
     gap: 0.8rem;
   }
