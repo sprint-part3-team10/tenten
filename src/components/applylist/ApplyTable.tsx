@@ -10,6 +10,7 @@ import usePagination from '@/src/hooks/usePagination';
 import Label from './Label';
 import styles from './ApplyTable.module.scss';
 import Pagination from '../pagination/Pagination';
+// import { cookies } from 'next/headers';
 
 interface UserApplyTableProps {
   totalCount: number;
@@ -62,12 +63,14 @@ function ApplyTable({
   totalCount,
   applies,
 }: UserApplyTableProps | ShopApplyTableProps) {
+  // const userType = cookies().get('userType')
+  const userType = 'employee';
+
   const LIMIT = 5;
   const { offset, selectedPage, handlePageChange } = usePagination(LIMIT);
   useEffect(() => {
     console.log('offset', offset);
   }, [offset]);
-  const userType = 'employee'; // 쿠키로 구현 예정
 
   return (
     <div className={styles.tableContainer}>
@@ -117,8 +120,14 @@ function ApplyTable({
                     <Label labelType='status' content={apply.item.status} />
                   ) : (
                     <>
-                      <button>거절하기</button>
-                      <button>승인하기</button>
+                      <button className={classNames(styles.btn, styles.reject)}>
+                        거절하기
+                      </button>
+                      <button
+                        className={classNames(styles.btn, styles.approve)}
+                      >
+                        승인하기
+                      </button>
                     </>
                   )}
                 </td>
