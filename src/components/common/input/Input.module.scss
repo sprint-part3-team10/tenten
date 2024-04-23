@@ -43,6 +43,8 @@
 }
 
 .input {
+  @include text-16-l;
+
   border: none;
 
   &:focus {
