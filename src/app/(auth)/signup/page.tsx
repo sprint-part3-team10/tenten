@@ -12,6 +12,7 @@ import { EMAIL_REGEX, PASSWORD_REGEX } from '@/src/constants/signRegEx';
 import postUserData from '@/src/api/postUser';
 import Toast from '@/src/components/common/toast/Toast';
 import useToast from '@/src/hooks/useToast';
+import { useRouter } from 'next/navigation';
 import styles from './page.module.scss';
 
 interface SignupFormData {
@@ -33,6 +34,8 @@ export default function SignUp() {
   const { showToast, toastMessage, setToastMessage, displayToast } =
     useToast(3000);
 
+  const router = useRouter();
+
   const pw = watch('password');
 
   const {
@@ -51,28 +54,11 @@ export default function SignUp() {
     password,
     passwordCheck,
   }: SignupFormData) => {
-    setToastMessage('');
     try {
-      const res = await postUserData(email, password, userType);
-      document.cookie = `userType=${userType}; path=/`;
-      if (!res.ok) {
-        let errorMessage = '';
-        switch (res.status) {
-          case 400:
-            errorMessage = '올바른 이메일이 아닙니다.';
-            break;
-          case 409:
-            errorMessage = '이미 존재하는 이메일입니다.';
-            break;
-          default:
-            errorMessage = '';
-            break;
-        }
-        throw new Error(errorMessage);
-      } else {
-        setToastMessage('정상적으로 가입되었습니다.');
-        setIsWarning(false);
-      }
+      await postUserData(email, password, userType);
+      setToastMessage('정상적으로 가입되었습니다.');
+      setIsWarning(false);
+      router.push('/signin');
     } catch (error: any) {
       setToastMessage(error.message);
       setIsWarning(true);
@@ -123,12 +109,7 @@ export default function SignUp() {
             onChange={handleType}
             isEmployer={isEmployer}
           />
-          <Button
-            buttonType='submit'
-            text='가입하기'
-            size='L'
-            onClick={displayToast}
-          />
+          <Button buttonType='submit' text='가입하기' size='L' />
           <div className={styles.movePage}>
             이미 가입하셨나요?{' '}
             <Link className={styles.link} href='/signin'>
