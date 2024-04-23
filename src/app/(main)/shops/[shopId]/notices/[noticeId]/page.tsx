@@ -4,6 +4,7 @@ import getNoticeData from '@/src/api/getNoticeData';
 import RecentViews from '@/src/components/RecentViews';
 import Button from '@/src/components/common/Button';
 import ApplyEventContainer from '@/src/components/ApplyEventContainer';
+import { cookies } from 'next/headers';
 import styles from './page.module.scss';
 
 // 샘플 api주소 https://bootcamp-api.codeit.kr/api/0-1/the-julge/shops/4490151c-5217-4157-b072-9c37b05bed47/notices/99996477-82db-4bda-aae1-4044f11d9a8b
@@ -16,6 +17,8 @@ interface NoticePageProps {
 }
 
 async function NoticePage({ params }: NoticePageProps) {
+  const userType = cookies().get('userType');
+
   const { shopId, noticeId } = params;
 
   const { item: notice } = await getNoticeData(shopId, noticeId);
@@ -59,7 +62,11 @@ async function NoticePage({ params }: NoticePageProps) {
         <div style={{ marginBottom: '2.4rem' }} />
         <JobDescription description={notice.description} />
       </section>
-      <RecentViews cardData={cardData} />
+      {userType && userType.value === 'employer' ? (
+        <div />
+      ) : (
+        <RecentViews cardData={cardData} />
+      )}
     </>
   );
 }
