@@ -45,24 +45,28 @@ const postLogin = async (
 
   const { item } = result;
   const { token, user } = item;
+  const oneDay = 12 * 60 * 60 * 1000;
 
   cookieStore.set({
     name: 'token',
     value: token,
     httpOnly: true,
     path: '/',
+    expires: Date.now() + oneDay,
   });
   cookieStore.set({
     name: 'u_id',
     value: user.item.id,
     httpOnly: true,
     path: '/',
+    expires: Date.now() + oneDay,
   });
   cookieStore.set({
     name: 'userType',
     value: user.item.type,
     httpOnly: true,
     path: '/',
+    expires: Date.now() + oneDay,
   });
 
   return { token, user };
