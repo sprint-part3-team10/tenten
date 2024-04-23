@@ -1,13 +1,13 @@
 'use client';
 
 import Card from '@/src/components/Card';
-import { cookies } from 'next/headers';
+// import { cookies } from 'next/headers';
 import styles from './page.module.scss';
 
 const BASE_URL = 'https://bootcamp-api.codeit.kr/api/0-2/the-julge';
 
 async function getData() {
-  const cookieStore = cookies();
+  // const cookieStore = cookies();
 
   const res = await fetch(`${BASE_URL}/notices`);
   return res.json();

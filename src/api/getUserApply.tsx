@@ -8,9 +8,10 @@ interface UserApplyData {
 const getUserApply = async (userId: string): Promise<UserApplyData> => {
   const res = await fetch(`${BASE_URL}/users/${userId}/applications`, {
     headers: {
-      Authorization:
+      authorization:
         'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiIwNjZmMDgwYy01MjY1LTRiNzAtODM2ZS0wZjEzNjBiNTcwMTAiLCJpYXQiOjE3MTM4NDU3MDF9.ENlpxw52TG-_--EX2J5r42vdrXFq0t_R_ln6OnAqAJY',
     },
+    cache: 'no-store',
   });
   const result = await res.json();
   const { count, items } = result;
