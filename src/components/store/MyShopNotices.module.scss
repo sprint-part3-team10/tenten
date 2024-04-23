@@ -1,0 +1,18 @@
+@import '/src/styles/index';
+
+.sectionTitle {
+  @include text-28-b;
+
+  margin-bottom: 2.4rem;
+}
+
+.shopNotices {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 3.1rem 1.4rem;
+  height: 100%;
+
+  @include media(tablet) {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}

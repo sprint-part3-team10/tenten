@@ -2,6 +2,7 @@ import getShop from '@/src/api/getShop';
 import ShopNoticeInfoBox from '@/src/components/store/ShopNoticeInfoBox';
 import { cookies } from 'next/headers';
 import Button from '@/src/components/common/Button';
+import MyShopNotices from '@/src/components/store/MyShopNotices';
 import styles from './page.module.scss';
 
 export default async function MyShop() {
@@ -42,7 +43,12 @@ export default async function MyShop() {
         </ShopNoticeInfoBox>
         <div style={{ marginBottom: '12rem' }} />
       </section>
-      <h1 className={styles.sectionTitle}>등록한 공고</h1>
+      <MyShopNotices
+        address1={item.address1}
+        imageUrl={item.imageUrl}
+        shopId={shopId.value}
+        shop_name={item.name}
+      />
     </>
   );
 }
