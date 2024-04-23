@@ -1,5 +1,15 @@
 @import '/src/styles/index';
 
+.outer {
+  background-color: $gray-5;
+}
+
+.container {
+  max-width: 96rem;
+  padding: 6rem 0;
+  margin: 0 auto;
+}
+
 .sectionTitle {
   @include text-28-b;
 
