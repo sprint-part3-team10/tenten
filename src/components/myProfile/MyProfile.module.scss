@@ -2,19 +2,23 @@
 
 .container {
   display: flex;
-  justify-content: space-between;
-  width: 100%;
+  gap: 10rem;
   min-width: 35rem;
-  max-width: 66.5rem;
+  max-width: 68rem;
   padding: 3.2rem;
   background-color: $red-10;
   border-radius: 1.2rem;
+
+  @include media(mobile) {
+    gap: 0.8rem;
+  }
 }
 
 .profileInfo {
   display: flex;
   flex-direction: column;
   gap: 1.4rem;
+  width: stretch;
 }
 
 .name {
@@ -67,5 +71,13 @@
 
   @include media(mobile) {
     @include text-14-l;
+  }
+}
+
+.button {
+  width: 17rem;
+
+  @include media(mobile) {
+    @include text-14-b;
   }
 }
