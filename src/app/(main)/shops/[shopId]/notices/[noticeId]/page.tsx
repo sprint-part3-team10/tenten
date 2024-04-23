@@ -1,4 +1,4 @@
-import Card from '@/src/components/Card';
+import Card from '@/src/components/card/Card';
 import JobDescription from '@/src/components/store/JobDescription';
 import ShopNoticeInfoBox from '@/src/components/store/ShopNoticeInfoBox';
 import getNoticeData from '@/src/api/getNoticeData';

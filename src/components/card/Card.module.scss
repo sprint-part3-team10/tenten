@@ -1,4 +1,4 @@
-@import '../styles/index';
+@import '/src/styles/index';
 
 .card {
   position: relative;
@@ -28,6 +28,7 @@
   display: flex;
   flex-direction: column;
   gap: 0.8rem;
+  justify-content: center;
   padding-top: 2rem;
   padding-bottom: 1.6rem;
 
@@ -40,10 +41,12 @@
   display: flex;
   gap: 0.6rem;
   align-items: center;
+  height: 3.5rem;
   word-break: keep-all;
 
   @include media(mobile) {
     align-items: flex-start;
+    height: 2rem;
   }
 }
 
@@ -95,7 +98,7 @@
   }
 }
 
-.explain {
+@mixin explain {
   @include text-14-l;
 
   line-height: 2.2rem;
@@ -104,6 +107,14 @@
   @include media(mobile) {
     @include text-12-l;
   }
+}
+
+.date {
+  @include explain;
+}
+
+.address {
+  @include explain;
 }
 
 .price {
