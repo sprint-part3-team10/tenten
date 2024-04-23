@@ -11,6 +11,7 @@ import ModalPortal from '@/src/components/common/modal/ModalPortal';
 import Modal from '@/src/components/common/modal/Modal';
 import { LOCATION_LIST } from '@/src/constants/dropdownList';
 import BackSpaceButton from '@/src/components/common/BackSpaceButton';
+import { PHONE_NUMBER_REGEX } from '@/src/constants/regEx';
 import styles from './page.module.scss';
 
 interface MyProfileFormData {
@@ -84,7 +85,7 @@ export default function Home() {
             register={register('phoneNumber', {
               required: '필수 입력사항입니다.',
               pattern: {
-                value: /^010-\d{4}-\d{4}$/,
+                value: PHONE_NUMBER_REGEX,
                 message: '연락처를 정확히 입력해주세요. 예) 010-0000-0000',
               },
             })}
