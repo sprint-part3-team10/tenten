@@ -5,17 +5,17 @@ interface ButtonProps {
   buttonType: 'button' | 'submit' | 'reset' | undefined;
   text: string;
   size?: 'L' | 'M' | 'S' | '';
-  widthValue?: string;
+  width?: string;
   isWhite?: boolean;
   isDisable?: boolean;
-  onClick?: any;
+  onClick?: () => void;
 }
 
 export default function Button({
   buttonType,
   text,
   size = '',
-  widthValue = '100%',
+  width = '100%',
   isWhite = false,
   isDisable = false,
   onClick,
@@ -29,7 +29,7 @@ export default function Button({
       )}
       type={buttonType}
       disabled={isDisable}
-      style={{ width: widthValue }}
+      style={{ width }}
       onClick={onClick}
     >
       {text}
