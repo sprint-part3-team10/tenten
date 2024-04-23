@@ -11,7 +11,6 @@ async function myprofile() {
   const { name, phone, address, bio } = await getProfileData(
     '066f080c-5265-4b70-836e-0f1360b57010',
   );
-  console.log(name);
 
   const { count, items } = await getUserApply(
     '066f080c-5265-4b70-836e-0f1360b57010',
