@@ -3,6 +3,7 @@ import ShopNoticeInfoBox from '@/src/components/store/ShopNoticeInfoBox';
 import getNoticeData from '@/src/api/getNoticeData';
 import RecentViews from '@/src/components/RecentViews';
 import Button from '@/src/components/common/Button';
+import ApplyEventContainer from '@/src/components/ApplyEventContainer';
 import styles from './page.module.scss';
 
 // 샘플 api주소 https://bootcamp-api.codeit.kr/api/0-1/the-julge/shops/4490151c-5217-4157-b072-9c37b05bed47/notices/99996477-82db-4bda-aae1-4044f11d9a8b
@@ -51,7 +52,9 @@ async function NoticePage({ params }: NoticePageProps) {
         <h2 className={styles.category}>식당</h2>
         <h1 className={styles.sectionTitle}>{shop.name}</h1>
         <ShopNoticeInfoBox data={infoData}>
-          <Button buttonType='button' text='신청하기' />
+          <ApplyEventContainer shopId={shopId} noticeId={noticeId}>
+            <Button buttonType='button' text='신청하기' />
+          </ApplyEventContainer>
         </ShopNoticeInfoBox>
         <div style={{ marginBottom: '2.4rem' }} />
         <JobDescription description={notice.description} />
