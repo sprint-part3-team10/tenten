@@ -52,7 +52,7 @@ function ApplyTable({ totalCount, applies }: ApplyTableProps) {
   useEffect(() => {
     console.log('offset', offset);
   }, [offset]);
-  const userType = 'employee'; // 쿠키로 구현 예정
+  const userType = 'employer'; // 쿠키로 구현 예정
 
   return (
     <div className={styles.tableContainer}>
@@ -78,32 +78,40 @@ function ApplyTable({ totalCount, applies }: ApplyTableProps) {
             applies.map(apply => (
               <tr key={apply.item.id}>
                 <td className={classNames(styles.listRow, styles.nameCol)}>
-                  {userType === 'employee'
+                  {userType !== 'employer'
                     ? apply.item.shop.item.name
-                    : apply.item.user.item.name}
+                    : apply.item.name}
                 </td>
                 <td className={classNames(styles.listRow, styles.timeCol)}>
-                  {userType === 'employee'
+                  {userType !== 'employer'
                     ? formatDateAndTime(
                         apply.item.notice.item.startsAt,
                         apply.item.notice.item.workhour,
                       )
-                    : apply.item.user.item.bio}
+                    : apply.item.bio}
                 </td>
                 <td className={classNames(styles.listRow, styles.payCol)}>
-                  {userType === 'employee'
+                  {userType !== 'employer'
                     ? formatWage(apply.item.notice.item.hourlyPay)
-                    : apply.item.user.item.phone}
+                    : apply.item.phone}
                 </td>
                 <td className={classNames(styles.listRow, styles.statusCol)}>
-                  {userType === 'employee' ? (
+                  {userType !== 'employer' ? (
                     <Label labelType='status' content={apply.item.status} />
                   ) : apply.item.status !== 'pending' ? (
                     <Label labelType='status' content={apply.item.status} />
                   ) : (
                     <>
-                      <button>거절하기</button>
-                      <button>승인하기</button>
+                      <button
+                        className={classNames(styles.btn, styles.btnReject)}
+                      >
+                        거절하기
+                      </button>
+                      <button
+                        className={classNames(styles.btn, styles.btnAccept)}
+                      >
+                        승인하기
+                      </button>
                     </>
                   )}
                 </td>
