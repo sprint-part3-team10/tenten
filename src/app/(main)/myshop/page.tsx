@@ -2,7 +2,7 @@ import getShop from '@/src/api/getShop';
 import ShopNoticeInfoBox from '@/src/components/store/ShopNoticeInfoBox';
 import { cookies } from 'next/headers';
 
-const myshop = async () => {
+export default async function MyShop() {
   const shopId = cookies().get('shopId');
 
   if (!shopId) return <div />;
@@ -20,6 +20,4 @@ const myshop = async () => {
       }}
     />
   );
-};
-
-export default myshop;
+}
