@@ -2,13 +2,13 @@
 
 import Image from 'next/image';
 import { useRef } from 'react';
-import styles from './Modal.module.scss';
 import warningIcon from '@/public/icons/modalWarning.svg';
 import checkIcon from '@/public/icons/modalCheck.svg';
 import useOutsideClick from '@/src/hooks/useOutsideClick';
-import Button from '../Button';
 import { min } from 'date-fns';
 import classNames from 'classnames';
+import Button from '../Button';
+import styles from './Modal.module.scss';
 
 interface ModalProps {
   icon?: 'warning' | 'check';
@@ -105,9 +105,5 @@ function Modal({
     </div>
   );
 }
-
-Modal.defaultProps = {
-  icon: undefined,
-};
 
 export default Modal;
