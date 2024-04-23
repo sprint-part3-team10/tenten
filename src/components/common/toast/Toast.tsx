@@ -1,9 +1,9 @@
 import { useEffect, useState } from 'react';
-import styles from './Toast.module.scss';
 import COMPLETE from '@/public/icons/completed.png';
 import WARNING from '@/public/icons/warning.svg';
 import Image from 'next/image';
 import classNames from 'classnames';
+import styles from './Toast.module.scss';
 
 interface ToastProps {
   message: string;
@@ -42,7 +42,7 @@ export default function Toast({
           [styles.warning]: isWarning,
         })}
         style={{ animationDuration: `${duration}ms` }}
-      ></div>
+      />
     </div>
   );
 }
