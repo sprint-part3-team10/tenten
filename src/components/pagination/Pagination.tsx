@@ -8,7 +8,7 @@ import Image from 'next/image';
 import styles from './Pagination.module.scss';
 
 interface PaginationProps {
-  totalCount: number;
+  totalCount: number | undefined;
   limit: number;
   selectedPage: number;
   handlePageChange: (page: number) => void;
