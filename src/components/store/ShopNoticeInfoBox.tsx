@@ -1,6 +1,7 @@
 import Image from 'next/image';
 import classNames from 'classnames';
 import { formatDateAndTime, formatWage } from '@/src/lib/format';
+import { ReactElement } from 'react';
 import styles from './ShopNoticeInfoBox.module.scss';
 import WageComparisonBadge from '../common/WageComparisonBadge';
 
@@ -17,9 +18,10 @@ interface ShopNoticeInfoBoxProps {
     hourlyPay: number;
     closed?: boolean;
   };
+  children: ReactElement;
 }
 
-function ShopNoticeInfoBox({ data }: ShopNoticeInfoBoxProps) {
+function ShopNoticeInfoBox({ data, children }: ShopNoticeInfoBoxProps) {
   const {
     kind,
     mainText,
@@ -68,9 +70,7 @@ function ShopNoticeInfoBox({ data }: ShopNoticeInfoBoxProps) {
           <div className={styles.address}>{address1}</div>
           <div className={styles.description}>{description}</div>
         </div>
-        <button className={styles.button} type='button'>
-          편집하기
-        </button>
+        {children}
       </div>
     </div>
   );
