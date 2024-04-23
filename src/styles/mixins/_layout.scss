@@ -1,0 +1,16 @@
+@import './responsive';
+
+@mixin layout {
+  padding: 0 calc((100vw - 96.5rem) / 2);
+  padding-top: 14rem;
+  padding-bottom: 6rem;
+
+  @include media(tablet) {
+    padding: 6rem 3.2rem;
+    padding-top: 14rem;
+  }
+  @include media(mobile) {
+    padding: 4rem 1.2rem;
+    padding-top: 16rem;
+  }
+}
