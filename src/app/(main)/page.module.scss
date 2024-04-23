@@ -1,5 +1,9 @@
 @import '../../styles/index';
 
+.mainLayout {
+  @include layout;
+}
+
 .cardListContainer {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
