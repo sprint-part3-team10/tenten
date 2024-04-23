@@ -1,0 +1,54 @@
+@import '../../../styles/index';
+
+.layout {
+  @include layout;
+}
+
+.section {
+  @include layout;
+
+  display: flex;
+  justify-content: space-between;
+
+  @include media(tablet) {
+    flex-direction: column;
+    gap: 2rem;
+  }
+}
+
+.title {
+  @include text-28-b;
+
+  margin-bottom: 2rem;
+
+  @include media(mobile) {
+    @include text-20-b;
+  }
+}
+
+.profileBox {
+  margin: 0 auto;
+}
+
+.tabletFit {
+  @include media(tablet) {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+}
+
+.backgroundArea {
+  background-color: $gray-5;
+}
+
+.tableArea {
+  padding: 6rem calc((100vw - 96.5rem) / 2);
+
+  @include media(tablet) {
+    padding: 6rem 3.2rem;
+  }
+  @include media(mobile) {
+    padding: 4rem 1.2rem;
+  }
+}
