@@ -1,7 +1,7 @@
 'use client';
 
 import getShopNotices, { Item } from '@/src/api/getShopNotices';
-import { useEffect, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import Card from '../Card';
 import styles from './MyShopNotices.module.scss';
 
@@ -20,16 +20,42 @@ function MyShopNotices({
 }: MyShopNoticesProps) {
   const [cards, setCards] = useState<Item[]>([]);
   const [offset, setOffset] = useState<number>(0);
-
-  const getData = async () => {
-    const { items } = await getShopNotices(shopId, offset);
-    console.log(items);
-    setCards(items);
-  };
+  const [hasNext, setHasNext] = useState<boolean>(true);
+  const ref = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
-    getData();
-  }, [offset]);
+    const SENTINEL = ref.current;
+
+    const getData = async () => {
+      const { hasNext: newHasNext, items } = await getShopNotices(
+        shopId,
+        offset,
+      );
+      setCards(prevItems => [...prevItems, ...items]);
+      setHasNext(newHasNext);
+      setOffset(offset + 6);
+    };
+
+    const handleIntersection = (entries: IntersectionObserverEntry[]) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting && hasNext) {
+          getData();
+        }
+      });
+    };
+
+    const observer = new IntersectionObserver(handleIntersection, {
+      threshold: 1,
+      rootMargin: '0px 0px -50px 0px',
+    });
+
+    observer.observe(SENTINEL as Element);
+
+    return () => {
+      observer.unobserve(SENTINEL as Element);
+      observer.disconnect();
+    };
+  }, [offset, hasNext, shopId]);
 
   return (
     <section>
@@ -38,9 +64,9 @@ function MyShopNotices({
         <div className={styles.empty}>최근에 본 공고가 없어요.</div>
       )} */}
       <div className={styles.shopNotices}>
-        {cards.map(card => (
+        {cards.map((card, i) => (
           <Card
-            key={card.item.id}
+            key={card.item.id + card.item.id[i]}
             data={{
               closed: card.item.closed,
               hourlyPay: card.item.hourlyPay,
@@ -55,6 +81,7 @@ function MyShopNotices({
           />
         ))}
       </div>
+      <div className={styles.loader} ref={ref} />
     </section>
   );
 }
