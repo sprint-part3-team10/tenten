@@ -95,7 +95,7 @@ function ApplyTable({
                 <td className={classNames(styles.listRow, styles.nameCol)}>
                   {userType === 'employee'
                     ? apply.item.shop.item.name
-                    : apply.item.name}
+                    : apply.item.user.item.name}
                 </td>
                 <td className={classNames(styles.listRow, styles.timeCol)}>
                   {userType === 'employee'
@@ -103,12 +103,12 @@ function ApplyTable({
                         apply.item.notice.item.startsAt,
                         apply.item.notice.item.workhour,
                       )
-                    : apply.item.bio}
+                    : apply.item.user.item.bio}
                 </td>
                 <td className={classNames(styles.listRow, styles.payCol)}>
                   {userType === 'employee'
                     ? formatWage(apply.item.notice.item.hourlyPay)
-                    : apply.item.phone}
+                    : apply.item.user.item.phone}
                 </td>
                 <td className={classNames(styles.listRow, styles.statusCol)}>
                   {userType === 'employee' ? (
@@ -117,16 +117,8 @@ function ApplyTable({
                     <Label labelType='status' content={apply.item.status} />
                   ) : (
                     <>
-                      <button
-                        className={classNames(styles.btn, styles.btnReject)}
-                      >
-                        거절하기
-                      </button>
-                      <button
-                        className={classNames(styles.btn, styles.btnAccept)}
-                      >
-                        승인하기
-                      </button>
+                      <button>거절하기</button>
+                      <button>승인하기</button>
                     </>
                   )}
                 </td>
