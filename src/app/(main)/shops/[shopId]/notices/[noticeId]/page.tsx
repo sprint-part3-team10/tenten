@@ -55,14 +55,18 @@ async function NoticePage({ params }: NoticePageProps) {
         <h2 className={styles.category}>식당</h2>
         <h1 className={styles.sectionTitle}>{shop.name}</h1>
         <ShopNoticeInfoBox data={infoData}>
-          <ApplyEventContainer shopId={shopId} noticeId={noticeId}>
-            <Button buttonType='button' text='신청하기' />
-          </ApplyEventContainer>
+          {userType?.value === 'employer' ? (
+            <div />
+          ) : (
+            <ApplyEventContainer shopId={shopId} noticeId={noticeId}>
+              <Button buttonType='button' text='신청하기' />
+            </ApplyEventContainer>
+          )}
         </ShopNoticeInfoBox>
         <div style={{ marginBottom: '2.4rem' }} />
         <JobDescription description={notice.description} />
       </section>
-      {userType && userType.value === 'employer' ? (
+      {userType?.value === 'employer' ? (
         <div />
       ) : (
         <RecentViews cardData={cardData} />
