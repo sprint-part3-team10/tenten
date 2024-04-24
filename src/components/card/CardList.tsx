@@ -65,7 +65,10 @@ function CardList() {
             value={sortText}
             onClick={handleDropdownClick}
           />
-          <FilterButton saveFilteredItems={handleFilterItems} />
+          <FilterButton
+            filterItems={filterItems}
+            saveFilteredItems={handleFilterItems}
+          />
         </div>
       </div>
       {totalCount && totalCount > 0 ? (

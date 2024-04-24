@@ -12,6 +12,7 @@ import Button from '../common/Button';
 
 interface FilterPopoverProps {
   handleClose: () => void;
+  filterItems: Filter;
   saveFilteredItems: (filter: Filter) => void;
 }
 
@@ -21,8 +22,12 @@ const INITIAL_FILTER = {
   hourlyPayGte: '',
 };
 
-function FilterPopover({ handleClose, saveFilteredItems }: FilterPopoverProps) {
-  const [filter, setFilter] = useState<Filter>(INITIAL_FILTER);
+function FilterPopover({
+  handleClose,
+  filterItems,
+  saveFilteredItems,
+}: FilterPopoverProps) {
+  const [filter, setFilter] = useState<Filter>(filterItems);
 
   const handleUpdateFilter = (
     key: keyof Filter,
