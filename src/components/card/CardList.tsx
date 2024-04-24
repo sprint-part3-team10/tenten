@@ -56,7 +56,9 @@ function CardList() {
   return (
     <div className={styles.container}>
       <div className={styles.titleContainer}>
-        <h1>전체 공고</h1>
+        <div className={styles.title}>
+          <h1>전체 공고</h1>
+        </div>
         <div className={styles.buttonContainer}>
           <Dropdown
             width='37%'
@@ -86,6 +88,7 @@ function CardList() {
                   hourlyPay: oneItem.item.hourlyPay,
                   imageUrl: oneItem.item.shop.item.imageUrl,
                   closed: oneItem.item.closed,
+                  originalHourlyPay: oneItem.item.shop.item.originalHourlyPay,
                 }}
               />
             ))}
