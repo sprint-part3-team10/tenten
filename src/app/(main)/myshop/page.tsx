@@ -3,6 +3,7 @@ import ShopNoticeInfoBox from '@/src/components/store/ShopNoticeInfoBox';
 import { cookies } from 'next/headers';
 import Button from '@/src/components/common/Button';
 import MyShopNotices from '@/src/components/store/MyShopNotices';
+import classNames from 'classnames';
 import styles from './page.module.scss';
 
 export default async function MyShop() {
@@ -10,13 +11,15 @@ export default async function MyShop() {
 
   if (!shopId)
     return (
-      <section>
-        <h1 className={styles.sectionTitle}>내 가게</h1>
-        <div className={styles.emptyBox}>
-          <p className={styles.addShopText}>
-            내 가게를 소개하고 공고도 등록해 보세요.
-          </p>
-          <Button buttonType='button' text='가게 등록하기' width='40%' />
+      <section className={classNames(styles.outer, styles.fillHeight)}>
+        <div className={styles.container}>
+          <h1 className={styles.sectionTitle}>내 가게</h1>
+          <div className={styles.emptyBox}>
+            <p className={styles.addShopText}>
+              내 가게를 소개하고 공고도 등록해 보세요.
+            </p>
+            <Button buttonType='button' text='가게 등록하기' width='40%' />
+          </div>
         </div>
       </section>
     );

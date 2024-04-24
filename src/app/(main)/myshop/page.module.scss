@@ -11,6 +11,10 @@
   margin: 0 auto;
 }
 
+.fillHeight {
+  height: 100vh;
+}
+
 .sectionTitle {
   @include text-28-b;
 
