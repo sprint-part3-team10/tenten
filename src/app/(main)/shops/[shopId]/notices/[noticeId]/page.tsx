@@ -19,8 +19,8 @@ interface NoticePageProps {
 }
 
 async function NoticePage({ params }: NoticePageProps) {
-  const userType = cookies().get('userType');
-  // const userType = { value: 'employer' };
+  // const userType = cookies().get('userType');
+  const userType = { value: 'employer' };
 
   const { shopId, noticeId } = params;
 
@@ -71,7 +71,7 @@ async function NoticePage({ params }: NoticePageProps) {
               userType={userType?.value}
             >
               {userType?.value === 'employer' ? (
-                <Button buttonType='button' text='공고 편집하기' />
+                <Button buttonType='button' text='공고 편집하기' isWhite />
               ) : (
                 <Button buttonType='button' text='신청하기' />
               )}
