@@ -6,7 +6,7 @@ import classNames from 'classnames';
 import downArrow from '@/public/icons/dropdown-down.svg';
 import upArrow from '@/public/icons/dropdown-up.svg';
 import useOutsideClick from '@/src/hooks/useOutsideClick';
-import { UseFormRegisterReturn } from 'react-hook-form';
+import { UseFormRegisterReturn, FieldError } from 'react-hook-form';
 import styles from './Dropdown.module.scss';
 
 interface DropdownProps {
@@ -15,6 +15,7 @@ interface DropdownProps {
   optionList: string[];
   value: string;
   register?: UseFormRegisterReturn;
+  error?: FieldError;
   onClick?: (selectedValue: string) => void;
   onChange?: (selectedValue: string) => void;
 }
@@ -25,12 +26,12 @@ export default function Dropdown({
   optionList,
   value,
   register,
+  error,
   onClick,
   onChange,
 }: DropdownProps) {
   const [isOpen, setIsOpen] = useState(false);
   const ref = useRef<HTMLDivElement>(null);
-
   const handleOutsideClick = () => {
     setIsOpen(false);
   };
@@ -41,7 +42,11 @@ export default function Dropdown({
     setIsOpen(prevValue => !prevValue);
   };
 
-  const handleOptionClick = (option: string) => {
+  const handleOptionClick = (
+    e: React.MouseEvent<HTMLLIElement>,
+    option: string,
+  ) => {
+    e.stopPropagation();
     if (onClick) onClick(option);
     if (onChange) onChange(option);
     setIsOpen(false);
@@ -64,6 +69,7 @@ export default function Dropdown({
         <input
           className={classNames(styles.input, {
             [styles.onlyFilterInput]: !labelName,
+            [styles.errorBox]: !!error,
           })}
           id={labelName}
           name={labelName}
@@ -79,20 +85,21 @@ export default function Dropdown({
           src={isOpen ? upArrow : downArrow}
           alt='방향화살표'
         />
+        {isOpen && (
+          <ul
+            className={classNames(styles.selectList, {
+              [styles.onlyFilterList]: !labelName,
+            })}
+          >
+            {optionList.map(option => (
+              <li key={option} onClick={e => handleOptionClick(e, option)}>
+                {option}
+              </li>
+            ))}
+          </ul>
+        )}
       </div>
-      {isOpen && (
-        <ul
-          className={classNames(styles.selectList, {
-            [styles.onlyFilterList]: !labelName,
-          })}
-        >
-          {optionList.map(option => (
-            <li key={option} onClick={() => handleOptionClick(option)}>
-              {option}
-            </li>
-          ))}
-        </ul>
-      )}
+      {error && <div className={styles.error}>{error.message}</div>}
     </div>
   );
 }
