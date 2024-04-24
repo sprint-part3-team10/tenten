@@ -17,7 +17,7 @@ export default function RootLayout({
     <html lang='ko'>
       <body suppressHydrationWarning>
         <Header />
-        <main style={{ minHeight: '100vh' }}>{children}</main>
+        <main style={{ minHeight: '100rem' }}>{children}</main>
         <Footer />
         <div id='modal' />
       </body>
