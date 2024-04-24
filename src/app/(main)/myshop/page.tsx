@@ -42,7 +42,7 @@ export default async function MyShop() {
             }}
           >
             <div className={styles.buttonContainer}>
-              <EventContainer path='/myshop/register?=edit'>
+              <EventContainer path='/myshop/register?action=edit'>
                 <Button buttonType='button' text='편집하기' isWhite size='M' />
               </EventContainer>
               <EventContainer path='/myshop/register/notice'>
