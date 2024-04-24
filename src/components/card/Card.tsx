@@ -8,6 +8,7 @@ import Link from 'next/link';
 import styles from './Card.module.scss';
 import { formatWage, formatDateAndTime } from '../../lib/format';
 import getTimeDifference from '../../lib/caculate';
+import WageComparisonBadge from '../common/WageComparisonBadge';
 
 interface CardData {
   data: {
@@ -20,6 +21,7 @@ interface CardData {
     hourlyPay: number;
     imageUrl: string;
     closed: boolean;
+    originalHourlyPay: number;
   };
 }
 
@@ -34,11 +36,7 @@ function Card({ data }: CardData) {
 
   return (
     <Link href={`/shops/${data.shop_id}/notices/${data.item_id}`} passHref>
-      <div
-        className={classNames(styles.card, {
-          [styles.closed]: closedStatus,
-        })}
-      >
+      <div className={styles.card}>
         <div
           className={classNames(styles.imgContainer, {
             [styles.closedImg]: closedStatus,
@@ -56,7 +54,11 @@ function Card({ data }: CardData) {
             <span className={styles.closeText}>{closedText}</span>
           )}
         </div>
-        <div className={styles.contentContainer}>
+        <div
+          className={classNames(styles.contentContainer, {
+            [styles.closed]: closedStatus,
+          })}
+        >
           <h2 className={styles.storeName}>{data.name}</h2>
           <div className={styles.content}>
             <Image
@@ -79,8 +81,20 @@ function Card({ data }: CardData) {
             <h3 className={styles.address}>{data.address1}</h3>
           </div>
         </div>
-        <div>
-          <h1 className={styles.price}>{formatWage(data.hourlyPay)}</h1>
+        <div className={styles.priceContainer}>
+          <h1
+            className={classNames(styles.price, {
+              [styles.closed]: closedStatus,
+            })}
+          >
+            {formatWage(data.hourlyPay)}
+          </h1>
+          <WageComparisonBadge
+            originalHourlyPay={data.originalHourlyPay}
+            hourlyPay={data.hourlyPay}
+            change
+            closed={closedStatus}
+          />
         </div>
       </div>
     </Link>

@@ -17,8 +17,8 @@
   }
 }
 
-.card.closed {
-  * {
+.contentContainer.closed {
+  & * {
     color: $gray-30;
   }
 }
@@ -26,7 +26,6 @@
 .contentContainer {
   display: flex;
   flex-direction: column;
-  gap: 0.8rem;
   justify-content: center;
   padding-top: 2rem;
   padding-bottom: 1.6rem;
@@ -44,7 +43,7 @@
   word-break: keep-all;
 
   @include media(mobile) {
-    align-items: flex-start;
+    align-items: center;
     height: 2rem;
   }
 }
@@ -90,17 +89,29 @@
 .storeName {
   @include text-20-b;
 
+  max-width: 25rem;
+  margin-bottom: 0.8rem;
+  overflow: hidden;
   color: $black;
+  text-overflow: ellipsis;
+  white-space: nowrap;
 
   @include media(mobile) {
     @include text-16-b;
+
+    max-width: 35rem;
+  }
+
+  @include media(mobile) {
+    @include text-16-b;
+
+    max-width: 14rem;
   }
 }
 
 @mixin explain {
   @include text-14-l;
 
-  line-height: 2.2rem;
   color: $gray-50;
 
   @include media(mobile) {
@@ -119,9 +130,28 @@
 .price {
   @include text-24-b;
 
+  max-width: 11.5rem;
+  overflow: hidden;
   color: $black;
+  text-overflow: ellipsis;
+  white-space: nowrap;
 
   @include media(mobile) {
     @include text-18-b;
+  }
+}
+
+.price.closed {
+  color: $gray-30;
+}
+
+.priceContainer {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+
+  @include media(mobile) {
+    flex-direction: column;
+    gap: 0.5rem;
   }
 }
