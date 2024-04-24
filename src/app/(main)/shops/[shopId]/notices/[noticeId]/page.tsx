@@ -5,6 +5,8 @@ import RecentViews from '@/src/components/RecentViews';
 import Button from '@/src/components/common/Button';
 import ApplyEventContainer from '@/src/components/ApplyEventContainer';
 import { cookies } from 'next/headers';
+import ApplyTable from '@/src/components/applyList/ApplyTable';
+import getShopApply from '@/src/api/getShopApply';
 import styles from './page.module.scss';
 
 // 샘플 api주소 https://bootcamp-api.codeit.kr/api/0-1/the-julge/shops/4490151c-5217-4157-b072-9c37b05bed47/notices/99996477-82db-4bda-aae1-4044f11d9a8b
@@ -18,10 +20,17 @@ interface NoticePageProps {
 
 async function NoticePage({ params }: NoticePageProps) {
   const userType = cookies().get('userType');
+  // const userType = { value: 'employer' };
 
   const { shopId, noticeId } = params;
 
+  const { count, items } =
+    userType?.value === 'employer'
+      ? await getShopApply(shopId, noticeId)
+      : { count: 0, items: [] };
+
   const { item: notice } = await getNoticeData(shopId, noticeId);
+
   const {
     shop: { item: shop },
   } = notice;
@@ -56,20 +65,27 @@ async function NoticePage({ params }: NoticePageProps) {
           <h2 className={styles.category}>식당</h2>
           <h1 className={styles.sectionTitle}>{shop.name}</h1>
           <ShopNoticeInfoBox data={infoData}>
-            {userType?.value === 'employer' ? (
-              <div />
-            ) : (
-              <ApplyEventContainer shopId={shopId} noticeId={noticeId}>
+            <ApplyEventContainer
+              shopId={shopId}
+              noticeId={noticeId}
+              userType={userType?.value}
+            >
+              {userType?.value === 'employer' ? (
+                <Button buttonType='button' text='공고 편집하기' />
+              ) : (
                 <Button buttonType='button' text='신청하기' />
-              </ApplyEventContainer>
-            )}
+              )}
+            </ApplyEventContainer>
           </ShopNoticeInfoBox>
           <div style={{ marginBottom: '2.4rem' }} />
           <JobDescription description={notice.description} />
         </div>
       </section>
       {userType?.value === 'employer' ? (
-        <div />
+        <div className={styles.tableArea}>
+          <div className={styles.title}>신청자 목록</div>
+          <ApplyTable totalCount={count} applies={items} />
+        </div>
       ) : (
         <RecentViews cardData={cardData} />
       )}

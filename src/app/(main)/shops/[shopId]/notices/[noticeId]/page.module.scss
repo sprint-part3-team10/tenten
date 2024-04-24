@@ -23,3 +23,25 @@
 
   margin-bottom: 2.4rem;
 }
+
+.title {
+  @include text-28-b;
+
+  margin-bottom: 2rem;
+
+  @include media(mobile) {
+    @include text-20-b;
+  }
+}
+
+.tableArea {
+  padding: 6rem calc((100vw - 96.5rem) / 2);
+  background-color: $gray-5;
+
+  @include media(tablet) {
+    padding: 6rem 3.2rem;
+  }
+  @include media(mobile) {
+    padding: 4rem 1.2rem;
+  }
+}
