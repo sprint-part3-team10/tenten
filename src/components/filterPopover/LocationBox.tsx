@@ -1,7 +1,7 @@
 import React from 'react';
 import { LOCATION_LIST } from '@/src/constants/dropdownList';
 import styles from './LocationBox.module.scss';
-import Label from '../applylist/Label';
+import Label from '../applyList/Label';
 
 interface LocationBoxProps {
   clickedLocation: string[];

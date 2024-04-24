@@ -1,3 +1,5 @@
+'use client';
+
 import { useState } from 'react';
 import closeIcon from '@/public/icons/close.svg';
 import Image from 'next/image';
@@ -31,22 +33,28 @@ function FilterPopover({ handleClose, saveFilteredItems }: FilterPopoverProps) {
       [key]: value,
     }));
   };
+
   const handleDateChange = (date: Date) =>
     handleUpdateFilter('startsAtGte', date);
+
   const handlePayChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     handleUpdateFilter('hourlyPayGte', Number(e.target.value));
   };
+
   const handleLocationChange = (item: string[]) =>
     handleUpdateFilter('address', item);
 
   const handleSubmitClick = () => {
     saveFilteredItems(filter);
+    handleClose();
   };
 
   const handleResetClick = () => {
-    setFilter(INITIAL_FILTER);
+    setFilter({ ...INITIAL_FILTER, startsAtGte: new Date() });
     saveFilteredItems(INITIAL_FILTER);
   };
+
+  // useEffect(() => handleDateChange(new Date()), []);
 
   return (
     <div className={styles.popover}>
@@ -83,11 +91,13 @@ function FilterPopover({ handleClose, saveFilteredItems }: FilterPopoverProps) {
           buttonType='button'
           text='초기화'
           width='30%'
+          size='M'
           isWhite
           onClick={handleResetClick}
         />
         <Button
           buttonType='button'
+          size='M'
           text='적용하기'
           onClick={handleSubmitClick}
         />
