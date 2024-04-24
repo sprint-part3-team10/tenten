@@ -8,6 +8,15 @@
   max-width: 96rem;
   padding: 6rem 0;
   margin: 0 auto;
+
+  @include media(mobile) {
+    width: 94vw;
+  }
+
+  @include media(tablet) {
+    flex-direction: column;
+    max-width: 68rem;
+  }
 }
 
 .sectionTitle {
@@ -17,16 +26,6 @@
 }
 
 .recentCards {
-  // display: flex;
-  // flex-wrap: wrap;
-  // gap: 1.4rem;
-  // max-width: 96rem;
-  // margin: 0 auto 6rem;
-
-  // & > a {
-  //   flex-basis: 32%;
-  // }
-
   display: grid;
   grid-template-columns: repeat(3, 1fr);
   gap: 3.1rem 1.4rem;
