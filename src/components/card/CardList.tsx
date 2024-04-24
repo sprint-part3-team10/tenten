@@ -47,7 +47,6 @@ function CardList() {
 
   const handleDropdownClick = (selectedValue: string) => {
     setSortText(selectedValue);
-    handlePageChange(1);
   };
 
   const handleFilterItems = (filter: Filter) => {

@@ -23,8 +23,8 @@ function FilterButton({ filterItems, saveFilteredItems }: FilterButtonProps) {
   useEffect(() => {
     let countFilter = 0;
     if (filterItems.address.length) countFilter += filterItems.address.length;
-    if (filterItems.hourlyPayGte) countFilter++;
-    if (filterItems.startsAtGte) countFilter++;
+    if (filterItems.hourlyPayGte) countFilter += 1;
+    if (filterItems.startsAtGte) countFilter += 1;
     setCount(countFilter);
   }, [filterItems]);
 
