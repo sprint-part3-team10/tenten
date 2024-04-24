@@ -1,6 +1,6 @@
 'use client';
 
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import rightArrowIcon from '@/public/icons/rightArrow.svg';
 import leftArrowIcon from '@/public/icons/leftArrow.svg';
 import classNames from 'classnames';
@@ -50,6 +50,10 @@ function Pagination({
       handlePageChange(Math.ceil(selectedPage / sectionSize) * sectionSize + 1);
     }
   };
+
+  useEffect(() => {
+    setSelectedSection(Math.floor(selectedPage / sectionSize));
+  }, [selectedPage]);
 
   return (
     <div className={styles.container}>

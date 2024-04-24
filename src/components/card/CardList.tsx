@@ -38,6 +38,7 @@ function CardList() {
         );
         setCardItems(items);
         setTotalCount(count);
+        window.scrollTo(0, 100);
       } catch (error) {
         console.error(error);
       }
@@ -47,10 +48,12 @@ function CardList() {
 
   const handleDropdownClick = (selectedValue: string) => {
     setSortText(selectedValue);
+    handlePageChange(1);
   };
 
   const handleFilterItems = (filter: Filter) => {
     setFilterItems(filter);
+    handlePageChange(1);
   };
 
   return (
