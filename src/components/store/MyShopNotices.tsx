@@ -4,6 +4,8 @@ import getShopNotices, { Item } from '@/src/api/getShopNotices';
 import { useEffect, useRef, useState } from 'react';
 import Card from '../Card';
 import styles from './MyShopNotices.module.scss';
+import EmptyContainer from './EmptyContainer';
+import Button from '../common/Button';
 
 interface MyShopNoticesProps {
   shopId: string;
@@ -24,6 +26,8 @@ function MyShopNotices({
   const ref = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
+    if (!ref.current) return () => {};
+
     const SENTINEL = ref.current;
 
     const getData = async () => {
@@ -61,9 +65,11 @@ function MyShopNotices({
     <section className={styles.outer}>
       <div className={styles.container}>
         <h1 className={styles.sectionTitle}>등록한 공고</h1>
-        {/* {!cards.length && (
-        <div className={styles.empty}>최근에 본 공고가 없어요.</div>
-      )} */}
+        {!cards.length && (
+          <EmptyContainer message='공고를 등록해 보세요.'>
+            <Button buttonType='button' text='공고  등록하기' width='40%' />
+          </EmptyContainer>
+        )}
         <div className={styles.shopNotices}>
           {cards.map((card, i) => (
             <Card
@@ -82,7 +88,7 @@ function MyShopNotices({
             />
           ))}
         </div>
-        <div className={styles.loader} ref={ref} />
+        {!!cards.length && <div className={styles.loader} ref={ref} />}
       </div>
     </section>
   );
