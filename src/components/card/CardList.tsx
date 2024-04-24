@@ -13,7 +13,7 @@ import FilterButton from '../filterPopover/FilterButton';
 
 const INITIAL_FILTER = {
   address: [],
-  startsAtGte: undefined,
+  startsAtGte: new Date(),
   hourlyPayGte: '',
 };
 

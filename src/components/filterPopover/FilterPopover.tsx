@@ -54,8 +54,6 @@ function FilterPopover({ handleClose, saveFilteredItems }: FilterPopoverProps) {
     saveFilteredItems(INITIAL_FILTER);
   };
 
-  // useEffect(() => handleDateChange(new Date()), []);
-
   return (
     <div className={styles.popover}>
       <div className={styles.titleContainer}>

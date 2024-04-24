@@ -1,5 +1,4 @@
-import getTimeDifference from '../lib/caculate';
-// import convertToRFC3339 from '../lib/convetToRFC3339';
+import convertToRFC3339 from '../lib/convertToRFC3339';
 import { CardItems, Filter } from '../types/types';
 import { BASE_URL } from './api';
 
@@ -16,17 +15,9 @@ const getCardData = async (
   const addressList = filterItems?.address
     .map(item => `&address=${item}`)
     .join('');
-  if (
-    filterItems?.startsAtGte &&
-    getTimeDifference(filterItems?.startsAtGte.toString())
-  )
-    console.log('지난 시간은 고를 수 없어요');
-  else {
-    console.log('업성요 ');
-  }
 
   const filterUrl = filterItems
-    ? ` &hourlyPayGte=${filterItems?.hourlyPayGte}${addressList}}` // &startsAtGte=${filterItems?.startsAtGte && convertToRFC3339(filterItems?.startsAtGte)}`
+    ? `&hourlyPayGte=${filterItems?.hourlyPayGte}${addressList}&startsAtGte=${filterItems?.startsAtGte && convertToRFC3339(filterItems?.startsAtGte)}`
     : '';
 
   const res = await fetch(
