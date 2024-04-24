@@ -91,7 +91,7 @@ function MyShopNotices({
             />
           ))}
         </div>
-        {!!cards.length && <div className={styles.loader} ref={ref} />}
+        <div className={styles.loader} ref={ref} />
       </div>
     </section>
   );
