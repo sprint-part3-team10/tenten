@@ -24,12 +24,8 @@ async function NoticePage({ params }: NoticePageProps) {
 
   const { shopId, noticeId } = params;
 
-  const { count, items } =
-    userType?.value === 'employer'
-      ? await getShopApply(shopId, noticeId)
-      : { count: 0, items: [] };
-
   const { item: notice } = await getNoticeData(shopId, noticeId);
+  const { count } = await getShopApply(shopId, noticeId, 0);
 
   const {
     shop: { item: shop },
@@ -84,7 +80,11 @@ async function NoticePage({ params }: NoticePageProps) {
       {userType?.value === 'employer' ? (
         <div className={styles.tableArea}>
           <div className={styles.title}>신청자 목록</div>
-          <ApplyTable totalCount={count} applies={items} />
+          {count ? (
+            <ApplyTable noticeId={noticeId} shopId={shopId} />
+          ) : (
+            <div className={styles.noApply}>신청자가 없습니다.</div>
+          )}
         </div>
       ) : (
         <RecentViews cardData={cardData} />
