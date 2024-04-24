@@ -4,7 +4,7 @@ import getNoticeData from '@/src/api/getNoticeData';
 import RecentViews from '@/src/components/RecentViews';
 import Button from '@/src/components/common/Button';
 import ApplyEventContainer from '@/src/components/ApplyEventContainer';
-import { cookies } from 'next/headers';
+// import { cookies } from 'next/headers';
 import ApplyTable from '@/src/components/applyList/ApplyTable';
 import getShopApply from '@/src/api/getShopApply';
 import styles from './page.module.scss';
@@ -81,7 +81,11 @@ async function NoticePage({ params }: NoticePageProps) {
         <div className={styles.tableArea}>
           <div className={styles.title}>신청자 목록</div>
           {count ? (
-            <ApplyTable noticeId={noticeId} shopId={shopId} />
+            <ApplyTable
+              noticeId={noticeId}
+              shopId={shopId}
+              userType={userType?.value}
+            />
           ) : (
             <div className={styles.noApply}>신청자가 없습니다.</div>
           )}

@@ -1,3 +1,4 @@
+/* eslint-disable react/destructuring-assignment */
 /* eslint-disable no-nested-ternary */
 
 'use client';
@@ -17,6 +18,7 @@ interface ApplyTableProps {
   noticeId?: string;
   shopId?: string;
   userId?: string;
+  userType: string;
 }
 
 const titleCol = {
@@ -25,29 +27,25 @@ const titleCol = {
 };
 
 function ApplyTable(props: ApplyTableProps) {
-  console.log('props', props);
-  const userType = { value: 'employer' };
-  const type = userType.value;
-  // const userId = '066f080c-5265-4b70-836e-0f1360b57010';
+  const { userType } = props;
 
   const [applies, setApplies] = useState([] as unknown);
   const [total, setTotal] = useState<number>(0);
 
   const LIMIT = 5;
   const { offset, selectedPage, handlePageChange } = usePagination(LIMIT);
-  console.log('offset', offset);
+
   useEffect(() => {
     const fetchData = async () => {
       const { count, items } =
-        type === 'employee'
+        userType === 'employee'
           ? await getUserApply(props.userId, offset)
-          : await getShopApply(props?.shopId, props.noticeId, offset);
+          : await getShopApply(props.shopId, props.noticeId, offset);
       setApplies(items);
       setTotal(count);
     };
     fetchData();
   }, [offset]);
-  console.log('item', applies);
 
   return (
     <div className={styles.tableContainer}>
@@ -55,16 +53,16 @@ function ApplyTable(props: ApplyTableProps) {
         <thead>
           <tr className={styles.titleRow}>
             <th className={classNames(styles.title, styles.nameCol)}>
-              {titleCol[type][0]}
+              {titleCol[userType][0]}
             </th>
             <th className={classNames(styles.title, styles.timeCol)}>
-              {titleCol[type][1]}
+              {titleCol[userType][1]}
             </th>
             <th className={classNames(styles.title, styles.payCol)}>
-              {titleCol[type][2]}
+              {titleCol[userType][2]}
             </th>
             <th className={classNames(styles.title, styles.statusCol)}>
-              {titleCol[type][3]}
+              {titleCol[userType][3]}
             </th>
           </tr>
         </thead>
@@ -73,12 +71,12 @@ function ApplyTable(props: ApplyTableProps) {
             applies.map(apply => (
               <tr key={apply.item.id}>
                 <td className={classNames(styles.listRow, styles.nameCol)}>
-                  {userType.value === 'employee'
+                  {userType === 'employee'
                     ? apply.item.shop.item.name
                     : apply.item.user.item.name}
                 </td>
                 <td className={classNames(styles.listRow, styles.timeCol)}>
-                  {userType.value === 'employee'
+                  {userType === 'employee'
                     ? formatDateAndTime(
                         apply.item.notice.item.startsAt,
                         apply.item.notice.item.workhour,
@@ -86,12 +84,12 @@ function ApplyTable(props: ApplyTableProps) {
                     : apply.item.user.item.bio}
                 </td>
                 <td className={classNames(styles.listRow, styles.payCol)}>
-                  {userType.value === 'employee'
+                  {userType === 'employee'
                     ? formatWage(apply.item.notice.item.hourlyPay)
                     : apply.item.user.item.phone}
                 </td>
                 <td className={classNames(styles.listRow, styles.statusCol)}>
-                  {userType.value === 'employee' ? (
+                  {userType === 'employee' ? (
                     <Label labelType='status' content={apply.item.status} />
                   ) : apply.item.status !== 'pending' ? (
                     <Label labelType='status' content={apply.item.status} />
