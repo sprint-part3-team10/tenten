@@ -1,10 +1,8 @@
-'use client';
-
 import Card from '@/src/components/Card';
 import { cookies } from 'next/headers';
 import styles from './page.module.scss';
 
-const BASE_URL = 'https://bootcamp-api.codeit.kr/api/0-2/the-julge';
+const BASE_URL = 'https://bootcamp-api.codeit.kr/api/0-1/the-julge';
 
 async function getData() {
   const cookieStore = cookies();
