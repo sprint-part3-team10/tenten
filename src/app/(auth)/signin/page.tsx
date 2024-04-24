@@ -36,7 +36,11 @@ export default function SignIn() {
     setToastMessage('');
     try {
       await postLogin(email, password);
-      router.push('/');
+      setToastMessage('정상적으로 로그인 되었습니다.');
+      setIsWarning(false);
+      setTimeout(() => {
+        router.push('/');
+      }, 3000);
     } catch (error: any) {
       setToastMessage(error.message);
       setIsWarning(true);

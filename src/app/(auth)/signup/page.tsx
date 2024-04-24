@@ -58,7 +58,9 @@ export default function SignUp() {
       await postUserData(email, password, userType);
       setToastMessage('정상적으로 가입되었습니다.');
       setIsWarning(false);
-      router.push('/signin');
+      setTimeout(() => {
+        router.push('/signin');
+      }, 3000);
     } catch (error: any) {
       setToastMessage(error.message);
       setIsWarning(true);
