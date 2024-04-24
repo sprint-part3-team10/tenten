@@ -30,24 +30,14 @@ function CardList() {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        if (INITIAL_FILTER.startsAtGte === filterItems.startsAtGte) {
-          const { count, items } = await getCardData(
-            offset,
-            LIMIT,
-            STORE_FILTERING_LIST[sortText],
-          );
-          setCardItems(items);
-          setTotalCount(count);
-        } else {
-          const { count, items } = await getCardData(
-            offset,
-            LIMIT,
-            STORE_FILTERING_LIST[sortText],
-            filterItems,
-          );
-          setCardItems(items);
-          setTotalCount(count);
-        }
+        const { count, items } = await getCardData(
+          offset,
+          LIMIT,
+          STORE_FILTERING_LIST[sortText],
+          filterItems,
+        );
+        setCardItems(items);
+        setTotalCount(count);
       } catch (error) {
         console.error(error);
       }

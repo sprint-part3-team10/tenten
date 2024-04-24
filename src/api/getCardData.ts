@@ -13,18 +13,22 @@ const getCardData = async (
   sort?: string,
   filterItems?: Filter,
 ): Promise<CardData> => {
-  const addressList = filterItems?.address
+  const addressListURLQuery = filterItems?.address
     .map(item => `&address=${item}`)
     .join('');
 
-  const filterUrl = filterItems
-    ? `&hourlyPayGte=${filterItems?.hourlyPayGte}${addressList}&startsAtGte=${filterItems?.startsAtGte && convertToRFC3339(filterItems?.startsAtGte)}`
+  const hourlyPayGteQuery = filterItems?.hourlyPayGte
+    ? `&hourlyPayGte=${filterItems.hourlyPayGte}`
     : '';
 
-  const sortUrl = sort ? `&sort=${sort}` : '';
+  const startsAtGteQuery = filterItems?.startsAtGte
+    ? `&startsAtGte=${convertToRFC3339(filterItems.startsAtGte)}`
+    : '';
+
+  const sortQuery = sort ? `&sort=${sort}` : '';
 
   const res = await fetch(
-    `${BASE_URL}/notices?offset=${offset}&limit=${limit}${filterUrl}${sortUrl}`,
+    `${BASE_URL}/notices?offset=${offset}&limit=${limit}${startsAtGteQuery}${hourlyPayGteQuery}${addressListURLQuery}${sortQuery}`,
     { cache: 'no-store' },
   );
 
