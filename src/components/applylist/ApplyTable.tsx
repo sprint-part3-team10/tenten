@@ -5,71 +5,35 @@
 /* eslint-disable jsx-a11y/control-has-associated-label */
 import classNames from 'classnames';
 import { formatDateAndTime, formatWage } from '@/src/lib/format';
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import usePagination from '@/src/hooks/usePagination';
+import getUserApply from '@/src/api/getUserApply';
 import Label from './Label';
 import styles from './ApplyTable.module.scss';
 import Pagination from '../pagination/Pagination';
 // import { cookies } from 'next/headers';
-
-interface UserApplyTableProps {
-  totalCount: number;
-  applies: {
-    item: {
-      id: string;
-      status: string;
-      user: {
-        item: {
-          name: string;
-          phone: string;
-          address: string;
-          bio: string;
-        };
-      };
-      shop: {
-        item: {
-          name: string;
-        };
-      };
-      notice: {
-        item: {
-          hourlyPay: number;
-          startsAt: string;
-          workhour: number;
-        };
-      };
-    };
-  }[];
-}
-
-interface ShopApplyTableProps {
-  totalCount: number;
-  applies: {
-    item: {
-      name: string;
-      bio: string;
-      phone: string;
-      status: string;
-    }[];
-  };
-}
 
 const titleCol = {
   employee: ['가게', '일자', '시급', '상태'],
   employer: ['신청자', '소개', '전화번호', '상태'],
 };
 
-function ApplyTable({
-  totalCount,
-  applies,
-}: UserApplyTableProps | ShopApplyTableProps) {
+function ApplyTable() {
   // const userType = cookies().get('userType')
   const userType = 'employee';
+  const userId = '066f080c-5265-4b70-836e-0f1360b57010';
+  const [applies, setApplies] = useState([] as unknown);
+  const [total, setTotal] = useState<number>(0);
 
   const LIMIT = 5;
   const { offset, selectedPage, handlePageChange } = usePagination(LIMIT);
   useEffect(() => {
-    console.log('offset', offset);
+    const fetchData = async () => {
+      const { count, items } = await getUserApply(userId, offset);
+      setApplies(items);
+      setTotal(count);
+    };
+    fetchData();
   }, [offset]);
 
   return (
@@ -138,7 +102,7 @@ function ApplyTable({
           <tr>
             <td colSpan={4} className={styles.pagination}>
               <Pagination
-                totalCount={totalCount}
+                totalCount={total}
                 limit={LIMIT}
                 selectedPage={selectedPage}
                 handlePageChange={handlePageChange}

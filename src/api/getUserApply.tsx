@@ -5,14 +5,20 @@ interface UserApplyData {
   items: object[];
 }
 
-const getUserApply = async (userId: string): Promise<UserApplyData> => {
-  const res = await fetch(`${BASE_URL}/users/${userId}/applications`, {
-    headers: {
-      authorization:
-        'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiIwNjZmMDgwYy01MjY1LTRiNzAtODM2ZS0wZjEzNjBiNTcwMTAiLCJpYXQiOjE3MTM4NDU3MDF9.ENlpxw52TG-_--EX2J5r42vdrXFq0t_R_ln6OnAqAJY',
+const getUserApply = async (
+  userId: string,
+  offset: number,
+): Promise<UserApplyData> => {
+  const res = await fetch(
+    `${BASE_URL}/users/${userId}/applications?offset=${offset}&limit=5`,
+    {
+      headers: {
+        authorization:
+          'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiIwNjZmMDgwYy01MjY1LTRiNzAtODM2ZS0wZjEzNjBiNTcwMTAiLCJpYXQiOjE3MTM4ODM4MjF9.IgH9P1rH0q_o65MsIqa9nHAjvhZX9fpEW0sl4jk00ZQ',
+      },
+      cache: 'no-store',
     },
-    cache: 'no-store',
-  });
+  );
   const result = await res.json();
   const { count, items } = result;
 
