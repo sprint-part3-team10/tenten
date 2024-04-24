@@ -1,0 +1,34 @@
+@import '/src/styles/index';
+
+.container {
+  height: 100%;
+}
+
+.cardListContainer {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 3.1rem 1.4rem;
+  width: 100%;
+  height: 100%;
+  margin-bottom: 4rem;
+  @include media(tablet) {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+.titleContainer {
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
+  margin-bottom: 3.4rem;
+
+  & > h1 {
+    @include text-28-b;
+  }
+}
+
+.buttonContainer {
+  display: flex;
+  gap: 1rem;
+  justify-content: flex-end;
+}
