@@ -8,16 +8,19 @@ import { useState } from 'react';
 import Logo from '@/public/icons/logo.svg';
 import Button from '@/src/components/common/Button';
 import { useForm } from 'react-hook-form';
-import { EMAIL_REGEX, PASSWORD_REGEX } from '@/src/constants/signRegEx';
+import { EMAIL_REGEX, PASSWORD_REGEX } from '@/src/constants/regEx';
 import postUserData from '@/src/api/postUser';
 import Toast from '@/src/components/common/toast/Toast';
 import useToast from '@/src/hooks/useToast';
 import { useRouter } from 'next/navigation';
 import styles from './page.module.scss';
 
-interface SignupFormData {
+interface SignupData {
   email: string;
   password: string;
+}
+
+interface SignupFormData extends SignupData {
   passwordCheck: string;
 }
 
@@ -49,11 +52,8 @@ export default function SignUp() {
     setUserType(isEmployer ? 'employer' : 'employee');
   };
 
-  const onSubmit = async ({
-    email,
-    password,
-    passwordCheck,
-  }: SignupFormData) => {
+  const onSubmit = async ({ email, password }: SignupData) => {
+    setToastMessage('');
     try {
       await postUserData(email, password, userType);
       setToastMessage('정상적으로 가입되었습니다.');
