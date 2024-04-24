@@ -27,8 +27,6 @@ function MyShopNotices({
   const ref = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
-    if (!ref.current) return () => {};
-
     const SENTINEL = ref.current;
 
     const getData = async () => {
@@ -66,7 +64,7 @@ function MyShopNotices({
     <section className={styles.outer}>
       <div className={styles.container}>
         <h1 className={styles.sectionTitle}>등록한 공고</h1>
-        {!cards.length && (
+        {!cards.length && !hasNext && (
           <EmptyContainer message='공고를 등록해 보세요.'>
             <EventContainer path='/myshop/register/notice'>
               <Button buttonType='button' text='공고  등록하기' />
