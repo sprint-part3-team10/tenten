@@ -1,63 +1,54 @@
-@import '/src/styles/index';
+@import '../../../styles/index';
 
-.container {
-  display: flex;
-  flex-direction: column;
-  gap: 3rem;
-  align-items: center;
-
-  @include media(tablet) {
-    padding: 0 2rem;
-  }
-
-  @include media(tablet) {
-    padding: 0 5rem;
-  }
+.layout {
+  @include layout;
 }
 
-.header {
-  @include text-28-b;
+.section {
+  @include layout;
 
   display: flex;
-  gap: 2rem;
-  align-self: stretch;
-}
-
-.formBox {
-  display: flex;
-  flex-direction: column;
-  gap: 3rem;
-  width: 100%;
-}
-
-.inputArea {
-  display: flex;
-  gap: 2rem;
+  justify-content: space-between;
 
   @include media(tablet) {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 2rem;
-  }
-
-  @include media(mobile) {
-    display: flex;
     flex-direction: column;
     gap: 2rem;
   }
 }
 
-.submitButton {
-  display: flex;
-  justify-content: center;
-  width: 100%;
+.title {
+  @include text-28-b;
 
-  .buttonSize {
-    @include media(tablet) {
-      width: 55%;
-    }
-    @include media(mobile) {
-      width: 100%;
-    }
+  margin-bottom: 2rem;
+
+  @include media(mobile) {
+    @include text-20-b;
+  }
+}
+
+.profileBox {
+  margin: 0 auto;
+}
+
+.tabletFit {
+  @include media(tablet) {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+}
+
+.backgroundArea {
+  background-color: $gray-5;
+}
+
+.tableArea {
+  padding: 6rem calc((100vw - 96.5rem) / 2);
+
+  @include media(tablet) {
+    padding: 6rem 3.2rem;
+  }
+  @include media(mobile) {
+    padding: 4rem 1.2rem;
   }
 }

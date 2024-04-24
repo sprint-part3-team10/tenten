@@ -8,7 +8,7 @@ import Image from 'next/image';
 import styles from './Pagination.module.scss';
 
 interface PaginationProps {
-  totalCount: number;
+  totalCount: number | undefined;
   limit: number;
   selectedPage: number;
   handlePageChange: (page: number) => void;
@@ -66,23 +66,29 @@ function Pagination({
       </span>
       <div className={styles.numberContainer}>
         <div className={styles.section}>
-          {sectionPageNumbers[selectedSection].map(num => (
-            <p
-              key={num}
-              className={classNames(styles.number, {
-                [styles.selected]: selectedPage === num,
-              })}
-              onClick={() => handleClickNumber(num)}
-            >
-              {num}
-            </p>
-          ))}
+          {sectionPageNumbers[selectedSection] ? (
+            sectionPageNumbers[selectedSection].map(num => (
+              <p
+                key={num}
+                className={classNames(styles.number, {
+                  [styles.selected]: selectedPage === num,
+                })}
+                onClick={() => handleClickNumber(num)}
+              >
+                {num}
+              </p>
+            ))
+          ) : (
+            <p className={classNames(styles.number, styles.selected)}>1</p>
+          )}
         </div>
       </div>
       <span onClick={() => handleArrowClick('right')}>
         <Image
           className={classNames({
-            [styles.hidden]: selectedSection === sectionPageNumbers.length - 1,
+            [styles.hidden]:
+              selectedSection === sectionPageNumbers.length - 1 ||
+              sectionPageNumbers.length === 1,
           })}
           src={rightArrowIcon}
           alt='오른쪽 화살표'
