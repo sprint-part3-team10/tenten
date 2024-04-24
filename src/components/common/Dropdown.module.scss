@@ -20,6 +20,12 @@
     gap: 1rem;
     width: 100%;
 
+    .label {
+      @include text-16-l;
+
+      line-height: 2.6rem;
+    }
+
     .input {
       @include border-gray;
 
@@ -40,13 +46,21 @@
 
     .arrow {
       position: absolute;
-      top: 55%;
+      top: 60%;
       right: 5%;
+
+      @include media(mobile) {
+        right: 2%;
+      }
     }
 
     .arrow.onlyFilterArrow {
       top: 25%;
       right: 5%;
+
+      @include media(mobile) {
+        right: 2%;
+      }
     }
   }
 

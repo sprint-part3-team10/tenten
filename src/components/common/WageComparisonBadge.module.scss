@@ -11,12 +11,22 @@
   border-radius: 2rem;
 }
 
+.closedBadge {
+  background-color: $gray-20;
+}
+
 .text {
   @include media(mobile) {
     padding: 0;
     color: $red-40;
     background-color: transparent;
     border-radius: 0;
+  }
+}
+
+.closedText {
+  @include media(mobile) {
+    color: $gray-20;
   }
 }
 
@@ -28,7 +38,8 @@
   display: unset;
 }
 
-.redArrow {
+.redArrow,
+.grayArrow {
   @include media(mobile) {
     display: unset;
   }

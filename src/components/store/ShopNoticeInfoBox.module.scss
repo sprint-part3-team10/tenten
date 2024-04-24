@@ -89,10 +89,16 @@
 .term {
   @include text-16-l;
 
+  display: flex;
+  gap: 0.6rem;
+  align-items: center;
   color: $gray-50;
 }
 
 .address {
+  display: flex;
+  gap: 0.6rem;
+  align-items: center;
   color: $gray-50;
 }
 
