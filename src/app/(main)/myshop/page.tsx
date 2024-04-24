@@ -11,7 +11,7 @@ import styles from './page.module.scss';
 export default async function MyShop() {
   const shopId = cookies().get('shopId');
 
-  if (!shopId)
+  if (!shopId?.value) {
     return (
       <section className={classNames(styles.outer, styles.fillHeight)}>
         <div className={styles.container}>
@@ -24,6 +24,7 @@ export default async function MyShop() {
         </div>
       </section>
     );
+  }
 
   const { item } = await getShop(shopId.value);
 
