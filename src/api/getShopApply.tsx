@@ -8,9 +8,10 @@ interface ShopApplyData {
 const getShopApply = async (
   shopId: string,
   noticeId: string,
+  offset: number,
 ): Promise<ShopApplyData> => {
   const res = await fetch(
-    `${BASE_URL}/shops/${shopId}/notices/${noticeId}/applications`,
+    `${BASE_URL}/shops/${shopId}/notices/${noticeId}/applications?offset=${offset}&limit=5`,
     {
       headers: {
         Authorization:
