@@ -30,16 +30,16 @@ export default function SignUp() {
   const {
     register,
     handleSubmit,
-    watch,
+    getValues,
     formState: { errors },
-  } = useForm<SignupFormData>({ mode: 'onChange' });
+  } = useForm<SignupFormData>({
+    mode: 'onChange',
+    defaultValues: { email: '', password: '', passwordCheck: '' },
+  });
   const [isWarning, setIsWarning] = useState<boolean>(false);
   const { showToast, toastMessage, setToastMessage, displayToast } =
     useToast(3000);
-
   const router = useRouter();
-
-  const pw = watch('password');
 
   const {
     email: emailError,
@@ -52,8 +52,9 @@ export default function SignUp() {
     setUserType(isEmployer ? 'employer' : 'employee');
   };
 
-  const onSubmit = async ({ email, password }: SignupData) => {
+  const onSubmit = async (data: SignupData) => {
     setToastMessage('');
+    const { email, password } = data;
     try {
       await postUserData(email, password, userType);
       setToastMessage('정상적으로 가입되었습니다.');
@@ -97,15 +98,17 @@ export default function SignUp() {
               },
             })}
           />
-
           <Input
             label='비밀번호 확인'
             inputType='password'
             error={passwordCheckError}
             register={register('passwordCheck', {
-              validate: value => value === pw || '비밀번호가 일치하지 않습니다',
+              validate: value =>
+                value === getValues('password') ||
+                `비밀번호가 일치하지 않습니다`,
             })}
           />
+
           <TypeSelector
             label='회원 유형'
             onChange={handleType}
