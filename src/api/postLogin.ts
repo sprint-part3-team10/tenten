@@ -3,7 +3,7 @@
 import { cookies } from 'next/headers';
 import { BASE_URL } from './api';
 
-interface UserProps {
+interface UserData {
   email: string;
   id: string;
   type: 'employee' | 'employer';
@@ -11,7 +11,7 @@ interface UserProps {
 
 interface LoginProps {
   token: string;
-  user: UserProps;
+  user: UserData;
 }
 
 const postLogin = async (
