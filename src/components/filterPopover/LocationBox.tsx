@@ -1,5 +1,6 @@
 import React from 'react';
 import { LOCATION_LIST } from '@/src/constants/dropdownList';
+import classNames from 'classnames';
 import styles from './LocationBox.module.scss';
 import Label from '../applyList/Label';
 
@@ -26,7 +27,14 @@ function LocationBox({
       <div className={styles.box}>
         {LOCATION_LIST.map(item => (
           <div key={item} className={styles.location}>
-            <span onClick={() => handleClick(item)}>{item}</span>
+            <span
+              onClick={() => handleClick(item)}
+              className={classNames({
+                [styles.clicked]: clickedLocation.includes(item),
+              })}
+            >
+              {item}
+            </span>
           </div>
         ))}
       </div>
