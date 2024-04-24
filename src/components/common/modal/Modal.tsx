@@ -5,7 +5,6 @@ import { useRef } from 'react';
 import warningIcon from '@/public/icons/modalWarning.svg';
 import checkIcon from '@/public/icons/modalCheck.svg';
 import useOutsideClick from '@/src/hooks/useOutsideClick';
-import { min } from 'date-fns';
 import classNames from 'classnames';
 import Button from '../Button';
 import styles from './Modal.module.scss';
@@ -16,7 +15,7 @@ interface ModalProps {
   minWidth: string;
   maxWidth: string;
   buttonText: [string] | [string, string];
-  handleButton: [() => void] | [() => void, () => void];
+  handleButton: [(e: Event) => void] | [(e: Event) => void, (e: Event) => void];
   buttonWidthPercent?: string;
   bottomRightButton?: boolean;
   handleModal: (value: boolean) => void;
