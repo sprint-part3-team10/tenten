@@ -16,8 +16,8 @@ interface ShopNoticeInfoBoxProps {
     description: string;
     imageUrl: string;
     address1: string;
-    originalHourlyPay: number;
-    hourlyPay: number;
+    originalHourlyPay?: number;
+    hourlyPay?: number;
     closed?: boolean;
   };
   children: ReactElement;
@@ -32,8 +32,8 @@ function ShopNoticeInfoBox({ data, children }: ShopNoticeInfoBoxProps) {
     description,
     imageUrl,
     address1,
-    originalHourlyPay,
-    hourlyPay,
+    originalHourlyPay = 0,
+    hourlyPay = 0,
     closed,
   } = data;
   const NOTICE = kind === 'notice';
