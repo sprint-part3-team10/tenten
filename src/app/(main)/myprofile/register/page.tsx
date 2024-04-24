@@ -33,7 +33,7 @@ export default function Home() {
     watch,
     setValue,
   } = useForm<MyProfileFormData>({
-    mode: 'onSubmit',
+    mode: 'onBlur',
     defaultValues: {
       name: '',
       phoneNumber: '',
@@ -45,6 +45,7 @@ export default function Home() {
     phoneNumber: phoneNumberError,
     introduction: introductionError,
   } = errors;
+
   const onSubmit = (formData: MyProfileFormData) => {
     console.log(formData);
     handleShowModal(true);
