@@ -27,6 +27,7 @@ async function myprofile({ params }: MyprofileProps) {
         title='내 프로필'
         description='내 프로필을 등록하고 원하는 가게에 지원해 보세요.'
         text='내 프로필 등록하기'
+        pushUrl='/myprofile/register'
       />
     </div>
   ) : (
@@ -49,6 +50,7 @@ async function myprofile({ params }: MyprofileProps) {
               title='신청 내역'
               description='아직 신청 내역이 없어요.'
               text='공고 보러가기'
+              pushUrl='/'
             />
           )}
         </div>
