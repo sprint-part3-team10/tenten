@@ -5,6 +5,7 @@ import Button from '@/src/components/common/Button';
 import MyShopNotices from '@/src/components/store/MyShopNotices';
 import classNames from 'classnames';
 import EmptyContainer from '@/src/components/store/EmptyContainer';
+import EventContainer from '@/src/components/store/EventContainer';
 import styles from './page.module.scss';
 
 export default async function MyShop() {
@@ -16,7 +17,9 @@ export default async function MyShop() {
         <div className={styles.container}>
           <h1 className={styles.sectionTitle}>내 가게</h1>
           <EmptyContainer message='내 가게를 소개하고 공고도 등록해 보세요.'>
-            <Button buttonType='button' text='가게 등록하기' width='40%' />
+            <EventContainer path='/myshop/register'>
+              <Button buttonType='button' text='가게 등록하기' />
+            </EventContainer>
           </EmptyContainer>
         </div>
       </section>
@@ -39,8 +42,12 @@ export default async function MyShop() {
             }}
           >
             <div className={styles.buttonContainer}>
-              <Button buttonType='button' text='편집하기' isWhite size='M' />
-              <Button buttonType='button' text='공고 등록하기' size='M' />
+              <EventContainer path='/myshop/register?=edit'>
+                <Button buttonType='button' text='편집하기' isWhite size='M' />
+              </EventContainer>
+              <EventContainer path='/myshop/register/notice'>
+                <Button buttonType='button' text='공고 등록하기' size='M' />
+              </EventContainer>
             </div>
           </ShopNoticeInfoBox>
         </div>

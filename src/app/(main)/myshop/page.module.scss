@@ -25,4 +25,8 @@
   display: flex;
   gap: 0.8rem;
   width: 100%;
+
+  & > div {
+    flex-basis: 50%;
+  }
 }

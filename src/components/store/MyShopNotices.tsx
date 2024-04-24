@@ -6,6 +6,7 @@ import Card from '../Card';
 import styles from './MyShopNotices.module.scss';
 import EmptyContainer from './EmptyContainer';
 import Button from '../common/Button';
+import EventContainer from './EventContainer';
 
 interface MyShopNoticesProps {
   shopId: string;
@@ -67,7 +68,9 @@ function MyShopNotices({
         <h1 className={styles.sectionTitle}>등록한 공고</h1>
         {!cards.length && (
           <EmptyContainer message='공고를 등록해 보세요.'>
-            <Button buttonType='button' text='공고  등록하기' width='40%' />
+            <EventContainer path='/myshop/register/notice'>
+              <Button buttonType='button' text='공고  등록하기' />
+            </EventContainer>
           </EmptyContainer>
         )}
         <div className={styles.shopNotices}>
