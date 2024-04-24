@@ -47,6 +47,8 @@
 }
 
 .noApply {
+  @include text-20-b;
+
   margin-top: 5rem;
   text-align: center;
 }
