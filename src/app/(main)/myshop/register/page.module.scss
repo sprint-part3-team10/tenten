@@ -1,0 +1,46 @@
+@import '/src/styles/index';
+
+.layout {
+  @include layout;
+
+  height: 100vh;
+  background: $gray-5;
+}
+
+.container {
+  display: flex;
+  flex-direction: column;
+  gap: 3rem;
+  align-items: center;
+  border: 1px solid black;
+
+  @include media(tablet) {
+    padding: 0 2rem;
+  }
+
+  @include media(tablet) {
+    padding: 0 5rem;
+  }
+}
+
+.header {
+  @include text-28-b;
+
+  display: flex;
+  gap: 2rem;
+  align-self: stretch;
+}
+
+.formBox {
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+  border: 1px solid black;
+  width: 100%;
+}
+
+.inputBox {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 2rem;
+}
