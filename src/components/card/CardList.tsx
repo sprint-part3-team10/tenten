@@ -13,7 +13,7 @@ import FilterButton from '../filterPopover/FilterButton';
 
 const INITIAL_FILTER = {
   address: [],
-  startsAtGte: new Date(),
+  startsAtGte: undefined,
   hourlyPayGte: '',
 };
 
@@ -22,20 +22,27 @@ function CardList() {
   const { offset, selectedPage, handlePageChange } = usePagination(LIMIT);
   const [cardItems, setCardItems] = useState<CardItems['items']>([]);
   const [totalCount, setTotalCount] = useState<number>();
-  const [sort, setSort] = useState(STORE_FILTERING_LIST[0]);
+  const [sortText, setSortText] = useState(
+    Object.keys(STORE_FILTERING_LIST)[0],
+  );
   const [filterItems, setFilterItems] = useState<Filter>(INITIAL_FILTER);
 
   useEffect(() => {
     const fetchData = async () => {
       try {
         if (INITIAL_FILTER.startsAtGte === filterItems.startsAtGte) {
-          const { count, items } = await getCardData(offset, LIMIT);
+          const { count, items } = await getCardData(
+            offset,
+            LIMIT,
+            STORE_FILTERING_LIST[sortText],
+          );
           setCardItems(items);
           setTotalCount(count);
         } else {
           const { count, items } = await getCardData(
             offset,
             LIMIT,
+            STORE_FILTERING_LIST[sortText],
             filterItems,
           );
           setCardItems(items);
@@ -46,10 +53,11 @@ function CardList() {
       }
     };
     fetchData();
-  }, [offset, filterItems]);
+  }, [offset, filterItems, sortText]);
 
   const handleDropdownClick = (selectedValue: string) => {
-    setSort(selectedValue);
+    setSortText(selectedValue);
+    handlePageChange(1);
   };
 
   const handleFilterItems = (filter: Filter) => {
@@ -63,37 +71,43 @@ function CardList() {
         <div className={styles.buttonContainer}>
           <Dropdown
             width='37%'
-            optionList={STORE_FILTERING_LIST}
-            value={sort}
+            optionList={Object.keys(STORE_FILTERING_LIST)}
+            value={sortText}
             onClick={handleDropdownClick}
           />
           <FilterButton saveFilteredItems={handleFilterItems} />
         </div>
       </div>
-      <div className={styles.cardListContainer}>
-        {cardItems?.map(oneItem => (
-          <Card
-            key={oneItem.item.id}
-            data={{
-              item_id: oneItem.item.id,
-              shop_id: oneItem.item.shop.item.id,
-              name: oneItem.item.shop.item.name,
-              startsAt: oneItem.item.startsAt,
-              workhour: oneItem.item.workhour,
-              address1: oneItem.item.shop.item.address1,
-              hourlyPay: oneItem.item.hourlyPay,
-              imageUrl: oneItem.item.shop.item.imageUrl,
-              closed: oneItem.item.closed,
-            }}
+      {totalCount && totalCount > 0 ? (
+        <>
+          <div className={styles.cardListContainer}>
+            {cardItems?.map(oneItem => (
+              <Card
+                key={oneItem.item.id}
+                data={{
+                  item_id: oneItem.item.id,
+                  shop_id: oneItem.item.shop.item.id,
+                  name: oneItem.item.shop.item.name,
+                  startsAt: oneItem.item.startsAt,
+                  workhour: oneItem.item.workhour,
+                  address1: oneItem.item.shop.item.address1,
+                  hourlyPay: oneItem.item.hourlyPay,
+                  imageUrl: oneItem.item.shop.item.imageUrl,
+                  closed: oneItem.item.closed,
+                }}
+              />
+            ))}
+          </div>
+          <Pagination
+            limit={LIMIT}
+            totalCount={totalCount}
+            selectedPage={selectedPage}
+            handlePageChange={handlePageChange}
           />
-        ))}
-      </div>
-      <Pagination
-        limit={LIMIT}
-        totalCount={totalCount}
-        selectedPage={selectedPage}
-        handlePageChange={handlePageChange}
-      />
+        </>
+      ) : (
+        <div className={styles.noCardList}>등록된 공고가 없어요.</div>
+      )}
     </div>
   );
 }

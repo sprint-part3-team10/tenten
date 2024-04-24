@@ -20,7 +20,7 @@ function Pagination({
   selectedPage,
   handlePageChange,
 }: PaginationProps) {
-  const totalPages = Math.ceil(totalCount / limit);
+  const totalPages = totalCount ? Math.ceil(totalCount / limit) : 0;
   const sectionSize = 7;
   const pageNumbers = Array.from({ length: totalPages }, (_, i) => ++i);
   const sectionPageNumbers = [];

@@ -19,6 +19,10 @@
     background: $gray-40;
     border-radius: 1rem;
   }
+
+  @include media(mobile) {
+    min-width: 30rem;
+  }
 }
 
 .labelContainer {

@@ -10,6 +10,7 @@ export interface CardData {
 const getCardData = async (
   offset: number,
   limit: number,
+  sort?: string,
   filterItems?: Filter,
 ): Promise<CardData> => {
   const addressList = filterItems?.address
@@ -20,8 +21,10 @@ const getCardData = async (
     ? `&hourlyPayGte=${filterItems?.hourlyPayGte}${addressList}&startsAtGte=${filterItems?.startsAtGte && convertToRFC3339(filterItems?.startsAtGte)}`
     : '';
 
+  const sortUrl = sort ? `&sort=${sort}` : '';
+
   const res = await fetch(
-    `${BASE_URL}/notices?offset=${offset}&limit=${limit}${filterUrl}`,
+    `${BASE_URL}/notices?offset=${offset}&limit=${limit}${filterUrl}${sortUrl}`,
     { cache: 'no-store' },
   );
 

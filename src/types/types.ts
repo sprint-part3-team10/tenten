@@ -1,6 +1,6 @@
 export type Filter = {
   address: string[];
-  startsAtGte: Date;
+  startsAtGte: Date | undefined;
   hourlyPayGte: number | string;
 };
 

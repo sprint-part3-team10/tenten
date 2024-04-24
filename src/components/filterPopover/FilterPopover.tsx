@@ -50,8 +50,8 @@ function FilterPopover({ handleClose, saveFilteredItems }: FilterPopoverProps) {
   };
 
   const handleResetClick = () => {
-    setFilter({ ...INITIAL_FILTER, startsAtGte: new Date() });
-    saveFilteredItems(INITIAL_FILTER);
+    setFilter({ ...INITIAL_FILTER, startsAtGte: undefined });
+    saveFilteredItems({ ...INITIAL_FILTER, startsAtGte: undefined });
   };
 
   return (
