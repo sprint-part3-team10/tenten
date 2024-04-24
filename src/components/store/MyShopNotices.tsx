@@ -58,30 +58,32 @@ function MyShopNotices({
   }, [offset, hasNext, shopId]);
 
   return (
-    <section>
-      <h1 className={styles.sectionTitle}>등록한 공고</h1>
-      {/* {!cards.length && (
+    <section className={styles.outer}>
+      <div className={styles.container}>
+        <h1 className={styles.sectionTitle}>등록한 공고</h1>
+        {/* {!cards.length && (
         <div className={styles.empty}>최근에 본 공고가 없어요.</div>
       )} */}
-      <div className={styles.shopNotices}>
-        {cards.map((card, i) => (
-          <Card
-            key={card.item.id + card.item.id[i]}
-            data={{
-              closed: card.item.closed,
-              hourlyPay: card.item.hourlyPay,
-              startsAt: card.item.startsAt,
-              workhour: card.item.workhour,
-              item_id: card.item.id,
-              shop_id: shopId,
-              address1,
-              imageUrl,
-              name: shop_name,
-            }}
-          />
-        ))}
+        <div className={styles.shopNotices}>
+          {cards.map((card, i) => (
+            <Card
+              key={card.item.id + card.item.id[i]}
+              data={{
+                closed: card.item.closed,
+                hourlyPay: card.item.hourlyPay,
+                startsAt: card.item.startsAt,
+                workhour: card.item.workhour,
+                item_id: card.item.id,
+                shop_id: shopId,
+                address1,
+                imageUrl,
+                name: shop_name,
+              }}
+            />
+          ))}
+        </div>
+        <div className={styles.loader} ref={ref} />
       </div>
-      <div className={styles.loader} ref={ref} />
     </section>
   );
 }

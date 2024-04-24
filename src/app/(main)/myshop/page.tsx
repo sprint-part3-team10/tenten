@@ -25,23 +25,24 @@ export default async function MyShop() {
 
   return (
     <>
-      <section>
-        <h1 className={styles.sectionTitle}>내 가게</h1>
-        <ShopNoticeInfoBox
-          data={{
-            address1: item.address1,
-            description: item.description,
-            imageUrl: item.imageUrl,
-            kind: 'shop',
-            mainText: item.name,
-          }}
-        >
-          <div className={styles.buttonContainer}>
-            <Button buttonType='button' text='편집하기' isWhite size='M' />
-            <Button buttonType='button' text='공고 등록하기' size='M' />
-          </div>
-        </ShopNoticeInfoBox>
-        <div style={{ marginBottom: '12rem' }} />
+      <section className={styles.outer}>
+        <div className={styles.container}>
+          <h1 className={styles.sectionTitle}>내 가게</h1>
+          <ShopNoticeInfoBox
+            data={{
+              address1: item.address1,
+              description: item.description,
+              imageUrl: item.imageUrl,
+              kind: 'shop',
+              mainText: item.name,
+            }}
+          >
+            <div className={styles.buttonContainer}>
+              <Button buttonType='button' text='편집하기' isWhite size='M' />
+              <Button buttonType='button' text='공고 등록하기' size='M' />
+            </div>
+          </ShopNoticeInfoBox>
+        </div>
       </section>
       <MyShopNotices
         address1={item.address1}
