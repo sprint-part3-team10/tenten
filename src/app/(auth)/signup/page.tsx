@@ -8,11 +8,11 @@ import { useState } from 'react';
 import Logo from '@/public/icons/logo.svg';
 import Button from '@/src/components/common/Button';
 import { useForm } from 'react-hook-form';
-import { EMAIL_REGEX, PASSWORD_REGEX } from '@/src/constants/signRegEx';
 import postUserData from '@/src/api/postUser';
 import Toast from '@/src/components/common/toast/Toast';
 import useToast from '@/src/hooks/useToast';
 import { useRouter } from 'next/navigation';
+import { EMAIL_REGEX, PASSWORD_REGEX } from '@/src/constants/regEx';
 import styles from './page.module.scss';
 
 interface SignupFormData {
