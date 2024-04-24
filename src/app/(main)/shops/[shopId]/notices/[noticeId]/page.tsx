@@ -49,6 +49,10 @@ async function NoticePage({ params }: NoticePageProps) {
     workhour: notice.workhour,
   };
 
+  const NOW = new Date().getTime();
+  const STARTS_AT = new Date(notice.startsAt as string).getTime();
+  const EXPIRED = NOW > STARTS_AT;
+
   return (
     <>
       <section className={styles.outer}>
@@ -60,7 +64,11 @@ async function NoticePage({ params }: NoticePageProps) {
               <div />
             ) : (
               <ApplyEventContainer shopId={shopId} noticeId={noticeId}>
-                <Button buttonType='button' text='신청하기' />
+                {EXPIRED || infoData.closed ? (
+                  <Button buttonType='button' text='신청 불가' isDisable />
+                ) : (
+                  <Button buttonType='button' text='신청하기' />
+                )}
               </ApplyEventContainer>
             )}
           </ShopNoticeInfoBox>
