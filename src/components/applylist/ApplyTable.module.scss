@@ -57,3 +57,38 @@
   padding: 0.8rem 1.2rem;
   text-align: center;
 }
+
+.btn {
+  padding: 1rem 2rem;
+  background-color: $gray-5;
+  border-radius: 0.6rem;
+
+  @include media(mobile) {
+    padding: 0.8rem 1.2rem;
+  }
+}
+
+.approve {
+  margin-right: 1.2rem;
+  color: $blue-20;
+  border: 1px solid $blue-20;
+
+  @include media(mobile) {
+    margin-right: 0.8rem;
+  }
+}
+
+.approve:hover {
+  background-color: $blue-10;
+  border-color: $blue-10;
+}
+
+.reject {
+  color: $red-20;
+  border: 1px solid $red-20;
+}
+
+.reject:hover {
+  background-color: $red-10;
+  border-color: $red-10;
+}
