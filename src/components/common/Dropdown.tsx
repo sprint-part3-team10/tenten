@@ -6,6 +6,7 @@ import classNames from 'classnames';
 import downArrow from '@/public/icons/dropdown-down.svg';
 import upArrow from '@/public/icons/dropdown-up.svg';
 import useOutsideClick from '@/src/hooks/useOutsideClick';
+import { UseFormRegisterReturn } from 'react-hook-form';
 import styles from './Dropdown.module.scss';
 
 interface DropdownProps {
@@ -13,7 +14,9 @@ interface DropdownProps {
   width?: string;
   optionList: string[];
   value: string;
-  onClick: (selectedValue: string) => void;
+  register?: UseFormRegisterReturn;
+  onClick?: (selectedValue: string) => void;
+  onChange?: (selectedValue: string) => void;
 }
 
 export default function Dropdown({
@@ -21,7 +24,9 @@ export default function Dropdown({
   width = '100%',
   optionList,
   value,
+  register,
   onClick,
+  onChange,
 }: DropdownProps) {
   const [isOpen, setIsOpen] = useState(false);
   const ref = useRef<HTMLDivElement>(null);
@@ -37,7 +42,8 @@ export default function Dropdown({
   };
 
   const handleOptionClick = (option: string) => {
-    onClick(option);
+    if (onClick) onClick(option);
+    if (onChange) onChange(option);
     setIsOpen(false);
   };
 
@@ -50,7 +56,11 @@ export default function Dropdown({
       }}
     >
       <div className={styles.inputBox} onClick={toggleDropDown}>
-        {labelName && <label htmlFor={labelName}>{labelName} *</label>}
+        {labelName && (
+          <label className={styles.label} htmlFor={labelName}>
+            {labelName}
+          </label>
+        )}
         <input
           className={classNames(styles.input, {
             [styles.onlyFilterInput]: !labelName,
@@ -59,6 +69,7 @@ export default function Dropdown({
           name={labelName}
           value={value}
           placeholder='선택'
+          {...register}
           readOnly
         />
         <Image

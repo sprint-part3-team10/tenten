@@ -1,1 +1,1 @@
-export const BASE_URL = 'https://bootcamp-api.codeit.kr/api/04-10/the-julge';
+export const BASE_URL = 'https://bootcamp-api.codeit.kr/api/0-1/the-julge';
