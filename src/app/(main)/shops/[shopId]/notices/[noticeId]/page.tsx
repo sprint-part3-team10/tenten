@@ -7,11 +7,11 @@ import ApplyTable from '@/src/components/applyList/ApplyTable';
 import getShopApply from '@/src/api/getShopApply';
 import getTimeDifference from '@/src/lib/caculate';
 import EmployerEventContainer from '@/src/components/EmployerEventContainer';
-import { cookies } from 'next/headers';
 import getProfileData from '@/src/api/getProfileData';
 import getUserApply from '@/src/api/getUserApply';
 import ApplyEventContainer from '@/src/components/ApplyEventContainer';
 import CancelApplyEventContainer from '@/src/components/CancelApplyEventContainer';
+import getCookie from '@/src/lib/getCookie';
 import styles from './page.module.scss';
 
 interface NoticePageProps {
@@ -22,9 +22,10 @@ interface NoticePageProps {
 
 async function NoticePage({ params }: NoticePageProps) {
   // const userType = cookies().get('userType');
-  const userId = cookies().get('u_id')?.value;
-  const token = cookies().get('token')?.value;
-  const userType = { value: 'employee' };
+  const { userId, token, userType } = getCookie();
+  // const userId = cookies().get('u_id')?.value;
+  // const token = cookies().get('token')?.value;
+  // const userType = { value: 'employee' };
 
   const { shopId, noticeId } = params;
 
@@ -83,16 +84,15 @@ async function NoticePage({ params }: NoticePageProps) {
           <h1 className={styles.sectionTitle}>{shop.name}</h1>
           <ShopNoticeInfoBox data={infoData}>
             <>
-              {userType?.value === 'employer' && (
+              {userType === 'employer' && (
                 <EmployerEventContainer shopId={shopId} noticeId={noticeId}>
                   <Button buttonType='button' text='공고 편집하기' isWhite />
                 </EmployerEventContainer>
               )}
-              {userType?.value === 'employee' &&
-                (EXPIRED || infoData.closed) && (
-                  <Button buttonType='button' text='신청 불가' isDisable />
-                )}
-              {userType?.value === 'employee' &&
+              {userType === 'employee' && (EXPIRED || infoData.closed) && (
+                <Button buttonType='button' text='신청 불가' isDisable />
+              )}
+              {userType !== 'employer' &&
                 !(EXPIRED || infoData.closed) &&
                 !applied && (
                   <ApplyEventContainer
@@ -104,7 +104,7 @@ async function NoticePage({ params }: NoticePageProps) {
                     <Button buttonType='button' text='신청하기' />
                   </ApplyEventContainer>
                 )}
-              {userType?.value === 'employee' &&
+              {userType === 'employee' &&
                 !(EXPIRED || infoData.closed) &&
                 applied && (
                   <CancelApplyEventContainer
@@ -122,14 +122,14 @@ async function NoticePage({ params }: NoticePageProps) {
           <JobDescription description={notice.description} />
         </div>
       </section>
-      {userType?.value === 'employer' ? (
+      {userType === 'employer' ? (
         <div className={styles.tableArea}>
           <div className={styles.title}>신청자 목록</div>
           {count ? (
             <ApplyTable
               noticeId={noticeId}
               shopId={shopId}
-              userType={userType?.value}
+              userType={userType}
             />
           ) : (
             <div className={styles.noApply}>신청자가 없습니다.</div>
