@@ -83,7 +83,7 @@ function CardList({ search = undefined }: CardListProps) {
         </div>
         <div className={styles.buttonContainer}>
           <Dropdown
-            width='37%'
+            width='40%'
             optionList={Object.keys(STORE_FILTERING_LIST)}
             value={sortText}
             onClick={handleDropdownClick}
