@@ -1,7 +1,7 @@
 'use client';
 
 import { ReactElement } from 'react';
-import postApplication from '../api/postApplication';
+import { useRouter } from 'next/navigation';
 
 interface EventContainerProps {
   shopId: string;
@@ -9,16 +9,17 @@ interface EventContainerProps {
   children: ReactElement;
 }
 
-function EmployeeEventContainer({
+function EmployerEventContainer({
   shopId,
   noticeId,
   children,
 }: EventContainerProps) {
+  const router = useRouter();
   const handleClick = async () => {
-    await postApplication(shopId, noticeId);
+    router.push(`/shops/${shopId}/notices/${noticeId}/edit`);
   };
 
   return <div onClick={handleClick}>{children}</div>;
 }
 
-export default EmployeeEventContainer;
+export default EmployerEventContainer;
