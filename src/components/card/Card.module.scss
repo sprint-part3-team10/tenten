@@ -149,10 +149,12 @@
   display: flex;
   align-items: center;
   justify-content: space-between;
+  min-width: 27rem;
 
   @include media(mobile) {
     flex-direction: column;
     gap: 0.5rem;
     align-items: flex-start;
+    min-width: 14rem;
   }
 }
