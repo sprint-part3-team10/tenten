@@ -32,5 +32,5 @@ export default function useToast(duration = 3000) {
     [timerId],
   );
 
-  return { showToast, toastMessage, setToastMessage, displayToast };
+  return { showToast, toastMessage, setToastMessage };
 }
