@@ -10,7 +10,12 @@ import classNames from 'classnames';
 import Alarms from './Alarms';
 import styles from './AlarmIcon.module.scss';
 
-export default function AlarmIcon() {
+interface AlarmIconProps {
+  userId: string;
+  token: string;
+}
+
+export default function AlarmIcon({ userId, token }: AlarmIconProps) {
   const [isOpen, setIsOpen] = useState(false);
   const [unRead, setUnRead] = useState(0);
 
@@ -29,7 +34,7 @@ export default function AlarmIcon() {
 
   useEffect(() => {
     const getUnread = async () => {
-      const { items } = await getAlarms('066f080c-5265-4b70-836e-0f1360b57010');
+      const { items } = await getAlarms(userId, token);
       const count = items.filter(item => item.item.read === false).length;
       setUnRead(count);
     };
@@ -47,7 +52,11 @@ export default function AlarmIcon() {
         })}
         ref={ref}
       >
-        <Alarms handleCloseClick={handleCloseClick} />
+        <Alarms
+          handleCloseClick={handleCloseClick}
+          userId={userId}
+          token={token}
+        />
       </div>
     </div>
   );

@@ -13,13 +13,18 @@ import { useEffect, useState } from 'react';
 import getAlarms from '@/src/api/getAlarms';
 import styles from './AlarmContainer.module.scss';
 
-export default function AlarmContainer() {
+interface AlarmContainerProps {
+  userId: string;
+  token: string;
+}
+
+export default function AlarmContainer({ userId, token }: AlarmContainerProps) {
   const [checkRead, setCheckRead] = useState(false);
   const [unRead, setUnRead] = useState(0);
   const [alarms, setAlarms] = useState([]);
   useEffect(() => {
     const getUnread = async () => {
-      const { items } = await getAlarms('066f080c-5265-4b70-836e-0f1360b57010');
+      const { items } = await getAlarms(userId, token);
       const filteredItems = items.filter(item => item.item.read === false);
       const count = filteredItems.length;
       setUnRead(count);
@@ -53,10 +58,7 @@ export default function AlarmContainer() {
                 className={styles.notiBox}
                 key={alarm.item.id}
                 onClick={() => {
-                  putAlarmRead(
-                    '066f080c-5265-4b70-836e-0f1360b57010',
-                    alarm.item.id,
-                  );
+                  putAlarmRead(userId, alarm.item.id, token);
                   setCheckRead(true);
                 }}
               >

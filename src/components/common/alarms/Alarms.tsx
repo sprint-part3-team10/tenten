@@ -5,15 +5,21 @@ import AlarmContainer from './AlarmContainer';
 
 interface AlarmsProps {
   handleCloseClick: () => void;
+  userId: string;
+  token: string;
 }
 
-export default function Alarms({ handleCloseClick }: AlarmsProps) {
+export default function Alarms({
+  handleCloseClick,
+  userId,
+  token,
+}: AlarmsProps) {
   return (
     <div className={styles.container}>
       <button className={styles.close} onClick={handleCloseClick}>
         <Image width={24} height={24} src={close} alt='close' />
       </button>
-      <AlarmContainer />
+      <AlarmContainer userId={userId} token={token} />
     </div>
   );
 }
