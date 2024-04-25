@@ -11,8 +11,7 @@ export default function Home() {
       {userType === 'employee' && <CustomCardList />}
       <div
         className={classNames({
-          [styles.withCustom]:
-            userType === 'employer' || userType === undefined,
+          [styles.noCustom]: userType === 'employer' || userType === undefined,
         })}
       >
         <CardList />
