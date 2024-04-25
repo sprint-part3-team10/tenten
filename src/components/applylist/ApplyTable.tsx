@@ -45,7 +45,9 @@ function ApplyTable(props: ApplyTableProps) {
   const handleModalClick = (value: string, id: string) => {
     setOpen(true);
     const text =
-      value === 'reject' ? '신청을 거절하시겠어요?' : '신청을 승인하시겠어요?';
+      value === 'rejected'
+        ? '신청을 거절하시겠어요?'
+        : '신청을 승인하시겠어요?';
     setMessage(text);
     setStatus(value);
     setApplyId(id);

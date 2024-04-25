@@ -2,7 +2,7 @@
 
 import getShopNotices, { Item } from '@/src/api/getShopNotices';
 import { useEffect, useRef, useState } from 'react';
-import Card from '../Card';
+import Card from '../card/Card';
 import styles from './MyShopNotices.module.scss';
 import NoList from '../applyList/NoList';
 
