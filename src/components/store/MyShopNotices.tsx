@@ -4,9 +4,7 @@ import getShopNotices, { Item } from '@/src/api/getShopNotices';
 import { useEffect, useRef, useState } from 'react';
 import Card from '../Card';
 import styles from './MyShopNotices.module.scss';
-import EmptyContainer from './EmptyContainer';
-import Button from '../common/Button';
-import EventContainer from './EventContainer';
+import NoList from '../applyList/NoList';
 
 interface MyShopNoticesProps {
   shopId: string;
@@ -63,15 +61,18 @@ function MyShopNotices({
   return (
     <section className={styles.outer}>
       <div className={styles.container}>
-        <h1 className={styles.sectionTitle}>등록한 공고</h1>
         {!cards.length && !hasNext && (
-          <EmptyContainer message='공고를 등록해 보세요.'>
-            <EventContainer path='/myshop/register/notice'>
-              <Button buttonType='button' text='공고  등록하기' />
-            </EventContainer>
-          </EmptyContainer>
+          <NoList
+            title='등록한 공고'
+            description='공고를 등록해 보세요.'
+            text='공고 등록하기'
+            pushUrl='/myshop/register/notice'
+          />
         )}
         <div className={styles.shopNotices}>
+          {!!cards.length && (
+            <h1 className={styles.sectionTitle}>등록한 공고</h1>
+          )}
           {cards.map((card, i) => (
             <Card
               key={card.item.id + card.item.id[i]}
