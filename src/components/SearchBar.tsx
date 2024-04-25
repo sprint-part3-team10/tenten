@@ -17,7 +17,7 @@ export default function SearchBar() {
   const handlePressKey = (event: React.KeyboardEvent<HTMLInputElement>) => {
     if (event.key === 'Enter') {
       if (searchShop) {
-        router.push(`/search?keyword=${searchShop}`);
+        router.push(`/search?q=${searchShop}`);
       }
     }
     // ESC를 누를 경우, search 내용 지워짐
