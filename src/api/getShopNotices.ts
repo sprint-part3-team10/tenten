@@ -23,6 +23,9 @@ const getShopNotices = async (
 ): Promise<ShopNotices> => {
   const res = await fetch(
     `https://bootcamp-api.codeit.kr/api/0-1/the-julge/shops/${shopId}/notices?offset=${offset}&limit=6`,
+    {
+      cache: 'no-store',
+    },
   );
 
   return res.json();
