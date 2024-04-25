@@ -121,6 +121,7 @@ async function NoticePage({ params }: NoticePageProps) {
                     shopId={shopId}
                     noticeId={noticeId}
                     applicationId={applied.item.id}
+                    token={token.value}
                   >
                     <Button buttonType='button' text='취소하기' isWhite />
                   </CancelApplyEventContainer>

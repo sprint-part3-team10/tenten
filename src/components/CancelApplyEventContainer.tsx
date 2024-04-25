@@ -1,6 +1,6 @@
 'use client';
 
-import { MouseEvent, ReactElement, useState } from 'react';
+import { ReactElement, useState } from 'react';
 import { useRouter } from 'next/navigation';
 import Modal from './common/modal/Modal';
 import ModalPortal from './common/modal/ModalPortal';
@@ -10,6 +10,7 @@ interface CancelApplyEventContainerProps {
   shopId: string;
   noticeId: string;
   applicationId: string;
+  token: string;
   children: ReactElement;
 }
 
@@ -17,6 +18,7 @@ function CancelApplyEventContainer({
   shopId,
   noticeId,
   applicationId,
+  token,
   children,
 }: CancelApplyEventContainerProps) {
   const [cancelModalOpen, setCancelModalOpen] = useState(false);
@@ -32,8 +34,7 @@ function CancelApplyEventContainer({
 
   const handleCancelApplication = async e => {
     e.stopPropagation();
-    const res = await putApplication(shopId, noticeId, applicationId);
-    console.log(res);
+    await putApplication(shopId, noticeId, applicationId, token);
     handleModal(false);
     router.refresh();
   };

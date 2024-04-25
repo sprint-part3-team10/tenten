@@ -1,6 +1,7 @@
 'use client';
 
 import { ReactElement, useState } from 'react';
+import { useRouter } from 'next/navigation';
 import postApplication from '../api/postApplication';
 import ModalPortal from './common/modal/ModalPortal';
 import Modal from './common/modal/Modal';
@@ -9,7 +10,7 @@ interface EventContainerProps {
   shopId: string;
   noticeId: string;
   emptyProfile: boolean;
-
+  token: string;
   children: ReactElement;
 }
 
@@ -17,9 +18,11 @@ function ApplyEventContainer({
   shopId,
   noticeId,
   emptyProfile,
+  token,
   children,
 }: EventContainerProps) {
   const [addProfileModalOpen, setAddProfileModalOpen] = useState(false);
+  const router = useRouter();
 
   const handleModal = (value: boolean) => {
     setAddProfileModalOpen(value);
@@ -31,7 +34,8 @@ function ApplyEventContainer({
       return;
     }
 
-    await postApplication(shopId, noticeId);
+    await postApplication(shopId, noticeId, token);
+    router.refresh();
   };
 
   return (
