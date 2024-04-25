@@ -1,10 +1,14 @@
 import Image from 'next/image';
 import logo from '@/public/icons/logo.svg';
 import Link from 'next/link';
+import checkLogin from '@/src/lib/checkLogin';
 import styles from './Header.module.scss';
 import SearchBar from '../SearchBar';
+import LogoutButton from '../common/LogoutButton';
 
 export default function Header() {
+  const { hasToken, userType } = checkLogin();
+
   return (
     <div className={styles.container}>
       <div className={styles.headerBox}>
@@ -20,14 +24,29 @@ export default function Header() {
         <div className={styles.searchBar}>
           <SearchBar />
         </div>
-        <div className={styles.activeList}>
-          <Link href='/signin'>
-            <button>로그인</button>
-          </Link>
-          <Link href='/signup'>
-            <button>회원가입</button>
-          </Link>
-        </div>
+        {hasToken ? (
+          <div className={styles.activeList}>
+            {userType === 'employee' ? (
+              <Link href='/myprofile'>
+                <button>내 프로필</button>
+              </Link>
+            ) : (
+              <Link href='/myshop'>
+                <button>내 가게</button>
+              </Link>
+            )}
+            <LogoutButton />
+          </div>
+        ) : (
+          <div className={styles.activeList}>
+            <Link href='/signin'>
+              <button>로그인</button>
+            </Link>
+            <Link href='/signup'>
+              <button>회원가입</button>
+            </Link>
+          </div>
+        )}
       </div>
     </div>
   );

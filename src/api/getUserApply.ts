@@ -1,20 +1,34 @@
 import { BASE_URL } from './api';
 
+interface UserApplyDatum {
+  item: {
+    id: string;
+    status: string;
+    notice: {
+      item: {
+        id: string;
+      };
+    };
+  };
+}
+
 interface UserApplyData {
   count: number;
-  items: object[];
+  items: UserApplyDatum[];
 }
 
 const getUserApply = async (
   userId: string,
   offset: number,
+  token: string,
+  limit: number = 5,
 ): Promise<UserApplyData> => {
   const res = await fetch(
-    `${BASE_URL}/users/${userId}/applications?offset=${offset}&limit=5`,
+    `${BASE_URL}/users/${userId}/applications?offset=${offset}&limit=${limit}`,
     {
       headers: {
-        authorization:
-          'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiIwNjZmMDgwYy01MjY1LTRiNzAtODM2ZS0wZjEzNjBiNTcwMTAiLCJpYXQiOjE3MTM5NTM1OTZ9.K8vUZ48DF7o6tHMDnWJJpLjijMoEgCDRYJMoJtQulIc',
+        authorization: `Bearer ${token}`,
+        // 'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiIwNjZmMDgwYy01MjY1LTRiNzAtODM2ZS0wZjEzNjBiNTcwMTAiLCJpYXQiOjE3MTM5NTM1OTZ9.K8vUZ48DF7o6tHMDnWJJpLjijMoEgCDRYJMoJtQulIc',
       },
       cache: 'no-store',
     },
