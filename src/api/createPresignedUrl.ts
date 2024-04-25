@@ -17,11 +17,11 @@ const createPresignedUrl = async (fileObject: File) => {
     },
     body: JSON.stringify({ name: fileObject.name }),
   });
-  const postResult = await response.json();
+  const result = await response.json();
 
-  await uploadImageToS3(postResult.item.url, fileObject);
+  await uploadImageToS3(result.item.url, fileObject);
 
-  const instanceUrl = new URL(postResult.item.url);
+  const instanceUrl = new URL(result.item.url);
   const urlWithoutQueryString = instanceUrl.origin + instanceUrl.pathname;
   return urlWithoutQueryString;
 };
