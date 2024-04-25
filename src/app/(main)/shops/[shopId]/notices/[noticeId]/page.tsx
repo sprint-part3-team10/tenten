@@ -30,6 +30,9 @@ async function NoticePage({ params }: NoticePageProps) {
   const { shopId, noticeId } = params;
 
   const { item: notice } = await getNoticeData(shopId, noticeId);
+  const {
+    shop: { item: shop },
+  } = notice;
   const { count } = await getShopApply(shopId, noticeId, 0);
 
   let emptyProfile = true;
@@ -38,9 +41,6 @@ async function NoticePage({ params }: NoticePageProps) {
     emptyProfile = !name;
   }
 
-  const {
-    shop: { item: shop },
-  } = notice;
   const infoData = {
     kind: 'notice' as const,
     mainText: notice.hourlyPay,
@@ -54,6 +54,7 @@ async function NoticePage({ params }: NoticePageProps) {
     closed: notice.closed,
   };
   const cardData = {
+    originalHourlyPay: shop.originalHourlyPay,
     closed: notice.closed,
     hourlyPay: notice.hourlyPay,
     item_id: notice.id,
