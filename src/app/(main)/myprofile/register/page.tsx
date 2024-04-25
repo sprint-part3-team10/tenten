@@ -1,10 +1,13 @@
 import MyProfileRegister from '@/src/components/myProfile/register/MyProfileRegister';
+import getCookie from '@/src/lib/getCookie';
 import styles from './page.module.scss';
 
 export default function Home() {
+  const accessToken = getCookie('token');
+  const userId = getCookie('u_id');
   return (
     <div className={styles.layout}>
-      <MyProfileRegister />
+      <MyProfileRegister token={accessToken} userId={userId} />
     </div>
   );
 }
