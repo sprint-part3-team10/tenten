@@ -10,7 +10,10 @@ export default function Home() {
     <div>
       {userType === 'employee' && <CustomCardList />}
       <div
-        className={classNames({ [styles.withCustom]: userType === 'employer' })}
+        className={classNames({
+          [styles.withCustom]:
+            userType === 'employer' || userType === undefined,
+        })}
       >
         <CardList />
       </div>
