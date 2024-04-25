@@ -6,8 +6,9 @@ const postApplication = async (shopId: string, noticeId: string) => {
       headers: {
         Authorization:
           'Bearer ' +
-          'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI1MTUzYTM4Yi1kNmY4LTQ3MWUtYjcxMi1mYTRmNmFlOTY0NmQiLCJpYXQiOjE3MTM4MzU2MzR9.HCLEYHHbMQfE_sJfrz203-YmUGGcH31n3gNoIskAQ-g',
+          'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI1NmNhNmJmNC02YjZmLTRmNGYtOTczMS1iODM3Y2NkYmNiNmIiLCJpYXQiOjE3MTM5NjM4NjR9.y-COvjBCzlRxRV_gqBy6tVdYo8ALn4aTU9W5QxdyWQo',
       },
+      cache: 'no-store',
     },
   );
 
