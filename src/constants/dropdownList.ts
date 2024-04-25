@@ -37,9 +37,9 @@ export const STORE_CATEGORY_LIST = [
   '기타',
 ];
 
-export const STORE_FILTERING_LIST = [
-  '마감임박순',
-  '시급많은순',
-  '시간적은순',
-  '가나다순',
-];
+export const STORE_FILTERING_LIST: Record<string, string> = {
+  마감임박순: 'time',
+  시급많은순: 'pay',
+  시간적은순: 'hour',
+  가나다순: 'shop',
+};

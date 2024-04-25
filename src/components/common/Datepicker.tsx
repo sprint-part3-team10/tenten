@@ -4,7 +4,7 @@ import 'react-datepicker/dist/react-datepicker.css';
 import './DatePicker.scss';
 
 interface DatePickerProps {
-  value: Date;
+  value: Date | undefined;
   onChange: (date: Date) => void;
   timeSelect?: boolean;
   width?: string;
@@ -42,6 +42,7 @@ export default function DatePicker({
           selected={value}
           onChange={onChange}
           locale={ko}
+          placeholderText='날짜를 선택해 주세요.'
           showPopperArrow={false}
         />
       )}

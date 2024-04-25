@@ -28,7 +28,7 @@ function WageComparisonBadge({
         [styles.closedText]: closed && change,
       })}
     >
-      기존 시급보다 {increaseRate}%
+      <span>기존 시급보다 {increaseRate}%</span>
       <Image
         className={classNames({ [styles.whiteArrow]: change })}
         width={20}
