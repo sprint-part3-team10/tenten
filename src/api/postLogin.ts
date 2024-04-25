@@ -9,7 +9,7 @@ interface UserData {
   type: 'employee' | 'employer';
 }
 
-interface LoginProps {
+interface CookieData {
   token: string;
   user: UserData;
 }
@@ -17,7 +17,7 @@ interface LoginProps {
 const postLogin = async (
   email: string,
   password: string,
-): Promise<LoginProps> => {
+): Promise<CookieData> => {
   const cookieStore = cookies();
 
   const res = await fetch(`${BASE_URL}/token`, {
