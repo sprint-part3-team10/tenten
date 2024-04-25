@@ -17,7 +17,11 @@ const INITIAL_FILTER = {
   hourlyPayGte: '',
 };
 
-function CardList() {
+interface CardListProps {
+  search?: string | undefined;
+}
+
+function CardList({ search = undefined }: CardListProps) {
   const LIMIT = 6;
   const { offset, selectedPage, handlePageChange } = usePagination(LIMIT);
   const [cardItems, setCardItems] = useState<CardItems['items']>([]);
@@ -37,6 +41,7 @@ function CardList() {
           LIMIT,
           STORE_FILTERING_LIST[sortText],
           filterItems,
+          search,
         );
         setCardItems(items);
         setTotalCount(count);
@@ -52,7 +57,7 @@ function CardList() {
       }
     };
     fetchData();
-  }, [offset, filterItems, sortText]);
+  }, [offset, filterItems, sortText, search]);
 
   const handleDropdownClick = (selectedValue: string) => {
     setSortText(selectedValue);
@@ -68,7 +73,13 @@ function CardList() {
     <div className={styles.container} ref={ref}>
       <div className={styles.titleContainer}>
         <div className={styles.title}>
-          <h1>전체 공고</h1>
+          {search ? (
+            <h1>
+              <span>{search}</span>에 대한 공고 목록
+            </h1>
+          ) : (
+            <h1>전체 공고</h1>
+          )}
         </div>
         <div className={styles.buttonContainer}>
           <Dropdown

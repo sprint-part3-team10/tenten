@@ -12,6 +12,7 @@ const getCardData = async (
   limit: number,
   sort?: string,
   filterItems?: Filter,
+  keyword?: string,
 ): Promise<CardData> => {
   const addressListURLQuery = filterItems?.address
     .map(item => `&address=${item}`)
@@ -27,8 +28,10 @@ const getCardData = async (
 
   const sortQuery = sort ? `&sort=${sort}` : '';
 
+  const keywordQuery = keyword ? `&keyword=${keyword}` : '';
+
   const res = await fetch(
-    `${BASE_URL}/notices?offset=${offset}&limit=${limit}${startsAtGteQuery}${hourlyPayGteQuery}${addressListURLQuery}${sortQuery}`,
+    `${BASE_URL}/notices?offset=${offset}&limit=${limit}${startsAtGteQuery}${hourlyPayGteQuery}${addressListURLQuery}${sortQuery}${keywordQuery}`,
     { cache: 'no-store' },
   );
 
