@@ -4,10 +4,11 @@ import styles from './page.module.scss';
 
 export default function Home() {
   const accessToken = getCookie('token');
+  const shopId = getCookie('s_id');
 
   return (
     <div className={styles.layout}>
-      <MyShopRegister token={accessToken} />
+      <MyShopRegister token={accessToken} shopId={shopId} />
     </div>
   );
 }
