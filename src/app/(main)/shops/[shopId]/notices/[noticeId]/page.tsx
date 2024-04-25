@@ -7,7 +7,7 @@ import Button from '@/src/components/common/Button';
 import ApplyTable from '@/src/components/applyList/ApplyTable';
 import getShopApply from '@/src/api/getShopApply';
 import getTimeDifference from '@/src/lib/caculate';
-import EmployerEventContainer from '@/src/components/ApplyEventContainer';
+import EmployerEventContainer from '@/src/components/EmployerEventContainer';
 import EmployeeEventContainer from '@/src/components/EmployeeEventContainer';
 import { cookies } from 'next/headers';
 import getProfileData from '@/src/api/getProfileData';
@@ -24,7 +24,7 @@ interface NoticePageProps {
 
 async function NoticePage({ params }: NoticePageProps) {
   // const userType = cookies().get('userType');
-  const userType = { value: 'employer' };
+  const userType = { value: 'employee' };
   const userId = cookies().get('u_id');
 
   const { shopId, noticeId } = params;
@@ -75,15 +75,15 @@ async function NoticePage({ params }: NoticePageProps) {
           <h1 className={styles.sectionTitle}>{shop.name}</h1>
           <ShopNoticeInfoBox data={infoData}>
             {userType?.value === 'employer' ? (
-              <EmployerEventContainer
+              <EmployerEventContainer shopId={shopId} noticeId={noticeId}>
+                <Button buttonType='button' text='공고 편집하기' isWhite />
+              </EmployerEventContainer>
+            ) : (
+              <EmployeeEventContainer
                 shopId={shopId}
                 noticeId={noticeId}
                 emptyProfile={emptyProfile}
               >
-                <Button buttonType='button' text='공고 편집하기' isWhite />
-              </EmployerEventContainer>
-            ) : (
-              <EmployeeEventContainer shopId={shopId} noticeId={noticeId}>
                 {EXPIRED || infoData.closed ? (
                   <Button buttonType='button' text='신청 불가' isDisable />
                 ) : (
