@@ -109,6 +109,7 @@ async function NoticePage({ params }: NoticePageProps) {
                     shopId={shopId}
                     noticeId={noticeId}
                     emptyProfile={emptyProfile}
+                    token={token.value}
                   >
                     <Button buttonType='button' text='신청하기' />
                   </ApplyEventContainer>
