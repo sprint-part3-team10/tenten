@@ -1,7 +1,7 @@
 const postApplication = async (
   shopId: string,
   noticeId: string,
-  token: string,
+  token?: string,
 ) => {
   const res = await fetch(
     `https://bootcamp-api.codeit.kr/api/0-1/the-julge/shops/${shopId}/notices/${noticeId}/applications`,

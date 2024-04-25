@@ -10,7 +10,7 @@ interface CancelApplyEventContainerProps {
   shopId: string;
   noticeId: string;
   applicationId: string;
-  token: string;
+  token?: string;
   children: ReactElement;
 }
 
@@ -32,7 +32,7 @@ function CancelApplyEventContainer({
     setCancelModalOpen(true);
   };
 
-  const handleCancelApplication = async e => {
+  const handleCancelApplication = async (e: Event) => {
     e.stopPropagation();
     await putApplication(shopId, noticeId, applicationId, token);
     handleModal(false);

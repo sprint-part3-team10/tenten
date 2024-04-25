@@ -10,7 +10,7 @@ interface EventContainerProps {
   shopId: string;
   noticeId: string;
   emptyProfile: boolean;
-  token: string;
+  token?: string;
   children: ReactElement;
 }
 
