@@ -2,59 +2,61 @@
 
 import { ReactElement, useState } from 'react';
 import { useRouter } from 'next/navigation';
-import postApplication from '../api/postApplication';
-import ModalPortal from './common/modal/ModalPortal';
 import Modal from './common/modal/Modal';
+import ModalPortal from './common/modal/ModalPortal';
+import putApplication from '../api/putApplication';
 
-interface EventContainerProps {
+interface CancelApplyEventContainerProps {
   shopId: string;
   noticeId: string;
-  emptyProfile: boolean;
+  applicationId: string;
   token?: string;
   children: ReactElement;
 }
 
-function ApplyEventContainer({
+function CancelApplyEventContainer({
   shopId,
   noticeId,
-  emptyProfile,
+  applicationId,
   token,
   children,
-}: EventContainerProps) {
-  const [addProfileModalOpen, setAddProfileModalOpen] = useState(false);
+}: CancelApplyEventContainerProps) {
+  const [cancelModalOpen, setCancelModalOpen] = useState(false);
   const router = useRouter();
 
   const handleModal = (value: boolean) => {
-    setAddProfileModalOpen(value);
+    setCancelModalOpen(value);
   };
 
   const handleClick = async () => {
-    if (emptyProfile) {
-      setAddProfileModalOpen(true);
-      return;
-    }
+    setCancelModalOpen(true);
+  };
 
-    await postApplication(shopId, noticeId, token);
+  const handleCancelApplication = async (e: Event) => {
+    e.stopPropagation();
+    await putApplication(shopId, noticeId, applicationId, token);
+    handleModal(false);
     router.refresh();
   };
 
   return (
     <div onClick={handleClick}>
       {children}
-      {addProfileModalOpen && (
+      {cancelModalOpen && (
         <ModalPortal>
           <Modal
-            icon='warning'
-            buttonText={['확인']}
+            icon='check'
+            buttonText={['아니오', '취소하기']}
             handleModal={handleModal}
             handleButton={[
               e => {
                 e.stopPropagation();
                 handleModal(false);
               },
+              handleCancelApplication,
             ]}
             maxWidth='40rem'
-            message='내 프로필을 먼저 등록해 주세요.'
+            message='신청을 취소하시겠어요?'
             minWidth='20rem'
           />
         </ModalPortal>
@@ -62,5 +64,4 @@ function ApplyEventContainer({
     </div>
   );
 }
-
-export default ApplyEventContainer;
+export default CancelApplyEventContainer;

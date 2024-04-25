@@ -55,6 +55,7 @@ export default async function MyShop() {
         </div>
       </section>
       <MyShopNotices
+        originalHourlyPay={item.originalHourlyPay}
         address1={item.address1}
         imageUrl={item.imageUrl}
         shopId={shopId.value}
