@@ -1,10 +1,12 @@
 'use client';
 
-import { useRouter } from 'next/navigation';
-import { useRef, useState } from 'react';
+import { useRouter, useSearchParams } from 'next/navigation';
+import { useRef, useState, useEffect } from 'react';
 import { useForm } from 'react-hook-form';
 import createPresignedUrl from '@/src/api/createPresignedUrl';
 import postMyShop from '@/src/api/postMyShop';
+import putMyShop from '@/src/api/putMyShop';
+import getShop from '@/src/api/getShop';
 import ModalPortal from '@/src/components/common/modal/ModalPortal';
 import Modal from '@/src/components/common/modal/Modal';
 import Input from '@/src/components/common/input/Input';
@@ -23,9 +25,12 @@ import styles from './MyShopRegister.module.scss';
 
 interface MyShopRegisterProps {
   token: string;
+  shopId: string;
 }
 
-export default function MyShopRegister({ token }: MyShopRegisterProps) {
+export default function MyShopRegister({ token, shopId }: MyShopRegisterProps) {
+  const params = useSearchParams();
+  const isEditing = params.get('action') === 'edit';
   const [isShow, setIsShow] = useState(false);
   const handleShowModal = (modalState: boolean) => {
     setIsShow(modalState);
@@ -42,6 +47,7 @@ export default function MyShopRegister({ token }: MyShopRegisterProps) {
   };
   const handleConfirmButton = () => {
     router.push('/myshop');
+    router.refresh();
   };
 
   const {
@@ -114,13 +120,33 @@ export default function MyShopRegister({ token }: MyShopRegisterProps) {
 
   const onSubmit = async (formData: MyShopFormData) => {
     try {
-      await postMyShop(token, formData);
+      if (isEditing) {
+        await putMyShop(token, shopId, formData);
+        setModalMessage('수정이 완료되었습니다.');
+      } else {
+        await postMyShop(token, formData);
+      }
       handleShowModal(true);
     } catch (error) {
       setModalMessage(error.message);
       handleShowModal(true);
     }
   };
+
+  useEffect(() => {
+    if (!isEditing) return;
+    const fetchShopData = async (targetShopId: string) => {
+      const result = await getShop(targetShopId);
+      const { user, ...shopData } = result.item;
+
+      // user 프로퍼티를 제외한 나머지 프로퍼티를 반복하여 설정
+      Object.entries(shopData).forEach(([fieldName, value]) => {
+        setValue(fieldName, value);
+      });
+    };
+
+    fetchShopData(shopId);
+  }, [isEditing, shopId, setValue]);
 
   return (
     <div className={styles.layout}>
@@ -181,7 +207,7 @@ export default function MyShopRegister({ token }: MyShopRegisterProps) {
                 required: '필수 입력사항입니다',
                 validate: {
                   minWage: value =>
-                    parseInt(value) >= 9860 ||
+                    Number(value) >= 9860 ||
                     '최저시급(9860원) 보다 낮은 값은 입력할 수 없습니다',
                 },
               })}
@@ -207,6 +233,7 @@ export default function MyShopRegister({ token }: MyShopRegisterProps) {
                   alt='가게이미지'
                   fill
                   sizes='48rem'
+                  priority
                 />
               ) : (
                 <div className={styles.defaultImageBox}>
