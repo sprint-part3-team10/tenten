@@ -1,0 +1,79 @@
+@import '../../../styles/index';
+
+.notiContainer {
+  display: flex;
+  flex-direction: column;
+  gap: 0.4rem;
+  height: 32rem;
+  overflow: scroll;
+  overflow-x: hidden;
+
+  &::-webkit-scrollbar {
+    width: 0.5rem;
+  }
+
+  &::-webkit-scrollbar-thumb {
+    height: 1%;
+    background: $gray-50;
+    border-radius: 1rem;
+  }
+
+  &::-webkit-scrollbar-track {
+    background: $red-10;
+  }
+
+  @include media(mobile) {
+    height: 100%;
+  }
+}
+
+.notiBox {
+  padding: 1.6rem 1.2rem;
+  background-color: $white;
+  border: 1px solid $gray-20;
+  border-radius: 0.5rem;
+}
+
+.accepted {
+  color: $blue-20;
+}
+
+.rejected {
+  color: $red-40;
+}
+
+.canceled {
+  color: $gray-50;
+}
+
+.alarmMention {
+  @include text-14-l;
+
+  line-height: 2.2rem;
+}
+
+.created {
+  @include text-12-l;
+
+  line-height: 1.6rem;
+  color: $gray-40;
+}
+
+.title {
+  @include text-20-b;
+
+  color: $black;
+}
+
+.noAlarm {
+  @include text-14-l;
+
+  margin: 2rem 0;
+  text-align: center;
+
+  @include media(mobile) {
+    @include text-16-l;
+
+    margin-top: 20rem;
+  }
+}

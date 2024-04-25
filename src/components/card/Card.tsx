@@ -7,7 +7,7 @@ import clockGrayIcon from '@/public/icons/clock_gray.svg';
 import Link from 'next/link';
 import styles from './Card.module.scss';
 import { formatWage, formatDateAndTime } from '../../lib/format';
-import getTimeDifference from '../../lib/caculate';
+import { getTimeDifference } from '../../lib/caculate';
 import WageComparisonBadge from '../common/WageComparisonBadge';
 
 interface CardData {
