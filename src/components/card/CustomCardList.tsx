@@ -24,7 +24,7 @@ async function CustomCardList() {
 
   newItems = [...items];
 
-  if (address && count < 8) {
+  if (address && newItems.length < 8) {
     const nearAddress = [address, ...NEAR_ADDRESS_LIST[address]];
     const { items: otherItems } = await getCardData(0, 8 - count, '', {
       ...INITIAL_FILTER,
