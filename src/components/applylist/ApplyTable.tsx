@@ -46,9 +46,8 @@ function ApplyTable(props: ApplyTableProps) {
     setOpen(true);
     const text =
       value === 'reject' ? '신청을 거절하시겠어요?' : '신청을 승인하시겠어요?';
-    const newState = value === 'reject' ? 'rejected' : 'accepted';
     setMessage(text);
-    setStatus(newState);
+    setStatus(value);
     setApplyId(id);
   };
 
@@ -124,7 +123,7 @@ function ApplyTable(props: ApplyTableProps) {
                         <button
                           className={classNames(styles.btn, styles.reject)}
                           onClick={() =>
-                            handleModalClick('reject', apply.item.id)
+                            handleModalClick('rejected', apply.item.id)
                           }
                         >
                           거절하기
@@ -132,7 +131,7 @@ function ApplyTable(props: ApplyTableProps) {
                         <button
                           className={classNames(styles.btn, styles.approve)}
                           onClick={() =>
-                            handleModalClick('approve', apply.item.id)
+                            handleModalClick('accepted', apply.item.id)
                           }
                         >
                           승인하기
