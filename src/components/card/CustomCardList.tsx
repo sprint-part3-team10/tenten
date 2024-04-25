@@ -2,13 +2,14 @@ import getProfileData from '@/src/api/getProfileData';
 import getCardData from '@/src/api/getCardData';
 import Link from 'next/link';
 import { NEAR_ADDRESS_LIST } from '@/src/constants/constant';
+import { cookies } from 'next/headers';
 import styles from './CustomCardList.module.scss';
 import Card from './Card';
 import Button from '../common/Button';
+import Carousel from './Carousel';
 
 async function CustomCardList() {
-  const userId = '12696aca-8beb-4e2a-a8ee-579029f4f390'; // '066f080c-5265-4b70-836e-0f1360b57010'; //
-
+  const userId = cookies().get('u_id')?.value; // '066f080c-5265-4b70-836e-0f1360b57010'; //  '12696aca-8beb-4e2a-a8ee-579029f4f390'; // //
   const { address } = await getProfileData(userId);
   const INITIAL_FILTER = {
     address: [address],
@@ -18,13 +19,14 @@ async function CustomCardList() {
   let newItems = [];
 
   const { count, items } = address
-    ? await getCardData(0, 6, '', INITIAL_FILTER)
+    ? await getCardData(0, 8, '', INITIAL_FILTER)
     : { count: 0, items: [] };
 
   newItems = [...items];
-  if (address && count < 6) {
+
+  if (address && count < 8) {
     const nearAddress = [address, ...NEAR_ADDRESS_LIST[address]];
-    const { items: otherItems } = await getCardData(0, 6 - count, '', {
+    const { items: otherItems } = await getCardData(0, 8 - count, '', {
       ...INITIAL_FILTER,
       address: nearAddress,
     });
@@ -34,21 +36,13 @@ async function CustomCardList() {
   if (!address) {
     return (
       <div className={styles.container}>
-        <div className={styles.layout}>
-          <div className={styles.noAddress}>
-            <h1>맞춤 공고가 없어요🥺</h1>
-            <h2>
-              내 프로필에서 선호 지역을 등록해 내 주변 공고를 확인해보세요!
-            </h2>
-            <div className={styles.button}>
-              <Link href='/myprofile'>
-                <Button
-                  size='M'
-                  buttonType='button'
-                  text='내 프로필 보러 가기'
-                />
-              </Link>
-            </div>
+        <div className={styles.noAddress}>
+          <h1>맞춤 공고가 없어요🥺</h1>
+          <h2>내 프로필에서 선호 지역을 등록해 내 주변 공고를 확인해보세요!</h2>
+          <div className={styles.button}>
+            <Link href='/myprofile'>
+              <Button size='M' buttonType='button' text='내 프로필 보러 가기' />
+            </Link>
           </div>
         </div>
       </div>
@@ -57,11 +51,12 @@ async function CustomCardList() {
 
   return (
     <div className={styles.container}>
-      <div className={styles.layout}>
-        <div className={styles.titleContainer}>
-          <h1 className={styles.title}>맞춤 공고</h1>
-        </div>
-        <div className={styles.cardListContainer}>
+      <div className={styles.titleContainer}>
+        <h1 className={styles.title}>맞춤 공고</h1>
+      </div>
+
+      <div className={styles.cardListContainer}>
+        <Carousel>
           {newItems?.map(oneItem => (
             <Card
               key={oneItem.item.id}
@@ -79,7 +74,7 @@ async function CustomCardList() {
               }}
             />
           ))}
-        </div>
+        </Carousel>
       </div>
     </div>
   );

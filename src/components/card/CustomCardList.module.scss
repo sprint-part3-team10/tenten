@@ -1,33 +1,44 @@
 @import '/src/styles/index';
 
 .container {
-  background-color: $red-10;
-}
-
-.layout {
   @include layout;
 
   height: 100%;
   padding-top: 13rem;
+  background-color: $red-10;
 }
 
 .noAddress {
   display: flex;
   flex-direction: column;
-  gap: 3rem;
+  gap: 2.5rem;
   width: 100%;
-  padding: 3rem;
+  padding: 5rem;
   background-color: $white;
   border-radius: 1rem;
 
+  @include media(mobile) {
+    padding: 3rem;
+  }
+
   h1 {
     @include text-24-b;
+
+    @include media(mobile) {
+      @include text-20-b;
+    }
   }
 
   h2 {
     @include text-18-r;
 
     word-break: keep-all;
+
+    @include media(mobile) {
+      @include text-16-r;
+
+      line-height: 2rem;
+    }
   }
 }
 
@@ -48,11 +59,8 @@
 }
 
 .cardListContainer {
-  display: grid;
-  grid-template-columns: repeat(6, 1fr);
-  gap: 2.3rem;
   width: 100%;
   height: 100%;
   padding-top: 3rem;
-  overflow-x: hidden;
+  overflow: hidden;
 }
