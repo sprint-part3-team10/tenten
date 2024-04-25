@@ -1,12 +1,12 @@
 'use client';
 
-import logout from '@/src/lib/logout';
+import deleteCookie from '@/src/lib/logout';
 import { useRouter } from 'next/navigation';
 
 export default function LogoutButton() {
   const router = useRouter();
   const handleLogout = async () => {
-    await logout();
+    await deleteCookie();
     router.push('/');
     router.refresh();
   };
