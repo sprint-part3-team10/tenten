@@ -12,8 +12,10 @@
   border-radius: 1rem;
 
   @include media(mobile) {
+    position: fixed;
     top: 0;
     left: 0;
+    z-index: 11;
     width: 100vw;
     height: 100vh;
     border-radius: 0;
@@ -37,10 +39,34 @@
   color: $black;
 }
 
-.notiBox {
+.notiContainer {
   display: flex;
   flex-direction: column;
   gap: 0.4rem;
+  height: 32rem;
+  overflow: scroll;
+  overflow-x: hidden;
+
+  &::-webkit-scrollbar {
+    width: 0.5rem;
+  }
+
+  &::-webkit-scrollbar-thumb {
+    height: 1%;
+    background: $gray-50;
+    border-radius: 1rem;
+  }
+
+  &::-webkit-scrollbar-track {
+    background: $red-10;
+  }
+
+  @include media(mobile) {
+    height: 100%;
+  }
+}
+
+.notiBox {
   padding: 1.6rem 1.2rem;
   background-color: $white;
   border: 1px solid $gray-20;
@@ -53,6 +79,10 @@
 
 .rejected {
   color: $red-40;
+}
+
+.canceled {
+  color: $gray-50;
 }
 
 .alarmMention {
