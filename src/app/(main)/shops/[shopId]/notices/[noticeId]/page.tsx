@@ -5,6 +5,7 @@ import RecentViews from '@/src/components/RecentViews';
 import Button from '@/src/components/common/Button';
 import ApplyEventContainer from '@/src/components/ApplyEventContainer';
 import { cookies } from 'next/headers';
+import getTimeDifference from '@/src/lib/caculate';
 import styles from './page.module.scss';
 
 // 샘플 api주소 https://bootcamp-api.codeit.kr/api/0-1/the-julge/shops/4490151c-5217-4157-b072-9c37b05bed47/notices/99996477-82db-4bda-aae1-4044f11d9a8b
@@ -49,9 +50,7 @@ async function NoticePage({ params }: NoticePageProps) {
     workhour: notice.workhour,
   };
 
-  const NOW = new Date().getTime();
-  const STARTS_AT = new Date(notice.startsAt as string).getTime();
-  const EXPIRED = NOW > STARTS_AT;
+  const EXPIRED = getTimeDifference(notice.startsAt);
 
   return (
     <>
