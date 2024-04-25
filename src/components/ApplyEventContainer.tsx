@@ -13,11 +13,10 @@ interface EventContainerProps {
   children: ReactElement;
 }
 
-function EmployeeEventContainer({
+function ApplyEventContainer({
   shopId,
   noticeId,
   emptyProfile,
-
   children,
 }: EventContainerProps) {
   const [addProfileModalOpen, setAddProfileModalOpen] = useState(false);
@@ -60,4 +59,4 @@ function EmployeeEventContainer({
   );
 }
 
-export default EmployeeEventContainer;
+export default ApplyEventContainer;

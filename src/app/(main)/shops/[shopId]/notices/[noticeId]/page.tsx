@@ -8,9 +8,11 @@ import ApplyTable from '@/src/components/applyList/ApplyTable';
 import getShopApply from '@/src/api/getShopApply';
 import getTimeDifference from '@/src/lib/caculate';
 import EmployerEventContainer from '@/src/components/EmployerEventContainer';
-import EmployeeEventContainer from '@/src/components/EmployeeEventContainer';
 import { cookies } from 'next/headers';
 import getProfileData from '@/src/api/getProfileData';
+import getUserApply from '@/src/api/getUserApply';
+import ApplyEventContainer from '@/src/components/ApplyEventContainer';
+import CancelApplyEventContainer from '@/src/components/CancelApplyEventContainer';
 import styles from './page.module.scss';
 
 // 샘플 api주소 https://bootcamp-api.codeit.kr/api/0-1/the-julge/shops/4490151c-5217-4157-b072-9c37b05bed47/notices/99996477-82db-4bda-aae1-4044f11d9a8b
@@ -24,8 +26,9 @@ interface NoticePageProps {
 
 async function NoticePage({ params }: NoticePageProps) {
   // const userType = cookies().get('userType');
-  const userType = { value: 'employee' };
   const userId = cookies().get('u_id');
+  const token = cookies().get('token');
+  const userType = { value: 'employee' };
 
   const { shopId, noticeId } = params;
 
@@ -36,10 +39,24 @@ async function NoticePage({ params }: NoticePageProps) {
   const { count } = await getShopApply(shopId, noticeId, 0);
 
   let emptyProfile = true;
+  let applied = null;
   if (userId) {
     const { name } = await getProfileData(userId.value);
     emptyProfile = !name;
+
+    const { items: applications } = await getUserApply(
+      userId.value,
+      0,
+      token.value,
+      50,
+    );
+    applied = applications.find(
+      application =>
+        application.item.status === 'pending' &&
+        application.item.notice.item.id === noticeId,
+    );
   }
+  // console.log(applied);
 
   const infoData = {
     kind: 'notice' as const,
@@ -75,23 +92,39 @@ async function NoticePage({ params }: NoticePageProps) {
           <h2 className={styles.category}>식당</h2>
           <h1 className={styles.sectionTitle}>{shop.name}</h1>
           <ShopNoticeInfoBox data={infoData}>
-            {userType?.value === 'employer' ? (
-              <EmployerEventContainer shopId={shopId} noticeId={noticeId}>
-                <Button buttonType='button' text='공고 편집하기' isWhite />
-              </EmployerEventContainer>
-            ) : (
-              <EmployeeEventContainer
-                shopId={shopId}
-                noticeId={noticeId}
-                emptyProfile={emptyProfile}
-              >
-                {EXPIRED || infoData.closed ? (
+            <>
+              {userType?.value === 'employer' && (
+                <EmployerEventContainer shopId={shopId} noticeId={noticeId}>
+                  <Button buttonType='button' text='공고 편집하기' isWhite />
+                </EmployerEventContainer>
+              )}
+              {userType?.value === 'employee' &&
+                (EXPIRED || infoData.closed) && (
                   <Button buttonType='button' text='신청 불가' isDisable />
-                ) : (
-                  <Button buttonType='button' text='신청하기' />
                 )}
-              </EmployeeEventContainer>
-            )}
+              {userType?.value === 'employee' &&
+                !(EXPIRED || infoData.closed) &&
+                !applied && (
+                  <ApplyEventContainer
+                    shopId={shopId}
+                    noticeId={noticeId}
+                    emptyProfile={emptyProfile}
+                  >
+                    <Button buttonType='button' text='신청하기' />
+                  </ApplyEventContainer>
+                )}
+              {userType?.value === 'employee' &&
+                !(EXPIRED || infoData.closed) &&
+                applied && (
+                  <CancelApplyEventContainer
+                    shopId={shopId}
+                    noticeId={noticeId}
+                    applicationId={applied.item.id}
+                  >
+                    <Button buttonType='button' text='취소하기' isWhite />
+                  </CancelApplyEventContainer>
+                )}
+            </>
           </ShopNoticeInfoBox>
           <div style={{ marginBottom: '2.4rem' }} />
           <JobDescription description={notice.description} />
