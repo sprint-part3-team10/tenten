@@ -15,12 +15,12 @@ import useToast from '@/src/hooks/useToast';
 import { useRouter } from 'next/navigation';
 import styles from './page.module.scss';
 
-interface SignupData {
+interface SignUpData {
   email: string;
   password: string;
 }
 
-interface SignupFormData extends SignupData {
+interface SignUpFormData extends SignUpData {
   passwordCheck: string;
 }
 
@@ -32,13 +32,12 @@ export default function SignUp() {
     handleSubmit,
     getValues,
     formState: { errors },
-  } = useForm<SignupFormData>({
+  } = useForm<SignUpFormData>({
     mode: 'onChange',
     defaultValues: { email: '', password: '', passwordCheck: '' },
   });
   const [isWarning, setIsWarning] = useState<boolean>(false);
-  const { showToast, toastMessage, setToastMessage, displayToast } =
-    useToast(3000);
+  const { showToast, toastMessage, setToastMessage } = useToast(3000);
   const router = useRouter();
 
   const {
@@ -52,7 +51,7 @@ export default function SignUp() {
     setUserType(isEmployer ? 'employer' : 'employee');
   };
 
-  const onSubmit = async (data: SignupData) => {
+  const onSubmit = async (data: SignUpData) => {
     setToastMessage('');
     const { email, password } = data;
     try {
