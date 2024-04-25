@@ -60,25 +60,27 @@ function Card({ data }: CardData) {
           })}
         >
           <h2 className={styles.storeName}>{data.name}</h2>
-          <div className={styles.content}>
-            <Image
-              src={closedStatus ? clockGrayIcon : clockIcon}
-              alt='시계 아이콘'
-              width={20}
-              height={20}
-            />
-            <h3 className={styles.date}>
-              {formatDateAndTime(data.startsAt, data.workhour)}
-            </h3>
-          </div>
-          <div className={styles.content}>
-            <Image
-              src={closedStatus ? locationGrayIcon : locationIcon}
-              alt='위치 아이콘'
-              width={20}
-              height={20}
-            />
-            <h3 className={styles.address}>{data.address1}</h3>
+          <div className={styles.explainContainer}>
+            <div className={styles.timeContent}>
+              <Image
+                src={closedStatus ? clockGrayIcon : clockIcon}
+                alt='시계 아이콘'
+                width={20}
+                height={20}
+              />
+              <h3 className={styles.date}>
+                {formatDateAndTime(data.startsAt, data.workhour)}
+              </h3>
+            </div>
+            <div className={styles.addressContent}>
+              <Image
+                src={closedStatus ? locationGrayIcon : locationIcon}
+                alt='위치 아이콘'
+                width={20}
+                height={20}
+              />
+              <h3 className={styles.address}>{data.address1}</h3>
+            </div>
           </div>
         </div>
         <div className={styles.priceContainer}>
