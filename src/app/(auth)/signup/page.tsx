@@ -37,8 +37,7 @@ export default function SignUp() {
     defaultValues: { email: '', password: '', passwordCheck: '' },
   });
   const [isWarning, setIsWarning] = useState<boolean>(false);
-  const { showToast, toastMessage, setToastMessage, displayToast } =
-    useToast(3000);
+  const { showToast, toastMessage, setToastMessage } = useToast(3000);
   const router = useRouter();
 
   const {
