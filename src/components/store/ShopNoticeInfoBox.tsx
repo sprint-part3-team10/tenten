@@ -4,6 +4,7 @@ import { formatDateAndTime, formatWage } from '@/src/lib/format';
 import { ReactElement } from 'react';
 import clockIcon from '@/public/icons/clock.svg';
 import locationIcon from '@/public/icons/location.svg';
+import getTimeDifference from '@/src/lib/caculate';
 import styles from './ShopNoticeInfoBox.module.scss';
 import WageComparisonBadge from '../common/WageComparisonBadge';
 
@@ -16,8 +17,8 @@ interface ShopNoticeInfoBoxProps {
     description: string;
     imageUrl: string;
     address1: string;
-    originalHourlyPay: number;
-    hourlyPay: number;
+    originalHourlyPay?: number;
+    hourlyPay?: number;
     closed?: boolean;
   };
   children: ReactElement;
@@ -32,14 +33,13 @@ function ShopNoticeInfoBox({ data, children }: ShopNoticeInfoBoxProps) {
     description,
     imageUrl,
     address1,
-    originalHourlyPay,
-    hourlyPay,
+    originalHourlyPay = 0,
+    hourlyPay = 0,
     closed,
   } = data;
   const NOTICE = kind === 'notice';
-  const NOW = new Date().getTime();
-  const STARTS_AT = new Date(startsAt as string).getTime();
-  const EXPIRED = NOW > STARTS_AT;
+
+  const EXPIRED = startsAt ? getTimeDifference(startsAt) : false;
 
   return (
     <div

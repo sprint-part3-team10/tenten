@@ -1,0 +1,61 @@
+@import '/src/styles/index';
+
+.container {
+  height: 100%;
+}
+
+.cardListContainer {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 3.1rem 1.4rem;
+  width: 100%;
+  height: 100%;
+  margin-bottom: 4rem;
+  @include media(tablet) {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+.titleContainer {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 3.4rem;
+
+  @include media(mobile) {
+    flex-direction: column;
+    gap: 1.5rem;
+    align-items: flex-start;
+  }
+}
+
+.title {
+  & > h1 {
+    @include text-28-b;
+
+    @include media(mobile) {
+      @include text-20-b;
+    }
+  }
+}
+
+.buttonContainer {
+  display: flex;
+  gap: 1rem;
+  justify-content: flex-end;
+
+  @include media(mobile) {
+    justify-content: flex-start;
+  }
+}
+
+.noCardList {
+  @include text-20-b;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  height: 30rem;
+  color: $gray-50;
+}

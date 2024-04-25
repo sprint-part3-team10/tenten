@@ -8,15 +8,6 @@
   max-width: 96rem;
   padding: 6rem 0;
   margin: 0 auto;
-
-  @include media(mobile) {
-    width: 94vw;
-  }
-
-  @include media(tablet) {
-    flex-direction: column;
-    max-width: 68rem;
-  }
 }
 
 .sectionTitle {
@@ -25,7 +16,7 @@
   margin-bottom: 2.4rem;
 }
 
-.recentCards {
+.shopNotices {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
   gap: 3.1rem 1.4rem;
@@ -36,6 +27,6 @@
   }
 }
 
-.empty {
-  @include text-16-l;
+.loader {
+  height: 5rem;
 }
