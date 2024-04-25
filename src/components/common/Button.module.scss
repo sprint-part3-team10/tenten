@@ -16,6 +16,7 @@
   &:disabled {
     cursor: not-allowed;
     background: $gray-40;
+    border: 1px solid $gray-40;
   }
 }
 

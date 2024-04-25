@@ -15,6 +15,7 @@ interface RecentViewsProps {
     name: string;
     startsAt: string;
     workhour: number;
+    originalHourlyPay: number;
   };
 }
 
@@ -64,6 +65,7 @@ function RecentViews({ cardData }: RecentViewsProps) {
             <Card
               key={card.item_id}
               data={{
+                originalHourlyPay: card.originalHourlyPay,
                 address1: card.address1,
                 closed: card.closed,
                 hourlyPay: card.hourlyPay,
