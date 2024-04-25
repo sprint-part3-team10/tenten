@@ -16,6 +16,7 @@ interface ModalProps {
   minWidth: string;
   maxWidth: string;
   buttonText: [string] | [string, string];
+  handleButton: [() => void] | [() => void, () => void];
   buttonWidthPercent?: string;
   bottomRightButton?: boolean;
   handleModal: (value: boolean) => void;
@@ -41,6 +42,7 @@ function Modal({
   minWidth,
   maxWidth,
   buttonText = ['닫기'],
+  handleButton = [() => {}],
   buttonWidthPercent = '35%',
   bottomRightButton = false,
   handleModal,
@@ -90,6 +92,7 @@ function Modal({
                 text={buttonText[0]}
                 size='M'
                 isWhite
+                onClick={handleButton[0]}
               />
             </div>
           )}
@@ -98,6 +101,7 @@ function Modal({
               buttonType='button'
               text={buttonText[1] || buttonText[0]}
               size='M'
+              onClick={handleButton[1] || handleButton[0]}
             />
           </div>
         </div>
