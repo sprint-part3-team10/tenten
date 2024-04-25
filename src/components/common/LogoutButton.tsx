@@ -1,6 +1,6 @@
 'use client';
 
-import deleteCookie from '@/src/lib/logout';
+import deleteCookie from '@/src/lib/deleteCookie';
 import { useRouter } from 'next/navigation';
 
 export default function LogoutButton() {
