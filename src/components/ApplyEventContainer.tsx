@@ -22,6 +22,7 @@ function ApplyEventContainer({
   children,
 }: EventContainerProps) {
   const [addProfileModalOpen, setAddProfileModalOpen] = useState(false);
+  const [loginModalOpen, setLoginModalOpen] = useState(false);
   const router = useRouter();
 
   const handleModal = (value: boolean) => {
@@ -29,6 +30,17 @@ function ApplyEventContainer({
   };
 
   const handleClick = async () => {
+    if (loginModalOpen || addProfileModalOpen) {
+      setLoginModalOpen(false);
+      setAddProfileModalOpen(false);
+      return;
+    }
+
+    if (!token) {
+      setLoginModalOpen(true);
+      return;
+    }
+
     if (emptyProfile) {
       setAddProfileModalOpen(true);
       return;
@@ -41,6 +53,24 @@ function ApplyEventContainer({
   return (
     <div onClick={handleClick}>
       {children}
+      {loginModalOpen && (
+        <ModalPortal>
+          <Modal
+            icon='warning'
+            buttonText={['로그인']}
+            handleButton={[
+              e => {
+                e.stopPropagation();
+                router.push('/signin');
+              },
+            ]}
+            handleModal={handleModal}
+            maxWidth='40rem'
+            message='로그인이 필요합니다.'
+            minWidth='20rem'
+          />
+        </ModalPortal>
+      )}
       {addProfileModalOpen && (
         <ModalPortal>
           <Modal
