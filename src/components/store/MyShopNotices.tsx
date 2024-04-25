@@ -2,7 +2,7 @@
 
 import getShopNotices, { Item } from '@/src/api/getShopNotices';
 import { useEffect, useRef, useState } from 'react';
-import Card from '../Card';
+import Card from '../card/Card';
 import styles from './MyShopNotices.module.scss';
 import NoList from '../applyList/NoList';
 
@@ -11,6 +11,7 @@ interface MyShopNoticesProps {
   address1: string;
   imageUrl: string;
   shop_name: string;
+  originalHourlyPay: number;
 }
 
 function MyShopNotices({
@@ -18,6 +19,7 @@ function MyShopNotices({
   address1,
   imageUrl,
   shop_name,
+  originalHourlyPay,
 }: MyShopNoticesProps) {
   const [cards, setCards] = useState<Item[]>([]);
   const [offset, setOffset] = useState<number>(0);
@@ -69,14 +71,13 @@ function MyShopNotices({
             pushUrl='/myshop/register/notice'
           />
         )}
+        {!!cards.length && <h1 className={styles.sectionTitle}>등록한 공고</h1>}
         <div className={styles.shopNotices}>
-          {!!cards.length && (
-            <h1 className={styles.sectionTitle}>등록한 공고</h1>
-          )}
           {cards.map((card, i) => (
             <Card
               key={card.item.id + card.item.id[i]}
               data={{
+                originalHourlyPay,
                 closed: card.item.closed,
                 hourlyPay: card.item.hourlyPay,
                 startsAt: card.item.startsAt,
