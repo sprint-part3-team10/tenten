@@ -6,13 +6,13 @@ import Input from '@/src/components/common/input/Input';
 import Image from 'next/image';
 import Link from 'next/link';
 import { useForm } from 'react-hook-form';
-import { EMAIL_REGEX, PASSWORD_REGEX } from '@/src/constants/signRegEx';
+import { EMAIL_REGEX, PASSWORD_REGEX } from '@/src/constants/regEx';
 import useToast from '@/src/hooks/useToast';
 import Toast from '@/src/components/common/toast/Toast';
 import { useState } from 'react';
 import postLogin from '@/src/api/postLogin';
-import styles from './page.module.scss';
 import { useRouter } from 'next/navigation';
+import styles from './page.module.scss';
 
 interface SigninFormData {
   email: string;
@@ -26,8 +26,7 @@ export default function SignIn() {
     formState: { errors },
   } = useForm<SigninFormData>({ mode: 'onChange' });
   const [isWarning, setIsWarning] = useState<boolean>(false);
-  const { showToast, toastMessage, setToastMessage, displayToast } =
-    useToast(3000);
+  const { showToast, toastMessage, setToastMessage } = useToast(3000);
   const router = useRouter();
 
   const { email: emailError, password: passwordError } = errors;

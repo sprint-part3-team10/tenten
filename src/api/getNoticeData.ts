@@ -29,7 +29,9 @@ const getNoticeData = async (
   shopId: string,
   noticeId: string,
 ): Promise<Notice> => {
-  const res = await fetch(`${BASE_URL}/shops/${shopId}/notices/${noticeId}`);
+  const res = await fetch(`${BASE_URL}/shops/${shopId}/notices/${noticeId}`, {
+    cache: 'no-store',
+  });
   return res.json();
 };
 
