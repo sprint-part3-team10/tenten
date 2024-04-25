@@ -82,8 +82,8 @@ export default function MyProfileRegister({
     router.back();
   };
   const handleConfirmButton = () => {
-    // router.push('/myprofile');
-    // router.refresh();
+    router.push('/myprofile');
+    router.refresh();
   };
 
   const onSubmit = async (formData: MyProfileFormData) => {
