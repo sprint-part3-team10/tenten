@@ -89,7 +89,7 @@ async function NoticePage({ params }: NoticePageProps) {
                   <Button buttonType='button' text='공고 편집하기' isWhite />
                 </EmployerEventContainer>
               )}
-              {userType === 'employee' && (EXPIRED || infoData.closed) && (
+              {userType !== 'employer' && (EXPIRED || infoData.closed) && (
                 <Button buttonType='button' text='신청 불가' isDisable />
               )}
               {userType !== 'employer' &&
