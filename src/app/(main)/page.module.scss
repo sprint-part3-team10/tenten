@@ -1,5 +1,5 @@
 @import '../../styles/index';
 
-.mainLayout {
-  @include layout;
+.withCustom {
+  padding-top: 5rem;
 }
