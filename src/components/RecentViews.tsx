@@ -1,7 +1,7 @@
 'use client';
 
 import { useEffect, useState } from 'react';
-import Card from './Card';
+import Card from './card/Card';
 import styles from './RecentViews.module.scss';
 
 interface RecentViewsProps {

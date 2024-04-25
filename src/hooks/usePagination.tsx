@@ -9,7 +9,7 @@ function usePagination(limit: number) {
     setOffset((page - 1) * limit);
   };
 
-  return { selectedPage, offset, handlePageChange };
+  return { offset, selectedPage, handlePageChange };
 }
 
 export default usePagination;

@@ -3,7 +3,12 @@ import ShopNoticeInfoBox from '@/src/components/store/ShopNoticeInfoBox';
 import getNoticeData from '@/src/api/getNoticeData';
 import RecentViews from '@/src/components/RecentViews';
 import Button from '@/src/components/common/Button';
-import ApplyEventContainer from '@/src/components/ApplyEventContainer';
+// import { cookies } from 'next/headers';
+import ApplyTable from '@/src/components/applyList/ApplyTable';
+import getShopApply from '@/src/api/getShopApply';
+import getTimeDifference from '@/src/lib/caculate';
+import EmployerEventContainer from '@/src/components/ApplyEventContainer';
+import EmployeeEventContainer from '@/src/components/EmployeeEventContainer';
 import { cookies } from 'next/headers';
 import getProfileData from '@/src/api/getProfileData';
 import styles from './page.module.scss';
@@ -18,12 +23,15 @@ interface NoticePageProps {
 }
 
 async function NoticePage({ params }: NoticePageProps) {
-  const userType = cookies().get('userType');
+  // const userType = cookies().get('userType');
+  const userType = { value: 'employer' };
   const userId = cookies().get('u_id');
 
   const { shopId, noticeId } = params;
 
   const { item: notice } = await getNoticeData(shopId, noticeId);
+  const { count } = await getShopApply(shopId, noticeId, 0);
+
   let emptyProfile = true;
   if (userId) {
     const { name } = await getProfileData(userId.value);
@@ -57,9 +65,7 @@ async function NoticePage({ params }: NoticePageProps) {
     workhour: notice.workhour,
   };
 
-  const NOW = new Date().getTime();
-  const STARTS_AT = new Date(notice.startsAt as string).getTime();
-  const EXPIRED = NOW > STARTS_AT;
+  const EXPIRED = getTimeDifference(notice.startsAt);
 
   return (
     <>
@@ -69,21 +75,21 @@ async function NoticePage({ params }: NoticePageProps) {
           <h1 className={styles.sectionTitle}>{shop.name}</h1>
           <ShopNoticeInfoBox data={infoData}>
             {userType?.value === 'employer' ? (
-              <div />
+              <EmployerEventContainer
+                shopId={shopId}
+                noticeId={noticeId}
+                emptyProfile={emptyProfile}
+              >
+                <Button buttonType='button' text='공고 편집하기' isWhite />
+              </EmployerEventContainer>
             ) : (
-              <div>
+              <EmployeeEventContainer shopId={shopId} noticeId={noticeId}>
                 {EXPIRED || infoData.closed ? (
                   <Button buttonType='button' text='신청 불가' isDisable />
                 ) : (
-                  <ApplyEventContainer
-                    shopId={shopId}
-                    noticeId={noticeId}
-                    emptyProfile={emptyProfile}
-                  >
-                    <Button buttonType='button' text='신청하기' />
-                  </ApplyEventContainer>
+                  <Button buttonType='button' text='신청하기' />
                 )}
-              </div>
+              </EmployeeEventContainer>
             )}
           </ShopNoticeInfoBox>
           <div style={{ marginBottom: '2.4rem' }} />
@@ -91,7 +97,18 @@ async function NoticePage({ params }: NoticePageProps) {
         </div>
       </section>
       {userType?.value === 'employer' ? (
-        <div />
+        <div className={styles.tableArea}>
+          <div className={styles.title}>신청자 목록</div>
+          {count ? (
+            <ApplyTable
+              noticeId={noticeId}
+              shopId={shopId}
+              userType={userType?.value}
+            />
+          ) : (
+            <div className={styles.noApply}>신청자가 없습니다.</div>
+          )}
+        </div>
       ) : (
         <RecentViews cardData={cardData} />
       )}

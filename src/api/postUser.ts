@@ -26,7 +26,7 @@ const postUserData = async (
     let errorMessage = '';
     switch (res.status) {
       case 400:
-        errorMessage = '올바른 이메일이 아닙니다.';
+        errorMessage = '이메일을 입력하세요.';
         break;
       case 409:
         errorMessage = '이미 존재하는 이메일입니다.';

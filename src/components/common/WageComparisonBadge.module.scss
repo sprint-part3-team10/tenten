@@ -9,6 +9,13 @@
   color: $white;
   background-color: $red-40;
   border-radius: 2rem;
+
+  & > span {
+    max-width: 12.5rem;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  }
 }
 
 .closedBadge {

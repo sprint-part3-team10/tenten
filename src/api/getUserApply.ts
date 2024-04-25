@@ -1,20 +1,20 @@
 import { BASE_URL } from './api';
 
-interface ShopApplyData {
+interface UserApplyData {
   count: number;
   items: object[];
 }
 
-const getShopApply = async (
-  shopId: string,
-  noticeId: string,
-): Promise<ShopApplyData> => {
+const getUserApply = async (
+  userId: string,
+  offset: number,
+): Promise<UserApplyData> => {
   const res = await fetch(
-    `${BASE_URL}/shops/${shopId}/notices/${noticeId}/applications`,
+    `${BASE_URL}/users/${userId}/applications?offset=${offset}&limit=5`,
     {
       headers: {
-        Authorization:
-          'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI1NmNhNmJmNC02YjZmLTRmNGYtOTczMS1iODM3Y2NkYmNiNmIiLCJpYXQiOjE3MTM4NjgxMzl9.GHg7XOLvw6AbVZz-ws4cVyJae5k3dGs8DZIR8Hu_BXk',
+        authorization:
+          'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiIwNjZmMDgwYy01MjY1LTRiNzAtODM2ZS0wZjEzNjBiNTcwMTAiLCJpYXQiOjE3MTM5NTM1OTZ9.K8vUZ48DF7o6tHMDnWJJpLjijMoEgCDRYJMoJtQulIc',
       },
       cache: 'no-store',
     },
@@ -30,4 +30,4 @@ const getShopApply = async (
   return { count, items };
 };
 
-export default getShopApply;
+export default getUserApply;

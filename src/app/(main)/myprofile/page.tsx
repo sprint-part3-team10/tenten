@@ -3,6 +3,7 @@ import MyProfile from '@/src/components/myProfile/MyProfile';
 import ApplyTable from '@/src/components/applyList/ApplyTable';
 import getProfileData from '@/src/api/getProfileData';
 import getUserApply from '@/src/api/getUserApply';
+// import { cookies } from 'next/headers';
 import styles from './page.module.scss';
 
 // userType = 'employee' : employee일 때 해당 페이지로 이동
@@ -15,11 +16,12 @@ interface MyprofileProps {
 
 async function myprofile({ params }: MyprofileProps) {
   // const { userId } = params;
-  const userId = '56ca6bf4-6b6f-4f4f-9731-b837ccdbcb6b';
+  const userId = '066f080c-5265-4b70-836e-0f1360b57010';
+  // const userType = cookies().get('userType');
+  const userType = { value: 'employee' };
 
   const { name, phone, address, bio } = await getProfileData(userId);
-
-  const { count, items } = await getUserApply(userId);
+  const { count } = await getUserApply(userId, 0);
 
   return !name ? (
     <div className={styles.layout}>
@@ -43,7 +45,7 @@ async function myprofile({ params }: MyprofileProps) {
           {count ? (
             <div>
               <div className={styles.title}>신청 내역</div>
-              <ApplyTable totalCount={count} applies={items} />
+              <ApplyTable userId={userId} userType={userType?.value} />
             </div>
           ) : (
             <NoList

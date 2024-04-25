@@ -14,6 +14,9 @@ interface Shop {
 const getShop = async (shopId: string): Promise<Shop> => {
   const res = await fetch(
     `https://bootcamp-api.codeit.kr/api/0-1/the-julge/shops/${shopId}`,
+    {
+      cache: 'no-store',
+    },
   );
 
   return res.json();

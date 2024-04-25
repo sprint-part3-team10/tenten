@@ -1,5 +1,22 @@
 @import '/src/styles/index';
 
+.backgroundArea {
+  height: 100vh;
+  padding-top: 6rem;
+  background-color: $white;
+}
+
+.tableArea {
+  padding: 6rem calc((100vw - 96.5rem) / 2);
+
+  @include media(tablet) {
+    padding: 6rem 3.2rem;
+  }
+  @include media(mobile) {
+    padding: 4rem 1.2rem;
+  }
+}
+
 .outer {
   padding-top: 8rem;
   background-color: $gray-5;

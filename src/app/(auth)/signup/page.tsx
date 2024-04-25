@@ -8,16 +8,19 @@ import { useState } from 'react';
 import Logo from '@/public/icons/logo.svg';
 import Button from '@/src/components/common/Button';
 import { useForm } from 'react-hook-form';
+import { EMAIL_REGEX, PASSWORD_REGEX } from '@/src/constants/regEx';
 import postUserData from '@/src/api/postUser';
 import Toast from '@/src/components/common/toast/Toast';
 import useToast from '@/src/hooks/useToast';
 import { useRouter } from 'next/navigation';
-import { EMAIL_REGEX, PASSWORD_REGEX } from '@/src/constants/regEx';
 import styles from './page.module.scss';
 
-interface SignupFormData {
+interface SignUpData {
   email: string;
   password: string;
+}
+
+interface SignUpFormData extends SignUpData {
   passwordCheck: string;
 }
 
@@ -27,16 +30,15 @@ export default function SignUp() {
   const {
     register,
     handleSubmit,
-    watch,
+    getValues,
     formState: { errors },
-  } = useForm<SignupFormData>({ mode: 'onChange' });
+  } = useForm<SignUpFormData>({
+    mode: 'onChange',
+    defaultValues: { email: '', password: '', passwordCheck: '' },
+  });
   const [isWarning, setIsWarning] = useState<boolean>(false);
-  const { showToast, toastMessage, setToastMessage, displayToast } =
-    useToast(3000);
-
+  const { showToast, toastMessage, setToastMessage } = useToast(3000);
   const router = useRouter();
-
-  const pw = watch('password');
 
   const {
     email: emailError,
@@ -49,11 +51,9 @@ export default function SignUp() {
     setUserType(isEmployer ? 'employer' : 'employee');
   };
 
-  const onSubmit = async ({
-    email,
-    password,
-    passwordCheck,
-  }: SignupFormData) => {
+  const onSubmit = async (data: SignUpData) => {
+    setToastMessage('');
+    const { email, password } = data;
     try {
       await postUserData(email, password, userType);
       setToastMessage('정상적으로 가입되었습니다.');
@@ -97,15 +97,17 @@ export default function SignUp() {
               },
             })}
           />
-
           <Input
             label='비밀번호 확인'
             inputType='password'
             error={passwordCheckError}
             register={register('passwordCheck', {
-              validate: value => value === pw || '비밀번호가 일치하지 않습니다',
+              validate: value =>
+                value === getValues('password') ||
+                `비밀번호가 일치하지 않습니다`,
             })}
           />
+
           <TypeSelector
             label='회원 유형'
             onChange={handleType}
