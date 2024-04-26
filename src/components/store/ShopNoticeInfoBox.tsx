@@ -4,7 +4,7 @@ import { formatDateAndTime, formatWage } from '@/src/lib/format';
 import { ReactElement } from 'react';
 import clockIcon from '@/public/icons/clock.svg';
 import locationIcon from '@/public/icons/location.svg';
-import getTimeDifference from '@/src/lib/caculate';
+import { getTimeDifference } from '@/src/lib/caculate';
 import styles from './ShopNoticeInfoBox.module.scss';
 import WageComparisonBadge from '../common/WageComparisonBadge';
 
