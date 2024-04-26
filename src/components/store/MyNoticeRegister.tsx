@@ -82,7 +82,11 @@ export default function MyNoticeRegister({
     router.back();
   };
   const handleConfirmButton = () => {
-    router.push(`/shops/${shopId}/notices/${noticeId}`);
+    if (noticeId) {
+      router.push(`/shops/${shopId}/notices/${noticeId}`);
+    } else {
+      router.push('/myshop');
+    }
     router.refresh();
   };
 
