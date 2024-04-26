@@ -45,10 +45,6 @@ export default function MyShopRegister({ token, shopId }: MyShopRegisterProps) {
   const handleGoBack = () => {
     router.back();
   };
-  const handleConfirmButton = () => {
-    router.push('/myshop');
-    router.refresh();
-  };
 
   const {
     register,
@@ -70,11 +66,12 @@ export default function MyShopRegister({ token, shopId }: MyShopRegisterProps) {
     },
   });
 
-  // name : 가게이름
-  // category : 분류
-  // address1 : 주소
-  // address2 : 상세주소
-  // originalHourlyPay : 기본시급
+  const handleConfirmButton = () => {
+    if (!watch('imageUrl')) return;
+    router.push('/myshop');
+    router.refresh();
+  };
+
   const {
     name: nameError,
     category: categoryError,
