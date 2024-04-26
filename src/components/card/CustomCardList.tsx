@@ -10,7 +10,7 @@ import Carousel from './Carousel';
 
 async function CustomCardList() {
   const userId = cookies().get('u_id')?.value; // '066f080c-5265-4b70-836e-0f1360b57010'; //  '12696aca-8beb-4e2a-a8ee-579029f4f390'; // //
-  const { address } = await getProfileData(userId);
+  const { address } = (await getProfileData(userId)) || '';
   const INITIAL_FILTER = {
     address: [address],
     startsAtGte: new Date(),
