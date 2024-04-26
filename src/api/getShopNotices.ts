@@ -1,3 +1,5 @@
+import { BASE_URL } from './api';
+
 export interface Item {
   item: {
     id: string;
@@ -22,7 +24,7 @@ const getShopNotices = async (
   offset: number,
 ): Promise<ShopNotices> => {
   const res = await fetch(
-    `https://bootcamp-api.codeit.kr/api/0-1/the-julge/shops/${shopId}/notices?offset=${offset}&limit=6`,
+    `${BASE_URL}/shops/${shopId}/notices?offset=${offset}&limit=6`,
     {
       cache: 'no-store',
     },

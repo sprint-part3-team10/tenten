@@ -1,3 +1,5 @@
+import { BASE_URL } from './api';
+
 const putApplication = async (
   shopId: string,
   noticeId: string,
@@ -5,7 +7,7 @@ const putApplication = async (
   token?: string,
 ) => {
   const res = await fetch(
-    `https://bootcamp-api.codeit.kr/api/0-1/the-julge/shops/${shopId}/notices/${noticeId}/applications/${applicationId}`,
+    `${BASE_URL}/shops/${shopId}/notices/${noticeId}/applications/${applicationId}`,
     {
       method: 'PUT',
       cache: 'no-store',

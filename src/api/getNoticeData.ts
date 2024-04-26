@@ -1,4 +1,4 @@
-const BASE_URL = 'https://bootcamp-api.codeit.kr/api/0-1/the-julge';
+import { BASE_URL } from './api';
 
 interface Notice {
   item: {
