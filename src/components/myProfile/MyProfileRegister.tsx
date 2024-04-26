@@ -47,13 +47,9 @@ export default function MyProfileRegister({
       name: '',
       phone: '',
       address: '',
+      bio: '',
     },
   });
-
-  // name : 유저이름
-  // phone : 연락처
-  // address : 선호지역
-  // bio : 자기소개
 
   const {
     name: nameError,
