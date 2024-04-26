@@ -4,7 +4,7 @@ import { ReactElement, useState } from 'react';
 import { useRouter } from 'next/navigation';
 import Modal from './common/modal/Modal';
 import ModalPortal from './common/modal/ModalPortal';
-import putApplication from '../api/putApplication';
+import putAlarmStatus from '../api/putAlarmStatus';
 
 interface CancelApplyEventContainerProps {
   shopId: string;
@@ -18,7 +18,7 @@ function CancelApplyEventContainer({
   shopId,
   noticeId,
   applicationId,
-  token,
+  token = '',
   children,
 }: CancelApplyEventContainerProps) {
   const [cancelModalOpen, setCancelModalOpen] = useState(false);
@@ -34,7 +34,7 @@ function CancelApplyEventContainer({
 
   const handleCancelApplication = async (e: Event) => {
     e.stopPropagation();
-    await putApplication(shopId, noticeId, applicationId, token);
+    await putAlarmStatus(shopId, noticeId, applicationId, 'canceled', token);
     handleModal(false);
     router.refresh();
   };
