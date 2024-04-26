@@ -21,6 +21,7 @@ import {
 import Image from 'next/image';
 import cameraIcon from '@/public/icons/camera.svg';
 import { MyShopFormData } from '@/src/types/interface';
+import Spinner from '../Spinner';
 import styles from './MyShopRegister.module.scss';
 
 interface MyShopRegisterProps {
@@ -29,6 +30,7 @@ interface MyShopRegisterProps {
 }
 
 export default function MyShopRegister({ token, shopId }: MyShopRegisterProps) {
+  const [isLoading, setIsLoading] = useState(true);
   const params = useSearchParams();
   const isEditing = params.get('action') === 'edit';
   const [isShow, setIsShow] = useState(false);
@@ -140,10 +142,15 @@ export default function MyShopRegister({ token, shopId }: MyShopRegisterProps) {
       Object.entries(shopData).forEach(([fieldName, value]) => {
         setValue(fieldName, value);
       });
+      setIsLoading(false);
     };
 
     fetchShopData(shopId);
   }, [isEditing, shopId, setValue]);
+
+  if (isLoading && isEditing) {
+    return <Spinner />;
+  }
 
   return (
     <div className={styles.layout}>

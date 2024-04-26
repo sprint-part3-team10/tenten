@@ -13,6 +13,7 @@ import ModalPortal from '@/src/components/common/modal/ModalPortal';
 import Modal from '@/src/components/common/modal/Modal';
 import BackSpaceButton from '@/src/components/common/BackSpaceButton';
 import { MyNoticeFormData } from '@/src/types/interface';
+import Spinner from '../Spinner';
 import styles from './MyNoticeRegister.module.scss';
 import DatePicker from '../common/Datepicker';
 
@@ -25,6 +26,7 @@ export default function MyNoticeRegister({
   token,
   shopId,
 }: MyNoticeRegisterProps) {
+  const [isLoading, setIsLoading] = useState(true);
   const params = useSearchParams();
   const noticeId = params.get('noticeId');
   const [isShow, setIsShow] = useState(false);
@@ -115,10 +117,15 @@ export default function MyNoticeRegister({
           setValue(fieldName, value);
         }
       });
+      setIsLoading(false);
     };
 
     fetchNoticeData(shopId, noticeId);
   }, [watch, shopId, noticeId, setValue]);
+
+  if (isLoading && noticeId) {
+    return <Spinner />;
+  }
 
   return (
     <div className={styles.container}>
