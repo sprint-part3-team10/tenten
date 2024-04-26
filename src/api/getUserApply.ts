@@ -28,7 +28,6 @@ const getUserApply = async (
     {
       headers: {
         authorization: `Bearer ${token}`,
-        // 'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiIwNjZmMDgwYy01MjY1LTRiNzAtODM2ZS0wZjEzNjBiNTcwMTAiLCJpYXQiOjE3MTM5NTM1OTZ9.K8vUZ48DF7o6tHMDnWJJpLjijMoEgCDRYJMoJtQulIc',
       },
       cache: 'no-store',
     },

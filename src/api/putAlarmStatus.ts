@@ -14,7 +14,6 @@ const putAlarmStatus = async (
       headers: {
         'Content-Type': 'application/json',
         authorization: `Bearer ${token}`,
-        // 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI1NmNhNmJmNC02YjZmLTRmNGYtOTczMS1iODM3Y2NkYmNiNmIiLCJpYXQiOjE3MTM5NjM4NjR9.y-COvjBCzlRxRV_gqBy6tVdYo8ALn4aTU9W5QxdyWQo',
       },
       body: JSON.stringify({
         status,

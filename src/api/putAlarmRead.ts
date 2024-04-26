@@ -6,7 +6,6 @@ const putAlarmRead = async (userId: string, alertId: string, token: string) => {
     headers: {
       'Content-Type': 'application/json',
       authorization: `Bearer ${token}`,
-      // 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiIwNjZmMDgwYy01MjY1LTRiNzAtODM2ZS0wZjEzNjBiNTcwMTAiLCJpYXQiOjE3MTQwMjMxMjZ9.tAnHykJc6znAkv26ntNx6-GTHuHXLd5DOz9VecWyEGA',
     },
     cache: 'no-store',
   });
