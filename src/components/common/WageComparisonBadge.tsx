@@ -24,7 +24,13 @@ function WageComparisonBadge({
 }: WageComparisonBadgeProps) {
   const [mouseOver, setMouseOver] = useState(false);
 
-  const increaseRate = Math.ceil((hourlyPay / originalHourlyPay) * 100);
+  const increaseRate = Math.ceil(
+    ((hourlyPay - originalHourlyPay) / originalHourlyPay) * 100,
+  );
+
+  if (increaseRate <= 0) {
+    return null;
+  }
 
   const handleMouseEnter = () => {
     setMouseOver(true);

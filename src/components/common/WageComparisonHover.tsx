@@ -10,7 +10,9 @@ function WageComparisonHover({
   hourlyPay,
   originalHourlyPay,
 }: WageComparisonHoverProps) {
-  const increaseRate = Math.ceil((hourlyPay / originalHourlyPay) * 100);
+  const increaseRate = Math.ceil(
+    ((hourlyPay - originalHourlyPay) / originalHourlyPay) * 100,
+  );
 
   return (
     <div
