@@ -77,6 +77,7 @@ export default function SignUp() {
           <Input
             label='이메일'
             inputType='text'
+            placeholder='example@example.com'
             error={emailError}
             register={register('email', {
               pattern: {
@@ -89,6 +90,7 @@ export default function SignUp() {
           <Input
             label='비밀번호'
             inputType='password'
+            placeholder='비밀번호'
             error={passwordError}
             register={register('password', {
               pattern: {
@@ -100,6 +102,7 @@ export default function SignUp() {
           <Input
             label='비밀번호 확인'
             inputType='password'
+            placeholder='비밀번호 확인'
             error={passwordCheckError}
             register={register('passwordCheck', {
               validate: value =>
