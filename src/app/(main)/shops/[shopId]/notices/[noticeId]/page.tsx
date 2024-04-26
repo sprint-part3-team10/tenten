@@ -81,7 +81,7 @@ async function NoticePage({ params }: NoticePageProps) {
           <ShopNoticeInfoBox data={infoData}>
             <>
               {userType === 'employer' && (
-                <EmployerEventContainer shopId={shopId} noticeId={noticeId}>
+                <EmployerEventContainer noticeId={noticeId}>
                   <Button buttonType='button' text='공고 편집하기' isWhite />
                 </EmployerEventContainer>
               )}

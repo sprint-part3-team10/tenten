@@ -1,5 +1,9 @@
 @import '/src/styles/index';
 
+.outer {
+  position: relative;
+}
+
 .badge {
   @include text-14-b;
 

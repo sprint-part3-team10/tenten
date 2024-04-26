@@ -1,0 +1,45 @@
+@import '../styles/index';
+
+@import './globals';
+
+.container404 {
+  display: flex;
+  flex-direction: column;
+  gap: 4rem;
+  align-items: center;
+  justify-content: flex-start;
+  width: 100vw;
+  height: 100vh;
+  background-color: #f0efe9;
+}
+
+.errorMessage {
+  @include text-20-b;
+}
+
+.errorTitle {
+  @include text-24-b;
+
+  display: inline-block;
+  padding: 2rem 3rem;
+  color: $white;
+  background-color: #ea3c12;
+  border-radius: 0.8rem;
+}
+
+.returnHome {
+  @include text-20-b;
+
+  box-sizing: border-box;
+  padding: 2rem 3rem;
+  color: #ea3c12;
+  text-align: center;
+  text-decoration: none;
+  background-color: $white;
+  border: 1px solid #ea3c12;
+  border-radius: 0.8rem;
+
+  &:hover {
+    background-color: $red-10;
+  }
+}

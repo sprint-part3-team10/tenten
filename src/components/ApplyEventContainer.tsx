@@ -21,18 +21,51 @@ function ApplyEventContainer({
   token,
   children,
 }: EventContainerProps) {
-  const [addProfileModalOpen, setAddProfileModalOpen] = useState(false);
   const [loginModalOpen, setLoginModalOpen] = useState(false);
+  const [addProfileModalOpen, setAddProfileModalOpen] = useState(false);
+  const [applyModalOpen, setApplyModalOpen] = useState(false);
   const router = useRouter();
 
-  const handleModal = (value: boolean) => {
+  const handleLoginModal = (value: boolean) => {
+    setLoginModalOpen(value);
+  };
+
+  const handleAddProfileModal = (value: boolean) => {
     setAddProfileModalOpen(value);
   };
 
-  const handleClick = async () => {
-    if (loginModalOpen || addProfileModalOpen) {
+  const handleApplyModal = (value: boolean) => {
+    setApplyModalOpen(value);
+  };
+
+  const handleLoginButton = (e: Event) => {
+    e.stopPropagation();
+    setLoginModalOpen(false);
+    router.push('/signin');
+  };
+
+  const handleAddProfileButton = (e: Event) => {
+    e.stopPropagation();
+    handleAddProfileModal(false);
+  };
+
+  const handleNoApplyButton = (e: Event) => {
+    e.stopPropagation();
+    handleApplyModal(false);
+  };
+
+  const handleApplyButton = async (e: Event) => {
+    e.stopPropagation();
+    await postApplication(shopId, noticeId, token);
+    setApplyModalOpen(false);
+    router.refresh();
+  };
+
+  const handleClick = () => {
+    if (loginModalOpen || addProfileModalOpen || applyModalOpen) {
       setLoginModalOpen(false);
       setAddProfileModalOpen(false);
+      setApplyModalOpen(false);
       return;
     }
 
@@ -46,8 +79,7 @@ function ApplyEventContainer({
       return;
     }
 
-    await postApplication(shopId, noticeId, token);
-    router.refresh();
+    setApplyModalOpen(true);
   };
 
   return (
@@ -58,13 +90,8 @@ function ApplyEventContainer({
           <Modal
             icon='warning'
             buttonText={['로그인']}
-            handleButton={[
-              e => {
-                e.stopPropagation();
-                router.push('/signin');
-              },
-            ]}
-            handleModal={handleModal}
+            handleButton={[handleLoginButton]}
+            handleModal={handleLoginModal}
             maxWidth='40rem'
             message='로그인이 필요합니다.'
             minWidth='20rem'
@@ -76,15 +103,23 @@ function ApplyEventContainer({
           <Modal
             icon='warning'
             buttonText={['확인']}
-            handleModal={handleModal}
-            handleButton={[
-              e => {
-                e.stopPropagation();
-                handleModal(false);
-              },
-            ]}
+            handleModal={handleAddProfileModal}
+            handleButton={[handleAddProfileButton]}
             maxWidth='40rem'
             message='내 프로필을 먼저 등록해 주세요.'
+            minWidth='20rem'
+          />
+        </ModalPortal>
+      )}
+      {applyModalOpen && (
+        <ModalPortal>
+          <Modal
+            icon='check'
+            buttonText={['아니오', '신청']}
+            handleButton={[handleNoApplyButton, handleApplyButton]}
+            handleModal={handleApplyModal}
+            maxWidth='40rem'
+            message='신청하시겠습니까?'
             minWidth='20rem'
           />
         </ModalPortal>
