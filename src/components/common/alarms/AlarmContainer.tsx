@@ -30,7 +30,16 @@ export default function AlarmContainer({
   useEffect(() => {
     const getUnread = async () => {
       const { items } = await getAlarms(userId, token);
-      const filteredItems = items.filter(item => item.item.read === false);
+      let filteredItems;
+      if (userType === 'employee') {
+        filteredItems = items.filter(
+          item => item.item.read === false && item.item.result !== 'canceled',
+        );
+      } else if (userType === 'employer') {
+        filteredItems = items.filter(
+          item => item.item.read === false && item.item.result === 'canceled',
+        );
+      }
       const count = filteredItems.length;
       setUnRead(count);
       setAlarms([...filteredItems]);
