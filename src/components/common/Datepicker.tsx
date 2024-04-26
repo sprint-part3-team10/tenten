@@ -13,10 +13,13 @@ interface DatePickerProps {
   error?: FieldError;
 }
 
-function DatePicker(
-  { value, onChange, timeSelect, error, width = '100%' }: DatePickerProps,
-  ref: React.Ref<HTMLInputElement>,
-) {
+function DatePicker({
+  value,
+  onChange,
+  timeSelect,
+  error,
+  width = '100%',
+}: DatePickerProps) {
   const pickerBoxStyle = {
     width,
     ...(error
@@ -42,7 +45,6 @@ function DatePicker(
           timeFormat='HH:mm'
           timeIntervals={5}
           timeCaption='time'
-          ref={ref}
         />
       ) : (
         <ReactDatePicker
