@@ -14,3 +14,10 @@ export interface MyProfileFormData {
   address: string;
   bio: string;
 }
+
+export interface MyNoticeFormData {
+  hourlyPay: number | string;
+  startsAt: Date;
+  workhour: number | string;
+  description: string;
+}
