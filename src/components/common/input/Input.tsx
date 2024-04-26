@@ -86,6 +86,7 @@ export default function Input({
         {(label.includes('시급') || label.includes('금액')) && (
           <span className={styles.won}>원</span>
         )}
+        {label.includes('시간') && <span className={styles.won}>시간</span>}
       </div>
 
       {error && <div className={styles.error}>{error.message}</div>}
