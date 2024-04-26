@@ -8,9 +8,9 @@ import NoList from '@/src/components/applyList/NoList';
 import styles from './page.module.scss';
 
 export default async function MyShop() {
-  const shopId = cookies().get('s_id');
+  const shopId = cookies().get('s_id')?.value;
 
-  if (!shopId?.value) {
+  if (!shopId) {
     return (
       <div className={styles.layout}>
         <div className={styles.backgroundArea}>
@@ -27,7 +27,7 @@ export default async function MyShop() {
     );
   }
 
-  const { item } = await getShop(shopId.value);
+  const { item } = await getShop(shopId);
 
   return (
     <>
@@ -58,7 +58,7 @@ export default async function MyShop() {
         originalHourlyPay={item.originalHourlyPay}
         address1={item.address1}
         imageUrl={item.imageUrl}
-        shopId={shopId.value}
+        shopId={shopId}
         shop_name={item.name}
       />
     </>
