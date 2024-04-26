@@ -9,7 +9,7 @@ import Modal from './modal/Modal';
 export default function LogoutButton() {
   const router = useRouter();
   const [isShow, setIsShow] = useState(false);
-  const [modalMessage, setModalMessage] = useState('로그아웃 하시겠습니까?');
+  const modalMessage = '로그아웃 하시겠습니까?';
 
   const handleShowModal = (modalState: boolean) => {
     setIsShow(modalState);
