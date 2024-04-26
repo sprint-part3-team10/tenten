@@ -40,8 +40,8 @@ function CancelApplyEventContainer({
   };
 
   return (
-    <div onClick={handleClick}>
-      {children}
+    <>
+      <div onClick={handleClick}>{children}</div>
       {cancelModalOpen && (
         <ModalPortal>
           <Modal
@@ -61,7 +61,7 @@ function CancelApplyEventContainer({
           />
         </ModalPortal>
       )}
-    </div>
+    </>
   );
 }
 export default CancelApplyEventContainer;
