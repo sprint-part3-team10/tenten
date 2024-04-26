@@ -3,13 +3,13 @@ import MyProfile from '@/src/components/myProfile/MyProfile';
 import ApplyTable from '@/src/components/applyList/ApplyTable';
 import getProfileData from '@/src/api/getProfileData';
 import getUserApply from '@/src/api/getUserApply';
-import getCookie from '@/src/lib/getCookie';
+import getCookies from '@/src/lib/getCookies';
 import { redirect } from 'next/navigation';
 import AlarmSet from '@/src/components/common/alarms/AlarmSet';
 import styles from './page.module.scss';
 
 async function myprofile() {
-  const { userId, token, userType } = getCookie();
+  const { userId, token, userType } = getCookies();
   if (!userId) redirect('/');
 
   const { name, phone, address, bio } = await getProfileData(userId);

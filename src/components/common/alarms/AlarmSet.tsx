@@ -1,4 +1,4 @@
-import getCookie from '@/src/lib/getCookie';
+import getCookie from '@/src/lib/getCookies';
 import AlarmIcon from './AlarmIcon';
 
 export default function AlarmSet() {
