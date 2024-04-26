@@ -1,5 +1,5 @@
 import { BASE_URL } from './api';
-import setCookie from '../lib/setCookie';
+import setCookies from '../lib/setCookies';
 
 interface UserData {
   email: string;
@@ -44,9 +44,25 @@ const postLogin = async (
   }
 
   const { item } = result;
-  const { token, user } = item;
+  const token = item.token;
+  const user = item.user.item;
 
-  setCookie({ token, user });
+  if (user.type === 'employer') {
+    const res = await fetch(`${BASE_URL}/users/${user.id}`, {
+      cache: 'no-store',
+    });
+    const result = await res.json();
+    const shop = result.item.shop;
+    if (shop) {
+      const shopId = shop.item.id;
+      setCookies({ token, user, shopId });
+    } else {
+      setCookies({ token, user });
+    }
+    console.log(shop);
+  } else {
+    setCookies({ token, user });
+  }
 
   return { token, user };
 };
