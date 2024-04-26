@@ -13,6 +13,8 @@ function Carousel({ children }: CarouselProps) {
   const [time, setTime] = useState(6000);
 
   useEffect(() => {
+    if (React.Children.count(children) <= 3) return;
+
     const interval = setInterval(() => {
       setCurrentIndex(prevIndex =>
         prevIndex === React.Children.count(children) - 3 ? 0 : prevIndex + 1,

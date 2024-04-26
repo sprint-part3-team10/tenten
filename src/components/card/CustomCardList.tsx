@@ -49,6 +49,16 @@ async function CustomCardList() {
     );
   }
 
+  if (newItems.length === 0) {
+    return (
+      <div className={styles.container}>
+        <div className={styles.noAddress}>
+          <h1>내 주변 공고가 없어요😭</h1>
+        </div>
+      </div>
+    );
+  }
+
   return (
     <div className={styles.container}>
       <div className={styles.titleContainer}>
