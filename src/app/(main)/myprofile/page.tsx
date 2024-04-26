@@ -3,25 +3,18 @@ import MyProfile from '@/src/components/myProfile/MyProfile';
 import ApplyTable from '@/src/components/applyList/ApplyTable';
 import getProfileData from '@/src/api/getProfileData';
 import getUserApply from '@/src/api/getUserApply';
-// import { cookies } from 'next/headers';
+import getCookies from '@/src/lib/getCookies';
+import { redirect } from 'next/navigation';
+import AlarmSet from '@/src/components/common/alarms/AlarmSet';
 import styles from './page.module.scss';
 
-// userType = 'employee' : employee일 때 해당 페이지로 이동
-
-interface MyprofileProps {
-  params: {
-    [param: string]: string;
-  };
-}
-
-async function myprofile({ params }: MyprofileProps) {
-  // const { userId } = params;
-  const userId = '066f080c-5265-4b70-836e-0f1360b57010';
-  // const userType = cookies().get('userType');
-  const userType = { value: 'employee' };
+async function myprofile() {
+  const { userId, token, userType } = getCookies();
+  if (!userId) redirect('/');
 
   const { name, phone, address, bio } = await getProfileData(userId);
-  const { count } = await getUserApply(userId, 0);
+
+  const { count } = await getUserApply(userId, 0, token);
 
   return !name ? (
     <div className={styles.layout}>
@@ -38,6 +31,7 @@ async function myprofile({ params }: MyprofileProps) {
         <div className={styles.title}>내 프로필</div>
         <div className={styles.profileBox}>
           <MyProfile name={name} phone={phone} address={address} bio={bio} />
+          <AlarmSet />
         </div>
       </div>
       <div className={styles.backgroundArea}>
@@ -45,7 +39,7 @@ async function myprofile({ params }: MyprofileProps) {
           {count ? (
             <div>
               <div className={styles.title}>신청 내역</div>
-              <ApplyTable userId={userId} userType={userType?.value} />
+              <ApplyTable userId={userId} userType={userType} token={token} />
             </div>
           ) : (
             <NoList
