@@ -16,9 +16,14 @@ import styles from './AlarmContainer.module.scss';
 interface AlarmContainerProps {
   userId: string;
   token: string;
+  userType: string;
 }
 
-export default function AlarmContainer({ userId, token }: AlarmContainerProps) {
+export default function AlarmContainer({
+  userId,
+  token,
+  userType,
+}: AlarmContainerProps) {
   const [checkRead, setCheckRead] = useState(false);
   const [unRead, setUnRead] = useState(0);
   const [alarms, setAlarms] = useState([]);

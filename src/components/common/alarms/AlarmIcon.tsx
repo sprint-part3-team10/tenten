@@ -13,9 +13,10 @@ import styles from './AlarmIcon.module.scss';
 interface AlarmIconProps {
   userId: string;
   token: string;
+  userType: string;
 }
 
-export default function AlarmIcon({ userId, token }: AlarmIconProps) {
+export default function AlarmIcon({ userId, token, userType }: AlarmIconProps) {
   const [isOpen, setIsOpen] = useState(false);
   const [unRead, setUnRead] = useState(0);
 
@@ -56,6 +57,7 @@ export default function AlarmIcon({ userId, token }: AlarmIconProps) {
           handleCloseClick={handleCloseClick}
           userId={userId}
           token={token}
+          userType={userType}
         />
       </div>
     </div>
