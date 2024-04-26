@@ -32,7 +32,23 @@ const getNoticeData = async (
   const res = await fetch(`${BASE_URL}/shops/${shopId}/notices/${noticeId}`, {
     cache: 'no-store',
   });
-  return res.json();
+
+  if (!res.ok) {
+    let errorMessage = '';
+    switch (res.status) {
+      case 404:
+        errorMessage = '가게나 공고가 존재하지 않습니다';
+        break;
+      default:
+        errorMessage = `${res.status} ${res.statusText}`;
+        break;
+    }
+    throw new Error(errorMessage);
+  }
+
+  const result = await res.json();
+
+  return result;
 };
 
 export default getNoticeData;
