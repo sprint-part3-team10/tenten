@@ -11,7 +11,7 @@ import getProfileData from '@/src/api/getProfileData';
 import getUserApply from '@/src/api/getUserApply';
 import ApplyEventContainer from '@/src/components/ApplyEventContainer';
 import CancelApplyEventContainer from '@/src/components/CancelApplyEventContainer';
-import getCookie from '@/src/lib/getCookie';
+import getCookies from '@/src/lib/getCookies';
 import styles from './page.module.scss';
 
 interface NoticePageProps {
@@ -22,7 +22,7 @@ interface NoticePageProps {
 
 async function NoticePage({ params }: NoticePageProps) {
   // const userType = cookies().get('userType');
-  const { userId, token, userType } = getCookie();
+  const { userId, token, userType } = getCookies();
   // const userId = cookies().get('u_id')?.value;
   // const token = cookies().get('token')?.value;
   // const userType = { value: 'employee' };
