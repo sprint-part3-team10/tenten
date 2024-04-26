@@ -10,10 +10,11 @@ import { CardItems, Filter } from '@/src/types/types';
 import styles from './CardList.module.scss';
 import Dropdown from '../common/Dropdown';
 import FilterButton from '../filterPopover/FilterButton';
+import Spinner from '../Spinner';
 
 const INITIAL_FILTER = {
   address: [],
-  startsAtGte: undefined,
+  startsAtGte: new Date(),
   hourlyPayGte: '',
 };
 
@@ -69,6 +70,10 @@ function CardList({ search = undefined }: CardListProps) {
     handlePageChange(1);
   };
 
+  if (totalCount === undefined) {
+    return <Spinner />;
+  }
+
   return (
     <div className={styles.container} ref={ref}>
       <div className={styles.titleContainer}>
@@ -94,7 +99,11 @@ function CardList({ search = undefined }: CardListProps) {
           />
         </div>
       </div>
-      {totalCount && totalCount > 0 ? (
+      {totalCount === 0 && (
+        <div className={styles.noCardList}>등록된 공고가 없습니다.</div>
+      )}
+
+      {totalCount > 0 && (
         <>
           <div className={styles.cardListContainer}>
             {cardItems?.map(oneItem => (
@@ -122,8 +131,6 @@ function CardList({ search = undefined }: CardListProps) {
             handlePageChange={handlePageChange}
           />
         </>
-      ) : (
-        <div className={styles.noCardList}>등록된 공고가 없어요.</div>
       )}
     </div>
   );
