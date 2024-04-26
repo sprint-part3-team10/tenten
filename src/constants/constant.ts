@@ -7,6 +7,7 @@ export const STATUS_LABEL: StatusLabelType = {
   accepted: '승인 완료',
   rejected: '거절',
   pending: '대기중',
+  canceled: '취소',
 };
 
 export const NEAR_ADDRESS_LIST: Record<string, string[]> = {

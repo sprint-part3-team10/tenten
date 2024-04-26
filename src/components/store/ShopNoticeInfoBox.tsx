@@ -48,7 +48,15 @@ function ShopNoticeInfoBox({ data, children }: ShopNoticeInfoBoxProps) {
       })}
     >
       <div className={styles.imageContainer}>
-        <Image fill src={imageUrl} alt='식당 이미지' className={styles.image} />
+        <Image
+          fill
+          sizes='(max-width: 768px) 100vw, (max-width: 1199px) 50vw, 33vw'
+          priority
+          style={{ objectFit: 'cover' }}
+          src={imageUrl}
+          alt='식당 이미지'
+          className={styles.image}
+        />
         {closed && <div className={styles.closed}>마감 완료</div>}
         {!closed && EXPIRED && <div className={styles.closed}>지난 공고</div>}
       </div>

@@ -1,6 +1,7 @@
 import Image from 'next/image';
 import locationIcon from '@/public/icons/location.svg';
 import phoneIcon from '@/public/icons/phone.svg';
+import Link from 'next/link';
 import styles from './MyProfile.module.scss';
 import Button from '../common/Button';
 
@@ -44,8 +45,11 @@ export default async function MyProfile({
         </div>
         <p className={styles.bio}>{bio}</p>
       </div>
+
       <div className={styles.button}>
-        <Button buttonType='button' text='편집하기' size='M' isWhite />
+        <Link href='/myprofile/register?action=edit'>
+          <Button buttonType='button' text='편집하기' size='M' isWhite />
+        </Link>
       </div>
     </div>
   );

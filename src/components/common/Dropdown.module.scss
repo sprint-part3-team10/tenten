@@ -12,6 +12,7 @@
   position: relative;
   display: flex;
   flex-direction: column;
+  gap: 0.8rem;
 
   .inputBox {
     position: relative;
@@ -28,6 +29,7 @@
 
     .input {
       @include border-gray;
+      @include text-16-l;
 
       padding: 1.6rem 2rem;
       cursor: pointer;
@@ -42,6 +44,11 @@
       text-align: start;
       background: $gray-10;
       border: none;
+    }
+
+    .input.errorBox {
+      border: 1px solid $red-40;
+      border-radius: 0.5rem;
     }
 
     .arrow {
@@ -109,4 +116,11 @@
   .selectList.onlyFilterList {
     height: auto;
   }
+}
+
+.error {
+  @include text-12-l;
+
+  line-height: 1.6rem;
+  color: $red-40;
 }

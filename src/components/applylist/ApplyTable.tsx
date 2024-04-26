@@ -23,6 +23,7 @@ interface ApplyTableProps {
   shopId?: string;
   userId?: string;
   userType: string;
+  token?: string;
 }
 
 const titleCol = {
@@ -32,7 +33,7 @@ const titleCol = {
 
 function ApplyTable(props: ApplyTableProps) {
   const router = useRouter();
-  const { userType } = props;
+  const { userType, token } = props;
 
   const [applies, setApplies] = useState([] as unknown);
   const [total, setTotal] = useState<number>(0);
@@ -45,7 +46,9 @@ function ApplyTable(props: ApplyTableProps) {
   const handleModalClick = (value: string, id: string) => {
     setOpen(true);
     const text =
-      value === 'reject' ? '신청을 거절하시겠어요?' : '신청을 승인하시겠어요?';
+      value === 'rejected'
+        ? '신청을 거절하시겠어요?'
+        : '신청을 승인하시겠어요?';
     setMessage(text);
     setStatus(value);
     setApplyId(id);
@@ -62,14 +65,13 @@ function ApplyTable(props: ApplyTableProps) {
     const fetchData = async () => {
       const { count, items } =
         userType === 'employee'
-          ? await getUserApply(props.userId, offset)
-          : await getShopApply(props.shopId, props.noticeId, offset);
+          ? await getUserApply(props.userId, offset, token)
+          : await getShopApply(props.shopId, props.noticeId, offset, token);
       setApplies(items);
       setTotal(count);
     };
     fetchData();
   }, [offset]);
-  console.log('applies', applies);
 
   return (
     <>
@@ -163,7 +165,13 @@ function ApplyTable(props: ApplyTableProps) {
             handleButton={[
               () => {},
               () => {
-                putAlarmStatus(props.shopId, props.noticeId, applyId, status);
+                putAlarmStatus(
+                  props.shopId,
+                  props.noticeId,
+                  applyId,
+                  status,
+                  token,
+                );
                 router.refresh();
               },
             ]}

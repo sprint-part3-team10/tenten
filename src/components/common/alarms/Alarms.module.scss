@@ -1,4 +1,4 @@
-@import '../../styles/index';
+@import '../../../styles/index';
 
 .container {
   position: relative;
@@ -12,8 +12,10 @@
   border-radius: 1rem;
 
   @include media(mobile) {
+    position: fixed;
     top: 0;
     left: 0;
+    z-index: 11;
     width: 100vw;
     height: 100vh;
     border-radius: 0;
@@ -29,41 +31,4 @@
     right: 2rem;
     display: block;
   }
-}
-
-.title {
-  @include text-20-b;
-
-  color: $black;
-}
-
-.notiBox {
-  display: flex;
-  flex-direction: column;
-  gap: 0.4rem;
-  padding: 1.6rem 1.2rem;
-  background-color: $white;
-  border: 1px solid $gray-20;
-  border-radius: 0.5rem;
-}
-
-.accepted {
-  color: $blue-20;
-}
-
-.rejected {
-  color: $red-40;
-}
-
-.alarmMention {
-  @include text-14-l;
-
-  line-height: 2.2rem;
-}
-
-.created {
-  @include text-12-l;
-
-  line-height: 1.6rem;
-  color: $gray-40;
 }
