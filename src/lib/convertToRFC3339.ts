@@ -1,6 +1,7 @@
 export default function convertToRFC3339(
   dateObject: Date,
   initNextDayTime: boolean = true,
+  init: boolean = true,
 ) {
   const now = new Date();
   const isNextDaySelected = dateObject.toDateString() !== now.toDateString();
@@ -11,6 +12,14 @@ export default function convertToRFC3339(
 
   if (isNextDaySelected && initNextDayTime)
     return `${year}-${month}-${day}T${initTime}`;
+
+  if (init) {
+    const hours = String(now.getHours()).padStart(2, '0');
+    const minutes = String(now.getMinutes()).padStart(2, '0');
+    const seconds = String(now.getSeconds()).padStart(2, '0');
+
+    return `${year}-${month}-${day}T${hours}:${minutes}:${seconds}Z`;
+  }
 
   const hours = String(dateObject.getHours()).padStart(2, '0');
   const minutes = String(dateObject.getMinutes()).padStart(2, '0');
