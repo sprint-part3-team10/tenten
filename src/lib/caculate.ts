@@ -19,6 +19,6 @@ export function getFromTime(createdAt: string) {
   if (minutes <= 59) return `${Math.floor(minutes)}분 전`;
   if (hours <= 23) return `${Math.floor(hours)}시간 전`;
   if (days <= 30) return `${Math.floor(days)}일 전`;
-  if (months <= 11) return `${Math.floor(months)}달 전`;
+  if (months < 12) return `${Math.floor(months)}달 전`;
   if (months >= 12) return `${Math.floor(months / 12)}년 전`;
 }
