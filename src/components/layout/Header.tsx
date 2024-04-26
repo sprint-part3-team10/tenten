@@ -5,6 +5,7 @@ import checkLogin from '@/src/lib/checkLogin';
 import styles from './Header.module.scss';
 import SearchBar from '../SearchBar';
 import LogoutButton from '../common/LogoutButton';
+import AlarmSet from '../common/alarms/AlarmSet';
 
 export default function Header() {
   const { hasToken, userType } = checkLogin();
@@ -24,29 +25,32 @@ export default function Header() {
         <div className={styles.searchBar}>
           <SearchBar />
         </div>
-        {hasToken ? (
-          <div className={styles.activeList}>
-            {userType === 'employee' ? (
-              <Link href='/myprofile'>
-                <button>내 프로필</button>
+        <div className={styles.activeList}>
+          {hasToken ? (
+            <>
+              {userType === 'employee' ? (
+                <Link href='/myprofile'>
+                  <button>내 프로필</button>
+                </Link>
+              ) : (
+                <Link href='/myshop'>
+                  <button>내 가게</button>
+                </Link>
+              )}
+              <LogoutButton />
+              <AlarmSet />
+            </>
+          ) : (
+            <>
+              <Link href='/signin'>
+                <button>로그인</button>
               </Link>
-            ) : (
-              <Link href='/myshop'>
-                <button>내 가게</button>
+              <Link href='/signup'>
+                <button>회원가입</button>
               </Link>
-            )}
-            <LogoutButton />
-          </div>
-        ) : (
-          <div className={styles.activeList}>
-            <Link href='/signin'>
-              <button>로그인</button>
-            </Link>
-            <Link href='/signup'>
-              <button>회원가입</button>
-            </Link>
-          </div>
-        )}
+            </>
+          )}
+        </div>
       </div>
     </div>
   );
