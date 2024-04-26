@@ -27,25 +27,38 @@
 }
 
 .nameCol {
-  width: 10rem;
+  position: sticky;
+  left: 0;
+  z-index: 2;
   width: 25%;
   border-bottom: 1px solid $gray-20;
 
   @include media(tablet) {
-    position: sticky;
-    left: 0;
-    z-index: 1;
-    width: 20rem;
+    width: 15rem;
   }
+}
+
+.listRow.nameCol {
+  background-color: $gray-5;
+}
+
+.title.nameCol {
+  z-index: 2;
+  padding: 0.3rem;
+  background-color: $red-10;
 }
 
 .payCol {
   width: 20%;
   border-bottom: 1px solid $gray-20;
 
-  // @include media(tablet) {
-  //   display: none;
-  // }
+  @include media(tablet) {
+    width: 20rem;
+  }
+}
+
+.title.payCol {
+  z-index: 2;
 }
 
 .timeCol {
@@ -54,14 +67,8 @@
   border-bottom: 1px solid $gray-20;
 
   @include media(tablet) {
-    position: sticky;
-    z-index: 1;
-    width: 20rem;
+    width: 25rem;
   }
-
-  // @include media(mobile) {
-  //   display: none;
-  // }
 }
 
 .statusCol {
@@ -70,9 +77,21 @@
 
   @include media(tablet) {
     position: sticky;
-    z-index: 1;
-    width: 20rem;
+    right: 0;
+    z-index: 3;
+    display: table-cell;
+    width: 15rem;
   }
+}
+
+.listRow.statusCol {
+  background-color: $gray-5;
+}
+
+.title.statusCol {
+  z-index: 3;
+  padding: 0.2rem;
+  background-color: $red-10;
 }
 
 .pagination {

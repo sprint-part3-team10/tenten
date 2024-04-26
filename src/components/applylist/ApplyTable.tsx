@@ -172,7 +172,7 @@ function ApplyTable(props: ApplyTableProps) {
                   status,
                   token,
                 );
-                router.refresh();
+                location.reload();
               },
             ]}
             message={message}
