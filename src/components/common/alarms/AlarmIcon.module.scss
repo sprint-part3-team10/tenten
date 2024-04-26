@@ -2,7 +2,6 @@
 
 .button {
   position: relative;
-  margin-left: 40rem;
 }
 
 .alarms {
@@ -18,4 +17,37 @@
 
 .closeAlarm {
   display: none;
+}
+
+.container {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  gap: 1.6rem;
+  width: 36.8rem;
+  padding: 2.4rem 2rem;
+  background-color: $red-10;
+  border: 1px solid $gray-30;
+  border-radius: 1rem;
+
+  @include media(mobile) {
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: 11;
+    width: 100vw;
+    height: 100vh;
+    border-radius: 0;
+  }
+}
+
+.close {
+  display: none;
+  background-color: $red-10;
+
+  @include media(mobile) {
+    position: absolute;
+    right: 2rem;
+    display: block;
+  }
 }
