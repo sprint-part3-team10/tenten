@@ -7,3 +7,10 @@ export interface MyShopFormData {
   imageUrl: string;
   originalHourlyPay: number | string;
 }
+
+export interface MyProfileFormData {
+  name: string;
+  phone: string;
+  address: string;
+  bio: string;
+}
