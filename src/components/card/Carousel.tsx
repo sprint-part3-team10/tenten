@@ -29,7 +29,7 @@ function Carousel({ children }: CarouselProps) {
       carouselInnerRef.current.style.transform = `translateX(-${currentIndex * 33.8}%)`;
     }
 
-    if (currentIndex === 5) setTime(8000);
+    if (currentIndex === React.Children.count(children) - 3) setTime(8000);
     else setTime(6000);
   }, [currentIndex]);
 
