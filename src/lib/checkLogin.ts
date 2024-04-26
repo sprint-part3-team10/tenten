@@ -1,4 +1,5 @@
 import { cookies } from 'next/headers';
+import getCookie from './getCookie';
 
 interface CheckCookieData {
   hasToken: boolean;
@@ -8,12 +9,9 @@ interface CheckCookieData {
 function checkLogin(): CheckCookieData {
   const cookiesStore = cookies();
   const hasToken = cookiesStore.has('token');
-  if (cookiesStore.get('userType')) {
-    const userType = cookiesStore.get('userType').value;
-    return { hasToken, userType };
-  }
+  const userType = getCookie('userType');
 
-  return { hasToken };
+  return { hasToken, userType };
 }
 
 export default checkLogin;
