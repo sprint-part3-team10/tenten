@@ -59,7 +59,6 @@ const postLogin = async (
     } else {
       setCookies({ token, user });
     }
-    console.log(shop);
   } else {
     setCookies({ token, user });
   }
