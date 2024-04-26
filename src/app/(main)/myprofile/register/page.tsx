@@ -1,4 +1,4 @@
-import MyProfileRegister from '@/src/components/myProfile/register/MyProfileRegister';
+import MyProfileRegister from '@/src/components/myProfile/MyProfileRegister';
 import getCookie from '@/src/lib/getCookie';
 import styles from './page.module.scss';
 
