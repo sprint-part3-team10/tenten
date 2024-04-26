@@ -52,7 +52,7 @@ function Pagination({
   };
 
   useEffect(() => {
-    setSelectedSection(Math.floor(selectedPage / sectionSize));
+    setSelectedSection(Math.ceil(selectedPage / sectionSize) - 1);
   }, [selectedPage]);
 
   return (

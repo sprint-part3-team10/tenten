@@ -1,5 +1,9 @@
 @import '../../styles/index';
 
-.mainLayout {
-  @include layout;
+.noCustom {
+  padding-top: 5rem;
+
+  @include media(mobile) {
+    padding-top: 10rem;
+  }
 }
