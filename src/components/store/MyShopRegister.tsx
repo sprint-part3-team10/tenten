@@ -198,7 +198,7 @@ export default function MyShopRegister({ token, shopId }: MyShopRegisterProps) {
               })}
             />
             <Input
-              label='시급*'
+              label='기본 시급 *'
               inputType='number'
               onChange={handleHourlyPayChange}
               placeholder='기본 시급을 적어주세요'
