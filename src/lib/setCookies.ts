@@ -14,7 +14,7 @@ interface CookieData {
   shopId?: string;
 }
 
-function setCookies({ token, user, shopId }: CookieData) {
+function setCookies({ token = '', user, shopId = '' }: CookieData) {
   const cookieStore = cookies();
   const expireTime = 12 * 60 * 60 * 1000;
 
