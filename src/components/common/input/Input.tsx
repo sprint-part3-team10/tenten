@@ -83,7 +83,7 @@ export default function Input({
             )}
           </button>
         )}
-        {(label === '시급*' || label === '금액') && (
+        {(label.includes('시급') || label.includes('금액')) && (
           <span className={styles.won}>원</span>
         )}
       </div>
