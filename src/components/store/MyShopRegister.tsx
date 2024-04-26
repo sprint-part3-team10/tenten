@@ -221,7 +221,7 @@ export default function MyShopRegister({ token, shopId }: MyShopRegisterProps) {
               accept='image/*'
               onChange={handleImageFileChange}
             />
-            <p>가게 이미지</p>
+            <p>가게 이미지 *</p>
             <div
               className={styles.storeImageBox}
               onClick={handleFilePickerClick}
