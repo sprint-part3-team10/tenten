@@ -5,7 +5,7 @@ import RecentViews from '@/src/components/RecentViews';
 import Button from '@/src/components/common/Button';
 import ApplyTable from '@/src/components/applyList/ApplyTable';
 import getShopApply from '@/src/api/getShopApply';
-import getTimeDifference from '@/src/lib/caculate';
+import { getTimeDifference } from '@/src/lib/caculate';
 import EmployerEventContainer from '@/src/components/EmployerEventContainer';
 import getProfileData from '@/src/api/getProfileData';
 import getUserApply from '@/src/api/getUserApply';
@@ -21,11 +21,7 @@ interface NoticePageProps {
 }
 
 async function NoticePage({ params }: NoticePageProps) {
-  // const userType = cookies().get('userType');
   const { userId, token, userType } = getCookies();
-  // const userId = cookies().get('u_id')?.value;
-  // const token = cookies().get('token')?.value;
-  // const userType = { value: 'employee' };
 
   const { shopId, noticeId } = params;
 
@@ -33,7 +29,7 @@ async function NoticePage({ params }: NoticePageProps) {
   const {
     shop: { item: shop },
   } = notice;
-  const { count } = await getShopApply(shopId, noticeId, 0);
+  const { count } = await getShopApply(shopId, noticeId, 0, token);
 
   let emptyProfile = true;
   let applied = null;
@@ -130,6 +126,7 @@ async function NoticePage({ params }: NoticePageProps) {
               noticeId={noticeId}
               shopId={shopId}
               userType={userType}
+              token={token}
             />
           ) : (
             <div className={styles.noApply}>신청자가 없습니다.</div>
