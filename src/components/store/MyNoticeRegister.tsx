@@ -109,12 +109,16 @@ export default function MyNoticeRegister({
         startsAt: noticeData.startsAt.replace('Z', ''),
       };
       Object.entries(timeConverTedNoticeData).forEach(([fieldName, value]) => {
-        setValue(fieldName, value);
+        if (fieldName === 'startsAt') {
+          setValue(fieldName, new Date(value));
+        } else {
+          setValue(fieldName, value);
+        }
       });
     };
 
     fetchNoticeData(shopId, noticeId);
-  }, [shopId, noticeId, setValue]);
+  }, [watch, shopId, noticeId, setValue]);
 
   return (
     <div className={styles.container}>
