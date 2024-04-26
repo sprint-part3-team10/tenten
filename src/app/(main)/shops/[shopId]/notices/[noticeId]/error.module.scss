@@ -1,0 +1,11 @@
+@import '/src/styles/index';
+
+.outer {
+  position: relative;
+  padding: 10rem 0;
+
+  & > div {
+    inset: 8rem 0 0;
+    background-color: $gray-40;
+  }
+}
