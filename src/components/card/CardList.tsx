@@ -3,7 +3,7 @@
 import Card from '@/src/components/card/Card';
 import Pagination from '@/src/components/pagination/Pagination';
 import usePagination from '@/src/hooks/usePagination';
-import { useEffect, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import getCardData from '@/src/api/getCardData';
 import { STORE_FILTERING_LIST } from '@/src/constants/dropdownList';
 import { CardItems, Filter } from '@/src/types/types';
@@ -17,7 +17,11 @@ const INITIAL_FILTER = {
   hourlyPayGte: '',
 };
 
-function CardList() {
+interface CardListProps {
+  search?: string | undefined;
+}
+
+function CardList({ search = undefined }: CardListProps) {
   const LIMIT = 6;
   const { offset, selectedPage, handlePageChange } = usePagination(LIMIT);
   const [cardItems, setCardItems] = useState<CardItems['items']>([]);
@@ -26,6 +30,8 @@ function CardList() {
     Object.keys(STORE_FILTERING_LIST)[0],
   );
   const [filterItems, setFilterItems] = useState<Filter>(INITIAL_FILTER);
+  const [isFirstRender, setIsFirstRender] = useState(true);
+  const ref = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
     const fetchData = async () => {
@@ -35,16 +41,23 @@ function CardList() {
           LIMIT,
           STORE_FILTERING_LIST[sortText],
           filterItems,
+          search,
         );
         setCardItems(items);
         setTotalCount(count);
-        window.scrollTo(0, 100);
+
+        if (!isFirstRender)
+          window.scrollTo({
+            top: ref.current.offsetTop - 50,
+            behavior: 'smooth',
+          });
+        else setIsFirstRender(false);
       } catch (error) {
         console.error(error);
       }
     };
     fetchData();
-  }, [offset, filterItems, sortText]);
+  }, [offset, filterItems, sortText, search]);
 
   const handleDropdownClick = (selectedValue: string) => {
     setSortText(selectedValue);
@@ -57,14 +70,20 @@ function CardList() {
   };
 
   return (
-    <div className={styles.container}>
+    <div className={styles.container} ref={ref}>
       <div className={styles.titleContainer}>
         <div className={styles.title}>
-          <h1>전체 공고</h1>
+          {search ? (
+            <h1>
+              <span>{search}</span>에 대한 공고 목록
+            </h1>
+          ) : (
+            <h1>전체 공고</h1>
+          )}
         </div>
         <div className={styles.buttonContainer}>
           <Dropdown
-            width='37%'
+            width='40%'
             optionList={Object.keys(STORE_FILTERING_LIST)}
             value={sortText}
             onClick={handleDropdownClick}
