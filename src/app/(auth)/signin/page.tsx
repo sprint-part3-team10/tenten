@@ -56,6 +56,7 @@ export default function SignIn() {
           <Input
             label='이메일'
             inputType='text'
+            placeholder='이메일'
             error={emailError}
             register={register('email', {
               pattern: {
@@ -67,6 +68,7 @@ export default function SignIn() {
           <Input
             label='비밀번호'
             inputType='password'
+            placeholder='비밀번호'
             error={passwordError}
             register={register('password', {
               pattern: {

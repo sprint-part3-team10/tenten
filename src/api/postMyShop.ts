@@ -1,6 +1,6 @@
 import { BASE_URL } from './api';
-import setShopCookie from '../lib/setShopIdCookie';
 import { MyShopFormData } from '../types/interface';
+import setCookies from '../lib/setCookies';
 
 const postMyShop = async (token: string, myShopFormData: MyShopFormData) => {
   const response = await fetch(`${BASE_URL}/shops`, {
@@ -30,7 +30,8 @@ const postMyShop = async (token: string, myShopFormData: MyShopFormData) => {
     throw new Error(errorMessage);
   }
 
-  setShopCookie(result.item.id);
+  const shopId = result.item.id;
+  setCookies({ shopId });
 };
 
 export default postMyShop;
