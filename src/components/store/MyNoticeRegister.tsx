@@ -6,12 +6,14 @@ import { useForm, Controller } from 'react-hook-form';
 import postMyNotice from '@/src/api/postMyNotice';
 import putMyNotice from '@/src/api/putMyNotice';
 import getNoticeData from '@/src/api/getNoticeData';
+import getShop from '@/src/api/getShop';
 import Input from '@/src/components/common/input/Input';
 import Button from '@/src/components/common/Button';
 import TextArea from '@/src/components/common/TextArea';
 import ModalPortal from '@/src/components/common/modal/ModalPortal';
 import Modal from '@/src/components/common/modal/Modal';
 import BackSpaceButton from '@/src/components/common/BackSpaceButton';
+import { getTimeDifference } from '@/src/lib/caculate';
 import { MyNoticeFormData } from '@/src/types/interface';
 import Spinner from '../Spinner';
 import styles from './MyNoticeRegister.module.scss';
@@ -27,6 +29,7 @@ export default function MyNoticeRegister({
   shopId,
 }: MyNoticeRegisterProps) {
   const [isLoading, setIsLoading] = useState(true);
+  const [originalPay, setOriginalPay] = useState(0);
   const params = useSearchParams();
   const noticeId = params.get('noticeId');
   const [isShow, setIsShow] = useState(false);
@@ -79,7 +82,7 @@ export default function MyNoticeRegister({
     router.back();
   };
   const handleConfirmButton = () => {
-    router.push('/myshop');
+    router.push(`/shops/${shopId}/notices/${noticeId}`);
     router.refresh();
   };
 
@@ -123,6 +126,21 @@ export default function MyNoticeRegister({
     fetchNoticeData(shopId, noticeId);
   }, [watch, shopId, noticeId, setValue]);
 
+  useEffect(() => {
+    const fetchOriginalPayData = async (targetShopId: string) => {
+      try {
+        const result = await getShop(targetShopId);
+        const { originalHourlyPay } = result.item;
+        setOriginalPay(originalHourlyPay);
+        setIsLoading(false);
+      } catch (error) {
+        console.error(error.message);
+      }
+    };
+
+    fetchOriginalPayData(shopId);
+  }, [shopId]);
+
   if (isLoading && noticeId) {
     return <Spinner />;
   }
@@ -143,6 +161,11 @@ export default function MyNoticeRegister({
             placeholder='시급을 입력해 주세요'
             register={register('hourlyPay', {
               required: '필수 입력사항입니다.',
+              validate: {
+                minWage: value =>
+                  Number(value) >= Number(originalPay) ||
+                  `기본시급(${originalPay}) 보다 낮은 값은 입력할 수 없습니다`,
+              },
             })}
           />
           <div className={styles.pickerBox}>
@@ -150,9 +173,23 @@ export default function MyNoticeRegister({
             <Controller
               name='startsAt'
               control={control}
-              rules={{ required: '필수 선택사항입니다.' }}
+              rules={{
+                required: '필수 선택사항입니다.',
+                validate: value => {
+                  const selectedValue = new Date(value);
+                  if (getTimeDifference(selectedValue.toISOString())) {
+                    return '현재보다 이전 시간대는 선택할 수 없습니다.';
+                  }
+                  return true;
+                },
+              }}
               render={({ field }) => (
-                <DatePicker {...field} timeSelect error={startsAtError} />
+                <DatePicker
+                  {...field}
+                  timeSelect
+                  value={watch('startsAt')}
+                  error={startsAtError}
+                />
               )}
             />
             {startsAtError && (
