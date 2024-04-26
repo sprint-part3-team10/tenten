@@ -5,7 +5,6 @@ import getProfileData from '@/src/api/getProfileData';
 import getUserApply from '@/src/api/getUserApply';
 import getCookies from '@/src/lib/getCookies';
 import { redirect } from 'next/navigation';
-import AlarmSet from '@/src/components/common/alarms/AlarmSet';
 import styles from './page.module.scss';
 
 async function myprofile() {
@@ -31,7 +30,6 @@ async function myprofile() {
         <div className={styles.title}>내 프로필</div>
         <div className={styles.profileBox}>
           <MyProfile name={name} phone={phone} address={address} bio={bio} />
-          <AlarmSet />
         </div>
       </div>
       <div className={styles.backgroundArea}>
