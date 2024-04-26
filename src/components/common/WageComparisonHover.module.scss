@@ -5,13 +5,19 @@
 
   position: absolute;
   top: -0.5rem;
+  z-index: 1;
   display: flex;
   justify-content: center;
   width: max-content;
+  max-width: 22rem;
   padding: 0.8rem;
   color: $white;
   background-color: $gray-30;
   border-radius: 0.8rem;
   transform: translateY(-100%);
   transform-origin: bottom;
+
+  @include media(mobile) {
+    max-width: 16rem;
+  }
 }
