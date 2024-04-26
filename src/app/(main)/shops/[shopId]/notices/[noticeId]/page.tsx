@@ -29,7 +29,12 @@ async function NoticePage({ params }: NoticePageProps) {
   const {
     shop: { item: shop },
   } = notice;
-  const { count } = await getShopApply(shopId, noticeId, 0, token);
+
+  let applyNum = 0;
+  if (token) {
+    const { count } = await getShopApply(shopId, noticeId, 0, token);
+    applyNum = count;
+  }
 
   let emptyProfile = true;
   let applied = null;
@@ -81,7 +86,7 @@ async function NoticePage({ params }: NoticePageProps) {
           <ShopNoticeInfoBox data={infoData}>
             <>
               {userType === 'employer' && (
-                <EmployerEventContainer shopId={shopId} noticeId={noticeId}>
+                <EmployerEventContainer noticeId={noticeId}>
                   <Button buttonType='button' text='공고 편집하기' isWhite />
                 </EmployerEventContainer>
               )}
@@ -121,7 +126,7 @@ async function NoticePage({ params }: NoticePageProps) {
       {userType === 'employer' ? (
         <div className={styles.tableArea}>
           <div className={styles.title}>신청자 목록</div>
-          {count ? (
+          {applyNum ? (
             <ApplyTable
               noticeId={noticeId}
               shopId={shopId}
