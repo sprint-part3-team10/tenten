@@ -14,7 +14,7 @@ interface InputProps {
   width?: string;
   error?: FieldError;
   register?: UseFormRegisterReturn;
-  onChange?: (e: React.ChangeEvent<HTMLInputElement>) => void;
+  onChange?: (e: React.ChangeEvent<HTMLInputElement>) => void | undefined;
 }
 
 export default function Input({
@@ -25,7 +25,7 @@ export default function Input({
   width = '100%',
   error,
   register,
-  onChange,
+  onChange = undefined,
 }: InputProps) {
   const [isVisible, setIsVisible] = useState(false);
   const isError: boolean = !!error;
@@ -50,16 +50,28 @@ export default function Input({
           [styles.inputBoxError]: isError,
         })}
       >
-        <input
-          className={classNames(styles.input, {
-            [styles.inputBoxError]: isError,
-          })}
-          type={inputType}
-          value={value}
-          placeholder={placeholder}
-          {...register}
-          onChange={onChange}
-        />
+        {onChange ? (
+          <input
+            className={classNames(styles.input, {
+              [styles.inputBoxError]: isError,
+            })}
+            type={inputType}
+            value={value}
+            placeholder={placeholder}
+            {...register}
+            onChange={onChange}
+          />
+        ) : (
+          <input
+            className={classNames(styles.input, {
+              [styles.inputBoxError]: isError,
+            })}
+            type={inputType}
+            value={value}
+            placeholder={placeholder}
+            {...register}
+          />
+        )}
         {(label === '비밀번호' || label === '비밀번호 확인') && (
           <button
             type='button'
