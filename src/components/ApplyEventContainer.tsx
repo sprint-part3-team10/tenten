@@ -62,13 +62,6 @@ function ApplyEventContainer({
   };
 
   const handleClick = () => {
-    if (loginModalOpen || addProfileModalOpen || applyModalOpen) {
-      setLoginModalOpen(false);
-      setAddProfileModalOpen(false);
-      setApplyModalOpen(false);
-      return;
-    }
-
     if (!token) {
       setLoginModalOpen(true);
       return;
@@ -83,8 +76,8 @@ function ApplyEventContainer({
   };
 
   return (
-    <div onClick={handleClick}>
-      {children}
+    <>
+      <div onClick={handleClick}>{children}</div>
       {loginModalOpen && (
         <ModalPortal>
           <Modal
@@ -124,7 +117,7 @@ function ApplyEventContainer({
           />
         </ModalPortal>
       )}
-    </div>
+    </>
   );
 }
 
