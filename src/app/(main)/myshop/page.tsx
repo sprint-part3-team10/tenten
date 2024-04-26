@@ -8,7 +8,7 @@ import NoList from '@/src/components/applyList/NoList';
 import styles from './page.module.scss';
 
 export default async function MyShop() {
-  const shopId = cookies().get('shopId');
+  const shopId = cookies().get('s_id');
 
   if (!shopId?.value) {
     return (

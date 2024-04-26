@@ -1,0 +1,7 @@
+@import '/src/styles/index';
+
+.layout {
+  @include layout;
+
+  background: $gray-5;
+}
