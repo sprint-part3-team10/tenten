@@ -1,4 +1,3 @@
-import React, { forwardRef } from 'react';
 import ReactDatePicker from 'react-datepicker';
 import { FieldError } from 'react-hook-form';
 import { ko } from 'date-fns/locale';
@@ -61,4 +60,4 @@ function DatePicker({
   );
 }
 
-export default React.forwardRef(DatePicker);
+export default DatePicker;

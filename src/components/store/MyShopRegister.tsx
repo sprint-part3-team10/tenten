@@ -134,13 +134,16 @@ export default function MyShopRegister({ token, shopId }: MyShopRegisterProps) {
 
   useEffect(() => {
     const fetchShopData = async (targetShopId: string) => {
-      const result = await getShop(targetShopId);
-      const { user, ...shopData } = result.item;
-
-      if (!isEditing && shopId) {
+      if (!isEditing && shopId !== '쿠키가 존재하지 않습니다.') {
         router.push('/');
         return;
       }
+      if (!isEditing) {
+        setIsLoading(false);
+        return;
+      }
+      const result = await getShop(targetShopId);
+      const { user, ...shopData } = result.item;
       Object.entries(shopData).forEach(([fieldName, value]) => {
         setValue(fieldName, value);
       });
@@ -148,7 +151,7 @@ export default function MyShopRegister({ token, shopId }: MyShopRegisterProps) {
     };
 
     fetchShopData(shopId);
-  }, [isEditing, shopId, setValue, router]);
+  }, [isEditing, setValue, router]);
 
   if (isLoading) {
     return <Spinner />;
