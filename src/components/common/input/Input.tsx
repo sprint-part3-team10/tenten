@@ -77,6 +77,7 @@ export default function Input({
             type='button'
             onClick={toggleVisibility}
             className={styles.eye}
+            tabIndex={-1}
           >
             {isVisible ? (
               <Image
@@ -84,6 +85,7 @@ export default function Input({
                 width={16}
                 height={16}
                 alt='비밀번호 보기'
+                priority
               />
             ) : (
               <Image
@@ -91,6 +93,7 @@ export default function Input({
                 width={16}
                 height={16}
                 alt='비밀번호 숨기기'
+                priority
               />
             )}
           </button>
