@@ -31,15 +31,15 @@ export default function LogoutButton() {
             message={modalMessage}
             minWidth='20rem'
             maxWidth='40rem'
-            buttonText={['아니오', '예']}
+            buttonText={['예', '아니오']}
             buttonWidthPercent='25%'
             handleModal={handleShowModal}
             handleButton={[
+              handleLogout,
               e => {
                 e.stopPropagation();
                 handleShowModal(false);
               },
-              handleLogout,
             ]}
           />
         </ModalPortal>
