@@ -26,7 +26,7 @@ export default function SignIn() {
     formState: { errors },
   } = useForm<SigninFormData>({ mode: 'onChange' });
   const [isWarning, setIsWarning] = useState<boolean>(false);
-  const { showToast, toastMessage, setToastMessage } = useToast(3000);
+  const { showToast, toastMessage, setToastMessage } = useToast();
   const router = useRouter();
 
   const { email: emailError, password: passwordError } = errors;
@@ -39,7 +39,7 @@ export default function SignIn() {
       setIsWarning(false);
       setTimeout(() => {
         router.push('/');
-      }, 3000);
+      }, 1500);
     } catch (error: any) {
       setToastMessage(error.message);
       setIsWarning(true);
@@ -48,9 +48,15 @@ export default function SignIn() {
 
   return (
     <>
-      <div className={styles.container}>
-        <Link href='/'>
-          <Image src={Logo} alt='홈페이지 로고' width={248} height={45} />
+      <div className={styles.container} onScroll={undefined}>
+        <Link href='/' scroll={false}>
+          <Image
+            src={Logo}
+            alt='홈페이지 로고'
+            width={248}
+            height={45}
+            priority
+          />
         </Link>
         <form className={styles.form} onSubmit={handleSubmit(onSubmit)}>
           <Input
