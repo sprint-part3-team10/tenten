@@ -30,17 +30,7 @@ export default function Toast({
   return (
     <div className={styles.toastContainer}>
       <div className={styles.toast}>
-        {isWarning ? (
-          <Image src={WARNING} alt='경고' width={26} height={26} priority />
-        ) : (
-          <Image
-            src={COMPLETE}
-            alt='정상 동작'
-            width={26}
-            height={26}
-            priority
-          />
-        )}
+        {ToastIcon(isWarning)}
         {message}
       </div>
       <div
@@ -52,3 +42,10 @@ export default function Toast({
     </div>
   );
 }
+
+const ToastIcon = (isWarning: boolean) => {
+  const iconSrc = isWarning ? WARNING : COMPLETE;
+  const altText = isWarning ? '경고' : '정상';
+
+  return <Image src={iconSrc} alt={altText} width={26} height={26} priority />;
+};

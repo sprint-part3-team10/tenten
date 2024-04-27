@@ -14,37 +14,41 @@ export default function TypeSelector({
   onChange,
   isEmployer,
 }: TypeSelectorProps) {
-  const ToggleButton = (selected: boolean, text: string) => {
-    const circleSrc = selected ? CHECK : NOTCHECKED;
-    const altText = selected ? '선택' : '선택하지 않음';
-    const buttonStyle = selected ? styles.select : styles.notSelect;
-
-    return (
-      <button
-        className={buttonStyle}
-        onClick={!selected ? onChange : undefined}
-        disabled={selected}
-      >
-        <Image
-          className={styles.circle}
-          src={circleSrc}
-          alt={altText}
-          width={20}
-          height={20}
-          priority
-        />
-        {text}
-      </button>
-    );
-  };
-
   return (
     <div className={styles.selectToggle}>
       <p className={styles.label}>{label}</p>
       <div className={styles.toggles}>
-        {ToggleButton(isEmployer, '알바생')}
-        {ToggleButton(!isEmployer, '사장님')}
+        {ToggleButton(isEmployer, '알바생', onChange)}
+        {ToggleButton(!isEmployer, '사장님', onChange)}
       </div>
     </div>
   );
 }
+
+const ToggleButton = (
+  selected: boolean,
+  text: string,
+  onChange: () => void,
+) => {
+  const circleSrc = selected ? CHECK : NOTCHECKED;
+  const altText = selected ? '선택' : '선택하지 않음';
+  const buttonStyle = selected ? styles.select : styles.notSelect;
+
+  return (
+    <button
+      className={buttonStyle}
+      onClick={!selected ? onChange : undefined}
+      disabled={selected}
+    >
+      <Image
+        className={styles.circle}
+        src={circleSrc}
+        alt={altText}
+        width={20}
+        height={20}
+        priority
+      />
+      {text}
+    </button>
+  );
+};
