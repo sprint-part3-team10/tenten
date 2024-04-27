@@ -48,7 +48,7 @@ export default function SignIn() {
 
   return (
     <>
-      <div className={styles.container} onScroll={undefined}>
+      <div className={styles.container}>
         <Link href='/' scroll={false}>
           <Image
             src={Logo}
