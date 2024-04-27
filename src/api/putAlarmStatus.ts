@@ -8,7 +8,7 @@ const putAlarmStatus = async (
   token: string,
 ) => {
   const res = await fetch(
-    `${BASE_URL}/shops/${shopId}/notices/${noticeId}/applications/${applicationId}`,
+    `${BASE_URL}/shopds/${shopId}/notices/${noticeId}/applications/${applicationId}`,
     {
       method: 'PUT',
       headers: {
