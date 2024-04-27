@@ -46,15 +46,16 @@ function CancelApplyEventContainer({
         <ModalPortal>
           <Modal
             icon='check'
-            buttonText={['아니오', '취소하기']}
+            buttonText={['취소하기', '아니오']}
             handleModal={handleModal}
             handleButton={[
+              handleCancelApplication,
               e => {
                 e.stopPropagation();
                 handleModal(false);
               },
-              handleCancelApplication,
             ]}
+            buttonColorChange
             maxWidth='40rem'
             message='신청을 취소하시겠어요?'
             minWidth='20rem'

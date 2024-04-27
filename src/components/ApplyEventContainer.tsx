@@ -108,12 +108,13 @@ function ApplyEventContainer({
         <ModalPortal>
           <Modal
             icon='check'
-            buttonText={['아니오', '신청']}
-            handleButton={[handleNoApplyButton, handleApplyButton]}
+            buttonText={['신청하기', '아니오']}
+            handleButton={[handleApplyButton, handleNoApplyButton]}
             handleModal={handleApplyModal}
             maxWidth='40rem'
             message='신청하시겠습니까?'
             minWidth='20rem'
+            buttonColorChange
           />
         </ModalPortal>
       )}
