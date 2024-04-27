@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { useEffect } from 'react';
 import COMPLETE from '@/public/icons/completed.png';
 import WARNING from '@/public/icons/warning.svg';
 import Image from 'next/image';
@@ -13,14 +13,14 @@ interface ToastProps {
 
 export default function Toast({
   message,
-  duration = 3000,
+  duration = 1500,
   isWarning = false,
 }: ToastProps) {
-  const [isVisible, setIsVisible] = useState(false);
+  let isVisible: boolean = false;
 
   useEffect(() => {
     const timer = setTimeout(() => {
-      setIsVisible(true);
+      isVisible = true;
     }, duration);
     return () => {
       clearTimeout(timer);
@@ -30,11 +30,7 @@ export default function Toast({
   return (
     <div className={styles.toastContainer}>
       <div className={styles.toast}>
-        {isWarning ? (
-          <Image src={WARNING} alt='경고' width={26} height={26} />
-        ) : (
-          <Image src={COMPLETE} alt='정상 동작' width={26} height={26} />
-        )}
+        {ToastIcon(isWarning)}
         {message}
       </div>
       <div
@@ -46,3 +42,10 @@ export default function Toast({
     </div>
   );
 }
+
+const ToastIcon = (isWarning: boolean) => {
+  const iconSrc = isWarning ? WARNING : COMPLETE;
+  const altText = isWarning ? '경고' : '정상';
+
+  return <Image src={iconSrc} alt={altText} width={26} height={26} priority />;
+};
