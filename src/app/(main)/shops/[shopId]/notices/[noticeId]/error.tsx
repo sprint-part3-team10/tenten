@@ -1,9 +1,6 @@
 'use client';
 
-// Error components must be Client Components
-
 import { useEffect } from 'react';
-import ModalPortal from '@/src/components/common/modal/ModalPortal';
 import Modal from '@/src/components/common/modal/Modal';
 import { useRouter } from 'next/navigation';
 import styles from './error.module.scss';

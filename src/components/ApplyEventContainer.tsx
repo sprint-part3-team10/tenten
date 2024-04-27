@@ -47,6 +47,7 @@ function ApplyEventContainer({
   const handleAddProfileButton = (e: Event) => {
     e.stopPropagation();
     handleAddProfileModal(false);
+    router.push('/myprofile');
   };
 
   const handleNoApplyButton = (e: Event) => {

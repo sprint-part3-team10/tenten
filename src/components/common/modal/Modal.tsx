@@ -94,7 +94,7 @@ function Modal({
                 text={buttonText[0]}
                 size='M'
                 isWhite={!buttonColorChange}
-                onClick={handleButton[0]}
+                onClick={handleButton[0] as () => void}
               />
             </div>
           )}
@@ -104,7 +104,10 @@ function Modal({
               text={buttonText[1] || buttonText[0]}
               size='M'
               isWhite={buttonColorChange}
-              onClick={handleButton[1] || handleButton[0]}
+              onClick={
+                (handleButton[1] as () => void) ||
+                (handleButton[0] as () => void)
+              }
             />
           </div>
         </div>
