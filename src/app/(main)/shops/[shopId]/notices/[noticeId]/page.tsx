@@ -21,15 +21,22 @@ interface NoticePageProps {
 }
 
 async function NoticePage({ params }: NoticePageProps) {
-  const { userId, token, userType } = getCookies();
+  const { userId, token, userType, shopId: cookieShopId } = getCookies();
 
   const { shopId, noticeId } = params;
+
+  const OWNER = cookieShopId === shopId;
 
   const { item: notice } = await getNoticeData(shopId, noticeId);
   const {
     shop: { item: shop },
   } = notice;
-  const { count } = await getShopApply(shopId, noticeId, 0, token);
+
+  let applyNum = 0;
+  if (token) {
+    const { count } = await getShopApply(shopId, noticeId, 0, token);
+    applyNum = count;
+  }
 
   let emptyProfile = true;
   let applied = null;
@@ -80,12 +87,13 @@ async function NoticePage({ params }: NoticePageProps) {
           <h1 className={styles.sectionTitle}>{shop.name}</h1>
           <ShopNoticeInfoBox data={infoData}>
             <>
-              {userType === 'employer' && (
+              {userType === 'employer' && OWNER && (
                 <EmployerEventContainer noticeId={noticeId}>
                   <Button buttonType='button' text='공고 편집하기' isWhite />
                 </EmployerEventContainer>
               )}
-              {userType !== 'employer' && (EXPIRED || infoData.closed) && (
+              {((userType === 'employer' && !OWNER) ||
+                (userType !== 'employer' && (EXPIRED || infoData.closed))) && (
                 <Button buttonType='button' text='신청 불가' isDisable />
               )}
               {userType !== 'employer' &&
@@ -118,10 +126,10 @@ async function NoticePage({ params }: NoticePageProps) {
           <JobDescription description={notice.description} />
         </div>
       </section>
-      {userType === 'employer' ? (
+      {userType === 'employer' && OWNER ? (
         <div className={styles.tableArea}>
           <div className={styles.title}>신청자 목록</div>
-          {count ? (
+          {applyNum ? (
             <ApplyTable
               noticeId={noticeId}
               shopId={shopId}

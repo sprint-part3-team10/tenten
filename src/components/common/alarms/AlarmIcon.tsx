@@ -7,8 +7,9 @@ import getAlarms from '@/src/api/getAlarms';
 import Image from 'next/image';
 import useOutsideClick from '@/src/hooks/useOutsideClick';
 import classNames from 'classnames';
-import Alarms from './Alarms';
+import close from '@/public/icons/close.svg';
 import styles from './AlarmIcon.module.scss';
+import AlarmContainer from './AlarmContainer';
 
 interface AlarmIconProps {
   userId: string;
@@ -44,7 +45,7 @@ export default function AlarmIcon({ userId, token, userType }: AlarmIconProps) {
 
   return (
     <div className={styles.button}>
-      <div onClick={handleOpenAlarms}>
+      <div onClick={handleOpenAlarms} className={styles.iconCursor}>
         <Image src={alarmIcon} width={24} height={24} alt='알람확인아이콘' />
       </div>
       <div
@@ -53,12 +54,12 @@ export default function AlarmIcon({ userId, token, userType }: AlarmIconProps) {
         })}
         ref={ref}
       >
-        <Alarms
-          handleCloseClick={handleCloseClick}
-          userId={userId}
-          token={token}
-          userType={userType}
-        />
+        <div className={styles.container}>
+          <button className={styles.close} onClick={handleCloseClick}>
+            <Image width={24} height={24} src={close} alt='close' />
+          </button>
+          <AlarmContainer userId={userId} token={token} userType={userType} />
+        </div>
       </div>
     </div>
   );

@@ -1,6 +1,6 @@
 @import '../styles/index';
 
-@import './globals';
+@import '@/src/app/globals';
 
 .container404 {
   display: flex;
@@ -8,13 +8,30 @@
   gap: 4rem;
   align-items: center;
   justify-content: flex-start;
-  width: 100vw;
   height: 100vh;
   background-color: #f0efe9;
+
+  @include media(mobile) {
+    gap: 3rem;
+  }
+}
+
+.errorImage {
+  position: relative;
+  width: 50rem;
+  aspect-ratio: 5 / 3;
+
+  @include media(mobile) {
+    width: 100vw;
+  }
 }
 
 .errorMessage {
   @include text-20-b;
+
+  @include media(mobile) {
+    @include text-18-b;
+  }
 }
 
 .errorTitle {
@@ -25,6 +42,8 @@
   color: $white;
   background-color: #ea3c12;
   border-radius: 0.8rem;
+
+  @include text-20-b;
 }
 
 .returnHome {
@@ -41,5 +60,9 @@
 
   &:hover {
     background-color: $red-10;
+  }
+
+  @include media(mobile) {
+    @include text-18-b;
   }
 }

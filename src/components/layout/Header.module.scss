@@ -49,7 +49,9 @@
 
 .activeList {
   display: flex;
-  gap: 1rem;
+  gap: 1.7rem;
+  align-items: center;
+  justify-content: center;
   margin-left: auto;
   white-space: nowrap;
 

@@ -21,6 +21,7 @@ import {
 import Image from 'next/image';
 import cameraIcon from '@/public/icons/camera.svg';
 import { MyShopFormData } from '@/src/types/interface';
+import Spinner from '../Spinner';
 import styles from './MyShopRegister.module.scss';
 
 interface MyShopRegisterProps {
@@ -29,6 +30,7 @@ interface MyShopRegisterProps {
 }
 
 export default function MyShopRegister({ token, shopId }: MyShopRegisterProps) {
+  const [isLoading, setIsLoading] = useState(true);
   const params = useSearchParams();
   const isEditing = params.get('action') === 'edit';
   const [isShow, setIsShow] = useState(false);
@@ -44,10 +46,6 @@ export default function MyShopRegister({ token, shopId }: MyShopRegisterProps) {
   const router = useRouter();
   const handleGoBack = () => {
     router.back();
-  };
-  const handleConfirmButton = () => {
-    router.push('/myshop');
-    router.refresh();
   };
 
   const {
@@ -70,11 +68,12 @@ export default function MyShopRegister({ token, shopId }: MyShopRegisterProps) {
     },
   });
 
-  // name : 가게이름
-  // category : 분류
-  // address1 : 주소
-  // address2 : 상세주소
-  // originalHourlyPay : 기본시급
+  const handleConfirmButton = () => {
+    if (!watch('imageUrl')) return;
+    router.push('/myshop');
+    router.refresh();
+  };
+
   const {
     name: nameError,
     category: categoryError,
@@ -143,10 +142,15 @@ export default function MyShopRegister({ token, shopId }: MyShopRegisterProps) {
       Object.entries(shopData).forEach(([fieldName, value]) => {
         setValue(fieldName, value);
       });
+      setIsLoading(false);
     };
 
     fetchShopData(shopId);
   }, [isEditing, shopId, setValue]);
+
+  if (isLoading && isEditing) {
+    return <Spinner />;
+  }
 
   return (
     <div className={styles.layout}>
@@ -198,7 +202,7 @@ export default function MyShopRegister({ token, shopId }: MyShopRegisterProps) {
               })}
             />
             <Input
-              label='시급*'
+              label='기본 시급 *'
               inputType='number'
               onChange={handleHourlyPayChange}
               placeholder='기본 시급을 적어주세요'
@@ -221,7 +225,7 @@ export default function MyShopRegister({ token, shopId }: MyShopRegisterProps) {
               accept='image/*'
               onChange={handleImageFileChange}
             />
-            <p>가게 이미지</p>
+            <p>가게 이미지 *</p>
             <div
               className={styles.storeImageBox}
               onClick={handleFilePickerClick}

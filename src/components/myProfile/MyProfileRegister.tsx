@@ -15,6 +15,7 @@ import BackSpaceButton from '@/src/components/common/BackSpaceButton';
 import { MyProfileFormData } from '@/src/types/interface';
 import { LOCATION_LIST } from '@/src/constants/dropdownList';
 import { PHONE_NUMBER_REGEX } from '@/src/constants/regEx';
+import Spinner from '../Spinner';
 import styles from './MyProfileRegister.module.scss';
 
 interface MyProfileRegisterProps {
@@ -26,6 +27,7 @@ export default function MyProfileRegister({
   token,
   userId,
 }: MyProfileRegisterProps) {
+  const [isLoading, setIsLoading] = useState(true);
   const params = useSearchParams();
   const isEditing = params.get('action') === 'edit';
   const [isShow, setIsShow] = useState(false);
@@ -47,13 +49,9 @@ export default function MyProfileRegister({
       name: '',
       phone: '',
       address: '',
+      bio: '',
     },
   });
-
-  // name : 유저이름
-  // phone : 연락처
-  // address : 선호지역
-  // bio : 자기소개
 
   const {
     name: nameError,
@@ -105,10 +103,15 @@ export default function MyProfileRegister({
       Object.entries(userData).forEach(([fieldName, value]) => {
         setValue(fieldName, value);
       });
+      setIsLoading(false);
     };
 
     fetchProfileData(userId);
   }, [isEditing, setValue, userId]);
+
+  if (isLoading && isEditing) {
+    return <Spinner />;
+  }
 
   return (
     <div className={styles.container}>

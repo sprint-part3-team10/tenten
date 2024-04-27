@@ -1,14 +1,31 @@
 @import '../../styles/index';
 
 .tableContainer {
+  overflow-x: auto;
   border: 1px solid $gray-20;
-  border-radius: 1rem;
+  border-bottom: none;
+  border-radius: 1rem 1rem 0 0;
+
+  &::-webkit-scrollbar {
+    height: 0.5rem;
+  }
+
+  &::-webkit-scrollbar-thumb {
+    height: 1%;
+    background: $gray-50;
+    border-radius: 1rem;
+  }
+
+  &::-webkit-scrollbar-track {
+    background: $gray-5;
+  }
 }
 
 .table {
   @include text-14-l;
 
   width: 100%;
+  table-layout: fixed;
 }
 
 .titleRow {
@@ -25,37 +42,73 @@
 }
 
 .nameCol {
-  width: 25%;
-  border-bottom: 1px solid $gray-20;
-}
-
-.payCol {
-  width: 20%;
+  position: sticky;
+  left: 0;
+  z-index: 2;
+  width: 20rem;
   border-bottom: 1px solid $gray-20;
 
   @include media(tablet) {
-    display: none;
+    min-width: 20rem;
   }
 }
 
-.timeCol {
-  width: 30%;
-  max-width: 30rem;
+.listRow.nameCol {
+  background-color: $gray-5;
+}
+
+.title.nameCol {
+  z-index: 2;
+  padding: 0.3rem;
+  background-color: $red-10;
+}
+
+.payCol {
+  width: 20rem;
   border-bottom: 1px solid $gray-20;
 
-  @include media(mobile) {
-    display: none;
+  @include media(tablet) {
+    min-width: 25rem;
+  }
+}
+
+.title.payCol {
+  z-index: 2;
+}
+
+.timeCol {
+  width: 30rem;
+  border-bottom: 1px solid $gray-20;
+
+  @include media(tablet) {
+    min-width: 40rem;
   }
 }
 
 .statusCol {
-  width: 25%;
+  position: sticky;
+  right: 0;
+  z-index: 3;
+  display: table-cell;
+  width: 25rem;
   border-bottom: 1px solid $gray-20;
+}
+
+.listRow.statusCol {
+  background-color: $gray-5;
+}
+
+.title.statusCol {
+  z-index: 3;
+  padding: 0.2rem;
+  background-color: $red-10;
 }
 
 .pagination {
   padding: 0.8rem 1.2rem;
   text-align: center;
+  border: 1px solid $gray-20;
+  border-radius: 0 0 1rem 1rem;
 }
 
 .btn {
