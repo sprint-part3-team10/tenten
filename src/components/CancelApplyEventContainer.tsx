@@ -5,6 +5,8 @@ import { useRouter } from 'next/navigation';
 import Modal from './common/modal/Modal';
 import ModalPortal from './common/modal/ModalPortal';
 import putAlarmStatus from '../api/putAlarmStatus';
+import Spinner from './Spinner';
+import styles from './CancelApplyEventContainer.module.scss';
 
 interface CancelApplyEventContainerProps {
   shopId: string;
@@ -22,6 +24,7 @@ function CancelApplyEventContainer({
   children,
 }: CancelApplyEventContainerProps) {
   const [cancelModalOpen, setCancelModalOpen] = useState(false);
+  const [isLoading, setIsLoading] = useState(false);
   const router = useRouter();
 
   const handleModal = (value: boolean) => {
@@ -34,14 +37,25 @@ function CancelApplyEventContainer({
 
   const handleCancelApplication = async (e: Event) => {
     e.stopPropagation();
-    await putAlarmStatus(shopId, noticeId, applicationId, 'canceled', token);
-    handleModal(false);
-    router.refresh();
+    try {
+      setIsLoading(true);
+      handleModal(false);
+      await putAlarmStatus(shopId, noticeId, applicationId, 'canceled', token);
+      router.refresh();
+    } catch {}
   };
 
   return (
     <>
-      <div onClick={handleClick}>{children}</div>
+      <div onClick={handleClick}>
+        {isLoading ? (
+          <div className={styles.spinner}>
+            <Spinner />
+          </div>
+        ) : (
+          children
+        )}
+      </div>
       {cancelModalOpen && (
         <ModalPortal>
           <Modal
