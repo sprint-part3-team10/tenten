@@ -27,7 +27,7 @@ function ApplyEventContainer({
   const [addProfileModalOpen, setAddProfileModalOpen] = useState(false);
   const [applyModalOpen, setApplyModalOpen] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
-  // const [isError, setIsError] = useState(false);
+  const [isError, setIsError] = useState<Error>();
   const router = useRouter();
 
   const handleLoginModal = (value: boolean) => {
@@ -66,7 +66,9 @@ function ApplyEventContainer({
       setApplyModalOpen(false);
       await postApplication(shopId, noticeId, token);
       router.refresh();
-    } catch {}
+    } catch (error) {
+      setIsError(error as Error);
+    }
   };
 
   const handleClick = () => {
@@ -82,6 +84,10 @@ function ApplyEventContainer({
 
     setApplyModalOpen(true);
   };
+
+  if (isError) {
+    throw isError;
+  }
 
   return (
     <>

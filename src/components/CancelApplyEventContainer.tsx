@@ -25,6 +25,7 @@ function CancelApplyEventContainer({
 }: CancelApplyEventContainerProps) {
   const [cancelModalOpen, setCancelModalOpen] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
+  const [isError, setIsError] = useState<Error>();
   const router = useRouter();
 
   const handleModal = (value: boolean) => {
@@ -42,8 +43,14 @@ function CancelApplyEventContainer({
       handleModal(false);
       await putAlarmStatus(shopId, noticeId, applicationId, 'canceled', token);
       router.refresh();
-    } catch {}
+    } catch (error) {
+      setIsError(error as Error);
+    }
   };
+
+  if (isError) {
+    throw isError;
+  }
 
   return (
     <>
