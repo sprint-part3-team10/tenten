@@ -25,27 +25,14 @@ export default function TypeSelector({
         onClick={!selected ? onChange : undefined}
         disabled={selected}
       >
-        {selected ? (
-          <>
-            <Image
-              className={styles.circle}
-              src={CHECK}
-              alt={altText}
-              width={20}
-              height={20}
-              priority
-            />
-          </>
-        ) : (
-          <Image
-            className={styles.circle}
-            src={circleSrc}
-            alt={altText}
-            width={20}
-            height={20}
-            priority
-          />
-        )}
+        <Image
+          className={styles.circle}
+          src={circleSrc}
+          alt={altText}
+          width={20}
+          height={20}
+          priority
+        />
         {text}
       </button>
     );
