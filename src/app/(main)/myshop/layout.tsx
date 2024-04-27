@@ -11,6 +11,5 @@ export default function MyShopLayout({ children }: MyShopLayoutProps) {
 
   if (userType !== 'employer') redirect('/');
 
-  // eslint-disable-next-line react/jsx-no-useless-fragment
   return <>{children}</>;
 }
