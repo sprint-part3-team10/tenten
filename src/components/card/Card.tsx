@@ -35,7 +35,11 @@ function Card({ data }: CardData) {
   }
 
   return (
-    <Link href={`/shops/${data.shop_id}/notices/${data.item_id}`} passHref>
+    <Link
+      href={`/shops/${data.shop_id}/notices/${data.item_id}`}
+      passHref
+      className={styles.link}
+    >
       <div className={styles.card}>
         <div
           className={classNames(styles.imgContainer, {

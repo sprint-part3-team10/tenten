@@ -13,10 +13,6 @@
   }
 
   div {
-    max-height: 35rem;
-
-    @include media(mobile) {
-      max-height: 24rem;
-    }
+    display: flex;
   }
 }
