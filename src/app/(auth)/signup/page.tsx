@@ -59,8 +59,8 @@ export default function SignUp() {
       setToastMessage('정상적으로 가입되었습니다.');
       setIsWarning(false);
       setTimeout(() => {
-        router.push('/signin');
-      }, 3000);
+        router.replace('/signin', { scroll: false });
+      }, 1500);
     } catch (error: any) {
       setToastMessage(error.message);
       setIsWarning(true);

@@ -38,7 +38,7 @@ export default function SignIn() {
       setToastMessage('정상적으로 로그인 되었습니다.');
       setIsWarning(false);
       setTimeout(() => {
-        router.push('/');
+        router.replace('/', { scroll: false });
       }, 1500);
     } catch (error: any) {
       setToastMessage(error.message);
@@ -87,7 +87,7 @@ export default function SignIn() {
 
           <div className={styles.movePage}>
             회원이 아니신가요?{' '}
-            <Link className={styles.signLink} href='/signup'>
+            <Link className={styles.signLink} href='/signup' scroll={false}>
               회원가입하기
             </Link>
           </div>
