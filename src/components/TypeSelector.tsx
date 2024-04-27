@@ -1,9 +1,11 @@
 import Image from 'next/image';
 import styles from './TypeSelector.module.scss';
+import CHECK from '@/public/icons/circleChecked.svg';
+import NOTCHECKED from '@/public/icons/circleNotChecked.svg';
 
 interface TypeSelectorProps {
   label: string;
-  onChange: any;
+  onChange: () => void;
   isEmployer: boolean;
 }
 
@@ -15,66 +17,38 @@ export default function TypeSelector({
   return (
     <div className={styles.selectToggle}>
       <p className={styles.label}>{label}</p>
-      {isEmployer ? (
-        <div className={styles.toggles}>
-          <button className={styles.select} disabled>
-            <Image
-              className={styles.circle}
-              src='/icons/circleChecked.svg'
-              alt='check-check'
-              width={20}
-              height={20}
-            />
-            <Image
-              className={styles.checked}
-              src='/icons/checked.svg'
-              alt='check-base'
-              width={20}
-              height={20}
-            />
-            알바생
-          </button>
-          <button className={styles.notSelect} onClick={onChange}>
-            <Image
-              className={styles.circle}
-              src='/icons/circleNotChecked.svg'
-              alt='check-not-check'
-              width={20}
-              height={20}
-            />
-            사장님
-          </button>
-        </div>
-      ) : (
-        <div className={styles.toggles}>
-          <button className={styles.notSelect} onClick={onChange}>
-            <Image
-              src='/icons/circleNotChecked.svg'
-              alt='check-not-check'
-              width={20}
-              height={20}
-            />
-            알바생
-          </button>
-          <button className={styles.select} disabled>
-            <Image
-              className={styles.circle}
-              src='/icons/circleChecked.svg'
-              alt='check-check'
-              width={20}
-              height={20}
-            />
-            <Image
-              className={styles.checked}
-              src='/icons/checked.svg'
-              alt='check-base'
-              width={20}
-              height={20}
-            />
-            사장님
-          </button>
-        </div>
-      )}
+      <div className={styles.toggles}>
+        {ToggleButton(isEmployer, '알바생', onChange)}
+        {ToggleButton(!isEmployer, '사장님', onChange)}
+      </div>
     </div>
   );
 }
+
+const ToggleButton = (
+  selected: boolean,
+  text: string,
+  onChange: () => void,
+) => {
+  const circleSrc = selected ? CHECK : NOTCHECKED;
+  const altText = selected ? '선택' : '선택하지 않음';
+  const buttonStyle = selected ? styles.select : styles.notSelect;
+
+  return (
+    <button
+      className={buttonStyle}
+      onClick={!selected ? onChange : undefined}
+      disabled={selected}
+    >
+      <Image
+        className={styles.circle}
+        src={circleSrc}
+        alt={altText}
+        width={20}
+        height={20}
+        priority
+      />
+      {text}
+    </button>
+  );
+};

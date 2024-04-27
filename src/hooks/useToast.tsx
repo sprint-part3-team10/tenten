@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react';
 
-export default function useToast(duration = 3000) {
+export default function useToast(duration = 1500) {
   const [showToast, setShowToast] = useState(false);
   const [timerId, setTimerId] = useState(null);
   const [toastMessage, setToastMessage] = useState('');
