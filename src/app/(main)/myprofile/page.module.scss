@@ -27,7 +27,15 @@
 }
 
 .profileBox {
-  margin: 0 auto;
+  width: 70%;
+
+  @include media(tablet) {
+    margin: 0 auto;
+  }
+  @include media(mobile) {
+    width: 100%;
+    margin: 0;
+  }
 }
 
 .tabletFit {
