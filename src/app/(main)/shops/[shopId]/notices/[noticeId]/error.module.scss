@@ -6,7 +6,7 @@
 
   & > div {
     inset: 8rem 0 0;
-    background-color: $gray-40;
+    background-color: rgb(0 0 0 / 40%);
 
     @include media(mobile) {
       inset: 12rem 0 0;
