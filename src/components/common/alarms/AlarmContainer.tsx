@@ -35,10 +35,6 @@ export default function AlarmContainer({
         filteredItems = items.filter(
           item => item.item.read === false && item.item.result !== 'canceled',
         );
-      } else if (userType === 'employer') {
-        filteredItems = items.filter(
-          item => item.item.read === false && item.item.result === 'canceled',
-        );
       }
       const count = filteredItems.length;
       setUnRead(count);
