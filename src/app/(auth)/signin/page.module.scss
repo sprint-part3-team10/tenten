@@ -6,9 +6,7 @@
 }
 
 .form {
-  display: flex;
-  flex-direction: column;
-  gap: 2.8rem;
+  @include form;
 }
 
 .movePage {
