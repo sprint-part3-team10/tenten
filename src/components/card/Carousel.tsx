@@ -13,12 +13,25 @@ function Carousel({ children }: CarouselProps) {
   const [time, setTime] = useState(6000);
 
   useEffect(() => {
-    if (React.Children.count(children) <= 3) return;
+    if (window.matchMedia('(max-width: 1199px)').matches) {
+      if (React.Children.count(children) <= 2) return;
+    } else if (React.Children.count(children) <= 3) return;
 
     const interval = setInterval(() => {
-      setCurrentIndex(prevIndex =>
-        prevIndex === React.Children.count(children) - 3 ? 0 : prevIndex + 1,
-      );
+      if (window.matchMedia('(max-width: 1199px)').matches) {
+        setCurrentIndex(prevIndex =>
+          prevIndex ===
+          React.Children.count(children) -
+            Math.floor(React.Children.count(children) / 2) -
+            1
+            ? 0
+            : prevIndex + 1,
+        );
+      } else {
+        setCurrentIndex(prevIndex =>
+          prevIndex === React.Children.count(children) - 3 ? 0 : prevIndex + 1,
+        );
+      }
     }, time);
 
     return () => clearInterval(interval);
@@ -26,7 +39,12 @@ function Carousel({ children }: CarouselProps) {
 
   useEffect(() => {
     if (carouselInnerRef.current) {
-      carouselInnerRef.current.style.transform = `translateX(-${currentIndex * 33.8}%)`;
+      if (window.matchMedia('(max-width: 1199px)').matches) {
+        console.log(currentIndex);
+        carouselInnerRef.current.style.transform = `translateX(-${currentIndex * 100}%)`;
+      } else {
+        carouselInnerRef.current.style.transform = `translateX(-${currentIndex * 33.8}%)`;
+      }
     }
 
     if (currentIndex === React.Children.count(children) - 3) setTime(8000);
