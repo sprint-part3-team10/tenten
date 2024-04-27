@@ -5,6 +5,8 @@ import { useRouter } from 'next/navigation';
 import postApplication from '../api/postApplication';
 import ModalPortal from './common/modal/ModalPortal';
 import Modal from './common/modal/Modal';
+import Spinner from './Spinner';
+import styles from './ApplyEventContainer.module.scss';
 
 interface EventContainerProps {
   shopId: string;
@@ -24,6 +26,8 @@ function ApplyEventContainer({
   const [loginModalOpen, setLoginModalOpen] = useState(false);
   const [addProfileModalOpen, setAddProfileModalOpen] = useState(false);
   const [applyModalOpen, setApplyModalOpen] = useState(false);
+  const [isLoading, setIsLoading] = useState(false);
+  const [isError, setIsError] = useState<Error>();
   const router = useRouter();
 
   const handleLoginModal = (value: boolean) => {
@@ -47,6 +51,7 @@ function ApplyEventContainer({
   const handleAddProfileButton = (e: Event) => {
     e.stopPropagation();
     handleAddProfileModal(false);
+    router.push('/myprofile');
   };
 
   const handleNoApplyButton = (e: Event) => {
@@ -56,19 +61,17 @@ function ApplyEventContainer({
 
   const handleApplyButton = async (e: Event) => {
     e.stopPropagation();
-    await postApplication(shopId, noticeId, token);
-    setApplyModalOpen(false);
-    router.refresh();
+    try {
+      setIsLoading(true);
+      setApplyModalOpen(false);
+      await postApplication(shopId, noticeId, token);
+      router.refresh();
+    } catch (error) {
+      setIsError(error as Error);
+    }
   };
 
   const handleClick = () => {
-    if (loginModalOpen || addProfileModalOpen || applyModalOpen) {
-      setLoginModalOpen(false);
-      setAddProfileModalOpen(false);
-      setApplyModalOpen(false);
-      return;
-    }
-
     if (!token) {
       setLoginModalOpen(true);
       return;
@@ -82,9 +85,21 @@ function ApplyEventContainer({
     setApplyModalOpen(true);
   };
 
+  if (isError) {
+    throw isError;
+  }
+
   return (
-    <div onClick={handleClick}>
-      {children}
+    <>
+      <div onClick={handleClick}>
+        {isLoading ? (
+          <div className={styles.spinner}>
+            <Spinner />
+          </div>
+        ) : (
+          children
+        )}
+      </div>
       {loginModalOpen && (
         <ModalPortal>
           <Modal
@@ -115,16 +130,17 @@ function ApplyEventContainer({
         <ModalPortal>
           <Modal
             icon='check'
-            buttonText={['아니오', '신청']}
-            handleButton={[handleNoApplyButton, handleApplyButton]}
+            buttonText={['신청하기', '아니오']}
+            handleButton={[handleApplyButton, handleNoApplyButton]}
             handleModal={handleApplyModal}
             maxWidth='40rem'
             message='신청하시겠습니까?'
             minWidth='20rem'
+            buttonColorChange
           />
         </ModalPortal>
       )}
-    </div>
+    </>
   );
 }
 
