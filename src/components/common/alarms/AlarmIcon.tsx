@@ -45,7 +45,7 @@ export default function AlarmIcon({ userId, token, userType }: AlarmIconProps) {
 
   return (
     <div className={styles.button}>
-      <div onClick={handleOpenAlarms}>
+      <div onClick={handleOpenAlarms} className={styles.iconCursor}>
         <Image src={alarmIcon} width={24} height={24} alt='알람확인아이콘' />
       </div>
       <div
