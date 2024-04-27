@@ -1,9 +1,7 @@
-/* eslint-disable react/destructuring-assignment */
 /* eslint-disable no-nested-ternary */
 
 'use client';
 
-/* eslint-disable jsx-a11y/control-has-associated-label */
 import classNames from 'classnames';
 import { formatDateAndTime, formatWage } from '@/src/lib/format';
 import { useEffect, useState } from 'react';
@@ -11,7 +9,6 @@ import usePagination from '@/src/hooks/usePagination';
 import getUserApply from '@/src/api/getUserApply';
 import getShopApply from '@/src/api/getShopApply';
 import putAlarmStatus from '@/src/api/putAlarmStatus';
-import { useRouter } from 'next/navigation';
 import Label from './Label';
 import styles from './ApplyTable.module.scss';
 import Pagination from '../pagination/Pagination';
@@ -32,7 +29,6 @@ const titleCol = {
 };
 
 function ApplyTable(props: ApplyTableProps) {
-  const router = useRouter();
   const { userType, token } = props;
 
   const [applies, setApplies] = useState([] as unknown);
@@ -144,20 +140,17 @@ function ApplyTable(props: ApplyTableProps) {
                 </tr>
               ))}
           </tbody>
-          <tfoot>
-            <tr>
-              <td colSpan={4} className={styles.pagination}>
-                <Pagination
-                  totalCount={total}
-                  limit={LIMIT}
-                  selectedPage={selectedPage}
-                  handlePageChange={handlePageChange}
-                />
-              </td>
-            </tr>
-          </tfoot>
         </table>
       </div>
+      <div className={styles.pagination}>
+        <Pagination
+          totalCount={total}
+          limit={LIMIT}
+          selectedPage={selectedPage}
+          handlePageChange={handlePageChange}
+        />
+      </div>
+
       {open && (
         <ModalPortal>
           <Modal
