@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { useEffect } from 'react';
 import COMPLETE from '@/public/icons/completed.png';
 import WARNING from '@/public/icons/warning.svg';
 import Image from 'next/image';
@@ -16,11 +16,11 @@ export default function Toast({
   duration = 1500,
   isWarning = false,
 }: ToastProps) {
-  const [isVisible, setIsVisible] = useState(false);
+  let isVisible: boolean = false;
 
   useEffect(() => {
     const timer = setTimeout(() => {
-      setIsVisible(true);
+      isVisible = true;
     }, duration);
     return () => {
       clearTimeout(timer);
