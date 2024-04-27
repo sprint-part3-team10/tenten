@@ -9,6 +9,7 @@ import usePagination from '@/src/hooks/usePagination';
 import getUserApply from '@/src/api/getUserApply';
 import getShopApply from '@/src/api/getShopApply';
 import putAlarmStatus from '@/src/api/putAlarmStatus';
+import { useRouter } from 'next/navigation';
 import Label from './Label';
 import styles from './ApplyTable.module.scss';
 import Pagination from '../pagination/Pagination';
@@ -39,6 +40,8 @@ function ApplyTable(props: ApplyTableProps) {
   const [status, setStatus] = useState('');
   const [applyId, setApplyId] = useState('');
 
+  const router = useRouter();
+
   const handleModalClick = (value: string, id: string) => {
     setOpen(true);
     const text =
@@ -57,17 +60,24 @@ function ApplyTable(props: ApplyTableProps) {
   const LIMIT = 5;
   const { offset, selectedPage, handlePageChange } = usePagination(LIMIT);
 
+  const fetchData = async () => {
+    const { count, items } =
+      userType === 'employee'
+        ? await getUserApply(props.userId, offset, token)
+        : await getShopApply(props.shopId, props.noticeId, offset, token);
+    setApplies(items);
+    setTotal(count);
+  };
+
   useEffect(() => {
-    const fetchData = async () => {
-      const { count, items } =
-        userType === 'employee'
-          ? await getUserApply(props.userId, offset, token)
-          : await getShopApply(props.shopId, props.noticeId, offset, token);
-      setApplies(items);
-      setTotal(count);
-    };
     fetchData();
   }, [offset]);
+
+  const buttonAction = async () => {
+    await putAlarmStatus(props.shopId, props.noticeId, applyId, status, token);
+    await fetchData();
+    router.refresh();
+  };
 
   return (
     <>
@@ -155,19 +165,7 @@ function ApplyTable(props: ApplyTableProps) {
         <ModalPortal>
           <Modal
             icon='check'
-            handleButton={[
-              () => {
-                putAlarmStatus(
-                  props.shopId,
-                  props.noticeId,
-                  applyId,
-                  status,
-                  token,
-                );
-                location.reload();
-              },
-              () => {},
-            ]}
+            handleButton={[buttonAction, () => {}]}
             message={message}
             minWidth='29.8rem'
             maxWidth='29.8rem'
