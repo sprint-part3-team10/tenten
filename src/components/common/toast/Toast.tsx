@@ -13,7 +13,7 @@ interface ToastProps {
 
 export default function Toast({
   message,
-  duration = 3000,
+  duration = 1500,
   isWarning = false,
 }: ToastProps) {
   const [isVisible, setIsVisible] = useState(false);
