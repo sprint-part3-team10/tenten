@@ -5,6 +5,8 @@ import { useRouter } from 'next/navigation';
 import postApplication from '../api/postApplication';
 import ModalPortal from './common/modal/ModalPortal';
 import Modal from './common/modal/Modal';
+import Spinner from './Spinner';
+import styles from './ApplyEventContainer.module.scss';
 
 interface EventContainerProps {
   shopId: string;
@@ -24,6 +26,8 @@ function ApplyEventContainer({
   const [loginModalOpen, setLoginModalOpen] = useState(false);
   const [addProfileModalOpen, setAddProfileModalOpen] = useState(false);
   const [applyModalOpen, setApplyModalOpen] = useState(false);
+  const [isLoading, setIsLoading] = useState(false);
+  // const [isError, setIsError] = useState(false);
   const router = useRouter();
 
   const handleLoginModal = (value: boolean) => {
@@ -57,9 +61,12 @@ function ApplyEventContainer({
 
   const handleApplyButton = async (e: Event) => {
     e.stopPropagation();
-    await postApplication(shopId, noticeId, token);
-    setApplyModalOpen(false);
-    router.refresh();
+    try {
+      setIsLoading(true);
+      setApplyModalOpen(false);
+      await postApplication(shopId, noticeId, token);
+      router.refresh();
+    } catch {}
   };
 
   const handleClick = () => {
@@ -78,7 +85,15 @@ function ApplyEventContainer({
 
   return (
     <>
-      <div onClick={handleClick}>{children}</div>
+      <div onClick={handleClick}>
+        {isLoading ? (
+          <div className={styles.spinner}>
+            <Spinner />
+          </div>
+        ) : (
+          children
+        )}
+      </div>
       {loginModalOpen && (
         <ModalPortal>
           <Modal
