@@ -113,7 +113,7 @@ export default function MyShopRegister({ token, shopId }: MyShopRegisterProps) {
     e: React.ChangeEvent<HTMLInputElement>,
   ) => {
     const file = e.target.files[0];
-    const presignedUrl = await createPresignedUrl(file);
+    const presignedUrl = await createPresignedUrl(file, token);
     setValue('imageUrl', presignedUrl);
   };
 
