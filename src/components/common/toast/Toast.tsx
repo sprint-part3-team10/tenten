@@ -31,9 +31,15 @@ export default function Toast({
     <div className={styles.toastContainer}>
       <div className={styles.toast}>
         {isWarning ? (
-          <Image src={WARNING} alt='경고' width={26} height={26} />
+          <Image src={WARNING} alt='경고' width={26} height={26} priority />
         ) : (
-          <Image src={COMPLETE} alt='정상 동작' width={26} height={26} />
+          <Image
+            src={COMPLETE}
+            alt='정상 동작'
+            width={26}
+            height={26}
+            priority
+          />
         )}
         {message}
       </div>
