@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { UseFormRegisterReturn, FieldError } from 'react-hook-form';
 import classNames from 'classnames';
 import styles from './TextArea.module.scss';
@@ -8,7 +8,7 @@ interface TextAreaProps {
   textLimit: number;
   placeholder: string;
   value: string;
-  onChange: (event: React.ChangeEvent<HTMLTextAreaElement>) => void;
+  onChange?: (event: React.ChangeEvent<HTMLTextAreaElement>) => void;
   register: UseFormRegisterReturn;
   error?: FieldError;
 }
@@ -25,12 +25,17 @@ export default function TextArea({
   const [textLength, setTextLength] = useState(0);
   const handleOnChange = (event: React.ChangeEvent<HTMLTextAreaElement>) => {
     if (textLength <= textLimit) {
-      onChange(event);
+      if (onChange) onChange(event);
       const slicedTextLength = event.target.value.slice(0, textLimit).length;
       setTextLength(slicedTextLength);
     }
   };
   const isTextLengthOver = textLength === textLimit;
+
+  useEffect(() => {
+    setTextLength(value.length);
+  }, [value.length]);
+
   return (
     <div className={styles.textAreaBox}>
       <label htmlFor={labelName}>{labelName}</label>
