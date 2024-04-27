@@ -156,7 +156,6 @@ function ApplyTable(props: ApplyTableProps) {
           <Modal
             icon='check'
             handleButton={[
-              () => {},
               () => {
                 putAlarmStatus(
                   props.shopId,
@@ -167,6 +166,7 @@ function ApplyTable(props: ApplyTableProps) {
                 );
                 location.reload();
               },
+              () => {},
             ]}
             message={message}
             minWidth='29.8rem'
