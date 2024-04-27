@@ -37,5 +37,13 @@
 }
 
 .empty {
-  @include text-16-l;
+  @include text-18-r;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 30rem;
+  background-color: $white;
+  border: 1px solid $gray-20;
+  border-radius: 0.8rem;
 }

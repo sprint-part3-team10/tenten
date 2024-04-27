@@ -3,6 +3,7 @@
 import { useEffect, useState } from 'react';
 import Card from './card/Card';
 import styles from './RecentViews.module.scss';
+import NoList from './applyList/NoList';
 
 interface RecentViewsProps {
   cardData: {
@@ -58,6 +59,12 @@ function RecentViews({ cardData }: RecentViewsProps) {
       <div className={styles.container}>
         <h1 className={styles.sectionTitle}>최근에 본 공고</h1>
         {!cards.length && (
+          // <NoList
+          //   description='최근에 본 공고가 없어요.'
+          //   text=''
+          //   title=''
+          //   pushUrl=''
+          // />
           <div className={styles.empty}>최근에 본 공고가 없어요.</div>
         )}
         <div className={styles.recentCards}>
