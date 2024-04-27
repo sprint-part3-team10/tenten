@@ -1,6 +1,6 @@
 'use client';
 
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useRef } from 'react';
 import { useRouter, useSearchParams } from 'next/navigation';
 import { useForm, Controller } from 'react-hook-form';
 import postMyNotice from '@/src/api/postMyNotice';
@@ -31,6 +31,7 @@ export default function MyNoticeRegister({
   const [isLoading, setIsLoading] = useState(true);
   const [originalPay, setOriginalPay] = useState(0);
   const params = useSearchParams();
+  const datePickerRef = useRef();
   const noticeId = params.get('noticeId');
   const [isShow, setIsShow] = useState(false);
   const [modalMessage, setModalMessage] = useState('등록이 완료되었습니다.');
@@ -193,6 +194,7 @@ export default function MyNoticeRegister({
                   timeSelect
                   value={watch('startsAt')}
                   error={startsAtError}
+                  ref={datePickerRef}
                 />
               )}
             />

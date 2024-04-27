@@ -1,3 +1,4 @@
+import React, { forwardRef, Ref } from 'react';
 import ReactDatePicker from 'react-datepicker';
 import { FieldError } from 'react-hook-form';
 import { ko } from 'date-fns/locale';
@@ -12,13 +13,9 @@ interface DatePickerProps {
   error?: FieldError;
 }
 
-function DatePicker({
-  value,
-  onChange,
-  timeSelect,
-  error,
-  width = '100%',
-}: DatePickerProps) {
+const DatePicker = forwardRef<any, DatePickerProps>((props, ref) => {
+  const { value, onChange, timeSelect, error, width = '100%' } = props;
+
   const pickerBoxStyle = {
     width,
     ...(error
@@ -33,6 +30,7 @@ function DatePicker({
     <div style={pickerBoxStyle}>
       {timeSelect ? (
         <ReactDatePicker
+          ref={ref}
           dateFormat='yyyy년 MM월 dd일 aa h:mm'
           minDate={new Date()}
           selected={value}
@@ -47,6 +45,7 @@ function DatePicker({
         />
       ) : (
         <ReactDatePicker
+          ref={ref}
           dateFormat='yyyy년 MM월 dd일'
           minDate={new Date()}
           selected={value}
@@ -58,6 +57,6 @@ function DatePicker({
       )}
     </div>
   );
-}
+});
 
 export default DatePicker;
