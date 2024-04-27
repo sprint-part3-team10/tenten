@@ -24,6 +24,7 @@ export default function TypeSelector({
               alt='check-check'
               width={20}
               height={20}
+              priority
             />
             <Image
               className={styles.checked}
@@ -31,6 +32,7 @@ export default function TypeSelector({
               alt='check-base'
               width={20}
               height={20}
+              priority
             />
             알바생
           </button>
@@ -41,6 +43,7 @@ export default function TypeSelector({
               alt='check-not-check'
               width={20}
               height={20}
+              priority
             />
             사장님
           </button>
@@ -53,6 +56,7 @@ export default function TypeSelector({
               alt='check-not-check'
               width={20}
               height={20}
+              priority
             />
             알바생
           </button>
@@ -63,6 +67,7 @@ export default function TypeSelector({
               alt='check-check'
               width={20}
               height={20}
+              priority
             />
             <Image
               className={styles.checked}
@@ -70,6 +75,7 @@ export default function TypeSelector({
               alt='check-base'
               width={20}
               height={20}
+              priority
             />
             사장님
           </button>
