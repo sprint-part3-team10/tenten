@@ -54,7 +54,12 @@
 }
 
 .listRow.nameCol {
+  cursor: pointer;
   background-color: $gray-5;
+
+  &:hover {
+    text-decoration: underline;
+  }
 }
 
 .title.nameCol {

@@ -103,7 +103,16 @@ function ApplyTable(props: ApplyTableProps) {
             {applies &&
               applies.map(apply => (
                 <tr key={apply.item.id}>
-                  <td className={classNames(styles.listRow, styles.nameCol)}>
+                  <td
+                    className={classNames(styles.listRow, styles.nameCol)}
+                    onClick={() => {
+                      if (userType === 'employee') {
+                        router.push(
+                          `/shops/${apply.item.shop.item.id}/notices/${apply.item.notice.item.id}`,
+                        );
+                      }
+                    }}
+                  >
                     {userType === 'employee'
                       ? apply.item.shop.item.name
                       : apply.item.user.item.name}
@@ -169,7 +178,7 @@ function ApplyTable(props: ApplyTableProps) {
             message={message}
             minWidth='29.8rem'
             maxWidth='29.8rem'
-            buttonText={['아니오', '예']}
+            buttonText={['예', '아니오']}
             handleModal={handleModal}
           />
         </ModalPortal>
