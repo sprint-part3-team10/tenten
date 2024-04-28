@@ -5,6 +5,7 @@
   flex-direction: column;
   gap: 3rem;
   align-items: center;
+  height: 100vh;
 
   @include media(tablet) {
     padding: 0 2rem;
