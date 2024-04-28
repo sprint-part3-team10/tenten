@@ -1,3 +1,4 @@
+/* stylelint-disable selector-class-pattern */
 @import '/src/styles/index';
 
 @mixin button {
@@ -62,15 +63,14 @@
 .commonButton {
   @include button;
 
-  /* stylelint-disable-next-line selector-class-pattern */
   &.S {
     @include small;
   }
-  /* stylelint-disable-next-line selector-class-pattern */
+
   &.M {
     @include medium;
   }
-  /* stylelint-disable-next-line selector-class-pattern */
+
   &.L {
     @include large;
   }
