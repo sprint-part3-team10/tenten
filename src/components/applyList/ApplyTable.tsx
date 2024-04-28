@@ -45,6 +45,7 @@ function ApplyTable({
   const [message, setMessage] = useState('');
   const [status, setStatus] = useState('');
   const [applyId, setApplyId] = useState('');
+  const [isAccepted, setIsAccepted] = useState(false);
 
   const router = useRouter();
 
@@ -78,15 +79,20 @@ function ApplyTable({
         offset,
         token,
       );
+      if (items.some(apply => apply.item.status === 'accepted'))
+        setIsAccepted(true);
       setEmployerApplies([...items]);
       setTotal(count);
     }
   };
-  const applies = employeeApplies || employerApplies;
+  console.log('받아졌냐', isAccepted);
+
+  const applies = employeeApplies.length ? employeeApplies : employerApplies;
+  console.log('data', applies);
 
   useEffect(() => {
     fetchData();
-  }, [offset]);
+  }, [offset, isAccepted]);
 
   const buttonAction = async () => {
     await putAlarmStatus(shopId, noticeId, applyId, status, token);
@@ -146,30 +152,46 @@ function ApplyTable({
                       : apply.item.user.item.phone}
                   </td>
                   <td className={classNames(styles.listRow, styles.statusCol)}>
-                    {userType === 'employee' ? (
+                    {userType === 'employee' && (
                       <Label labelType='status' content={apply.item.status} />
-                    ) : apply.item.status !== 'pending' ? (
-                      <Label labelType='status' content={apply.item.status} />
-                    ) : (
-                      <>
-                        <button
-                          className={classNames(styles.btn, styles.reject)}
-                          onClick={() =>
-                            handleModalClick('rejected', apply.item.id)
-                          }
-                        >
-                          거절하기
-                        </button>
-                        <button
-                          className={classNames(styles.btn, styles.approve)}
-                          onClick={() =>
-                            handleModalClick('accepted', apply.item.id)
-                          }
-                        >
-                          승인하기
-                        </button>
-                      </>
                     )}
+                    {userType !== 'employee' &&
+                      !isAccepted &&
+                      apply.item.status !== 'pending' && (
+                        <Label labelType='status' content={apply.item.status} />
+                      )}
+                    {userType !== 'employee' &&
+                      !isAccepted &&
+                      apply.item.status === 'pending' && (
+                        <>
+                          <button
+                            className={classNames(styles.btn, styles.reject)}
+                            onClick={() =>
+                              handleModalClick('rejected', apply.item.id)
+                            }
+                          >
+                            거절하기
+                          </button>
+                          <button
+                            className={classNames(styles.btn, styles.approve)}
+                            onClick={() =>
+                              handleModalClick('accepted', apply.item.id)
+                            }
+                          >
+                            승인하기
+                          </button>
+                        </>
+                      )}
+                    {userType !== 'employee' &&
+                      isAccepted &&
+                      apply.item.status === 'pending' && (
+                        <Label labelType='rejected' content='rejected' />
+                      )}
+                    {userType !== 'employee' &&
+                      isAccepted &&
+                      apply.item.status !== 'pending' && (
+                        <Label labelType='status' content={apply.item.status} />
+                      )}
                   </td>
                 </tr>
               ))}
