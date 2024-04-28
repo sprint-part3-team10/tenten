@@ -68,7 +68,7 @@ export default function SignUp() {
   };
 
   return (
-    <>
+    <div className={styles.wrapper}>
       <div className={styles.container}>
         <Link href='/' scroll={false}>
           <Image
@@ -134,6 +134,6 @@ export default function SignUp() {
       {showToast && toastMessage && (
         <Toast message={toastMessage} isWarning={isWarning} />
       )}
-    </>
+    </div>
   );
 }

@@ -1,9 +1,9 @@
 import { useState, useEffect } from 'react';
 
 export default function useToast(duration = 1500) {
-  const [showToast, setShowToast] = useState(false);
-  const [timerId, setTimerId] = useState(null);
-  const [toastMessage, setToastMessage] = useState('');
+  const [showToast, setShowToast] = useState<boolean>(false);
+  const [timerId, setTimerId] = useState<any>(null);
+  const [toastMessage, setToastMessage] = useState<string>('');
 
   const displayToast = () => {
     setShowToast(true);
