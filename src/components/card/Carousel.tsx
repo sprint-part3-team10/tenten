@@ -40,7 +40,6 @@ function Carousel({ children }: CarouselProps) {
   useEffect(() => {
     if (carouselInnerRef.current) {
       if (window.matchMedia('(max-width: 1199px)').matches) {
-        console.log(currentIndex);
         carouselInnerRef.current.style.transform = `translateX(-${currentIndex * 100}%)`;
       } else {
         carouselInnerRef.current.style.transform = `translateX(-${currentIndex * 33.8}%)`;
