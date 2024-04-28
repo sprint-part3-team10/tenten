@@ -21,7 +21,7 @@ export default function Footer() {
           </Link>
         </div>
         <div className={styles.sns}>
-          <Link href='https://www.mail.google.com/'>
+          <Link href='https://www.google.com/'>
             <Image src={Envelope} alt='envelope Logo' width={25} height={25} />
           </Link>
           <Link href='https://www.facebook.com/'>
