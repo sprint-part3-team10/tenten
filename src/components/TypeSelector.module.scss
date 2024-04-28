@@ -39,7 +39,7 @@
 .select {
   @include button;
 
-  border: 0.12rem solid #ea3c12;
+  border: 0.12rem solid $pink-50;
 }
 
 .notSelect {

@@ -1,20 +1,9 @@
+import { EmployeeData } from '../types/types';
 import { BASE_URL } from './api';
-
-interface UserApplyDatum {
-  item: {
-    id: string;
-    status: string;
-    notice: {
-      item: {
-        id: string;
-      };
-    };
-  };
-}
 
 interface UserApplyData {
   count: number;
-  items: UserApplyDatum[];
+  items: EmployeeData[];
 }
 
 const getUserApply = async (
