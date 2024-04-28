@@ -179,6 +179,7 @@ function ApplyTable(props: ApplyTableProps) {
             minWidth='29.8rem'
             maxWidth='29.8rem'
             buttonText={['예', '아니오']}
+            buttonColorChange
             handleModal={handleModal}
           />
         </ModalPortal>
