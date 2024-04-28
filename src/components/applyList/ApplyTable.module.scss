@@ -12,12 +12,17 @@
 
   &::-webkit-scrollbar-thumb {
     height: 1%;
-    background: $gray-50;
+    background: $gray-30;
     border-radius: 1rem;
   }
 
   &::-webkit-scrollbar-track {
     background: $gray-5;
+  }
+  @include media(mobile) {
+    &::-webkit-scrollbar {
+      height: 0;
+    }
   }
 }
 
@@ -54,12 +59,16 @@
 }
 
 .listRow.nameCol {
+  cursor: pointer;
   background-color: $gray-5;
+
+  &:hover {
+    text-decoration: underline;
+  }
 }
 
 .title.nameCol {
   z-index: 2;
-  padding: 0.3rem;
   background-color: $pink-5;
 }
 
@@ -100,7 +109,6 @@
 
 .title.statusCol {
   z-index: 3;
-  padding: 0.2rem;
   background-color: $pink-5;
 }
 
