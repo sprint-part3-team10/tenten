@@ -1,7 +1,7 @@
 'use client';
 
 import Image from 'next/image';
-import { useRef } from 'react';
+import { useEffect, useRef } from 'react';
 import warningIcon from '@/public/icons/modalWarning.svg';
 import checkIcon from '@/public/icons/modalCheck.svg';
 import useOutsideClick from '@/src/hooks/useOutsideClick';
@@ -68,6 +68,20 @@ function Modal({
   };
 
   useOutsideClick(ref, handleClick);
+
+  useEffect(() => {
+    const bodyQuery = document.querySelector('body');
+
+    if (bodyQuery) {
+      bodyQuery.style.overflow = 'hidden';
+    }
+
+    return () => {
+      if (bodyQuery) {
+        bodyQuery.style.overflow = 'unset';
+      }
+    };
+  }, []);
 
   return (
     <div className={styles.background}>
