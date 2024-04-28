@@ -31,7 +31,14 @@
     "jsx-a11y/no-noninteractive-element-interactions": "off",
     "react/button-has-type": "off",
     "react/jsx-no-useless-fragment": "off",
-    "react-hooks/exhaustive-deps": "warn",
+    "import/prefer-default-export": "off",
+    "react-hooks/exhaustive-deps": "off",
+    "no-console": "off",
+    "consistent-return": "off",
+    "react/no-array-index-key": "off",
+    "no-await-in-loop": "off",
+    "no-plusplus": "off",
+    "no-param-reassign": "off",
     "@typescript-eslint/no-explicit-any": "off"
   }
 }
