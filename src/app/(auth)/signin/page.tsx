@@ -6,7 +6,7 @@ import Input from '@/src/components/common/input/Input';
 import Image from 'next/image';
 import Link from 'next/link';
 import { useForm } from 'react-hook-form';
-import { EMAIL_REGEX, PASSWORD_REGEX } from '@/src/constants/regEx';
+import { EMAIL_REGEX } from '@/src/constants/regEx';
 import useToast from '@/src/hooks/useToast';
 import Toast from '@/src/components/common/toast/Toast';
 import { useState } from 'react';
