@@ -24,6 +24,30 @@ interface AlarmContainerProps {
   userType: string;
 }
 
+type AlarmType = {
+  item: {
+    application: {
+      item: {
+        status: string;
+      };
+    };
+    notice: {
+      item: {
+        startsAt: string;
+        workhour: number;
+      };
+    };
+    shop: {
+      item: {
+        name: string;
+      };
+    };
+    read: boolean;
+    id: string;
+    createdAt: string;
+  };
+};
+
 export default function AlarmContainer({
   userId,
   token,
@@ -31,7 +55,7 @@ export default function AlarmContainer({
 }: AlarmContainerProps) {
   const [checkRead, setCheckRead] = useState(false);
   const [unRead, setUnRead] = useState(0);
-  const [alarms, setAlarms] = useState([]);
+  const [alarms, setAlarms] = useState<AlarmType[]>([]);
   const [isOpen, setIsOpen] = useState(false);
   const [icon, setIcon] = useState(alarmsRead);
 

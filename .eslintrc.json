@@ -30,6 +30,7 @@
     "react/require-default-props": "off",
     "jsx-a11y/no-noninteractive-element-interactions": "off",
     "react/button-has-type": "off",
-    "react/jsx-no-useless-fragment": "off"
+    "react/jsx-no-useless-fragment": "off",
+    "react-hooks/exhaustive-deps": "warn"
   }
 }

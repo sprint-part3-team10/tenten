@@ -3,6 +3,7 @@ import { BASE_URL } from './api';
 interface AlarmsData {
   count: number;
   items: {
+    filter(arg0: (item: any) => boolean): any;
     item: {
       application: {
         item: {
@@ -31,7 +32,6 @@ const getAlarms = async (
     cache: 'no-store',
   });
   const result = await res.json();
-  console.log('alamr', result);
 
   if (result.status === 403) {
     throw new Error('권한이 없습니다.');
