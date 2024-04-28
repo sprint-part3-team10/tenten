@@ -74,3 +74,28 @@ export type EmployerData = {
     };
   };
 };
+
+export type AlarmType = {
+  item: {
+    application: {
+      item: {
+        status: string;
+      };
+    };
+    notice: {
+      item: {
+        startsAt: string;
+        workhour: number;
+      };
+    };
+    shop: {
+      item: {
+        name: string;
+      };
+    };
+    read: boolean;
+    id: string;
+    createdAt: string;
+    result: string;
+  };
+};

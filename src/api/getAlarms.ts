@@ -1,9 +1,10 @@
+import { AlarmType } from '../types/types';
 import { BASE_URL } from './api';
 
 interface AlarmsData {
   count: number;
   items: {
-    filter(arg0: (item: any) => boolean): any;
+    filter(arg0: (item: AlarmType) => boolean): any;
     item: {
       application: {
         item: {

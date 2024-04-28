@@ -16,6 +16,7 @@ import getAlarms from '@/src/api/getAlarms';
 import { useRouter } from 'next/navigation';
 import useOutsideClick from '@/src/hooks/useOutsideClick';
 import close from '@/public/icons/close.svg';
+import { AlarmType } from '@/src/types/types';
 import styles from './AlarmContainer.module.scss';
 
 interface AlarmContainerProps {
@@ -23,30 +24,6 @@ interface AlarmContainerProps {
   token: string;
   userType: string;
 }
-
-type AlarmType = {
-  item: {
-    application: {
-      item: {
-        status: string;
-      };
-    };
-    notice: {
-      item: {
-        startsAt: string;
-        workhour: number;
-      };
-    };
-    shop: {
-      item: {
-        name: string;
-      };
-    };
-    read: boolean;
-    id: string;
-    createdAt: string;
-  };
-};
 
 export default function AlarmContainer({
   userId,
@@ -80,7 +57,8 @@ export default function AlarmContainer({
       let filteredItems;
       if (userType === 'employee') {
         filteredItems = items.filter(
-          item => item.item.read === false && item.item.result !== 'canceled',
+          (item: AlarmType) =>
+            item.item.read === false && item.item.result !== 'canceled',
         );
       }
       const count = filteredItems.length;
