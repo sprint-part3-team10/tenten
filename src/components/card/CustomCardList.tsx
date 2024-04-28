@@ -9,88 +9,79 @@ import Card from './Card';
 import Button from '../common/Button';
 import Carousel from './Carousel';
 
-async function CustomCardList() {
+function renderNoAddress() {
+  return (
+    <div className={styles.container}>
+      <div className={styles.noAddress}>
+        <h1>맞춤 공고가 없어요🥺</h1>
+        <h2>내 프로필에서 선호 지역을 등록해 내 주변 공고를 확인해보세요!</h2>
+        <div className={styles.button}>
+          <Link href='/myprofile'>
+            <Button size='M' buttonType='button' text='내 프로필 보러 가기' />
+          </Link>
+        </div>
+      </div>
+    </div>
+  );
+}
+
+function renderNoNearNotice() {
+  return (
+    <div className={styles.container}>
+      <div className={styles.noAddress}>
+        <h1>내 주변 공고가 없어요😭</h1>
+      </div>
+    </div>
+  );
+}
+
+async function fetchItems(filter: Filter): Promise<CardItems[]> {
+  const { count } = await getCardData(0, 0, '', filter);
+  let offset = 0;
+  let fetchedItems: CardItems[] = [];
+
+  while (count > 0 && offset < count && fetchedItems.length < 8) {
+    const remainingCount = 8 - fetchedItems.length;
+    const { items } = await getCardData(offset, remainingCount, '', filter);
+    if (items.length === 0) break;
+    fetchedItems = fetchedItems.concat(
+      items.filter(oneItem => !oneItem.item.closed),
+    );
+    offset += items.length;
+  }
+
+  return fetchedItems;
+}
+
+export default async function CustomCardList() {
   const userId = cookies().get('u_id')?.value;
   const { address } = (await getProfileData(userId)) || '';
-  const INITIAL_FILTER = {
+
+  if (!address) {
+    return renderNoAddress();
+  }
+
+  const initialFilter = {
     address: [address],
     startsAtGte: new Date(),
     hourlyPayGte: '',
   };
 
-  const { count } = address
-    ? await getCardData(0, 0, '', INITIAL_FILTER)
-    : { count: 0 };
-
-  let newItems: CardItems[] = [];
-  let offset = 0;
-
-  const fetchItems = async (
-    newOffset: number,
-    limit: number,
-    filter: Filter,
-  ) => {
-    const { items } = address
-      ? await getCardData(newOffset, limit, '', filter)
-      : { items: [] };
-
-    return items.filter(oneItem => !oneItem.item.closed);
-  };
-
-  while (count > 0 && offset < count && newItems.length < 8) {
-    const remainingCount = 8 - newItems.length;
-    const moreItems = await fetchItems(offset, remainingCount, INITIAL_FILTER);
-    if (moreItems.length === 0) break;
-    newItems = newItems.concat(moreItems);
-    offset += moreItems.length;
-  }
+  let newItems = await fetchItems(initialFilter);
 
   if (newItems.length < 8) {
-    const nearAddress = [...NEAR_ADDRESS_LIST[address]];
-    const { count: newcount } = address
-      ? await getCardData(0, 0, '', {
-          ...INITIAL_FILTER,
-          address: nearAddress,
-        })
-      : { count: 0 };
-    offset = 0;
+    const nearAddress = NEAR_ADDRESS_LIST[address];
 
-    while (newcount > 0 && offset < newcount && newItems.length < 8) {
-      const remainingCount = 8 - newItems.length;
-      const moreItems = await fetchItems(offset, remainingCount, {
-        ...INITIAL_FILTER,
-        address: nearAddress,
-      });
-      if (moreItems.length === 0) break;
-      newItems = newItems.concat(moreItems);
-      offset += moreItems.length;
-    }
-  }
+    const additionalItems = await fetchItems({
+      ...initialFilter,
+      address: nearAddress,
+    });
 
-  if (!address) {
-    return (
-      <div className={styles.container}>
-        <div className={styles.noAddress}>
-          <h1>맞춤 공고가 없어요🥺</h1>
-          <h2>내 프로필에서 선호 지역을 등록해 내 주변 공고를 확인해보세요!</h2>
-          <div className={styles.button}>
-            <Link href='/myprofile'>
-              <Button size='M' buttonType='button' text='내 프로필 보러 가기' />
-            </Link>
-          </div>
-        </div>
-      </div>
-    );
+    newItems = newItems.concat(additionalItems.slice(0, 8 - newItems.length));
   }
 
   if (newItems.length === 0) {
-    return (
-      <div className={styles.container}>
-        <div className={styles.noAddress}>
-          <h1>내 주변 공고가 없어요😭</h1>
-        </div>
-      </div>
-    );
+    return renderNoNearNotice();
   }
 
   return (
@@ -123,5 +114,3 @@ async function CustomCardList() {
     </div>
   );
 }
-
-export default CustomCardList;
