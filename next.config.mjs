@@ -10,11 +10,6 @@ const nextConfig = {
         pathname: '/**',
       },
     ],
-    domains: [
-      'images.unsplash.com',
-      'encrypted-tbn0.gstatic.com',
-      'i.namu.wiki',
-    ],
   },
 };
 

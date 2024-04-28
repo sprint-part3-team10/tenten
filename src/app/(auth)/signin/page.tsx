@@ -76,12 +76,7 @@ export default function SignIn() {
             inputType='password'
             placeholder='비밀번호'
             error={passwordError}
-            register={register('password', {
-              pattern: {
-                value: PASSWORD_REGEX,
-                message: '비밀번호는 8-16자, 문자 및 숫자를 포함해야 합니다',
-              },
-            })}
+            register={register('password')}
           />
           <Button buttonType='submit' text='로그인 하기' size='L' />
 

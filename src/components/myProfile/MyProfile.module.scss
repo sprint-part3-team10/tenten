@@ -5,7 +5,7 @@
   gap: 10rem;
   min-width: 35rem;
   padding: 3.2rem;
-  background-color: $red-10;
+  background-color: $pink-5;
   border-radius: 1.2rem;
 
   @include media(mobile) {
@@ -23,7 +23,7 @@
 .name {
   @include text-16-b;
 
-  color: $red-50;
+  color: $pink-50;
 
   @include media(mobile) {
     @include text-14-b;

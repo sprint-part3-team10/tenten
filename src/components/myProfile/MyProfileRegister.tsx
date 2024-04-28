@@ -96,10 +96,13 @@ export default function MyProfileRegister({
   };
 
   useEffect(() => {
-    if (!isEditing) return;
     const fetchProfileData = async (targetUserId: string) => {
       const result = await getProfileData(targetUserId);
       const { id, email, type, shop, ...userData } = result;
+      if (!isEditing && userData.name) {
+        router.push('/');
+        return;
+      }
       Object.entries(userData).forEach(([fieldName, value]) => {
         setValue(fieldName, value);
       });
@@ -107,9 +110,9 @@ export default function MyProfileRegister({
     };
 
     fetchProfileData(userId);
-  }, [isEditing, setValue, userId]);
+  }, [isEditing, setValue, userId, router]);
 
-  if (isLoading && isEditing) {
+  if (isLoading) {
     return <Spinner />;
   }
 

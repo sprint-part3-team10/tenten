@@ -4,7 +4,7 @@ import { BASE_URL } from './api';
 
 export interface CardData {
   count: number;
-  items: CardItems['items'];
+  items: CardItems[];
 }
 
 const getCardData = async (
