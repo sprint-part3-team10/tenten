@@ -46,7 +46,7 @@ function Modal({
   handleButton = [() => {}],
   buttonWidthPercent = '35%',
   bottomRightButton = false,
-  buttonColorChange = false,
+  buttonColorChange = true,
   handleModal,
 }: ModalProps) {
   const ref = useRef<HTMLDivElement>(null);
