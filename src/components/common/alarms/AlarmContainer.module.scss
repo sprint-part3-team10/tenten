@@ -105,7 +105,7 @@
   gap: 1.6rem;
   width: 36.8rem;
   padding: 2.4rem 2rem;
-  background-color: $red-10;
+  background-color: $pink-10;
   border: 1px solid $gray-30;
   border-radius: 1rem;
 
@@ -120,9 +120,9 @@
   }
 }
 
-.close {
+.container .close {
   display: none;
-  background-color: $red-10;
+  background: $pink-10;
 
   @include media(mobile) {
     position: absolute;
