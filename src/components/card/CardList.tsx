@@ -25,7 +25,7 @@ interface CardListProps {
 function CardList({ search = undefined }: CardListProps) {
   const LIMIT = 6;
   const { offset, selectedPage, handlePageChange } = usePagination(LIMIT);
-  const [cardItems, setCardItems] = useState<CardItems['items']>([]);
+  const [cardItems, setCardItems] = useState<CardItems[]>();
   const [totalCount, setTotalCount] = useState<number>();
   const [sortText, setSortText] = useState(
     Object.keys(STORE_FILTERING_LIST)[0],
@@ -47,7 +47,7 @@ function CardList({ search = undefined }: CardListProps) {
         setCardItems(items);
         setTotalCount(count);
 
-        if (!isFirstRender)
+        if (!isFirstRender && ref.current)
           window.scrollTo({
             top: ref.current.offsetTop - 50,
             behavior: 'smooth',

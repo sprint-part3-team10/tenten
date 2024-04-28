@@ -6,7 +6,9 @@ interface ProfileData {
   address: string;
   bio: string;
 }
-const getProfileData = async (userId: string): Promise<ProfileData> => {
+const getProfileData = async (
+  userId: string | undefined,
+): Promise<ProfileData> => {
   const res = await fetch(`${BASE_URL}/users/${userId}`, { cache: 'no-store' });
 
   if (!res.ok) {
