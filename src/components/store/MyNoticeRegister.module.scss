@@ -11,7 +11,7 @@
   }
 
   @include media(tablet) {
-    padding: 0 5rem;
+    padding: 0 3rem;
   }
 }
 
@@ -21,6 +21,12 @@
   display: flex;
   gap: 2rem;
   align-self: stretch;
+
+  @include media(mobile) {
+    @include text-24-b;
+
+    gap: 1rem;
+  }
 }
 
 .formBox {

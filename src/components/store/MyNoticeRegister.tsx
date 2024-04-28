@@ -24,6 +24,11 @@ interface MyNoticeRegisterProps {
   shopId: string;
 }
 
+type SetValueFunction = (
+  fieldName: 'description' | 'hourlyPay' | 'startsAt' | 'workhour',
+  value: Date | string | number | null,
+) => void;
+
 export default function MyNoticeRegister({
   token,
   shopId,
@@ -101,7 +106,11 @@ export default function MyNoticeRegister({
       }
       handleShowModal(true);
     } catch (error) {
-      setModalMessage(error.message);
+      if (error instanceof Error) {
+        setModalMessage(error.message);
+      } else {
+        setModalMessage('알 수 없는 오류가 발생했습니다.');
+      }
       handleShowModal(true);
     }
   };
@@ -118,11 +127,18 @@ export default function MyNoticeRegister({
         ...noticeData,
         startsAt: noticeData.startsAt.replace('Z', ''),
       };
+      const setValueTyped = setValue as SetValueFunction;
+
       Object.entries(timeConverTedNoticeData).forEach(([fieldName, value]) => {
         if (fieldName === 'startsAt') {
-          setValue(fieldName, new Date(value));
+          if (value !== null) {
+            setValueTyped(fieldName as 'startsAt', new Date(value));
+          }
         } else {
-          setValue(fieldName, value);
+          setValueTyped(
+            fieldName as 'description' | 'hourlyPay' | 'workhour',
+            value,
+          );
         }
       });
       setIsLoading(false);
@@ -139,7 +155,9 @@ export default function MyNoticeRegister({
         setOriginalPay(originalHourlyPay);
         setIsLoading(false);
       } catch (error) {
-        console.error(error.message);
+        if (error instanceof Error) {
+          console.error(error.message);
+        }
       }
     };
 
@@ -149,7 +167,6 @@ export default function MyNoticeRegister({
   if (isLoading && noticeId) {
     return <Spinner />;
   }
-
   return (
     <div className={styles.container}>
       <div className={styles.header}>

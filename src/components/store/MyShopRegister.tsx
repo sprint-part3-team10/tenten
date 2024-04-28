@@ -29,6 +29,19 @@ interface MyShopRegisterProps {
   shopId: string;
 }
 
+type SetValueFunction = (
+  fieldName:
+    | 'name'
+    | 'category'
+    | 'address1'
+    | 'address2'
+    | 'address2'
+    | 'description'
+    | 'imageUrl'
+    | 'originalHourlyPay',
+  value: string | number,
+) => void;
+
 export default function MyShopRegister({ token, shopId }: MyShopRegisterProps) {
   const [isLoading, setIsLoading] = useState(true);
   const params = useSearchParams();
@@ -39,9 +52,13 @@ export default function MyShopRegister({ token, shopId }: MyShopRegisterProps) {
   };
   const [modalMessage, setModalMessage] = useState('등록이 완료되었습니다.');
 
-  const imageInputRef = useRef(null);
+  const imageInputRef = useRef<HTMLInputElement>(null);
   const handleFilePickerClick = () => {
-    imageInputRef.current.click();
+    if (imageInputRef.current !== null && imageInputRef.current !== undefined) {
+      imageInputRef.current.click();
+    } else {
+      console.error('imageInputRef is null.');
+    }
   };
   const router = useRouter();
   const handleGoBack = () => {
@@ -112,9 +129,11 @@ export default function MyShopRegister({ token, shopId }: MyShopRegisterProps) {
   const handleImageFileChange = async (
     e: React.ChangeEvent<HTMLInputElement>,
   ) => {
-    const file = e.target.files[0];
-    const presignedUrl = await createPresignedUrl(file, token);
-    setValue('imageUrl', presignedUrl);
+    if (e.target.files && e.target.files.length > 0) {
+      const file = e.target.files[0];
+      const presignedUrl = await createPresignedUrl(file, token);
+      setValue('imageUrl', presignedUrl);
+    }
   };
 
   const onSubmit = async (formData: MyShopFormData) => {
@@ -127,7 +146,11 @@ export default function MyShopRegister({ token, shopId }: MyShopRegisterProps) {
       }
       handleShowModal(true);
     } catch (error) {
-      setModalMessage(error.message);
+      if (error instanceof Error) {
+        setModalMessage(error.message);
+      } else {
+        setModalMessage('알 수 없는 오류가 발생했습니다.');
+      }
       handleShowModal(true);
     }
   };
@@ -144,8 +167,22 @@ export default function MyShopRegister({ token, shopId }: MyShopRegisterProps) {
       }
       const result = await getShop(targetShopId);
       const { user, ...shopData } = result.item;
+
+      const setValueTyped = setValue as SetValueFunction;
+
       Object.entries(shopData).forEach(([fieldName, value]) => {
-        setValue(fieldName, value);
+        setValueTyped(
+          fieldName as
+            | 'name'
+            | 'category'
+            | 'address1'
+            | 'address2'
+            | 'address2'
+            | 'description'
+            | 'imageUrl'
+            | 'originalHourlyPay',
+          value,
+        );
       });
       setIsLoading(false);
     };
