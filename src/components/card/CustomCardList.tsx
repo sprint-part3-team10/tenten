@@ -3,6 +3,7 @@ import getCardData from '@/src/api/getCardData';
 import Link from 'next/link';
 import { NEAR_ADDRESS_LIST } from '@/src/constants/constant';
 import { cookies } from 'next/headers';
+import { CardItems, Filter } from '@/src/types/types';
 import styles from './CustomCardList.module.scss';
 import Card from './Card';
 import Button from '../common/Button';
@@ -16,21 +17,54 @@ async function CustomCardList() {
     startsAtGte: new Date(),
     hourlyPayGte: '',
   };
-  let newItems = [];
 
-  const { count, items } = address
-    ? await getCardData(0, 8, '', INITIAL_FILTER)
-    : { count: 0, items: [] };
+  const { count } = address
+    ? await getCardData(0, 0, '', INITIAL_FILTER)
+    : { count: 0 };
 
-  newItems = [...items];
+  let newItems: CardItems[] = [];
+  let offset = 0;
 
-  if (address && newItems.length < 8) {
-    const nearAddress = [address, ...NEAR_ADDRESS_LIST[address]];
-    const { items: otherItems } = await getCardData(0, 8 - count, '', {
-      ...INITIAL_FILTER,
-      address: nearAddress,
-    });
-    newItems = [...newItems, ...otherItems];
+  const fetchItems = async (
+    newOffset: number,
+    limit: number,
+    filter: Filter,
+  ) => {
+    const { items } = address
+      ? await getCardData(newOffset, limit, '', filter)
+      : { items: [] };
+
+    return items.filter(oneItem => !oneItem.item.closed);
+  };
+
+  while (count > 0 && offset < count && newItems.length < 8) {
+    const remainingCount = 8 - newItems.length;
+    const moreItems = await fetchItems(offset, remainingCount, INITIAL_FILTER);
+    if (moreItems.length === 0) break;
+    newItems = newItems.concat(moreItems);
+    offset += moreItems.length;
+  }
+
+  if (newItems.length < 8) {
+    const nearAddress = [...NEAR_ADDRESS_LIST[address]];
+    const { count: newcount } = address
+      ? await getCardData(0, 0, '', {
+          ...INITIAL_FILTER,
+          address: nearAddress,
+        })
+      : { count: 0 };
+    offset = 0;
+
+    while (newcount > 0 && offset < newcount && newItems.length < 8) {
+      const remainingCount = 8 - newItems.length;
+      const moreItems = await fetchItems(offset, remainingCount, {
+        ...INITIAL_FILTER,
+        address: nearAddress,
+      });
+      if (moreItems.length === 0) break;
+      newItems = newItems.concat(moreItems);
+      offset += moreItems.length;
+    }
   }
 
   if (!address) {
