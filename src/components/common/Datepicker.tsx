@@ -1,4 +1,4 @@
-import React, { forwardRef, Ref } from 'react';
+import React, { forwardRef } from 'react';
 import ReactDatePicker from 'react-datepicker';
 import { FieldError } from 'react-hook-form';
 import { ko } from 'date-fns/locale';
@@ -7,7 +7,7 @@ import './DatePicker.scss';
 
 interface DatePickerProps {
   value?: Date | undefined;
-  onChange?: (date: Date) => void;
+  onChange: (date: Date) => void | undefined;
   timeSelect?: boolean;
   width?: string;
   error?: FieldError;
