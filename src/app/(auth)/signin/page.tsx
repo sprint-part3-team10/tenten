@@ -47,7 +47,7 @@ export default function SignIn() {
   };
 
   return (
-    <>
+    <div className={styles.wrapper}>
       <div className={styles.container}>
         <Link href='/' scroll={false}>
           <Image
@@ -91,6 +91,6 @@ export default function SignIn() {
       {showToast && toastMessage && (
         <Toast message={toastMessage} isWarning={isWarning} />
       )}
-    </>
+    </div>
   );
 }
