@@ -63,4 +63,18 @@
   height: 100%;
   padding-top: 3rem;
   overflow: hidden;
+
+  @include media(tablet) {
+    display: flex;
+    justify-content: center;
+    max-width: 64.5rem;
+    margin: 0 auto;
+  }
+
+  @include media(mobile) {
+    display: flex;
+    justify-content: center;
+    max-width: 37rem;
+    margin: 0 auto;
+  }
 }
