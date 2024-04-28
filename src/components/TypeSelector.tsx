@@ -1,7 +1,7 @@
 import Image from 'next/image';
-import styles from './TypeSelector.module.scss';
 import CHECK from '@/public/icons/circleChecked.svg';
 import NOTCHECKED from '@/public/icons/circleNotChecked.svg';
+import styles from './TypeSelector.module.scss';
 
 interface TypeSelectorProps {
   label: string;
@@ -9,27 +9,7 @@ interface TypeSelectorProps {
   isEmployer: boolean;
 }
 
-export default function TypeSelector({
-  label,
-  onChange,
-  isEmployer,
-}: TypeSelectorProps) {
-  return (
-    <div className={styles.selectToggle}>
-      <p className={styles.label}>{label}</p>
-      <div className={styles.toggles}>
-        {ToggleButton(isEmployer, '알바생', onChange)}
-        {ToggleButton(!isEmployer, '사장님', onChange)}
-      </div>
-    </div>
-  );
-}
-
-const ToggleButton = (
-  selected: boolean,
-  text: string,
-  onChange: () => void,
-) => {
+function ToggleButton(selected: boolean, text: string, onChange: () => void) {
   const circleSrc = selected ? CHECK : NOTCHECKED;
   const altText = selected ? '선택' : '선택하지 않음';
   const buttonStyle = selected ? styles.select : styles.notSelect;
@@ -51,4 +31,20 @@ const ToggleButton = (
       {text}
     </button>
   );
-};
+}
+
+export default function TypeSelector({
+  label,
+  onChange,
+  isEmployer,
+}: TypeSelectorProps) {
+  return (
+    <div className={styles.selectToggle}>
+      <p className={styles.label}>{label}</p>
+      <div className={styles.toggles}>
+        {ToggleButton(isEmployer, '알바생', onChange)}
+        {ToggleButton(!isEmployer, '사장님', onChange)}
+      </div>
+    </div>
+  );
+}
