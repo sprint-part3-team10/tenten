@@ -56,6 +56,7 @@ export type EmployeeData = {
 
 export type EmployerData = {
   item: {
+    notice: any;
     id: string;
     status: string;
     shop: {

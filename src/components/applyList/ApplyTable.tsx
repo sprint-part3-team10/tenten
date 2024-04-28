@@ -85,10 +85,8 @@ function ApplyTable({
       setTotal(count);
     }
   };
-  console.log('받아졌냐', isAccepted);
 
   const applies = employeeApplies.length ? employeeApplies : employerApplies;
-  console.log('data', applies);
 
   useEffect(() => {
     fetchData();
