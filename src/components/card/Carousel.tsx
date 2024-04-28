@@ -18,7 +18,7 @@ function Carousel({ children }: CarouselProps) {
     } else if (React.Children.count(children) <= 3) return;
 
     const interval = setInterval(() => {
-      if (window.matchMedia('(max-width: 1199px)').matches) {
+      if (window.matchMedia('(max-width: 768px)').matches) {
         setCurrentIndex(prevIndex =>
           prevIndex ===
           React.Children.count(children) -
@@ -26,6 +26,10 @@ function Carousel({ children }: CarouselProps) {
             1
             ? 0
             : prevIndex + 1,
+        );
+      } else if (window.matchMedia('(max-width: 1199px)').matches) {
+        setCurrentIndex(prevIndex =>
+          prevIndex === React.Children.count(children) - 2 ? 0 : prevIndex + 1,
         );
       } else {
         setCurrentIndex(prevIndex =>
@@ -39,8 +43,10 @@ function Carousel({ children }: CarouselProps) {
 
   useEffect(() => {
     if (carouselInnerRef.current) {
-      if (window.matchMedia('(max-width: 1199px)').matches) {
+      if (window.matchMedia('(max-width: 768px)').matches) {
         carouselInnerRef.current.style.transform = `translateX(-${currentIndex * 100}%)`;
+      } else if (window.matchMedia('(max-width: 1199px)').matches) {
+        carouselInnerRef.current.style.transform = `translateX(-${currentIndex * 50}%)`;
       } else {
         carouselInnerRef.current.style.transform = `translateX(-${currentIndex * 33.8}%)`;
       }
