@@ -16,7 +16,7 @@
   padding: 2.4rem;
   margin: 0 auto;
   font-size: 1.6rem;
-  background-color: $red-10;
+  background-color: $pink-5;
 
   &.white {
     background-color: $white;
@@ -75,7 +75,7 @@
 .category {
   @include text-16-b;
 
-  color: #ea3c12;
+  color: $pink-50;
 }
 
 .title {
@@ -111,8 +111,8 @@
 
   width: 100%;
   padding: 1.4rem;
-  color: $red-40;
+  color: $pink-40;
   background-color: $white;
-  border: 1px solid $red-40;
+  border: 1px solid $pink-40;
   border-radius: 0.6rem;
 }
