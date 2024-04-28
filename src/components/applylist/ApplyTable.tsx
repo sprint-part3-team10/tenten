@@ -10,6 +10,7 @@ import getUserApply from '@/src/api/getUserApply';
 import getShopApply from '@/src/api/getShopApply';
 import putAlarmStatus from '@/src/api/putAlarmStatus';
 import { useRouter } from 'next/navigation';
+import { EmployeeData, EmployerData } from '@/src/types/types';
 import Label from './Label';
 import styles from './ApplyTable.module.scss';
 import Pagination from '../pagination/Pagination';
@@ -29,14 +30,15 @@ const titleCol: { [key: string]: string[] } = {
   employer: ['신청자', '소개', '전화번호', '상태'],
 };
 
-function ApplyTable(props: ApplyTableProps) {
-  const { userType, token } = props;
-  // const userId = props.userId as string;
-  // const shopId = props.shopId as string;
-  // const noticeId = props.noticeId as string;
-  // const tokenId = token as string;
-
-  const [applies, setApplies] = useState<any[]>([]);
+function ApplyTable({
+  noticeId = '',
+  shopId = '',
+  userId = '',
+  userType,
+  token = '',
+}: ApplyTableProps) {
+  const [employerApplies, setEmployerApplies] = useState<EmployerData[]>([]);
+  const [employeeApplies, setEmployeeApplies] = useState<EmployeeData[]>([]);
   const [total, setTotal] = useState<number>(0);
 
   const [open, setOpen] = useState(false);
@@ -65,20 +67,29 @@ function ApplyTable(props: ApplyTableProps) {
   const { offset, selectedPage, handlePageChange } = usePagination(LIMIT);
 
   const fetchData = async () => {
-    const { count, items } =
-      userType === 'employee'
-        ? await getUserApply(props.userId, offset, token)
-        : await getShopApply(props.shopId, props.noticeId, offset, token);
-    setApplies(items);
-    setTotal(count);
+    if (userType === 'employee') {
+      const { count, items } = await getUserApply(userId, offset, token);
+      setEmployeeApplies([...items]);
+      setTotal(count);
+    } else if (userType === 'employer') {
+      const { count, items } = await getShopApply(
+        shopId,
+        noticeId,
+        offset,
+        token,
+      );
+      setEmployerApplies([...items]);
+      setTotal(count);
+    }
   };
+  const applies = employeeApplies || employerApplies;
 
   useEffect(() => {
     fetchData();
   }, [offset]);
 
   const buttonAction = async () => {
-    await putAlarmStatus(props.shopId, props.noticeId, applyId, status, token);
+    await putAlarmStatus(shopId, noticeId, applyId, status, token);
     await fetchData();
     router.refresh();
   };

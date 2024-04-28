@@ -1,8 +1,9 @@
+import { EmployerData } from '../types/types';
 import { BASE_URL } from './api';
 
 interface ShopApplyData {
   count: number;
-  items: object[];
+  items: EmployerData[];
 }
 
 const getShopApply = async (
