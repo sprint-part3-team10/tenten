@@ -17,7 +17,7 @@ export default function LogoutButton() {
 
   const handleLogout = async () => {
     await deleteCookie();
-    router.push('/');
+    router.replace('/');
     router.refresh();
   };
 
@@ -31,15 +31,16 @@ export default function LogoutButton() {
             message={modalMessage}
             minWidth='20rem'
             maxWidth='40rem'
-            buttonText={['아니오', '예']}
+            buttonText={['예', '아니오']}
             buttonWidthPercent='25%'
             handleModal={handleShowModal}
+            buttonColorChange={true}
             handleButton={[
+              handleLogout,
               e => {
                 e.stopPropagation();
                 handleShowModal(false);
               },
-              handleLogout,
             ]}
           />
         </ModalPortal>

@@ -5,12 +5,12 @@
   align-items: center;
   justify-content: center;
   color: $white;
-  background: #ea3c12;
-  border: 1px solid #ea3c12;
+  background: $pink-50;
+  border: 1px solid $pink-50;
   border-radius: 0.6rem;
 
   &:hover {
-    background: $red-30;
+    background: $pink-30;
   }
 
   &:disabled {
@@ -23,12 +23,12 @@
 @mixin white {
   @include button;
 
-  color: #ea3c12;
+  color: $pink-50;
   background: $white;
-  border: 1px solid #ea3c12;
+  border: 1px solid $pink-50;
 
   &:hover {
-    background: $red-10;
+    background: $pink-10;
   }
 
   &:disabled {

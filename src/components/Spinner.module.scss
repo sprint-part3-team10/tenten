@@ -13,8 +13,8 @@
 .spinner {
   min-width: 5rem;
   min-height: 5rem;
-  border: 6px dotted $red-30;
-  border-right: 5px solid $white;
+  border: 6px dotted $pink-30;
+  border-right: 5px solid transparent;
   border-radius: 50%;
   animation: spinner 1.5s linear infinite;
 }

@@ -2,6 +2,7 @@
 
 .layout {
   @include layout;
+
   height: 100vh;
   background: $gray-5;
 }

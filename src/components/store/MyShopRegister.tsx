@@ -113,7 +113,7 @@ export default function MyShopRegister({ token, shopId }: MyShopRegisterProps) {
     e: React.ChangeEvent<HTMLInputElement>,
   ) => {
     const file = e.target.files[0];
-    const presignedUrl = await createPresignedUrl(file);
+    const presignedUrl = await createPresignedUrl(file, token);
     setValue('imageUrl', presignedUrl);
   };
 
@@ -133,12 +133,17 @@ export default function MyShopRegister({ token, shopId }: MyShopRegisterProps) {
   };
 
   useEffect(() => {
-    if (!isEditing) return;
     const fetchShopData = async (targetShopId: string) => {
+      if (!isEditing && shopId !== '쿠키가 존재하지 않습니다.') {
+        router.push('/');
+        return;
+      }
+      if (!isEditing) {
+        setIsLoading(false);
+        return;
+      }
       const result = await getShop(targetShopId);
       const { user, ...shopData } = result.item;
-
-      // user 프로퍼티를 제외한 나머지 프로퍼티를 반복하여 설정
       Object.entries(shopData).forEach(([fieldName, value]) => {
         setValue(fieldName, value);
       });
@@ -146,9 +151,9 @@ export default function MyShopRegister({ token, shopId }: MyShopRegisterProps) {
     };
 
     fetchShopData(shopId);
-  }, [isEditing, shopId, setValue]);
+  }, [isEditing, setValue, router]);
 
-  if (isLoading && isEditing) {
+  if (isLoading) {
     return <Spinner />;
   }
 
