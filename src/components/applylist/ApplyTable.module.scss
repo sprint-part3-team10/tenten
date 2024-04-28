@@ -12,12 +12,17 @@
 
   &::-webkit-scrollbar-thumb {
     height: 1%;
-    background: $gray-50;
+    background: $gray-30;
     border-radius: 1rem;
   }
 
   &::-webkit-scrollbar-track {
     background: $gray-5;
+  }
+  @include media(mobile) {
+    &::-webkit-scrollbar {
+      height: 0;
+    }
   }
 }
 
