@@ -5,12 +5,13 @@
   flex-direction: column;
   gap: 3rem;
   align-items: center;
+  height: 100%;
 
   @include media(tablet) {
     padding: 0 2rem;
   }
 
-  @include media(tablet) {
+  @include media(mobile) {
     padding: 0 5rem;
   }
 }
