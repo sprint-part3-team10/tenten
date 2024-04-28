@@ -40,7 +40,7 @@
   display: inline-block;
   padding: 2rem 3rem;
   color: $white;
-  background-color: #ea3c12;
+  background-color: $pink-50;
   border-radius: 0.8rem;
 
   @include text-20-b;
@@ -51,15 +51,15 @@
 
   box-sizing: border-box;
   padding: 2rem 3rem;
-  color: #ea3c12;
+  color: $pink-50;
   text-align: center;
   text-decoration: none;
   background-color: $white;
-  border: 1px solid #ea3c12;
+  border: 1px solid $pink-50;
   border-radius: 0.8rem;
 
   &:hover {
-    background-color: $red-10;
+    background-color: $pink-10;
   }
 
   @include media(mobile) {

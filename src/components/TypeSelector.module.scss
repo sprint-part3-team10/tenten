@@ -28,7 +28,7 @@
 
   display: flex;
   gap: 1rem;
-  align-items: flex-start;
+  align-items: center;
   width: 100%;
   padding: 1.3rem 4.1rem;
   color: $black;
@@ -48,14 +48,10 @@
   border: 0.1rem solid $gray-30;
 
   &:hover {
-    background: $red-10;
+    background: $pink-10;
   }
 }
 
 .circle {
   position: relative;
-}
-
-.checked {
-  position: absolute;
 }

@@ -26,7 +26,7 @@ export default function SignIn() {
     formState: { errors },
   } = useForm<SigninFormData>({ mode: 'onChange' });
   const [isWarning, setIsWarning] = useState<boolean>(false);
-  const { showToast, toastMessage, setToastMessage } = useToast(3000);
+  const { showToast, toastMessage, setToastMessage } = useToast();
   const router = useRouter();
 
   const { email: emailError, password: passwordError } = errors;
@@ -38,8 +38,8 @@ export default function SignIn() {
       setToastMessage('정상적으로 로그인 되었습니다.');
       setIsWarning(false);
       setTimeout(() => {
-        router.push('/');
-      }, 3000);
+        router.replace('/', { scroll: false });
+      }, 1500);
     } catch (error: any) {
       setToastMessage(error.message);
       setIsWarning(true);
@@ -49,8 +49,14 @@ export default function SignIn() {
   return (
     <>
       <div className={styles.container}>
-        <Link href='/'>
-          <Image src={Logo} alt='홈페이지 로고' width={248} height={45} />
+        <Link href='/' scroll={false}>
+          <Image
+            src={Logo}
+            alt='홈페이지 로고'
+            width={248}
+            height={45}
+            priority
+          />
         </Link>
         <form className={styles.form} onSubmit={handleSubmit(onSubmit)}>
           <Input
@@ -70,18 +76,13 @@ export default function SignIn() {
             inputType='password'
             placeholder='비밀번호'
             error={passwordError}
-            register={register('password', {
-              pattern: {
-                value: PASSWORD_REGEX,
-                message: '비밀번호는 8-16자, 문자 및 숫자를 포함해야 합니다',
-              },
-            })}
+            register={register('password')}
           />
           <Button buttonType='submit' text='로그인 하기' size='L' />
 
           <div className={styles.movePage}>
             회원이 아니신가요?{' '}
-            <Link className={styles.signLink} href='/signup'>
+            <Link className={styles.signLink} href='/signup' scroll={false}>
               회원가입하기
             </Link>
           </div>

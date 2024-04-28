@@ -37,7 +37,7 @@ export default function SignUp() {
     defaultValues: { email: '', password: '', passwordCheck: '' },
   });
   const [isWarning, setIsWarning] = useState<boolean>(false);
-  const { showToast, toastMessage, setToastMessage } = useToast(3000);
+  const { showToast, toastMessage, setToastMessage } = useToast();
   const router = useRouter();
 
   const {
@@ -59,8 +59,8 @@ export default function SignUp() {
       setToastMessage('정상적으로 가입되었습니다.');
       setIsWarning(false);
       setTimeout(() => {
-        router.push('/signin');
-      }, 3000);
+        router.replace('/signin', { scroll: false });
+      }, 1500);
     } catch (error: any) {
       setToastMessage(error.message);
       setIsWarning(true);
@@ -70,8 +70,14 @@ export default function SignUp() {
   return (
     <>
       <div className={styles.container}>
-        <Link href='/'>
-          <Image src={Logo} alt='홈페이지 로고' width={248} height={45} />
+        <Link href='/' scroll={false}>
+          <Image
+            src={Logo}
+            alt='홈페이지 로고'
+            width={248}
+            height={45}
+            priority
+          />
         </Link>
         <form className={styles.form} onSubmit={handleSubmit(onSubmit)}>
           <Input
@@ -119,7 +125,7 @@ export default function SignUp() {
           <Button buttonType='submit' text='가입하기' size='L' />
           <div className={styles.movePage}>
             이미 가입하셨나요?{' '}
-            <Link className={styles.link} href='/signin'>
+            <Link className={styles.link} href='/signin' scroll={false}>
               로그인 하기
             </Link>
           </div>

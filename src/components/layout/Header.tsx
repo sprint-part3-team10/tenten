@@ -13,7 +13,7 @@ export default function Header() {
   return (
     <div className={styles.container}>
       <div className={styles.headerBox}>
-        <Link href='/'>
+        <Link href='/' scroll={false}>
           <Image
             className={styles.logo}
             src={logo}
@@ -30,7 +30,7 @@ export default function Header() {
             <>
               {userType === 'employee' ? (
                 <>
-                  <Link href='/myprofile'>
+                  <Link href='/myprofile' scroll={false}>
                     <button>내 프로필</button>
                   </Link>
                   <LogoutButton />
@@ -38,7 +38,7 @@ export default function Header() {
                 </>
               ) : (
                 <>
-                  <Link href='/myshop'>
+                  <Link href='/myshop' scroll={false}>
                     <button>내 가게</button>
                   </Link>
                   <LogoutButton />
@@ -47,10 +47,10 @@ export default function Header() {
             </>
           ) : (
             <>
-              <Link href='/signin'>
+              <Link href='/signin' scroll={false}>
                 <button>로그인</button>
               </Link>
-              <Link href='/signup'>
+              <Link href='/signup' scroll={false}>
                 <button>회원가입</button>
               </Link>
             </>
