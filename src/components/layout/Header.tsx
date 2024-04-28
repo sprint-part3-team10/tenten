@@ -29,16 +29,21 @@ export default function Header() {
           {hasToken ? (
             <>
               {userType === 'employee' ? (
-                <Link href='/myprofile' scroll={false}>
-                  <button>내 프로필</button>
-                </Link>
+                <>
+                  <Link href='/myprofile' scroll={false}>
+                    <button>내 프로필</button>
+                  </Link>
+                  <LogoutButton />
+                  <AlarmSet />
+                </>
               ) : (
-                <Link href='/myshop' scroll={false}>
-                  <button>내 가게</button>
-                </Link>
+                <>
+                  <Link href='/myshop' scroll={false}>
+                    <button>내 가게</button>
+                  </Link>
+                  <LogoutButton />
+                </>
               )}
-              <LogoutButton />
-              <AlarmSet />
             </>
           ) : (
             <>

@@ -9,7 +9,7 @@ import styles from './page.module.scss';
 
 async function myprofile() {
   const { userId, token, userType } = getCookies();
-  if (!userId) redirect('/');
+  if (!userId || !token || userType !== 'employee') redirect('/');
 
   const { name, phone, address, bio } = await getProfileData(userId);
 

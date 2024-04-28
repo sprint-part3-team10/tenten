@@ -1,10 +1,12 @@
 @import '../../../styles/index';
 @import '../signup/page.module';
 
+.wrapper {
+  @include warpper;
+}
+
 .container {
   @include container;
-
-  margin-top: 25rem;
 }
 
 .form {

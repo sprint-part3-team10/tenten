@@ -38,6 +38,7 @@
     "react/no-array-index-key": "off",
     "no-await-in-loop": "off",
     "no-plusplus": "off",
-    "no-param-reassign": "off"
+    "no-param-reassign": "off",
+    "@typescript-eslint/no-explicit-any": "off"
   }
 }
