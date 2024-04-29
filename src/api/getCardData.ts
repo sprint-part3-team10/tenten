@@ -36,7 +36,9 @@ const getCardData = async (
   );
 
   if (!res.ok) {
-    throw new Error('공고를 조회할 수 없습니다. (getCardData)');
+    throw new Error(
+      `공고를 조회할 수 없습니다. (getCardData) ${offset} ${limit} ${sort} ${filterItems} ${keyword}`,
+    );
   }
   const result = await res.json();
 
