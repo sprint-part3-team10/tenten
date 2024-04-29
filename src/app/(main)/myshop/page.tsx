@@ -41,6 +41,7 @@ export default async function MyShop() {
               imageUrl: item.imageUrl,
               kind: 'shop',
               mainText: item.name,
+              category: item.category,
             }}
           >
             <div className={styles.buttonContainer}>

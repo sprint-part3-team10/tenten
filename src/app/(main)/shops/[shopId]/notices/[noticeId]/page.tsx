@@ -63,6 +63,7 @@ async function NoticePage({ params }: NoticePageProps) {
     originalHourlyPay: shop.originalHourlyPay,
     hourlyPay: notice.hourlyPay,
     closed: notice.closed,
+    category: shop.category,
   };
   const cardData = {
     originalHourlyPay: shop.originalHourlyPay,
@@ -83,7 +84,7 @@ async function NoticePage({ params }: NoticePageProps) {
     <>
       <section className={styles.outer}>
         <div className={styles.container}>
-          <h2 className={styles.category}>식당</h2>
+          <h2 className={styles.category}>{shop.category}</h2>
           <h1 className={styles.sectionTitle}>{shop.name}</h1>
           <ShopNoticeInfoBox data={infoData}>
             <>
