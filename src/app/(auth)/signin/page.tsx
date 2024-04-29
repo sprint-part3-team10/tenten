@@ -1,6 +1,6 @@
 'use client';
 
-import Logo from '@/public/icons/logo.svg';
+import Logo from '@/public/icons/logo.png';
 import Button from '@/src/components/common/Button';
 import Input from '@/src/components/common/input/Input';
 import Image from 'next/image';
@@ -53,8 +53,8 @@ export default function SignIn() {
           <Image
             src={Logo}
             alt='홈페이지 로고'
-            width={248}
-            height={45}
+            width={250}
+            height={60}
             priority
           />
         </Link>
