@@ -6,10 +6,10 @@ import styles from './MyProfile.module.scss';
 import Button from '../common/Button';
 
 interface MyProfileProps {
-  name: string;
-  phone: string;
-  address: string;
-  bio: string;
+  name: string | undefined;
+  phone: string | undefined;
+  address: string | undefined;
+  bio: string | undefined;
 }
 
 export default async function MyProfile({

@@ -1,11 +1,17 @@
 import { BASE_URL } from './api';
+import { Shop } from './getShop';
 
 interface ProfileData {
-  name: string;
-  phone: string;
-  address: string;
-  bio: string;
+  id: string;
+  email: string;
+  type: 'employer' | 'employee';
+  shop: Shop;
+  name?: string;
+  phone?: string;
+  address?: string;
+  bio?: string;
 }
+
 const getProfileData = async (
   userId: string | undefined,
 ): Promise<ProfileData> => {

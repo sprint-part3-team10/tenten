@@ -1,6 +1,18 @@
 import { BASE_URL } from './api';
 
-interface Shop {
+export interface User {
+  item: {
+    id: string;
+    email: string;
+    type: 'employer' | 'employee';
+    name?: string;
+    phone?: string;
+    address?: string;
+    bio?: string;
+  };
+}
+
+export interface Shop {
   item: {
     id: string;
     name: string;
@@ -10,6 +22,7 @@ interface Shop {
     description: string;
     imageUrl: string;
     originalHourlyPay: number;
+    user: User;
   };
 }
 
