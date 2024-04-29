@@ -31,8 +31,7 @@ const getCardData = async (
   const keywordQuery = keyword ? `&keyword=${keyword}` : '';
 
   const res = await fetch(
-    `${BASE_URL}/notices?offset=${offset}&limit=${limit}`,
-    // ${startsAtGteQuery}${hourlyPayGteQuery}${addressListURLQuery}${sortQuery}${keywordQuery}`,
+    `${BASE_URL}/notices?offset=${offset}&limit=${limit}${hourlyPayGteQuery}${addressListURLQuery}${sortQuery}${keywordQuery}`,
     { cache: 'no-store' },
   );
 
