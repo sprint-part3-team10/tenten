@@ -1,5 +1,5 @@
 import Image from 'next/image';
-import logo from '@/public/icons/logo.svg';
+import logo from '@/public/icons/logo.png';
 import Link from 'next/link';
 import checkLogin from '@/src/lib/checkLogin';
 import styles from './Header.module.scss';
@@ -18,7 +18,7 @@ export default function Header() {
             className={styles.logo}
             src={logo}
             width={110}
-            height={20}
+            height={25}
             alt='로고'
           />
         </Link>
