@@ -89,7 +89,12 @@ async function NoticePage({ params }: NoticePageProps) {
             <>
               {userType === 'employer' && OWNER && (
                 <EmployerEventContainer noticeId={noticeId}>
-                  <Button buttonType='button' text='공고 편집하기' isWhite />
+                  <Button
+                    buttonType='button'
+                    text='공고 편집하기'
+                    isWhite
+                    isDisable={infoData.closed}
+                  />
                 </EmployerEventContainer>
               )}
               {((userType === 'employer' && !OWNER) ||

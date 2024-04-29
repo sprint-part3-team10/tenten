@@ -13,13 +13,17 @@
   color: $white;
   background-color: $pink-40;
   border-radius: 2rem;
+}
 
-  & > span {
-    max-width: 12.5rem;
-    overflow: hidden;
-    text-overflow: ellipsis;
-    white-space: nowrap;
-  }
+.badgeText {
+  max-width: 12.5rem;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+span.noWrap {
+  max-width: unset;
 }
 
 .closedBadge {

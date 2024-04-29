@@ -56,7 +56,20 @@ function RecentViews({ cardData }: RecentViewsProps) {
   return (
     <section className={styles.outer}>
       <div className={styles.container}>
-        <h1 className={styles.sectionTitle}>최근에 본 공고</h1>
+        <div className={styles.titleDeleteContainer}>
+          <h1 className={styles.sectionTitle}>최근에 본 공고</h1>
+          {!!cards.length && (
+            <button
+              className={styles.delete}
+              onClick={() => {
+                localStorage.clear();
+                setCards([]);
+              }}
+            >
+              모두 지우기
+            </button>
+          )}
+        </div>
         {!cards.length && (
           <div className={styles.empty}>최근에 본 공고가 없어요.</div>
         )}

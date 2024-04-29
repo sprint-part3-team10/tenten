@@ -25,6 +25,30 @@
   margin-bottom: 2.4rem;
 }
 
+.delete {
+  @include text-14-l;
+
+  padding: 0.8rem;
+  margin-bottom: 1.6rem;
+  color: $pink-40;
+  background-color: $white;
+  border: 1px solid $pink-40;
+  border-radius: 0.6rem;
+
+  &:hover {
+    background-color: $pink-10;
+  }
+
+  &:active {
+    background-color: $white;
+  }
+}
+
+.titleDeleteContainer {
+  display: flex;
+  justify-content: space-between;
+}
+
 .recentCards {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
@@ -37,5 +61,13 @@
 }
 
 .empty {
-  @include text-16-l;
+  @include text-18-r;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 30rem;
+  background-color: $white;
+  border: 1px solid $gray-20;
+  border-radius: 0.8rem;
 }

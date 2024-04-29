@@ -70,6 +70,7 @@ function ShopNoticeInfoBox({ data, children }: ShopNoticeInfoBoxProps) {
                 originalHourlyPay={originalHourlyPay}
                 hourlyPay={hourlyPay}
                 closed={EXPIRED || closed}
+                noWrap
               />
             )}
           </div>
