@@ -2,8 +2,8 @@ import getProfileData from '@/src/api/getProfileData';
 import getCardData from '@/src/api/getCardData';
 import Link from 'next/link';
 import { NEAR_ADDRESS_LIST } from '@/src/constants/constant';
-import { cookies } from 'next/headers';
 import { CardItems, Filter } from '@/src/types/types';
+import getCookie from '@/src/lib/getCookie';
 import styles from './CustomCardList.module.scss';
 import Card from './Card';
 import Button from '../common/Button';
@@ -54,7 +54,7 @@ async function fetchItems(filter: Filter): Promise<CardItems[]> {
 }
 
 export default async function CustomCardList() {
-  const userId = cookies().get('u_id')?.value;
+  const userId = getCookie('u_id');
   const { address } = (await getProfileData(userId)) || '';
 
   if (!address) {

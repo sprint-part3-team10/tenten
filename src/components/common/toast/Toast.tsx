@@ -11,6 +11,13 @@ interface ToastProps {
   isWarning?: boolean;
 }
 
+function ToastIcon(isWarning: boolean) {
+  const iconSrc = isWarning ? WARNING : COMPLETE;
+  const altText = isWarning ? '경고' : '정상';
+
+  return <Image src={iconSrc} alt={altText} width={26} height={26} priority />;
+}
+
 export default function Toast({
   message,
   duration = 1500,
@@ -42,10 +49,3 @@ export default function Toast({
     </div>
   );
 }
-
-const ToastIcon = (isWarning: boolean) => {
-  const iconSrc = isWarning ? WARNING : COMPLETE;
-  const altText = isWarning ? '경고' : '정상';
-
-  return <Image src={iconSrc} alt={altText} width={26} height={26} priority />;
-};
