@@ -4,8 +4,11 @@ import Footer from '@/src/components/layout/Footer';
 import Header from '@/src/components/layout/Header';
 
 export const metadata: Metadata = {
-  title: 'the JulGe',
+  title: 'Synergy',
   description: 'codeit sprint part3 tenten',
+  icons: {
+    icon: '/icons/favicon.ico',
+  },
 };
 
 export default function RootLayout({
