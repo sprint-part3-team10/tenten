@@ -25,7 +25,7 @@ export default function Error({
         handleButton={[() => reset(), () => router.push('/')]}
         handleModal={() => {}}
         maxWidth='50rem'
-        message={error.message}
+        message={`${error.name} ${error.message} ${error.digest} ${error.cause} ${error.stack}`}
         minWidth='30rem'
         icon='warning'
       />

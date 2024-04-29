@@ -36,7 +36,7 @@ const getCardData = async (
   );
 
   if (!res.ok) {
-    throw new Error('공고를 조회할 수 없습니다.');
+    throw new Error('공고를 조회할 수 없습니다. (getCardData)');
   }
   const result = await res.json();
 
