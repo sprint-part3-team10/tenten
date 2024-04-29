@@ -60,6 +60,14 @@ export default function Input({
             placeholder={placeholder}
             {...register}
             onChange={onChange}
+            onKeyDown={e => {
+              if (
+                inputType === 'number' &&
+                (e.key === 'ArrowUp' || e.key === 'ArrowDown')
+              ) {
+                e.preventDefault();
+              }
+            }}
           />
         ) : (
           <input
@@ -70,6 +78,14 @@ export default function Input({
             value={value}
             placeholder={placeholder}
             {...register}
+            onKeyDown={e => {
+              if (
+                inputType === 'number' &&
+                (e.key === 'ArrowUp' || e.key === 'ArrowDown')
+              ) {
+                e.preventDefault();
+              }
+            }}
           />
         )}
         {(label === '비밀번호' || label === '비밀번호 확인') && (
