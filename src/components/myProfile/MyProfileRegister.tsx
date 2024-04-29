@@ -23,6 +23,11 @@ interface MyProfileRegisterProps {
   userId: string;
 }
 
+type SetValueFunction = (
+  fieldName: 'name' | 'phone' | 'address' | 'bio',
+  value: string,
+) => void;
+
 export default function MyProfileRegister({
   token,
   userId,
@@ -63,7 +68,7 @@ export default function MyProfileRegister({
     if (e.target.value) clearErrors('name');
   };
 
-  const handlephoneNumberChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+  const handlePhoneNumberChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     if (e.target.value) clearErrors('phone');
   };
 
@@ -90,7 +95,11 @@ export default function MyProfileRegister({
       if (isEditing) setModalMessage('수정이 완료되었습니다');
       handleShowModal(true);
     } catch (error) {
-      setModalMessage(error.message);
+      if (error instanceof Error) {
+        setModalMessage(error.message);
+      } else {
+        setModalMessage('알 수 없는 오류가 발생했습니다.');
+      }
       handleShowModal(true);
     }
   };
@@ -103,8 +112,10 @@ export default function MyProfileRegister({
         router.push('/');
         return;
       }
+      const setValueTyped = setValue as SetValueFunction;
+
       Object.entries(userData).forEach(([fieldName, value]) => {
-        setValue(fieldName, value);
+        setValueTyped(fieldName as 'name' | 'phone' | 'address' | 'bio', value);
       });
       setIsLoading(false);
     };
@@ -137,7 +148,7 @@ export default function MyProfileRegister({
           <Input
             label='연락처 *'
             inputType='text'
-            onChange={handlephoneNumberChange}
+            onChange={handlePhoneNumberChange}
             error={phoneNumberError}
             placeholder='예) 010-0000-0000'
             register={register('phone', {
