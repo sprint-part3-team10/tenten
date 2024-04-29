@@ -2,9 +2,9 @@
 
 import Image from 'next/image';
 import search from '@/public/icons/search.svg';
-import styles from './SearchBar.module.scss';
 import { usePathname, useRouter } from 'next/navigation';
 import { useEffect, useState } from 'react';
+import styles from './SearchBar.module.scss';
 
 export default function SearchBar() {
   const [searchShop, setSearchShop] = useState('');

@@ -38,7 +38,7 @@ export default function LogoutButton() {
             buttonText={['예', '아니오']}
             buttonWidthPercent='25%'
             handleModal={handleShowModal}
-            buttonColorChange={true}
+            buttonColorChange
             handleButton={[
               handleLogout,
               e => {

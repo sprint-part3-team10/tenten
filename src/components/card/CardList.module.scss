@@ -54,7 +54,7 @@
   }
 
   & span {
-    color: $pink-50;
+    color: $pink-40;
   }
 }
 
@@ -85,5 +85,16 @@
 
   @include media(mobile) {
     padding-top: 11rem;
+  }
+}
+
+.count {
+  @include text-20-b;
+
+  padding-left: 0.5rem;
+  letter-spacing: 0.07rem;
+
+  @include media(mobile) {
+    @include text-14-b;
   }
 }

@@ -83,7 +83,9 @@ function CardList({ search = undefined }: CardListProps) {
               <span>{search}</span>에 대한 공고 목록
             </h1>
           ) : (
-            <h1>전체 공고</h1>
+            <h1>
+              전체 공고 <span className={styles.count}>{totalCount}건</span>
+            </h1>
           )}
         </div>
         <div className={styles.buttonContainer}>
