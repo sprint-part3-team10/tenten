@@ -63,7 +63,7 @@ export default async function CustomCardList() {
 
   const initialFilter = {
     address: [address],
-    startsAtGte: new Date(),
+    startsAtGte: undefined,
     hourlyPayGte: '',
   };
 
