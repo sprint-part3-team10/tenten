@@ -20,6 +20,7 @@ interface ShopNoticeInfoBoxProps {
     originalHourlyPay?: number;
     hourlyPay?: number;
     closed?: boolean;
+    category?: string;
   };
   children: ReactElement;
 }
@@ -36,6 +37,7 @@ function ShopNoticeInfoBox({ data, children }: ShopNoticeInfoBoxProps) {
     originalHourlyPay = 0,
     hourlyPay = 0,
     closed,
+    category,
   } = data;
   const NOTICE = kind === 'notice';
 
@@ -62,7 +64,7 @@ function ShopNoticeInfoBox({ data, children }: ShopNoticeInfoBoxProps) {
       </div>
       <div className={styles.textButtonSpace}>
         <div className={styles.textInfo}>
-          <p className={styles.category}>{NOTICE ? '시급' : '식당'}</p>
+          <p className={styles.category}>{NOTICE ? '시급' : `${category}`}</p>
           <div className={styles.title}>
             <span>{NOTICE ? formatWage(Number(mainText)) : mainText}</span>
             {NOTICE && (
