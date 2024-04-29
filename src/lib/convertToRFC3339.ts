@@ -25,6 +25,5 @@ export default function convertToRFC3339(
   const minutes = String(dateObject.getMinutes()).padStart(2, '0');
   const seconds = String(dateObject.getSeconds()).padStart(2, '0');
 
-  // return `${year}-${month}-${day}T${hours}:${minutes}:${seconds}Z`;
-  return `${year}-${month}-${day}T00:00:00Z`;
+  return `${year}-${month}-${day}T${hours}:${minutes}:${seconds}Z`;
 }
