@@ -8,6 +8,13 @@
   max-width: 96rem;
   padding: 6rem 0;
   margin: 0 auto;
+
+  @include media(mobile) {
+    width: 94vw;
+  }
+  @include media(tablet) {
+    max-width: 68rem;
+  }
 }
 
 .sectionTitle {

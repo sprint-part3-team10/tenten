@@ -26,6 +26,10 @@
   max-width: 96rem;
   padding: 6rem 0;
   margin: 0 auto;
+
+  @include media(mobile) {
+    width: 94vw;
+  }
 }
 
 .fillHeight {
@@ -35,7 +39,13 @@
 .sectionTitle {
   @include text-28-b;
 
+  width: 100%;
+  margin: 0 auto;
   margin-bottom: 2.4rem;
+
+  @include media(tablet) {
+    max-width: 68rem;
+  }
 }
 
 .buttonContainer {
