@@ -14,6 +14,7 @@ interface WageComparisonBadgeProps {
   originalHourlyPay: number;
   closed?: boolean;
   change?: boolean;
+  noWrap?: boolean;
 }
 
 function WageComparisonBadge({
@@ -21,6 +22,7 @@ function WageComparisonBadge({
   hourlyPay,
   change = false,
   closed = false,
+  noWrap = false,
 }: WageComparisonBadgeProps) {
   const [mouseOver, setMouseOver] = useState(false);
 
@@ -54,7 +56,11 @@ function WageComparisonBadge({
           [styles.closedText]: closed && change,
         })}
       >
-        <span>기존 시급보다 {increaseRate}%</span>
+        <span
+          className={classNames(styles.badgeText, { [styles.noWrap]: noWrap })}
+        >
+          기존 시급보다 {increaseRate}%
+        </span>
         <Image
           className={classNames({ [styles.whiteArrow]: change })}
           width={20}
