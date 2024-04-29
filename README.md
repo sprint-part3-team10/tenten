@@ -22,7 +22,7 @@
       <img width=200px src="https://github.com/Hooni07/tenten_the_julge/assets/79882248/4ec1fc5d-417b-43b1-89b8-8b441ae01b5e" alt="이모지_유진"/><br />
       <sub><b>[팀원] 이유진</b></sub></a><br /></td>
       <td align="center"><a href="https://github.com/mynameJS">
-      <img width=200px src="https://github.com/Hooni07/tenten_the_julge/assets/79882248/2b405d80-cfa8-48c8-9b60-370b12c84977" alt="이모지_재성"/><br />
+      <img width=200px src="https://github.com/Hooni07/tenten_the_julge/assets/79882248/ece23e6d-0bdf-40f9-b586-a312cdf99520" alt="이모지_재성"/><br />
       <sub><b>[팀원] 이재성</b></sub></a><br /></td>
       <td align="center"><a href="https://github.com/forestream">
       <img width=200px src="https://github.com/Hooni07/tenten_the_julge/assets/79882248/35f79daf-4658-42b0-8593-52a81061502e" alt="이모지_한빈"/><br />
