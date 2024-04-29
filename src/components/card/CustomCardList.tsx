@@ -67,18 +67,18 @@ export default async function CustomCardList() {
     hourlyPayGte: '',
   };
 
-  const newItems = await fetchItems(initialFilter);
+  let newItems = await fetchItems(initialFilter);
 
-  // if (newItems.length < 8) {
-  //   const nearAddress = NEAR_ADDRESS_LIST[address];
+  if (newItems.length < 8) {
+    const nearAddress = NEAR_ADDRESS_LIST[address];
 
-  //   const additionalItems = await fetchItems({
-  //     ...initialFilter,
-  //     address: nearAddress,
-  //   });
+    const additionalItems = await fetchItems({
+      ...initialFilter,
+      address: nearAddress,
+    });
 
-  //   newItems = newItems.concat(additionalItems.slice(0, 8 - newItems.length));
-  // }
+    newItems = newItems.concat(additionalItems.slice(0, 8 - newItems.length));
+  }
 
   if (newItems.length === 0) {
     return renderNoNearNotice();
