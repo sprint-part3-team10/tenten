@@ -3,7 +3,7 @@ import ReactDatePicker from 'react-datepicker';
 import { FieldError } from 'react-hook-form';
 import { ko } from 'date-fns/locale';
 import 'react-datepicker/dist/react-datepicker.css';
-import './DatePicker.scss';
+import './Datepicker.scss';
 
 interface DatePickerProps {
   value?: Date | undefined;
