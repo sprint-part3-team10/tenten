@@ -5,7 +5,7 @@ import getCookie from '@/src/lib/getCookie';
 import styles from './page.module.scss';
 
 export default function Home() {
-  const userType = getCookie('usertype');
+  const userType = getCookie('userType');
 
   return (
     <div>
