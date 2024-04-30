@@ -1,0 +1,85 @@
+@import '../../styles/index';
+
+.container {
+  min-width: 35rem;
+  padding: 3.2rem;
+  background-color: $pink-5;
+  border-radius: 1.2rem;
+}
+
+.nameButton {
+  display: flex;
+  gap: 10rem;
+
+  @include media(mobile) {
+    gap: 0.8rem;
+  }
+}
+
+.profileInfo {
+  display: flex;
+  flex-direction: column;
+  gap: 1.4rem;
+  width: stretch;
+}
+
+.name {
+  @include text-16-b;
+
+  color: $pink-50;
+
+  @include media(mobile) {
+    @include text-14-b;
+  }
+}
+
+.nameText {
+  @include text-28-b;
+
+  margin-bottom: 0.6rem;
+  color: $black;
+  letter-spacing: 0.2rem;
+
+  @include media(mobile) {
+    @include text-24-b;
+  }
+}
+
+.phone,
+.address {
+  @include text-16-l;
+
+  color: $gray-50;
+  vertical-align: super;
+
+  @include media(mobile) {
+    @include text-14-l;
+  }
+}
+
+.icon {
+  margin-right: 0.6rem;
+
+  @include media(mobile) {
+    width: 16px;
+    height: 16px;
+  }
+}
+
+.bio {
+  @include text-16-l;
+
+  margin-top: 2rem;
+
+  @include media(mobile) {
+    @include text-14-l;
+  }
+}
+
+.button {
+  width: 17rem;
+
+  @include media(mobile) {
+    @include text-14-b;
+  }
+}

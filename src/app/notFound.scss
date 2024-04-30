@@ -1,0 +1,68 @@
+@import '../styles/index';
+
+@import '@/src/app/globals';
+
+.container404 {
+  display: flex;
+  flex-direction: column;
+  gap: 4rem;
+  align-items: center;
+  justify-content: flex-start;
+  height: 100vh;
+  background-color: #f0efe9;
+
+  @include media(mobile) {
+    gap: 3rem;
+  }
+}
+
+.errorImage {
+  position: relative;
+  width: 50rem;
+  aspect-ratio: 5 / 3;
+
+  @include media(mobile) {
+    width: 100vw;
+  }
+}
+
+.errorMessage {
+  @include text-20-b;
+
+  @include media(mobile) {
+    @include text-18-b;
+  }
+}
+
+.errorTitle {
+  @include text-24-b;
+
+  display: inline-block;
+  padding: 2rem 3rem;
+  color: $white;
+  background-color: $pink-50;
+  border-radius: 0.8rem;
+
+  @include text-20-b;
+}
+
+.returnHome {
+  @include text-20-b;
+
+  box-sizing: border-box;
+  padding: 2rem 3rem;
+  color: $pink-50;
+  text-align: center;
+  text-decoration: none;
+  background-color: $white;
+  border: 1px solid $pink-50;
+  border-radius: 0.8rem;
+
+  &:hover {
+    background-color: $pink-10;
+  }
+
+  @include media(mobile) {
+    @include text-18-b;
+  }
+}

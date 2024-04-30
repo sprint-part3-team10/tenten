@@ -1,0 +1,39 @@
+@import '/src/styles/index';
+
+.outer {
+  background-color: $gray-5;
+}
+
+.container {
+  max-width: 96rem;
+  padding: 6rem 0;
+  margin: 0 auto;
+
+  @include media(mobile) {
+    width: 94vw;
+  }
+  @include media(tablet) {
+    max-width: 68rem;
+  }
+}
+
+.sectionTitle {
+  @include text-28-b;
+
+  margin-bottom: 2.4rem;
+}
+
+.shopNotices {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 3.1rem 1.4rem;
+  height: 100%;
+
+  @include media(tablet) {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+.loader {
+  height: 5rem;
+}

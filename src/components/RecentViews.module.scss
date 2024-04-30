@@ -1,0 +1,73 @@
+@import '/src/styles/index';
+
+.outer {
+  background-color: $gray-5;
+}
+
+.container {
+  max-width: 96rem;
+  padding: 6rem 0;
+  margin: 0 auto;
+
+  @include media(mobile) {
+    width: 94vw;
+  }
+
+  @include media(tablet) {
+    flex-direction: column;
+    max-width: 68rem;
+  }
+}
+
+.sectionTitle {
+  @include text-28-b;
+
+  margin-bottom: 2.4rem;
+}
+
+.delete {
+  @include text-14-l;
+
+  padding: 0.8rem;
+  margin-bottom: 1.6rem;
+  color: $pink-40;
+  background-color: $white;
+  border: 1px solid $pink-40;
+  border-radius: 0.6rem;
+
+  &:hover {
+    background-color: $pink-10;
+  }
+
+  &:active {
+    background-color: $white;
+  }
+}
+
+.titleDeleteContainer {
+  display: flex;
+  justify-content: space-between;
+}
+
+.recentCards {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 3.1rem 1.4rem;
+  height: 100%;
+
+  @include media(tablet) {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+.empty {
+  @include text-18-r;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 30rem;
+  background-color: $white;
+  border: 1px solid $gray-20;
+  border-radius: 0.8rem;
+}

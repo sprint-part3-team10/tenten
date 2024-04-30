@@ -1,0 +1,13 @@
+.spinner {
+  & > div {
+    min-height: unset;
+    padding: unset;
+  }
+
+  & > div > div {
+    width: 4rem;
+    min-width: 0;
+    height: 4rem;
+    min-height: 0;
+  }
+}

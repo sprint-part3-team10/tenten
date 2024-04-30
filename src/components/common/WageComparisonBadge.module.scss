@@ -1,0 +1,63 @@
+@import '/src/styles/index';
+
+.outer {
+  position: relative;
+}
+
+.badge {
+  @include text-14-b;
+
+  display: inline-flex;
+  align-items: center;
+  padding: 0.8rem;
+  color: $white;
+  background-color: $pink-40;
+  border-radius: 2rem;
+}
+
+.badgeText {
+  max-width: 12.5rem;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+span.noWrap {
+  max-width: unset;
+}
+
+.closedBadge {
+  background-color: $gray-20;
+}
+
+.text {
+  @include media(mobile) {
+    padding: 0;
+    color: $pink-40;
+    background-color: transparent;
+    border-radius: 0;
+  }
+}
+
+.closedText {
+  @include media(mobile) {
+    color: $gray-20;
+  }
+}
+
+.whiteArrow {
+  @include media(mobile) {
+    display: none;
+  }
+
+  display: unset;
+}
+
+.redArrow,
+.grayArrow {
+  @include media(mobile) {
+    display: unset;
+  }
+
+  display: none;
+}

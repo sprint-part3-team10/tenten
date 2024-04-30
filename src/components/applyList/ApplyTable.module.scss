@@ -1,0 +1,160 @@
+@import '../../styles/index';
+
+.tableContainer {
+  overflow-x: auto;
+  border: 1px solid $gray-20;
+  border-bottom: none;
+  border-radius: 1rem 1rem 0 0;
+
+  &::-webkit-scrollbar {
+    height: 0.5rem;
+  }
+
+  &::-webkit-scrollbar-thumb {
+    height: 1%;
+    background: $gray-30;
+    border-radius: 1rem;
+  }
+
+  &::-webkit-scrollbar-track {
+    background: $gray-5;
+  }
+  @include media(mobile) {
+    &::-webkit-scrollbar {
+      height: 0;
+    }
+  }
+}
+
+.table {
+  @include text-14-l;
+
+  width: 100%;
+  table-layout: fixed;
+}
+
+.titleRow {
+  text-align: left;
+  background-color: $pink-5;
+}
+
+.title {
+  padding: 1.4rem 1.2rem;
+}
+
+.listRow {
+  padding: 2rem 1.2rem;
+}
+
+.nameCol {
+  position: sticky;
+  left: 0;
+  z-index: 2;
+  width: 20rem;
+  border-bottom: 1px solid $gray-20;
+
+  @include media(tablet) {
+    min-width: 20rem;
+  }
+}
+
+.listRow.nameCol {
+  cursor: pointer;
+  background-color: $gray-5;
+
+  &:hover {
+    text-decoration: underline;
+  }
+}
+
+.title.nameCol {
+  z-index: 2;
+  background-color: $pink-5;
+}
+
+.payCol {
+  width: 20rem;
+  border-bottom: 1px solid $gray-20;
+
+  @include media(tablet) {
+    min-width: 25rem;
+  }
+}
+
+.title.payCol {
+  z-index: 2;
+}
+
+.timeCol {
+  width: 30rem;
+  border-bottom: 1px solid $gray-20;
+
+  @include media(tablet) {
+    min-width: 40rem;
+  }
+}
+
+.statusCol {
+  position: sticky;
+  right: 0;
+  z-index: 3;
+  display: table-cell;
+  width: 25rem;
+  border-bottom: 1px solid $gray-20;
+}
+
+.listRow.statusCol {
+  background-color: $gray-5;
+}
+
+.title.statusCol {
+  z-index: 3;
+  background-color: $pink-5;
+}
+
+.pagination {
+  padding: 0.8rem 1.2rem;
+  text-align: center;
+  border: 1px solid $gray-20;
+  border-radius: 0 0 1rem 1rem;
+}
+
+.btn {
+  padding: 1rem 2rem;
+  background-color: $gray-5;
+  border-radius: 0.6rem;
+
+  @include media(mobile) {
+    padding: 0.8rem 1.2rem;
+  }
+}
+
+.approve {
+  margin-right: 1.2rem;
+  color: $blue-20;
+  border: 1px solid $blue-20;
+
+  @include media(mobile) {
+    margin-right: 0.8rem;
+  }
+}
+
+.approve:hover {
+  background-color: $blue-10;
+  border-color: $blue-10;
+}
+
+.reject {
+  margin-right: 1.2rem;
+  color: $red-40;
+  border: 1px solid $red-40;
+
+  @include media(mobile) {
+    margin-right: 0.8rem;
+  }
+}
+
+.reject:hover {
+  background-color: $red-10;
+  border-color: $red-10;
+}

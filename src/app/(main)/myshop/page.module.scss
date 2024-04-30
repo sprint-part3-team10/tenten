@@ -1,0 +1,59 @@
+@import '/src/styles/index';
+
+.backgroundArea {
+  height: 100vh;
+  padding-top: 6rem;
+  background-color: $white;
+}
+
+.tableArea {
+  padding: 6rem calc((100vw - 96.5rem) / 2);
+
+  @include media(tablet) {
+    padding: 6rem 3.2rem;
+  }
+  @include media(mobile) {
+    padding: 4rem 1.2rem;
+  }
+}
+
+.outer {
+  padding-top: 8rem;
+  background-color: $gray-5;
+}
+
+.container {
+  max-width: 96rem;
+  padding: 6rem 0;
+  margin: 0 auto;
+
+  @include media(mobile) {
+    width: 94vw;
+  }
+}
+
+.fillHeight {
+  height: 100vh;
+}
+
+.sectionTitle {
+  @include text-28-b;
+
+  width: 100%;
+  margin: 0 auto;
+  margin-bottom: 2.4rem;
+
+  @include media(tablet) {
+    max-width: 68rem;
+  }
+}
+
+.buttonContainer {
+  display: flex;
+  gap: 0.8rem;
+  width: 100%;
+
+  & > div {
+    flex-basis: 50%;
+  }
+}

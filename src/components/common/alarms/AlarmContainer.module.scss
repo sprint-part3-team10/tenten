@@ -1,0 +1,136 @@
+@import '../../../styles/index';
+
+.notiContainer {
+  display: flex;
+  flex-direction: column;
+  gap: 0.4rem;
+  height: 32rem;
+  overflow: scroll;
+  overflow-x: hidden;
+
+  &::-webkit-scrollbar {
+    width: 0.5rem;
+  }
+
+  &::-webkit-scrollbar-thumb {
+    height: 1%;
+    background: $gray-50;
+    border-radius: 1rem;
+  }
+
+  &::-webkit-scrollbar-track {
+    background: $pink-10;
+  }
+
+  @include media(mobile) {
+    height: 100%;
+  }
+}
+
+.notiBox {
+  padding: 1.6rem 1.2rem;
+  white-space: wrap;
+  background-color: $white;
+  border: 1px solid $gray-20;
+  border-radius: 0.5rem;
+}
+
+.accepted {
+  color: $blue-20;
+}
+
+.rejected {
+  color: $red-40;
+}
+
+.canceled {
+  color: $gray-50;
+}
+
+.alarmMention {
+  @include text-14-l;
+
+  line-height: 2.2rem;
+}
+
+.created {
+  @include text-12-l;
+
+  line-height: 1.6rem;
+  color: $gray-40;
+}
+
+.title {
+  @include text-20-b;
+
+  color: $black;
+}
+
+.noAlarm {
+  @include text-14-l;
+
+  margin: 2rem 0;
+  text-align: center;
+
+  @include media(mobile) {
+    @include text-16-l;
+
+    margin-top: 20rem;
+  }
+}
+
+.button {
+  position: relative;
+}
+
+.alarms {
+  position: absolute;
+  top: 3.4rem;
+  left: -34.4rem;
+
+  @include media(mobile) {
+    top: -4rem;
+    left: -41.5rem;
+  }
+}
+
+.closeAlarm {
+  display: none;
+}
+
+.container {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  gap: 1.6rem;
+  width: 36.8rem;
+  padding: 2.4rem 2rem;
+  background-color: $pink-10;
+  border: 1px solid $gray-30;
+  border-radius: 1rem;
+
+  @include media(mobile) {
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: 11;
+    width: 100vw;
+    height: 100vh;
+    border-radius: 0;
+  }
+}
+
+.container .close {
+  display: none;
+  background: $pink-10;
+
+  @include media(mobile) {
+    position: absolute;
+    right: 2rem;
+    display: block;
+  }
+}
+
+.iconCursor {
+  cursor: pointer;
+}

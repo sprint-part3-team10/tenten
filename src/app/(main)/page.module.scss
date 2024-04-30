@@ -1,0 +1,9 @@
+@import '../../styles/index';
+
+.noCustom {
+  padding-top: 5rem;
+
+  @include media(mobile) {
+    padding-top: 10rem;
+  }
+}

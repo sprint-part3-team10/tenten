@@ -1,0 +1,43 @@
+@import '../../styles/index';
+
+.label {
+  @include text-14-b;
+
+  display: inline;
+  padding: 0.6rem 1rem;
+  border-radius: 2rem;
+}
+
+.labelAccept {
+  color: $blue-20;
+  background-color: $blue-10;
+}
+
+.labelReject {
+  color: $red-40;
+  background-color: $red-10;
+}
+
+.labelWaiting {
+  color: $green-20;
+  background-color: $green-10;
+}
+
+.labelCancel {
+  color: $gray-50;
+  background-color: $gray-20;
+}
+
+.labelLocation {
+  display: flex;
+  align-items: center;
+  color: $pink-50;
+  background-color: $pink-10;
+}
+
+.delete {
+  width: 100%;
+  padding-left: 0.4rem;
+  vertical-align: text-top;
+  cursor: pointer;
+}

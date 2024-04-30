@@ -1,0 +1,39 @@
+@import '../../styles/index';
+
+.container {
+  display: flex;
+  gap: 2rem;
+  align-items: center;
+  justify-content: center;
+
+  img {
+    cursor: pointer;
+  }
+}
+
+.hidden {
+  display: none;
+}
+
+.section {
+  display: flex;
+}
+
+.number {
+  @include text-14-l;
+
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  width: 4rem;
+  height: 4rem;
+  color: $black;
+  cursor: pointer;
+}
+
+.number.selected {
+  color: $white;
+  background: $pink-30;
+  border-radius: 0.4rem;
+}

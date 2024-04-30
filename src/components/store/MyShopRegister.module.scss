@@ -1,0 +1,111 @@
+@import '/src/styles/index';
+
+.container {
+  display: flex;
+  flex-direction: column;
+  gap: 3rem;
+  align-items: center;
+
+  @include media(tablet) {
+    padding: 0 2rem;
+  }
+
+  @include media(tablet) {
+    padding: 0 3rem;
+  }
+}
+
+.header {
+  @include text-28-b;
+
+  display: flex;
+  gap: 2rem;
+  align-self: stretch;
+
+  @include media(mobile) {
+    @include text-24-b;
+
+    gap: 1rem;
+  }
+}
+
+.formBox {
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+  width: 100%;
+}
+
+.inputBox {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 2rem;
+
+  @include media(mobile) {
+    display: flex;
+    flex-direction: column;
+  }
+}
+
+.imageInputBox {
+  display: flex;
+  flex-direction: column;
+  gap: 1.2rem;
+
+  p {
+    @include text-16-l;
+  }
+}
+
+.imageInput {
+  display: none;
+}
+
+.storeImageBox {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 48rem;
+  height: 27.6rem;
+  cursor: pointer;
+  background: $gray-10;
+  border: 1px solid $gray-30;
+  border-radius: 2rem;
+
+  @include media(mobile) {
+    width: 100%;
+  }
+}
+
+.storeImage {
+  border-radius: 2rem;
+}
+
+.defaultImageBox {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  align-items: center;
+
+  p {
+    @include text-16-b;
+
+    color: $gray-40;
+  }
+}
+
+.submitButton {
+  display: flex;
+  justify-content: center;
+  width: 100%;
+
+  .buttonSize {
+    @include media(tablet) {
+      width: 55%;
+    }
+    @include media(mobile) {
+      width: 100%;
+    }
+  }
+}

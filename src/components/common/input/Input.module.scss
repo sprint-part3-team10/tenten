@@ -1,0 +1,78 @@
+@import '/src/styles/index';
+
+.inputContainer {
+  display: flex;
+  flex-direction: column;
+  gap: 0.8rem;
+}
+
+.label {
+  @include text-16-l;
+
+  line-height: 2.6rem; /* 162.5% */
+  color: $black;
+}
+
+@mixin box {
+  @include text-16-l;
+
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  width: 100%;
+  padding: 1.6rem 2rem;
+  color: $black;
+  background: $white;
+  border: 1px solid #cbc9cf;
+  border-radius: 0.6rem;
+
+  input::-webkit-outer-spin-button,
+  input::-webkit-inner-spin-button {
+    margin: 0;
+    appearance: none;
+  }
+}
+
+.inputBox {
+  @include box;
+}
+
+.inputBox.inputBoxError {
+  border: 1px solid $red-40;
+}
+
+.input {
+  @include text-16-l;
+
+  border: none;
+
+  &:focus {
+    border: none;
+    outline: none;
+  }
+}
+
+.eye {
+  position: absolute;
+  top: 55%;
+  right: 1rem;
+  background: $white;
+  transform: translateY(-50%);
+}
+
+.won {
+  @include text-16-l;
+
+  position: absolute;
+  top: 50%;
+  right: 2rem;
+  transform: translateY(-50%);
+}
+
+.error {
+  @include text-12-l;
+
+  line-height: 1.6rem;
+  color: $red-40;
+}

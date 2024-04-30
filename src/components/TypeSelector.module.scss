@@ -1,0 +1,57 @@
+@import '/src/styles/index';
+
+.selectToggle {
+  display: inline-flex;
+  flex-direction: column;
+  gap: 0.8rem;
+  align-items: flex-start;
+  width: 35rem;
+}
+
+.label {
+  @include text-16-l;
+
+  display: inline-flex;
+}
+
+.toggles {
+  display: inline-flex;
+  gap: 1.6rem;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+  max-width: 35rem;
+}
+
+@mixin button {
+  @include text-14-l;
+
+  display: flex;
+  gap: 1rem;
+  align-items: center;
+  width: 100%;
+  padding: 1.3rem 4.1rem;
+  color: $black;
+  background: $white;
+  border-radius: 3rem;
+}
+
+.select {
+  @include button;
+
+  border: 0.12rem solid $pink-50;
+}
+
+.notSelect {
+  @include button;
+
+  border: 0.1rem solid $gray-30;
+
+  &:hover {
+    background: $pink-10;
+  }
+}
+
+.circle {
+  position: relative;
+}

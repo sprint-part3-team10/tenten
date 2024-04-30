@@ -1,0 +1,45 @@
+@import '../../../styles/index';
+
+@mixin warpper {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 100vh;
+}
+
+@mixin container {
+  display: flex;
+  flex-direction: column;
+  gap: 4.5rem;
+  align-items: center;
+  justify-content: center;
+  max-width: 35rem;
+}
+
+@mixin form {
+  display: flex;
+  flex-direction: column;
+  gap: 3rem;
+}
+
+@mixin move {
+  @include text-16-l;
+
+  text-align: center;
+}
+
+.wrapper {
+  @include warpper;
+}
+
+.container {
+  @include container;
+}
+
+.form {
+  @include form;
+}
+
+.movePage {
+  @include move;
+}

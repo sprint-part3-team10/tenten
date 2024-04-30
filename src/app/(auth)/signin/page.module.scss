@@ -1,0 +1,18 @@
+@import '../../../styles/index';
+@import '../signup/page.module';
+
+.wrapper {
+  @include warpper;
+}
+
+.container {
+  @include container;
+}
+
+.form {
+  @include form;
+}
+
+.movePage {
+  @include move;
+}
