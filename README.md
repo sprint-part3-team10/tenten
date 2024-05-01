@@ -1,14 +1,14 @@
-# SP4 Synergy(The Julge) Project-TenTen(Team10)
+# Synergy Project - TenTen
 
 ![logo](https://github.com/sprint-part3-team10/tenten/assets/79882248/65511083-87a4-4680-a4a5-35cd21e446c5)
 
-> 코드잇 스프린트 : 프론트 엔드 4기 Part3 - Tenten(10팀)
+> 코드잇 스프린트 : 프론트엔드 4기 Part3 - Tenten(10팀)
 >
 > 프로젝트명 : Synergy(The Julge)
 >
 > 프로젝트 소개 : 급하게 일손이 필요한 자리에 더 많은 시급을 제공해서 아르바이트생을 구할 수 있는 서비스
 >
-> 개발 기간: 2024.4.15 ~ 5.1
+> 개발 기간: 2024. 4. 15 ~ 5. 1
 >
 > URL: https://synergy10.vercel.app/
 
@@ -60,9 +60,6 @@
 #### 🖥️ 페이지 & 컴포넌트 구현 내용
 
 ##### <공고 리스트 페이지>
-
-- 전체 공고 개수 표시하고, 공고 내용 호버시 box-shadow 애니메이션 적용
-- **관련 기능**
 
   - **맞춤 공고**
 
