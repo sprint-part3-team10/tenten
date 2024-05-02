@@ -36,7 +36,6 @@ export default function DaumAddressInput({
     new window.daum.Postcode({
       shorthand: false,
       oncomplete(data: InputAddress) {
-        console.log(data);
         const sigungu =
           data.sido === '서울특별시'
             ? `서울시 ${data.sigungu}`
