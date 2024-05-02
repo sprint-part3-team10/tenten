@@ -21,6 +21,7 @@ import {
 import Image from 'next/image';
 import cameraIcon from '@/public/icons/camera.svg';
 import { MyShopFormData } from '@/src/types/interface';
+import DaumAddressInput from '../daum/DaumAddressInput';
 import Spinner from '../Spinner';
 import styles from './MyShopRegister.module.scss';
 
@@ -103,10 +104,15 @@ export default function MyShopRegister({ token, shopId }: MyShopRegisterProps) {
   const handleNameChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     if (e.target.value) clearErrors('name');
   };
-  const handleDetailAddressChange = (
-    e: React.ChangeEvent<HTMLInputElement>,
-  ) => {
-    if (e.target.value) clearErrors('address2');
+  // const handleDetailAddressChange = (
+  //   e: React.ChangeEvent<HTMLInputElement>,
+  // ) => {
+  //   setValue('address2', e.target.value);
+  //   if (e.target.value) clearErrors('address2');
+  // };
+  const handleDetailAddressChange = (selectedCategory: string) => {
+    setValue('address2', selectedCategory);
+    clearErrors('address2');
   };
   const handleHourlyPayChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     if (e.target.value) clearErrors('originalHourlyPay');
@@ -177,7 +183,6 @@ export default function MyShopRegister({ token, shopId }: MyShopRegisterProps) {
             | 'category'
             | 'address1'
             | 'address2'
-            | 'address2'
             | 'description'
             | 'imageUrl'
             | 'originalHourlyPay',
@@ -190,6 +195,7 @@ export default function MyShopRegister({ token, shopId }: MyShopRegisterProps) {
     fetchShopData(shopId);
   }, [isEditing, setValue, router]);
 
+  console.log(errors);
   if (isLoading) {
     return <Spinner />;
   }
@@ -203,61 +209,70 @@ export default function MyShopRegister({ token, shopId }: MyShopRegisterProps) {
         </div>
         <form className={styles.formBox} onSubmit={handleSubmit(onSubmit)}>
           <div className={styles.inputBox}>
-            <Input
-              label='가게 이름 *'
-              inputType='text'
-              onChange={handleNameChange}
-              error={nameError}
-              placeholder='상호명을 적어주세요'
-              register={register('name', {
-                required: '필수 입력사항입니다.',
-              })}
-            />
-            <Dropdown
-              labelName='분류 *'
-              optionList={STORE_CATEGORY_LIST}
-              register={register('category', {
-                required: '필수 입력사항입니다.',
-              })}
-              error={categoryError}
-              value={watch('category')}
-              onChange={handleCategoryChange}
-            />
-            <Dropdown
-              labelName='주소 *'
-              optionList={LOCATION_LIST}
-              register={register('address1', {
-                required: '필수 입력사항입니다.',
-              })}
-              error={address1Error}
-              value={watch('address1')}
-              onChange={handleLocationChange}
-            />
-            <Input
-              label='상세 주소 *'
-              inputType='text'
-              onChange={handleDetailAddressChange}
-              placeholder='상세 주소를 입력해 주세요'
-              error={address2Error}
-              register={register('address2', {
-                required: '필수 입력사항입니다',
-              })}
-            />
-            <Input
-              label='기본 시급 *'
-              inputType='number'
-              onChange={handleHourlyPayChange}
-              placeholder='기본 시급을 적어주세요'
-              error={originalHourlyPayError}
-              register={register('originalHourlyPay', {
-                required: '필수 입력사항입니다',
-                validate: {
-                  minWage: value =>
-                    Number(value) >= 9860 ||
-                    '최저시급(9860원) 보다 낮은 값은 입력할 수 없습니다',
-                },
-              })}
-            />
+            <div className={styles.item1}>
+              <Input
+                label='가게 이름 *'
+                inputType='text'
+                onChange={handleNameChange}
+                error={nameError}
+                placeholder='상호명을 적어주세요'
+                register={register('name', {
+                  required: '필수 입력사항입니다.',
+                })}
+              />
+            </div>
+            <div className={styles.item2}>
+              <Dropdown
+                labelName='분류 *'
+                optionList={STORE_CATEGORY_LIST}
+                register={register('category', {
+                  required: '필수 입력사항입니다.',
+                })}
+                error={categoryError}
+                value={watch('category')}
+                onChange={handleCategoryChange}
+              />
+            </div>
+            <div className={styles.item3}>
+              <DaumAddressInput
+                addressData={[
+                  {
+                    register: register('address1', {
+                      required: '필수 입력사항입니다.',
+                      validate: value =>
+                        value.includes('서울시') ||
+                        '현재 서울에 위치한 가게만 등록이 가능합니다.',
+                    }),
+                    error: address1Error,
+                    onChange: handleLocationChange,
+                  },
+                  {
+                    register: register('address2', {
+                      required: '필수 입력사항입니다.',
+                    }),
+                    error: address2Error,
+                    onChange: handleDetailAddressChange,
+                  },
+                ]}
+              />
+            </div>
+            <div className={styles.item4}>
+              <Input
+                label='기본 시급 *'
+                inputType='number'
+                onChange={handleHourlyPayChange}
+                placeholder='기본 시급을 적어주세요'
+                error={originalHourlyPayError}
+                register={register('originalHourlyPay', {
+                  required: '필수 입력사항입니다',
+                  validate: {
+                    minWage: value =>
+                      Number(value) >= 9860 ||
+                      '최저시급(9860원) 보다 낮은 값은 입력할 수 없습니다',
+                  },
+                })}
+              />
+            </div>
           </div>
           <div className={styles.imageInputBox}>
             <input
