@@ -104,12 +104,7 @@ export default function MyShopRegister({ token, shopId }: MyShopRegisterProps) {
   const handleNameChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     if (e.target.value) clearErrors('name');
   };
-  // const handleDetailAddressChange = (
-  //   e: React.ChangeEvent<HTMLInputElement>,
-  // ) => {
-  //   setValue('address2', e.target.value);
-  //   if (e.target.value) clearErrors('address2');
-  // };
+
   const handleDetailAddressChange = (selectedCategory: string) => {
     setValue('address2', selectedCategory);
     clearErrors('address2');
@@ -195,7 +190,6 @@ export default function MyShopRegister({ token, shopId }: MyShopRegisterProps) {
     fetchShopData(shopId);
   }, [isEditing, setValue, router]);
 
-  console.log(errors);
   if (isLoading) {
     return <Spinner />;
   }
