@@ -59,5 +59,9 @@
     @include text-16-b;
 
     background: $white;
+
+    &:hover {
+      color: $pink-50;
+    }
   }
 }
