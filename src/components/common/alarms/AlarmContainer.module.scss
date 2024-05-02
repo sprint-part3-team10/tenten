@@ -30,6 +30,7 @@
 .notiBox {
   padding: 1.6rem 1.2rem;
   white-space: wrap;
+  cursor: pointer;
   background-color: $white;
   border: 1px solid $gray-20;
   border-radius: 0.5rem;
@@ -51,6 +52,10 @@
   @include text-14-l;
 
   line-height: 2.2rem;
+}
+
+.alarmMention:hover {
+  text-decoration: underline;
 }
 
 .created {
