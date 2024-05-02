@@ -56,6 +56,7 @@
 @mixin small {
   @include text-12-l;
 
+  min-width: 8rem;
   padding: 0.8rem 1.2rem;
   line-height: 2rem;
 }
