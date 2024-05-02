@@ -88,7 +88,11 @@ async function NoticePage({ params }: NoticePageProps) {
           <h2 className={styles.category}>{shop.category}</h2>
           <div className={styles.nameShareContainer}>
             <h1 className={styles.sectionTitle}>{shop.name}</h1>
-            <Share />
+            <Share
+              title={cardData.name}
+              description={infoData.description}
+              imageUrl={infoData.imageUrl}
+            />
           </div>
           <ShopNoticeInfoBox data={infoData}>
             <>

@@ -7,12 +7,33 @@ import { CopyToClipboard } from 'react-copy-to-clipboard';
 import styles from './Share.module.scss';
 import Toast from '../common/toast/Toast';
 
-function Share() {
+interface ShareProps {
+  title: string;
+  description: string;
+  imageUrl: string;
+}
+
+function Share({ title, description, imageUrl }: ShareProps) {
   const [isOpen, setIsOpen] = useState(false);
   const [toast, setToast] = useState(false);
 
   const handleClick = () => {
     setIsOpen(!isOpen);
+  };
+
+  const handleKakaoShare = () => {
+    Kakao.Share.sendDefault({
+      objectType: 'feed',
+      content: {
+        title,
+        description,
+        imageUrl,
+        link: {
+          mobileWebUrl: window.location.href,
+          webUrl: window.location.href,
+        },
+      },
+    });
   };
 
   return (
@@ -32,7 +53,7 @@ function Share() {
             >
               <li>URL 복사</li>
             </CopyToClipboard>
-            <li>카카오톡</li>
+            <li onClick={handleKakaoShare}>카카오톡</li>
             <li>페이스북</li>
           </ul>
         )}
