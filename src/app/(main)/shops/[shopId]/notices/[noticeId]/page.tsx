@@ -12,6 +12,7 @@ import getUserApply from '@/src/api/getUserApply';
 import ApplyEventContainer from '@/src/components/ApplyEventContainer';
 import CancelApplyEventContainer from '@/src/components/CancelApplyEventContainer';
 import getCookies from '@/src/lib/getCookies';
+import Share from '@/src/components/share/Share';
 import styles from './page.module.scss';
 
 interface NoticePageProps {
@@ -85,7 +86,10 @@ async function NoticePage({ params }: NoticePageProps) {
       <section className={styles.outer}>
         <div className={styles.container}>
           <h2 className={styles.category}>{shop.category}</h2>
-          <h1 className={styles.sectionTitle}>{shop.name}</h1>
+          <div className={styles.nameShareContainer}>
+            <h1 className={styles.sectionTitle}>{shop.name}</h1>
+            <Share />
+          </div>
           <ShopNoticeInfoBox data={infoData}>
             <>
               {userType === 'employer' && OWNER && (

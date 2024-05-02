@@ -1,0 +1,40 @@
+@import '/src/styles/index';
+
+.button {
+  position: relative;
+  height: 100%;
+  aspect-ratio: 1 / 1;
+  padding: 0.6rem;
+  cursor: pointer;
+  background-color: $gray-5;
+  border: 1px solid $gray-30;
+  border-radius: 9999px;
+
+  &:hover {
+    background-color: $gray-10;
+  }
+}
+
+.list {
+  @include text-14-l;
+
+  position: absolute;
+  right: 0;
+  bottom: -0.6rem;
+  z-index: 1;
+  width: max-content;
+  background-color: $white;
+  border: 1px solid $gray-40;
+  border-radius: 0.6rem;
+  box-shadow: 20px;
+  transform: translateY(100%);
+
+  & > li {
+    padding: 1.2rem 1.6rem;
+    border-bottom: 1px solid $gray-20;
+
+    &:hover {
+      background-color: $gray-10;
+    }
+  }
+}
