@@ -4,6 +4,7 @@ import Image from 'next/image';
 import shareIcon from '@/public/icons/share.svg';
 import { useState } from 'react';
 import { CopyToClipboard } from 'react-copy-to-clipboard';
+import { FacebookShareButton } from 'react-share';
 import styles from './Share.module.scss';
 import Toast from '../common/toast/Toast';
 
@@ -54,7 +55,11 @@ function Share({ title, description, imageUrl }: ShareProps) {
               <li>URL 복사</li>
             </CopyToClipboard>
             <li onClick={handleKakaoShare}>카카오톡</li>
-            <li>페이스북</li>
+            <li>
+              <FacebookShareButton url={window.location.href}>
+                페이스북
+              </FacebookShareButton>
+            </li>
           </ul>
         )}
       </div>
