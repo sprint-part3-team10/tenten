@@ -2,7 +2,7 @@
 
 import Image from 'next/image';
 import shareIcon from '@/public/icons/share.svg';
-import { useCallback, useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 import { CopyToClipboard } from 'react-copy-to-clipboard';
 import { FacebookShareButton } from 'react-share';
 import styles from './Share.module.scss';
