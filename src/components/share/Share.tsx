@@ -8,6 +8,12 @@ import { FacebookShareButton } from 'react-share';
 import styles from './Share.module.scss';
 import Toast from '../common/toast/Toast';
 
+declare global {
+  interface Window {
+    Kakao: any;
+  }
+}
+
 interface ShareProps {
   title: string;
   description: string;
@@ -18,12 +24,8 @@ function Share({ title, description, imageUrl }: ShareProps) {
   const [isOpen, setIsOpen] = useState(false);
   const [toast, setToast] = useState(false);
 
-  const handleClick = () => {
-    setIsOpen(!isOpen);
-  };
-
   const handleKakaoShare = () => {
-    Kakao.Share.sendDefault({
+    window.Kakao.Share.sendDefault({
       objectType: 'feed',
       content: {
         title,
@@ -37,11 +39,15 @@ function Share({ title, description, imageUrl }: ShareProps) {
     });
   };
 
+  const handleClick = () => {
+    setIsOpen(!isOpen);
+  };
+
   useEffect(() => {
-    Kakao.init(process.env.NEXT_PUBLIC_KAKAO_SHARE);
+    window.Kakao.init(process.env.NEXT_PUBLIC_KAKAO_SHARE);
 
     return () => {
-      Kakao.cleanup();
+      window.Kakao.cleanup();
     };
   }, []);
 
