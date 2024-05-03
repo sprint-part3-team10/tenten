@@ -82,8 +82,8 @@ export default function SignIn() {
 
           <div className={styles.movePage}>
             회원이 아니신가요?{' '}
-            <Link className={styles.signLink} href='/signup' scroll={false}>
-              회원가입하기
+            <Link className={styles.link} href='/signup' scroll={false}>
+              회원가입 하기
             </Link>
           </div>
         </form>
