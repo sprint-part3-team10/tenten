@@ -24,10 +24,6 @@ export default function RootLayout({
           crossOrigin='anonymous'
           strategy='beforeInteractive'
         />
-        <Script id='kakaoSdk' strategy='beforeInteractive'>
-          {`Kakao.init('505485f61e7d680972459846e428be8c');
-          console.log(Kakao.isInitialized());`}
-        </Script>
       </head>
       <body suppressHydrationWarning>{children}</body>
     </html>
