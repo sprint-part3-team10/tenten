@@ -2,7 +2,7 @@
 
 import Image from 'next/image';
 import shareIcon from '@/public/icons/share.svg';
-import { useEffect, useState } from 'react';
+import { useCallback, useEffect, useState } from 'react';
 import { CopyToClipboard } from 'react-copy-to-clipboard';
 import { FacebookShareButton } from 'react-share';
 import styles from './Share.module.scss';
@@ -18,11 +18,7 @@ function Share({ title, description, imageUrl }: ShareProps) {
   const [isOpen, setIsOpen] = useState(false);
   const [toast, setToast] = useState(false);
 
-  const handleClick = () => {
-    setIsOpen(!isOpen);
-  };
-
-  const handleKakaoShare = () => {
+  const handleKakaoShare = useCallback(() => {
     Kakao.Share.sendDefault({
       objectType: 'feed',
       content: {
@@ -35,6 +31,10 @@ function Share({ title, description, imageUrl }: ShareProps) {
         },
       },
     });
+  }, []);
+
+  const handleClick = () => {
+    setIsOpen(!isOpen);
   };
 
   useEffect(() => {
