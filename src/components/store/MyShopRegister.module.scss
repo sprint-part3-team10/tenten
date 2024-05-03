@@ -39,7 +39,22 @@
 .inputBox {
   display: grid;
   grid-template-columns: 1fr 1fr;
+  grid-template-rows: auto auto;
   gap: 2rem;
+
+  .item1,
+  .item2 {
+    grid-row: span 1;
+  }
+
+  .item3 {
+    grid-column: 1 / span 2;
+    grid-row: span 2;
+  }
+
+  .item4 {
+    grid-column: span 1 / 2;
+  }
 
   @include media(mobile) {
     display: flex;
@@ -108,4 +123,11 @@
       width: 100%;
     }
   }
+}
+
+.error {
+  @include text-12-l;
+
+  line-height: 1.6rem;
+  color: $red-40;
 }

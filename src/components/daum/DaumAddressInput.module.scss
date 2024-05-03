@@ -1,0 +1,70 @@
+@import '/src/styles/index';
+
+.container {
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+}
+
+.buttonBox {
+  width: 100%;
+}
+
+.inputBox {
+  @include text-16-l;
+
+  display: flex;
+  gap: 2rem;
+  width: 100%;
+
+  input::-webkit-outer-spin-button,
+  input::-webkit-inner-spin-button {
+    margin: 0;
+    appearance: none;
+  }
+
+  @include media(mobile) {
+    flex-direction: column;
+  }
+}
+
+.locationBox {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  gap: 1rem;
+}
+
+.withButtonBox {
+  display: flex;
+  justify-content: space-between;
+  gap: 0.5rem;
+
+  input {
+    width: 100%;
+  }
+}
+
+.input {
+  padding: 1.6rem 2rem;
+  color: $black;
+  background: $white;
+  border: 1px solid #cbc9cf;
+  border-radius: 0.6rem;
+
+  &:focus {
+    outline: none;
+  }
+}
+
+.input.errorBox {
+  border: 1px solid $red-40;
+  border-radius: 0.5rem;
+}
+
+.error {
+  @include text-12-l;
+
+  line-height: 1.6rem;
+  color: $red-40;
+}
