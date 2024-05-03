@@ -53,11 +53,16 @@
   align-items: center;
   justify-content: center;
   margin-left: auto;
+  color: $black;
   white-space: nowrap;
 
   button {
     @include text-16-b;
 
     background: $white;
+
+    &:hover {
+      color: $pink-50;
+    }
   }
 }

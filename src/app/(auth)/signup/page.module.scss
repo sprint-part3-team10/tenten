@@ -28,6 +28,14 @@
   text-align: center;
 }
 
+@mixin link {
+  color: $pink-50;
+
+  &:hover {
+    color: $pink-20;
+  }
+}
+
 .wrapper {
   @include warpper;
 }
@@ -42,4 +50,8 @@
 
 .movePage {
   @include move;
+}
+
+.link {
+  @include link;
 }
