@@ -56,6 +56,9 @@
   @include media(tablet) {
     min-width: 20rem;
   }
+  @include media(mobile) {
+    width: 10rem;
+  }
 }
 
 .listRow.nameCol {
@@ -101,6 +104,10 @@
   display: table-cell;
   width: 25rem;
   border-bottom: 1px solid $gray-20;
+
+  @include media(mobile) {
+    width: 20rem;
+  }
 }
 
 .listRow.statusCol {
