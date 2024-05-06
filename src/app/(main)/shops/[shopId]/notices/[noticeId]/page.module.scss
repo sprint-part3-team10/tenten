@@ -28,7 +28,12 @@
 
 .sectionTitle {
   @include text-28-b;
+}
 
+.nameShareContainer {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
   margin-bottom: 2.4rem;
 }
 

@@ -8,13 +8,12 @@
   transition: 0.3s ease;
 
   @include media(tablet) {
-    gap: 2rem;
     max-width: 64.5rem;
   }
 
   @include media(mobile) {
-    gap: 2rem;
-    max-width: 37rem;
+    gap: 1rem;
+    max-width: 35rem;
   }
 
   div {
