@@ -52,12 +52,15 @@ function Card({ data }: CardData) {
             fill
             style={{ objectFit: 'cover' }}
             priority
-            sizes='28rem'
+            sizes='(max-width: 768px) 15rem, (max-width: 1200px) 28rem'
+            placeholder='blur'
+            blurDataURL='data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAoAAAAKCAYAAACNMs+9AAAAFklEQVR42mN8//HLfwYiAOOoQvoqBABbWyZJf74GZgAAAABJRU5ErkJggg=='
           />
           {closedStatus && (
             <span className={styles.closeText}>{closedText}</span>
           )}
         </div>
+
         <div
           className={classNames(styles.contentContainer, {
             [styles.closed]: closedStatus,
