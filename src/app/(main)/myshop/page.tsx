@@ -37,6 +37,7 @@ export default async function MyShop() {
           <ShopNoticeInfoBox
             data={{
               address1: item.address1,
+              address2: item.address2,
               description: item.description,
               imageUrl: item.imageUrl,
               kind: 'shop',
