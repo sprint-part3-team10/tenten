@@ -17,6 +17,7 @@ interface ShopNoticeInfoBoxProps {
     description: string;
     imageUrl: string;
     address1: string;
+    address2: string;
     originalHourlyPay?: number;
     hourlyPay?: number;
     closed?: boolean;
@@ -34,6 +35,7 @@ function ShopNoticeInfoBox({ data, children }: ShopNoticeInfoBoxProps) {
     description,
     imageUrl,
     address1,
+    address2,
     originalHourlyPay = 0,
     hourlyPay = 0,
     closed,
@@ -89,7 +91,7 @@ function ShopNoticeInfoBox({ data, children }: ShopNoticeInfoBoxProps) {
               width={20}
               height={20}
             />
-            {address1}
+            {address1} {address2}
           </div>
           <div className={styles.description}>{description}</div>
         </div>
