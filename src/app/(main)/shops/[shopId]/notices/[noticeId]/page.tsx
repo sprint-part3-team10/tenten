@@ -61,6 +61,7 @@ async function NoticePage({ params }: NoticePageProps) {
     description: shop.description,
     imageUrl: shop.imageUrl,
     address1: shop.address1,
+    address2: shop.address2,
     originalHourlyPay: shop.originalHourlyPay,
     hourlyPay: notice.hourlyPay,
     closed: notice.closed,
